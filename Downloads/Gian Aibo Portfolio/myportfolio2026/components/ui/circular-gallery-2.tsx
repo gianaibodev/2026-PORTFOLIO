@@ -26,6 +26,8 @@ interface CircularGalleryProps
   scrollSpeed?: number;
   scrollEase?: number;
   fontClassName?: string;
+  /** Scale factor for image size (0–1). Smaller = smaller cards. Default 1. Use ~0.55 for mobile. */
+  imageScale?: number;
 }
 
 function debounce(func: (...args: unknown[]) => void, wait: number) {
@@ -43,8 +45,11 @@ function lerp(p1: number, p2: number, t: number) {
 function autoBind(instance: object) {
   const proto = Object.getPrototypeOf(instance);
   Object.getOwnPropertyNames(proto).forEach((key) => {
-    if (key !== "constructor" && typeof (instance as Record<string, unknown>)[key] === "function") {
-      (instance as Record<string, unknown>)[key] = ((instance as Record<string, unknown>)[key] as Function).bind(instance);
+    if (key !== "constructor") {
+      const value = (instance as Record<string, unknown>)[key];
+      if (typeof value === "function") {
+        (instance as Record<string, unknown>)[key] = value.bind(instance);
+      }
     }
   });
 }
@@ -166,6 +171,7 @@ class Media {
   textColor: string;
   borderRadius: number;
   font: string;
+  imageScale: number;
   program!: Program;
   plane!: Mesh;
   title!: Title;
@@ -194,6 +200,7 @@ class Media {
     textColor,
     borderRadius = 0,
     font,
+    imageScale = 1,
   }: {
     geometry: Plane;
     gl: OGLRenderingContext;
@@ -209,6 +216,7 @@ class Media {
     textColor: string;
     borderRadius: number;
     font: string;
+    imageScale?: number;
   }) {
     this.geometry = geometry;
     this.gl = gl;
@@ -224,6 +232,7 @@ class Media {
     this.textColor = textColor;
     this.borderRadius = borderRadius;
     this.font = font;
+    this.imageScale = imageScale;
     this.createShader();
     this.createMesh();
     this.createTitle();
@@ -391,7 +400,7 @@ class Media {
         ).uViewportSizes.value = [this.viewport.width, this.viewport.height];
       }
     }
-    this.scale = this.screen.height / 1500;
+    this.scale = (this.screen.height / 1500) * this.imageScale;
     this.plane.scale.y =
       (this.viewport.height * (900 * this.scale)) / this.screen.height;
     this.plane.scale.x =
@@ -424,11 +433,11 @@ class App {
   screen!: { width: number; height: number };
   viewport!: { width: number; height: number };
   raf!: number;
-  boundOnResize: () => void;
-  boundOnWheel: (e: WheelEvent) => void;
-  boundOnTouchDown: (e: MouseEvent | TouchEvent) => void;
-  boundOnTouchMove: (e: MouseEvent | TouchEvent) => void;
-  boundOnTouchUp: () => void;
+  boundOnResize!: () => void;
+  boundOnWheel!: (e: WheelEvent) => void;
+  boundOnTouchDown!: (e: MouseEvent | TouchEvent) => void;
+  boundOnTouchMove!: (e: MouseEvent | TouchEvent) => void;
+  boundOnTouchUp!: () => void;
 
   constructor(
     container: HTMLElement,
@@ -440,6 +449,7 @@ class App {
       font,
       scrollSpeed,
       scrollEase,
+      imageScale = 1,
     }: {
       items?: GalleryItem[];
       bend: number;
@@ -448,6 +458,7 @@ class App {
       font: string;
       scrollSpeed: number;
       scrollEase: number;
+      imageScale?: number;
     },
   ) {
     this.container = container;
@@ -462,7 +473,7 @@ class App {
     this.createScene();
     this.onResize();
     this.createGeometry();
-    this.createMedias(items, bend, textColor, borderRadius, font);
+    this.createMedias(items, bend, textColor, borderRadius, font, imageScale);
     this.update();
     this.addEventListeners();
   }
@@ -501,6 +512,7 @@ class App {
     textColor: string,
     borderRadius: number,
     font: string,
+    imageScale: number = 1,
   ) {
     const defaultItems: GalleryItem[] = [
       { image: `https://picsum.photos/seed/1/800/600?grayscale`, text: "Bridge" },
@@ -532,6 +544,7 @@ class App {
         textColor,
         borderRadius,
         font,
+        imageScale,
       });
     });
   }
@@ -617,8 +630,8 @@ class App {
     window.addEventListener("mousemove", this.boundOnTouchMove as EventListener);
     window.addEventListener("mouseup", this.boundOnTouchUp);
     this.container.addEventListener("touchstart", this.boundOnTouchDown);
-    window.addEventListener("touchmove", this.boundOnTouchMove as EventListener);
-    window.addEventListener("touchend", this.boundOnTouchUp);
+    window.addEventListener("touchmove", this.boundOnTouchMove as EventListener, { passive: true });
+    window.addEventListener("touchend", this.boundOnTouchUp, { passive: true });
   }
 
   destroy() {
@@ -645,6 +658,7 @@ const CircularGallery = ({
   borderRadius = 0.05,
   scrollSpeed = 2,
   scrollEase = 0.05,
+  imageScale = 1,
   className,
   fontClassName,
   ...props
@@ -670,12 +684,13 @@ const CircularGallery = ({
       font: computedFont,
       scrollSpeed,
       scrollEase,
+      imageScale,
     });
 
     return () => {
       app.destroy();
     };
-  }, [items, bend, borderRadius, scrollSpeed, scrollEase, fontClassName]);
+  }, [items, bend, borderRadius, scrollSpeed, scrollEase, imageScale, fontClassName]);
 
   return (
     <div
@@ -686,6 +701,7 @@ const CircularGallery = ({
         fontClassName,
         className,
       )}
+      style={{ touchAction: 'pan-y' }}
       {...props}
     />
   );

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:is(.dark, .dark *));
 
 @theme inline {
   --color-background: var(--background);
@@ -79,6 +79,9 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --folder-back: 217 91% 60%;
+  --folder-front: 217 91% 65%;
+  --folder-tab: 217 91% 55%;
 }
 
 .dark {
@@ -113,14 +116,68 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --folder-back: 217 70% 50%;
+  --folder-front: 217 75% 55%;
+  --folder-tab: 217 65% 45%;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
+  html {
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+    -webkit-overflow-scrolling: touch;
+    /* Use min-height instead of height for better mobile viewport handling */
+    min-height: 100%;
+    /* Prevent iOS bounce scrolling issues */
+    position: relative;
+    /* Support dynamic viewport height on mobile */
+    height: -webkit-fill-available;
+  }
+
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+    position: relative;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    -webkit-overflow-scrolling: touch;
+    /* Prevent horizontal scroll on mobile */
+    overscroll-behavior-x: none;
+    overscroll-behavior-y: auto;
+  }
+}
+
+@layer utilities {
+  .bg-folder-back {
+    background-color: hsl(217, 91%, 60%) !important;
+  }
+
+  .bg-folder-front {
+    background-color: hsl(217, 91%, 65%) !important;
+  }
+
+  .bg-folder-tab {
+    background-color: hsl(217, 91%, 55%) !important;
+  }
+
+  .dark .bg-folder-back {
+    background-color: hsl(217, 70%, 50%) !important;
+  }
+
+  .dark .bg-folder-front {
+    background-color: hsl(217, 75%, 55%) !important;
+  }
+
+  .dark .bg-folder-tab {
+    background-color: hsl(217, 65%, 45%) !important;
   }
 }
 
@@ -130,6 +187,7 @@
     opacity: 0;
     transform: translate(-72%, -62%) scale(0.5);
   }
+
   100% {
     opacity: 1;
     transform: translate(-50%, -40%) scale(1);
@@ -141,6 +199,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -152,6 +211,7 @@
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -159,9 +219,12 @@
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
   }
@@ -215,17 +278,174 @@
   }
 }
 
-/* Smooth scrolling with enhanced behavior */
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px;
-}
-
 /* Enhanced smooth scroll for better performance */
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
   }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Optimize scrolling performance */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent scroll jank while allowing natural momentum - handled in base layer */
+
+/* Safari Pink Line / Vertical Artifact Fix */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.fixed,
+[style*="position: fixed"] {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+#global-canvas {
+  z-index: 99999 !important;
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+}
+
+canvas:not(.spline-canvas) {
+  /* Allow vertical scrolling to pass through non-interactive canvas elements */
+  touch-action: pan-y !important;
+  /* Prevent default touch behaviors that interfere with scrolling */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Don't capture pointer events by default - let scroll through */
+  pointer-events: none;
+}
+
+/* Only enable pointer events on canvas when explicitly interactive */
+canvas.interactive {
+  pointer-events: auto;
+  touch-action: manipulation;
+}
+
+/* Spline 3D scene: must receive mouse events for follow-the-cursor etc. */
+.spline-scene-container canvas {
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+}
+
+/* Reduce filter load on mobile to prevent GPU faults */
+@media (max-width: 768px) {
+
+  /* Hero: AGGRESSIVE fix - force all hero elements to allow vertical scroll */
+  .hero-section {
+    touch-action: pan-y !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .hero-canvas-wrapper,
+  .hero-canvas-wrapper *,
+  .hero-canvas-wrapper canvas,
+  .hero-shader-canvas {
+    pointer-events: none !important;
+    touch-action: pan-y !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+  }
+
+  /* Hero content must also allow scroll pass-through except buttons */
+  .hero-content,
+  .hero-content > *:not(button):not(a) {
+    touch-action: pan-y !important;
+  }
+
+  /* Only buttons in hero should capture touches */
+  .hero-content button,
+  .hero-content a {
+    touch-action: manipulation !important;
+    pointer-events: auto !important;
+  }
+
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl,
+  .backdrop-blur-3xl {
+    -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+    backdrop-filter: blur(20px) saturate(160%) !important;
+  }
+
+  /* Improve mobile scrolling performance */
+  html {
+    /* Support dynamic viewport height on mobile browsers */
+    height: 100%;
+    height: -webkit-fill-available;
+    /* Prevent iOS rubber band effect issues */
+    position: relative;
+  }
+
+  body {
+    /* Ensure proper scrolling on mobile */
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    /* Smooth momentum scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
+    /* Prevent horizontal scroll */
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  /* Ensure content containers respect viewport */
+  main,
+  #__next {
+    min-height: 100%;
+    min-height: -webkit-fill-available;
+  }
+
+  /* Prevent fixed elements from causing scroll issues */
+  .fixed {
+    /* Use transform for better performance */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+
+  /* Handle safe area insets for devices with notches */
+  @supports (padding: max(0px)) {
+    body {
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
+    }
+  }
+}
+
+/* GPU Scroll Performance Optimizations - scroll-behavior handled in base layer */
+
+/* Promote fixed elements to their own GPU layer */
+/* Excluding backdrop-blur elements to prevent blending issues */
+.fixed:not([class*="backdrop-blur"]),
+[class*="fixed"]:not([class*="backdrop-blur"]) {
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Reduce repaints on scrollable content */
+main,
+.scroll-container {
+  contain: layout style;
+}
+
+/* Optimize backdrop-filter elements for scrolling without forced GPU flattening */
+[class*="backdrop-blur"] {
+  will-change: backdrop-filter;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Scroll animations */
@@ -234,6 +454,7 @@ html {
     opacity: 0;
     transform: translateX(-50px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -245,6 +466,7 @@ html {
     opacity: 0;
     transform: translateX(50px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -256,6 +478,7 @@ html {
     opacity: 0;
     transform: scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -263,9 +486,12 @@ html {
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-20px);
   }
@@ -297,4 +523,38 @@ html {
 .fade-in-on-scroll.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+@keyframes menuFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-menuFadeIn {
+  animation: menuFadeIn 0.15s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+.animate-marquee {
+  animation: marquee var(--duration) linear infinite;
+}
+
+.particle-loading-hint {
+  animation: pulse 2s ease-in-out infinite;
 }

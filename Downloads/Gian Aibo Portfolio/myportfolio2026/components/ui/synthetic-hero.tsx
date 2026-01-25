@@ -1,12 +1,13 @@
 "use client";
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useEffect, useState } from "react";
 import * as THREE from "three";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useTheme } from "next-themes";
 
 gsap.registerPlugin(useGSAP);
 
@@ -62,6 +63,7 @@ const fragmentShader = `
   uniform float u_time;
   uniform vec3 u_resolution;
   uniform sampler2D u_channel0;
+  uniform float u_dark;
 
   vec2 toPolar(vec2 p) {
       float r = length(p);
@@ -101,8 +103,17 @@ const fragmentShader = `
 
       c /= 8.0;
 
-      vec3 baseColor = vec3(0.2, 0.5, 0.7);
-      vec3 finalColor = baseColor * smoothstep(0.0, 1.0, c * 0.6);
+      vec3 darkBg = vec3(0.02, 0.05, 0.08);
+      vec3 darkWave = vec3(0.2, 0.5, 0.7);
+      
+      vec3 lightBg = vec3(0.95, 0.98, 1.0);
+      vec3 lightWave = vec3(0.4, 0.7, 1.0);
+      
+      vec3 bgColor = mix(lightBg, darkBg, u_dark);
+      vec3 waveColor = mix(lightWave, darkWave, u_dark);
+      
+      float intensity = smoothstep(0.0, 1.0, c * 0.6);
+      vec3 finalColor = mix(bgColor, waveColor, intensity);
 
       fragColor = vec4(finalColor, 1.0);
   }
@@ -120,7 +131,7 @@ interface HeroProps {
 	description: string;
 	badgeText?: string;
 	badgeLabel?: string;
-	ctaButtons?: Array<{ text: string; href?: string; primary?: boolean }>;
+	ctaButtons?: Array<{ text: string; href?: string; primary?: boolean; onClick?: () => void }>;
 	microDetails?: Array<string>;
 }
 
@@ -145,12 +156,36 @@ const SyntheticHero = ({
 	const paragraphRef = useRef<HTMLParagraphElement | null>(null);
 	const ctaRef = useRef<HTMLDivElement | null>(null);
 	const microRef = useRef<HTMLUListElement | null>(null);
+	const { resolvedTheme } = useTheme();
+	const [mounted, setMounted] = useState(false);
+
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setMounted(true);
+		}, 0);
+		return () => clearTimeout(timer);
+	}, []);
+
+	// Only compute isDark after mounting to prevent hydration mismatch
+	const isDark = mounted ? resolvedTheme === "dark" : true;
+	const [dpr, setDpr] = useState(1);
+
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			const timer = setTimeout(() => {
+				setDpr(Math.min(window.devicePixelRatio || 1, 1.5));
+			}, 0);
+			return () => clearTimeout(timer);
+		}
+	}, []);
+
 	const shaderUniforms = useMemo(
 		() => ({
 			u_time: { value: 0 },
 			u_resolution: { value: new THREE.Vector3(1, 1, 1) },
+			u_dark: { value: isDark ? 1.0 : 0.0 },
 		}),
-		[],
+		[isDark],
 	);
 
 	useGSAP(
@@ -233,33 +268,93 @@ const SyntheticHero = ({
 		{ scope: sectionRef },
 	);
 
+	// Force canvas to never block scroll - MutationObserver catches R3F canvas creation/updates
+	useEffect(() => {
+		if (!sectionRef.current) return;
+		const section = sectionRef.current;
+
+		const forceCanvasStyles = (canvas: HTMLCanvasElement) => {
+			canvas.style.setProperty("pointer-events", "none", "important");
+			canvas.style.setProperty("touch-action", "pan-y", "important");
+			canvas.classList.add("hero-shader-canvas");
+		};
+
+		// Force styles on any existing canvas
+		const existingCanvas = section.querySelector("canvas");
+		if (existingCanvas) forceCanvasStyles(existingCanvas as HTMLCanvasElement);
+
+		// Watch for R3F creating/replacing canvas
+		const observer = new MutationObserver((mutations) => {
+			for (const mutation of mutations) {
+				if (mutation.type === "childList") {
+					mutation.addedNodes.forEach((node) => {
+						if (node instanceof HTMLCanvasElement) {
+							forceCanvasStyles(node);
+						}
+						if (node instanceof HTMLElement) {
+							const canvas = node.querySelector?.("canvas");
+							if (canvas) forceCanvasStyles(canvas as HTMLCanvasElement);
+						}
+					});
+				}
+				// Also check for attribute changes on canvas
+				if (mutation.type === "attributes" && mutation.target instanceof HTMLCanvasElement) {
+					forceCanvasStyles(mutation.target);
+				}
+			}
+		});
+
+		observer.observe(section, {
+			childList: true,
+			subtree: true,
+			attributes: true,
+			attributeFilter: ["style"],
+		});
+
+		// Re-apply periodically in case R3F overrides after render
+		const interval = setInterval(() => {
+			const canvas = section.querySelector("canvas");
+			if (canvas) forceCanvasStyles(canvas as HTMLCanvasElement);
+		}, 1000);
+
+		return () => {
+			observer.disconnect();
+			clearInterval(interval);
+		};
+	}, [mounted]);
+
 	return (
 		<section
 			ref={sectionRef}
-			className="relative flex items-center justify-center min-h-screen overflow-hidden"
+			className="hero-section relative flex items-center justify-center min-h-screen overflow-visible"
+			style={{ touchAction: 'pan-y', WebkitOverflowScrolling: 'touch' }}
 		>
-			<div className="absolute inset-0 z-0">
-				<Canvas
-					gl={{ antialias: true, alpha: true }}
-					dpr={[1, 2]}
-					style={{ width: '100%', height: '100%' }}
-				>
-					<ShaderPlane
-						vertexShader={vertexShader}
-						fragmentShader={fragmentShader}
-						uniforms={shaderUniforms}
-					/>
-				</Canvas>
+			<div className="hero-canvas-wrapper absolute inset-0 z-0 pointer-events-none" style={{ touchAction: 'pan-y', pointerEvents: 'none' }}>
+				{mounted && (
+					<Canvas
+						key={`canvas-${isDark ? 'dark' : 'light'}`}
+						gl={{ antialias: false, alpha: true }}
+						dpr={dpr}
+						style={{ width: '100%', height: '100%', touchAction: 'pan-y', pointerEvents: 'none' }}
+						performance={{ min: 0.5 }}
+					>
+						<ShaderPlane
+							vertexShader={vertexShader}
+							fragmentShader={fragmentShader}
+							uniforms={shaderUniforms}
+						/>
+					</Canvas>
+				)}
 			</div>
 
-			<div className="relative z-10 flex flex-col items-center text-center px-6">
+			<div className="hero-content relative z-10 flex flex-col items-center text-center px-4 sm:px-6 max-w-full" style={{ touchAction: 'pan-y' }}>
 				<div ref={badgeWrapperRef}>
-					<Badge className="mb-6 bg-white/10 hover:bg-white/15 text-blue-300 backdrop-blur-md border border-white/20 uppercase tracking-wider font-medium flex items-center gap-2 px-4 py-1.5">
-						<span className="text-[10px] font-light tracking-[0.18em] text-blue-100/80">
+					<Badge className="mb-6 bg-white/40 dark:bg-white/[0.03] hover:bg-white/50 dark:hover:bg-white/[0.08] text-blue-600 dark:text-blue-300 backdrop-blur-xl border border-black/5 dark:border-white/[0.12] uppercase tracking-wider font-medium flex items-center gap-2 px-4 py-1.5 shadow-md transition-all duration-300">
+						<span className="text-[10px] font-bold tracking-[0.18em] text-blue-600/80 dark:text-blue-100/80">
 							{badgeLabel}
 						</span>
-						<span className="h-1 w-1 rounded-full bg-blue-200/60" />
-						<span className="text-xs font-light tracking-tight text-blue-200">
+						<span className="h-1 w-1 rounded-full bg-blue-600/40 dark:bg-blue-200/60" />
+						<span className="text-xs font-semibold tracking-tight text-blue-600 dark:text-blue-200">
 							{badgeText}
 						</span>
 					</Badge>
@@ -267,14 +362,14 @@ const SyntheticHero = ({
 
 				<h1
 					ref={headingRef}
-					className="text-5xl md:text-7xl max-w-4xl font-light tracking-tight text-white mb-4"
+					className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl max-w-4xl font-light tracking-tight text-foreground mb-4 px-2"
 				>
 					{title}
 				</h1>
 
 				<p
 					ref={paragraphRef}
-					className="text-blue-50/80 text-lg max-w-2xl mx-auto mb-10 font-light"
+					className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto mb-10 font-light px-4"
 				>
 					{description}
 				</p>
@@ -286,8 +381,8 @@ const SyntheticHero = ({
 					{ctaButtons.map((button, index) => {
 						const isPrimary = button.primary ?? index === 0;
 						const classes = isPrimary
-							? "px-8 py-3 rounded-xl text-base font-medium backdrop-blur-lg bg-blue-400/80 hover:bg-blue-300/80 shadow-lg transition-all cursor-pointer"
-							: "px-8 py-3 rounded-xl text-base font-medium border-2 border-white/50 bg-white/10 text-white hover:bg-white/20 backdrop-blur-lg transition-all cursor-pointer shadow-lg";
+							? "px-10 py-4 rounded-full text-base font-bold backdrop-blur-2xl bg-blue-500/10 dark:bg-white/5 border border-blue-500/20 dark:border-white/10 text-blue-600 dark:text-white shadow-xl dark:shadow-none shadow-[0_15px_35px_rgba(59,130,246,0.25),0_5px_15px_rgba(59,130,246,0.15)] transition-all duration-300 cursor-pointer active:scale-95 flex items-center gap-2 hover:bg-blue-500/20 dark:hover:bg-white/10 hover:shadow-2xl"
+							: "px-10 py-4 rounded-full text-base font-bold border border-black/5 dark:border-white/[0.12] bg-white/40 dark:bg-white/[0.03] text-foreground dark:text-white hover:bg-white/60 dark:hover:bg-white/[0.08] backdrop-blur-2xl transition-all duration-300 cursor-pointer shadow-xl hover:shadow-2xl active:scale-95";
 
 						if (button.href) {
 							return (
@@ -297,7 +392,14 @@ const SyntheticHero = ({
 									className={classes}
 									asChild
 								>
-									<a href={button.href}>{button.text}</a>
+									<a href={button.href}>
+										{button.text}
+										{isPrimary && (
+											<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="ml-1 group-hover:translate-x-1 transition-transform">
+												<path d="M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
+											</svg>
+										)}
+									</a>
 								</Button>
 							);
 						}
@@ -307,6 +409,7 @@ const SyntheticHero = ({
 								key={index}
 								variant={isPrimary ? undefined : "outline"}
 								className={classes}
+								onClick={button.onClick}
 							>
 								{button.text}
 							</Button>
@@ -317,11 +420,11 @@ const SyntheticHero = ({
 				{microDetails.length > 0 && (
 					<ul
 						ref={microRef}
-						className="mt-8 flex flex-wrap justify-center gap-6 text-xs font-light tracking-tight text-blue-100/70"
+						className="mt-8 flex flex-wrap justify-center gap-6 text-xs font-light tracking-tight text-muted-foreground/85"
 					>
 						{microDetails.map((detail, index) => (
 							<li key={index} className="flex items-center gap-2">
-								<span className="h-1 w-1 rounded-full bg-blue-200/60" />
+								<span className="h-1 w-1 rounded-full bg-blue-500/40 dark:bg-blue-200/60" />
 								{detail}
 							</li>
 						))}

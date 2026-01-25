@@ -1,21 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
-import { renderCanvas } from "@/components/ui/canvas";
+
+import { useCopyMode } from "@/components/copy-mode-provider";
 
 export function QuoteSection() {
-  useEffect(() => {
-    // Wait for canvas to be in DOM
-    const timer = setTimeout(() => {
-      renderCanvas("quote-canvas");
-    }, 100);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
+  const { copyMode } = useCopyMode();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -34,87 +25,102 @@ export function QuoteSection() {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: "easeOut",
+        ease: [0.4, 0, 0.2, 1] as const,
       },
     },
   };
 
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center bg-gradient-to-b from-background via-blue-50/30 dark:via-blue-950/20 to-background overflow-hidden">
-      {/* Canvas Mouse Trail Effect */}
-      <canvas
-        className="bg-transparent pointer-events-none absolute inset-0 mx-auto z-0"
-        id="quote-canvas"
-        style={{ width: '100%', height: '100%' }}
-      ></canvas>
-
-      {/* Decorative background elements */}
-      <div className="absolute inset-0 opacity-20 z-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-600 rounded-full blur-3xl"></div>
-      </div>
-
+    <section className="relative w-full flex items-center justify-center bg-gradient-to-b from-background via-blue-600/5 dark:via-blue-400/5 to-background overflow-x-hidden py-8 sm:py-12 md:py-16">
       <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={containerVariants}
-        className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20"
+        className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8"
       >
         <motion.div variants={itemVariants} className="text-center mb-8">
-          <Quote className="h-12 w-12 text-blue-500 mx-auto mb-6 opacity-60" />
+          <Quote className="h-12 w-12 text-blue-600 dark:text-blue-300 mx-auto mb-6 opacity-80" />
         </motion.div>
 
         <motion.blockquote
           variants={itemVariants}
-          className="text-3xl md:text-5xl lg:text-6xl font-light leading-tight text-foreground mb-8"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light leading-tight text-foreground mb-8 px-2"
         >
-          <span className="text-blue-500 font-semibold">Scaling communities</span> from 500+ to 1,500+ members globally in five months taught me that{" "}
-          <span className="text-blue-500 font-semibold">leadership isn't about position</span> — it's about{" "}
-          <span className="text-blue-500 font-semibold">creating spaces where others can thrive.</span>
+          {copyMode === "plain" ? (
+            <>
+              <span className="text-blue-600 dark:text-blue-300 font-semibold">Reliability</span> is my main currency. I turn{" "}
+              <span className="text-blue-600 dark:text-blue-300 font-semibold">messy ideas</span> into{" "}
+              <span className="text-blue-600 dark:text-blue-300 font-semibold">clean, profitable websites</span> that you&apos;ll be proud to show off.
+            </>
+          ) : (
+            <>
+              <span className="text-blue-600 dark:text-blue-300 font-semibold">Great software</span> isn&apos;t just code—it&apos;s{" "}
+              <span className="text-blue-600 dark:text-blue-300 font-semibold">communication</span>. I bridge the gap between{" "}
+              <span className="text-blue-600 dark:text-blue-300 font-semibold">complex engineering</span> and{" "}
+              <span className="text-blue-600 dark:text-blue-300 font-semibold">human experience</span>.
+            </>
+          )}
         </motion.blockquote>
 
         <motion.div
           variants={itemVariants}
           className="flex flex-col items-center gap-4 mt-12"
         >
-          <div className="h-px w-24 bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
+          <div className="h-px w-24 bg-gradient-to-r from-transparent via-blue-600 dark:via-blue-400 to-transparent"></div>
           <p className="text-lg md:text-xl text-muted-foreground font-medium">
             — Gian Aibo C. Boyero
           </p>
-          <p className="text-sm text-muted-foreground/70">
-            Former CEO & GDG Organizer & GDSC Lead of USLS
+          <p className="text-sm text-muted-foreground/85">
+            {copyMode === "plain" ? "Designer & Developer" : "Former CEO & GDG Organizer & GDSC Lead of USLS"}
           </p>
-          <p className="text-xs text-muted-foreground/60">
-            Google Developer Programs
+          <p className="text-xs text-muted-foreground/75">
+            {copyMode === "plain" ? "Helping Businesses Worldwide" : "Google Developer Programs"}
           </p>
         </motion.div>
 
         {/* Achievement badges */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-wrap justify-center gap-4 mt-16"
+          className="flex flex-wrap justify-center gap-3 mt-12 scale-90"
         >
-          <div className="px-6 py-3 rounded-full bg-blue-500/10 border border-blue-500/20 backdrop-blur-sm">
-            <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">
-              500+ to 1,500+ members globally
-            </p>
-          </div>
-          <div className="px-6 py-3 rounded-full bg-blue-500/10 border border-blue-500/20 backdrop-blur-sm">
-            <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">
-              Top 1 out of 7000+ students
-            </p>
-          </div>
-          <div className="px-6 py-3 rounded-full bg-blue-500/10 border border-blue-500/20 backdrop-blur-sm">
-            <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">
-              50+ events organized
-            </p>
-          </div>
-          <div className="px-6 py-3 rounded-full bg-blue-500/10 border border-blue-500/20 backdrop-blur-sm">
-            <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">
-              2,650+ attendees
-            </p>
-          </div>
+          {copyMode === "plain" ? (
+            <>
+              <div className="px-5 py-2 rounded-full bg-blue-500/10 border border-blue-500/25 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+                <p className="text-[13px] font-semibold text-blue-600 dark:text-blue-300">
+                  Easy to work with
+                </p>
+              </div>
+              <div className="px-5 py-2 rounded-full bg-blue-500/10 border border-blue-500/25 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+                <p className="text-[13px] font-semibold text-blue-600 dark:text-blue-300">
+                  Fast turnaround
+                </p>
+              </div>
+              <div className="px-5 py-2 rounded-full bg-blue-500/10 border border-blue-500/25 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+                <p className="text-[13px] font-semibold text-blue-600 dark:text-blue-300">
+                  Modern design
+                </p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="px-5 py-2 rounded-full bg-blue-500/10 border border-blue-500/25 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+                <p className="text-[13px] font-semibold text-blue-600 dark:text-blue-300">
+                  Next.js App Router
+                </p>
+              </div>
+              <div className="px-5 py-2 rounded-full bg-blue-500/10 border border-blue-500/25 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+                <p className="text-[13px] font-semibold text-blue-600 dark:text-blue-300">
+                  TypeScript & Tailwind
+                </p>
+              </div>
+              <div className="px-5 py-2 rounded-full bg-blue-500/10 border border-blue-500/25 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+                <p className="text-[13px] font-semibold text-blue-600 dark:text-blue-300">
+                  Performance-first
+                </p>
+              </div>
+            </>
+          )}
         </motion.div>
       </motion.div>
     </section>
