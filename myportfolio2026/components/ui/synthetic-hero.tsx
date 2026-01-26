@@ -255,7 +255,7 @@ const SyntheticHero = ({
   return (
     <section
       ref={sectionRef}
-      className="hero-section relative flex items-center justify-center min-h-screen overflow-visible"
+      className="hero-section relative flex items-center justify-center min-h-screen min-h-[100dvh] w-full overflow-visible"
       style={{ touchAction: "pan-y", WebkitOverflowScrolling: "touch" }}
     >
       <div
@@ -281,7 +281,7 @@ const SyntheticHero = ({
       </div>
 
       <div
-        className="hero-content relative z-10 flex flex-col items-center text-center px-4 sm:px-6 max-w-full"
+        className="hero-content relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 w-full max-w-4xl mx-auto"
         style={{ touchAction: "pan-y" }}
       >
         <div ref={badgeWrapperRef}>
