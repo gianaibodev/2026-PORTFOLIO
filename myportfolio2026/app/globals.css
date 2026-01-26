@@ -149,9 +149,9 @@
     min-height: 100vh;
     min-height: -webkit-fill-available;
     -webkit-overflow-scrolling: touch;
-    /* Prevent horizontal scroll on mobile */
+    /* Prevent horizontal scroll, contain page bounce */
     overscroll-behavior-x: none;
-    overscroll-behavior-y: auto;
+    overscroll-behavior-y: contain;
   }
 }
 
@@ -305,11 +305,13 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Fixed elements: GPU acceleration only where needed */
 .fixed,
 [style*="position: fixed"] {
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 #global-canvas {
@@ -374,11 +376,12 @@ canvas.interactive {
     pointer-events: auto !important;
   }
 
+  /* Reduced blur on mobile for better GPU performance */
   .backdrop-blur-xl,
   .backdrop-blur-2xl,
   .backdrop-blur-3xl {
-    -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
-    backdrop-filter: blur(20px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
+    backdrop-filter: blur(12px) saturate(150%) !important;
   }
 
   /* Improve mobile scrolling performance */
@@ -424,28 +427,25 @@ canvas.interactive {
   }
 }
 
-/* GPU Scroll Performance Optimizations - scroll-behavior handled in base layer */
+/* GPU Scroll Performance Optimizations */
 
-/* Promote fixed elements to their own GPU layer */
-/* Excluding backdrop-blur elements to prevent blending issues */
-.fixed:not([class*="backdrop-blur"]),
-[class*="fixed"]:not([class*="backdrop-blur"]) {
-  will-change: transform;
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-}
-
-/* Reduce repaints on scrollable content */
+/* Reduce repaints on scrollable content with content containment */
 main,
 .scroll-container {
-  contain: layout style;
+  contain: content;
 }
 
-/* Optimize backdrop-filter elements for scrolling without forced GPU flattening */
+/* Below-the-fold sections: lazy render */
+section:not(:first-of-type) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
+/* Backdrop elements: prevent layout thrash but avoid will-change abuse */
 [class*="backdrop-blur"] {
-  will-change: backdrop-filter;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
 }
 
 /* Scroll animations */

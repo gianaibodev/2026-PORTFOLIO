@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
   images: {
@@ -15,6 +16,9 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion", "@radix-ui/react-slot"],
+  },
+  turbopack: {
+    root: path.resolve(__dirname),
   },
 };
 

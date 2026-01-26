@@ -24,19 +24,16 @@ const footerLinks: FooterSection[] = [
 		links: [
 			{ title: 'Home', href: '/#home' },
 			{ title: 'Projects', href: '/projects' },
-			{ title: 'Blog', href: '/blog' },
 			{ title: 'About', href: '/about' },
-			{ title: 'Credits', href: '/credits' },
 			{ title: 'Contact', href: '/#contact' },
 		],
 	},
 	{
 		label: 'Resources',
 		links: [
-			{ title: 'Case Studies', href: '/blog' },
-			{ title: 'Web Development', href: '/projects/web-development' },
-			{ title: 'Graphic Design', href: '/projects/graphic-design' },
-			{ title: 'Product Design', href: '/projects/product-design' },
+			{ title: 'All Projects', href: '/projects' },
+			{ title: 'About Me', href: '/about' },
+			{ title: 'Credits', href: '/credits' },
 		],
 	},
 	{
@@ -82,9 +79,9 @@ export function Footer() {
 								<div className="text-xs text-muted-foreground">Portfolio 2026</div>
 							</div>
 						</Link>
-					<p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
-						Design Engineer with full-stack capabilities — UI/UX Designer, Graphic Designer & AI Engineer based in the Philippines.
-					</p>
+						<p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
+							Design Engineer with full-stack capabilities — UI/UX Designer, Graphic Designer & AI Engineer based in the Philippines.
+						</p>
 						<p className="text-muted-foreground text-xs">
 							© {new Date().getFullYear()} Gian Aibo Boyero. All rights reserved.
 						</p>

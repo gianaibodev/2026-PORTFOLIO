@@ -265,8 +265,9 @@ const SyntheticHero = ({
         {mounted && (
           <Canvas
             key={isDark ? "dark" : "light"}
-            gl={{ antialias: false, alpha: true }}
+            gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
             dpr={dpr}
+            frameloop="always"
             style={{ width: "100%", height: "100%", touchAction: "pan-y", pointerEvents: "none" }}
             performance={{ min: 0.5 }}
           >

@@ -96,19 +96,19 @@ export default function HomeClient({ galleryImages }: { galleryImages: GalleryIm
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
-        ease: [0.4, 0, 0.2, 1] as const,
+        duration: 0.5,
+        ease: [0.25, 0.1, 0.25, 1] as const,
       },
     },
   };
@@ -127,7 +127,7 @@ export default function HomeClient({ galleryImages }: { galleryImages: GalleryIm
               <div className="flex items-center justify-center min-h-screen px-4">
                 <div className="text-center">
                   <h1 className="text-4xl font-bold mb-4">
-                    {copyMode === "plain" 
+                    {copyMode === "plain"
                       ? "Websites that build trust and drive growth."
                       : "Building high-end digital experiences."}
                   </h1>
@@ -150,16 +150,16 @@ export default function HomeClient({ galleryImages }: { galleryImages: GalleryIm
           >
             <SyntheticHero
               title={copyMode === "plain" ? "Websites that build trust and drive growth." : "Building high-end digital experiences."}
-              description={copyMode === "plain" 
+              description={copyMode === "plain"
                 ? "I help businesses worldwide launch modern, fast, and mobile-friendly websites without the headache."
                 : "Crafting products where design meets performance. From strategy to key visuals, I build scalable digital solutions that convert."}
               badgeText={copyMode === "plain" ? "2026 Portfolio" : "Portfolio 2026"}
               badgeLabel="Available for hire"
               ctaButtons={[
                 { text: copyMode === "plain" ? "See My Work" : "View My Work", href: "#projects", primary: true },
-                { 
-                  text: copyMode === "plain" ? "Read Technical Version" : "Read Simple Version", 
-                  onClick: toggleCopyMode 
+                {
+                  text: copyMode === "plain" ? "Read Technical Version" : "Read Simple Version",
+                  onClick: toggleCopyMode
                 },
               ]}
               microDetails={copyMode === "plain"
@@ -256,7 +256,7 @@ export default function HomeClient({ galleryImages }: { galleryImages: GalleryIm
               variants={itemVariants}
               className="text-center text-gray-600 dark:text-gray-400 mb-4 max-w-3xl mx-auto text-lg leading-relaxed"
             >
-              {copyMode === "plain" 
+              {copyMode === "plain"
                 ? "After finishing school, I spent 6 months backpacking across different countries, funding my travels through freelance work—SEO, design, video, photography, web design, AI tasks, and more. Now, with this portfolio launched, I'm ready to find a real job and bring those fresh perspectives into my work."
                 : "After graduating, I spent 6 months backpacking across different countries, funding my travels through freelance work—SEO, design, video, photography, web design, AI tasks, and more. Now, with this portfolio launched, I'm ready to find a real job and bring those fresh perspectives into my work."}
             </motion.p>
@@ -264,7 +264,7 @@ export default function HomeClient({ galleryImages }: { galleryImages: GalleryIm
               variants={itemVariants}
               className="text-center text-gray-500 dark:text-gray-500 mb-8 max-w-2xl mx-auto text-sm italic"
             >
-              {copyMode === "plain" 
+              {copyMode === "plain"
                 ? "Traveling and experiencing different cultures has been a huge boost to my creativity—learning design styles, color palettes, and visual languages from around the world."
                 : "Traveling and experiencing different cultures has been a huge boost to my creativity—learning design styles, color palettes, and visual languages from around the world."}
             </motion.p>
@@ -364,43 +364,43 @@ export default function HomeClient({ galleryImages }: { galleryImages: GalleryIm
                   variants={itemVariants}
                   className="p-8 rounded-[32px] bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-300 dark:border-white/5"
                 >
-              <h3 className="text-xl font-bold mb-6">
-                {copyMode === "plain" ? "Education & Training" : "Formal Education"}
-              </h3>
-              <div className="space-y-6">
-                <div className="relative pl-6 border-l-2 border-blue-500/30">
-                  <div className="absolute w-3 h-3 bg-blue-500 rounded-full -left-[7px] top-1.5" />
-                  <h4 className="font-bold">College — University of St. La Salle</h4>
-                  <p className="text-sm text-muted-foreground">Bachelor of Science in Computer Science (2021-2025)</p>
-                  <p className="text-xs font-medium text-blue-600 mt-1 uppercase tracking-wider">
-                    Cum Laude • GWA 1.3 / 97%
-                  </p>
-                </div>
-                <div className="relative pl-6 border-l-2 border-green-500/30">
-                  <div className="absolute w-3 h-3 bg-green-500 rounded-full -left-[7px] top-1.5" />
-                  <h4 className="font-bold">Senior High School</h4>
-                  <p className="text-sm text-muted-foreground">STEM • Liceo De La Salle</p>
-                  <p className="text-xs font-medium text-green-600 dark:text-green-400 mt-1 uppercase tracking-wider">
-                    With Highest Honors • 98%
-                  </p>
-                </div>
-                <div className="relative pl-6 border-l-2 border-orange-500/30">
-                  <div className="absolute w-3 h-3 bg-orange-500 rounded-full -left-[7px] top-1.5" />
-                  <h4 className="font-bold">Junior High School</h4>
-                  <p className="text-sm text-muted-foreground">Holy Infant Academy</p>
-                  <p className="text-xs font-medium text-orange-600 dark:text-orange-400 mt-1 uppercase tracking-wider">
-                    Highest Honors • Rank 1 • 98.2%
-                  </p>
-                </div>
-                <div className="relative pl-6 border-l-2 border-pink-500/30">
-                  <div className="absolute w-3 h-3 bg-pink-500 rounded-full -left-[7px] top-1.5" />
-                  <h4 className="font-bold">Primary School</h4>
-                  <p className="text-sm text-muted-foreground">Holy Infant Academy</p>
-                  <p className="text-xs font-medium text-pink-600 dark:text-pink-400 mt-1 uppercase tracking-wider">
-                    Valedictorian • 97.4%
-                  </p>
-                </div>
-              </div>
+                  <h3 className="text-xl font-bold mb-6">
+                    {copyMode === "plain" ? "Education & Training" : "Formal Education"}
+                  </h3>
+                  <div className="space-y-6">
+                    <div className="relative pl-6 border-l-2 border-blue-500/30">
+                      <div className="absolute w-3 h-3 bg-blue-500 rounded-full -left-[7px] top-1.5" />
+                      <h4 className="font-bold">College — University of St. La Salle</h4>
+                      <p className="text-sm text-muted-foreground">Bachelor of Science in Computer Science (2021-2025)</p>
+                      <p className="text-xs font-medium text-blue-600 mt-1 uppercase tracking-wider">
+                        Cum Laude • GWA 1.3 / 97%
+                      </p>
+                    </div>
+                    <div className="relative pl-6 border-l-2 border-green-500/30">
+                      <div className="absolute w-3 h-3 bg-green-500 rounded-full -left-[7px] top-1.5" />
+                      <h4 className="font-bold">Senior High School</h4>
+                      <p className="text-sm text-muted-foreground">STEM • Liceo De La Salle</p>
+                      <p className="text-xs font-medium text-green-600 dark:text-green-400 mt-1 uppercase tracking-wider">
+                        With Highest Honors • 98%
+                      </p>
+                    </div>
+                    <div className="relative pl-6 border-l-2 border-orange-500/30">
+                      <div className="absolute w-3 h-3 bg-orange-500 rounded-full -left-[7px] top-1.5" />
+                      <h4 className="font-bold">Junior High School</h4>
+                      <p className="text-sm text-muted-foreground">Holy Infant Academy</p>
+                      <p className="text-xs font-medium text-orange-600 dark:text-orange-400 mt-1 uppercase tracking-wider">
+                        Highest Honors • Rank 1 • 98.2%
+                      </p>
+                    </div>
+                    <div className="relative pl-6 border-l-2 border-pink-500/30">
+                      <div className="absolute w-3 h-3 bg-pink-500 rounded-full -left-[7px] top-1.5" />
+                      <h4 className="font-bold">Primary School</h4>
+                      <p className="text-sm text-muted-foreground">Holy Infant Academy</p>
+                      <p className="text-xs font-medium text-pink-600 dark:text-pink-400 mt-1 uppercase tracking-wider">
+                        Valedictorian • 97.4%
+                      </p>
+                    </div>
+                  </div>
                 </motion.div>
 
                 <motion.div variants={itemVariants} className="flex flex-wrap gap-3">
@@ -476,7 +476,7 @@ export default function HomeClient({ galleryImages }: { galleryImages: GalleryIm
               {copyMode === "plain" ? "Ready to start?" : "Get In Touch"}
             </motion.h2>
             <motion.p variants={itemVariants} className="text-lg text-muted-foreground mb-8">
-              {copyMode === "plain" 
+              {copyMode === "plain"
                 ? "Let's discuss your project. I'm currently accepting new clients."
                 : "I'm always open to new opportunities, collaborations, and conversations."}
             </motion.p>
