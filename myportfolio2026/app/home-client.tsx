@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 
@@ -9,9 +9,17 @@ import { ErrorBoundary } from "@/components/error-boundary";
 
 import { useCopyMode } from "@/components/copy-mode-provider";
 
-// Lazy load heavy Three.js-based Hero (GSAP + shader animation)
-const SyntheticHero = dynamic(
-  () => import("@/components/ui/synthetic-hero").then((mod) => ({ default: mod.default })),
+interface SyntheticHeroProps {
+  title: string;
+  description: string;
+  badgeText?: string;
+  badgeLabel?: string;
+  ctaButtons?: Array<{ text: string; href?: string; primary?: boolean; onClick?: () => void }>;
+  microDetails?: Array<string>;
+}
+
+const SyntheticHero = dynamic<SyntheticHeroProps>(
+  () => import("@/components/ui/synthetic-hero").then((mod) => mod.default),
   {
     ssr: false,
     loading: () => (
@@ -58,6 +66,24 @@ const CircularGalleryDemo = dynamic(() => import("@/components/demos/circular-ga
     <div className="relative h-[380px] sm:h-[480px] md:h-[540px] lg:h-[600px] w-full rounded-lg overflow-hidden bg-muted/50" />
   ),
 });
+
+// Helper for staggered hydration
+function Deferred({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+  const [shouldRender, setShouldRender] = useState(false);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (window.requestIdleCallback) {
+        window.requestIdleCallback(() => setShouldRender(true));
+      } else {
+        setShouldRender(true);
+      }
+    }, delay);
+    return () => clearTimeout(timeout);
+  }, [delay]);
+
+  if (!shouldRender) return null;
+  return <>{children}</>;
+}
 
 export default function HomeClient({ galleryImages }: { galleryImages: GalleryImage[] }) {
   const { copyMode, toggleCopyMode } = useCopyMode();
@@ -148,30 +174,34 @@ export default function HomeClient({ galleryImages }: { galleryImages: GalleryIm
               </div>
             }
           >
-            <SyntheticHero
-              title={copyMode === "plain" ? "Websites that build trust and drive growth." : "Building high-end digital experiences."}
-              description={copyMode === "plain"
-                ? "I help businesses worldwide launch modern, fast, and mobile-friendly websites without the headache."
-                : "Crafting products where design meets performance. From strategy to key visuals, I build scalable digital solutions that convert."}
-              badgeText={copyMode === "plain" ? "2026 Portfolio" : "Portfolio 2026"}
-              badgeLabel="Available for hire"
-              ctaButtons={[
-                { text: copyMode === "plain" ? "See My Work" : "View My Work", href: "#projects", primary: true },
-                {
-                  text: copyMode === "plain" ? "Read Technical Version" : "Read Simple Version",
-                  onClick: toggleCopyMode
-                },
-              ]}
-              microDetails={copyMode === "plain"
-                ? ["Modern Design", "Mobile-First", "Fast Loading"]
-                : ["Design-driven Engineering", "1,500+ Global Members Led", "#1 of 7,042 · 1st Year"]}
-            />
+            <Deferred delay={100}>
+              <SyntheticHero
+                title={copyMode === "plain" ? "Websites that build trust and drive growth." : "Building high-end digital experiences."}
+                description={copyMode === "plain"
+                  ? "I help businesses worldwide launch modern, fast, and mobile-friendly websites without the headache."
+                  : "Crafting products where design meets performance. From strategy to key visuals, I build scalable digital solutions that convert."}
+                badgeText={copyMode === "plain" ? "2026 Portfolio" : "Portfolio 2026"}
+                badgeLabel="Available for hire"
+                ctaButtons={[
+                  { text: copyMode === "plain" ? "See My Work" : "View My Work", href: "#projects", primary: true },
+                  {
+                    text: copyMode === "plain" ? "Read Technical Version" : "Read Simple Version",
+                    onClick: toggleCopyMode
+                  },
+                ]}
+                microDetails={copyMode === "plain"
+                  ? ["Modern Design", "Mobile-First", "Fast Loading"]
+                  : ["Design-driven Engineering", "1,500+ Global Members Led", "#1 of 7,042 · 1st Year"]}
+              />
+            </Deferred>
           </ErrorBoundary>
         </div>
 
         {/* Quote Section - Appears after scroll */}
         <section className="w-full fade-in-on-scroll relative z-10">
-          <QuoteSection />
+          <Deferred delay={400}>
+            <QuoteSection />
+          </Deferred>
         </section>
 
         {/* Portfolio Gallery Section */}
@@ -225,13 +255,15 @@ export default function HomeClient({ galleryImages }: { galleryImages: GalleryIm
                   <div className="w-full h-[500px] bg-slate-100 dark:bg-black/[0.96] flex flex-col items-center justify-center rounded-lg border border-dashed border-muted-foreground/20">
                     <h3 className="text-xl font-bold mb-2">3D Scene Unavailable</h3>
                     <p className="text-muted-foreground text-center max-w-md px-4">
-                      The interactive 3D scene couldn't be loaded on your browser.
+                      The interactive 3D scene couldn&apos;t be loaded on your browser.
                       Try using a different browser or device for the full experience.
                     </p>
                   </div>
                 }
               >
-                <SplineSceneBasic />
+                <Deferred delay={800}>
+                  <SplineSceneBasic />
+                </Deferred>
               </ErrorBoundary>
             </motion.div>
           </motion.div>
@@ -269,7 +301,9 @@ export default function HomeClient({ galleryImages }: { galleryImages: GalleryIm
                 : "Traveling and experiencing different cultures has been a huge boost to my creativity—learning design styles, color palettes, and visual languages from around the world."}
             </motion.p>
             <motion.div variants={itemVariants}>
-              <CircularGalleryDemo />
+              <Deferred delay={1000}>
+                <CircularGalleryDemo />
+              </Deferred>
             </motion.div>
           </motion.div>
         </section>

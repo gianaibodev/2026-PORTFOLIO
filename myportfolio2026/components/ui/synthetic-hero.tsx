@@ -112,19 +112,12 @@ interface HeroProps {
 }
 
 const SyntheticHero = ({
-  title = "An experiment in light, motion, and the quiet chaos between.",
-  description = "Experience a new dimension of interaction — fluid, tactile, and alive. Designed for creators who see beauty in motion.",
-  badgeText = "React Three Fiber",
-  badgeLabel = "Experience",
-  ctaButtons = [
-    { text: "Explore the Canvas", href: "#explore", primary: true },
-    { text: "Learn More", href: "#learn-more" },
-  ],
-  microDetails = [
-    "Immersive shader landscapes",
-    "Hand-tuned motion easing",
-    "Responsive, tactile feedback",
-  ],
+  title,
+  description,
+  badgeText,
+  badgeLabel,
+  ctaButtons = [],
+  microDetails = [],
 }: HeroProps) => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const badgeWrapperRef = useRef<HTMLDivElement | null>(null);
@@ -133,11 +126,21 @@ const SyntheticHero = ({
   const ctaRef = useRef<HTMLDivElement | null>(null);
   const microRef = useRef<HTMLUListElement | null>(null);
   const { resolvedTheme } = useTheme();
+
   const [mounted, setMounted] = useState(false);
+  const [canvasVisible, setCanvasVisible] = useState(false);
   const [dpr, setDpr] = useState(1);
 
   useEffect(() => {
-    const t = setTimeout(() => setMounted(true), 0);
+    setMounted(true);
+    // Delay Canvas mount to allow hydration and text paint
+    const t = setTimeout(() => {
+      if (window.requestIdleCallback) {
+        window.requestIdleCallback(() => setCanvasVisible(true));
+      } else {
+        setCanvasVisible(true);
+      }
+    }, 500);
     return () => clearTimeout(t);
   }, []);
 
@@ -163,50 +166,47 @@ const SyntheticHero = ({
     () => {
       if (!headingRef.current) return;
 
-      document.fonts.ready.then(() => {
-        gsap.set(headingRef.current, {
-          filter: "blur(16px)",
-          y: 24,
-          autoAlpha: 0,
-          scale: 1.04,
-        });
-        if (badgeWrapperRef.current) {
-          gsap.set(badgeWrapperRef.current, { autoAlpha: 0, y: -8 });
-        }
-        if (paragraphRef.current) {
-          gsap.set(paragraphRef.current, { autoAlpha: 0, y: 8 });
-        }
-        if (ctaRef.current) {
-          gsap.set(ctaRef.current, { autoAlpha: 0, y: 8 });
-        }
-        const microItems = microRef.current
-          ? Array.from(microRef.current.querySelectorAll("li"))
-          : [];
-        if (microItems.length > 0) {
-          gsap.set(microItems, { autoAlpha: 0, y: 6 });
-        }
+      // Yield to main thread before starting heavy GSAP logic
+      gsap.delayedCall(0.1, () => {
+        document.fonts.ready.then(() => {
+          if (!headingRef.current) return;
 
-        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-        if (badgeWrapperRef.current) {
-          tl.to(badgeWrapperRef.current, { autoAlpha: 1, y: 0, duration: 0.5 }, 0);
-        }
-        tl.to(
-          headingRef.current,
-          { filter: "blur(0px)", y: 0, autoAlpha: 1, scale: 1, duration: 0.9 },
-          0.1
-        );
-        if (paragraphRef.current) {
-          tl.to(paragraphRef.current, { autoAlpha: 1, y: 0, duration: 0.5 }, "-=0.55");
-        }
-        if (ctaRef.current) {
-          tl.to(ctaRef.current, { autoAlpha: 1, y: 0, duration: 0.5 }, "-=0.35");
-        }
-        if (microItems.length > 0) {
-          tl.to(microItems, { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.1 }, "-=0.25");
-        }
+          gsap.set(headingRef.current, {
+            filter: "blur(16px)",
+            y: 24,
+            autoAlpha: 0,
+            scale: 1.04,
+          });
+          if (badgeWrapperRef.current) gsap.set(badgeWrapperRef.current, { autoAlpha: 0, y: -8 });
+          if (paragraphRef.current) gsap.set(paragraphRef.current, { autoAlpha: 0, y: 8 });
+          if (ctaRef.current) gsap.set(ctaRef.current, { autoAlpha: 0, y: 8 });
+
+          const microItems = microRef.current ? Array.from(microRef.current.querySelectorAll("li")) : [];
+          if (microItems.length > 0) gsap.set(microItems, { autoAlpha: 0, y: 6 });
+
+          const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+          if (badgeWrapperRef.current) {
+            tl.to(badgeWrapperRef.current, { autoAlpha: 1, y: 0, duration: 0.5 }, 0);
+          }
+
+          tl.to(headingRef.current, { filter: "blur(0px)", y: 0, autoAlpha: 1, scale: 1, duration: 0.9 }, 0.1);
+
+          if (paragraphRef.current) {
+            tl.to(paragraphRef.current, { autoAlpha: 1, y: 0, duration: 0.5 }, "-=0.55");
+          }
+
+          if (ctaRef.current) {
+            tl.to(ctaRef.current, { autoAlpha: 1, y: 0, duration: 0.5 }, "-=0.35");
+          }
+
+          if (microItems.length > 0) {
+            tl.to(microItems, { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.1 }, "-=0.25");
+          }
+        });
       });
     },
-    { scope: sectionRef }
+    { scope: sectionRef, dependencies: [mounted] }
   );
 
   useEffect(() => {
@@ -250,7 +250,7 @@ const SyntheticHero = ({
       observer.disconnect();
       clearInterval(interval);
     };
-  }, [mounted]);
+  }, [mounted, canvasVisible]);
 
   return (
     <section
@@ -262,7 +262,7 @@ const SyntheticHero = ({
         className="hero-canvas-wrapper absolute inset-0 z-0 pointer-events-none"
         style={{ touchAction: "pan-y", pointerEvents: "none" }}
       >
-        {mounted && (
+        {canvasVisible && (
           <Canvas
             key={isDark ? "dark" : "light"}
             gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
