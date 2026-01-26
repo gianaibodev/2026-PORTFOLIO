@@ -234,7 +234,7 @@ function GradesModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[1000] flex items-start justify-center p-4 sm:p-6 overflow-y-auto pt-[8dvh] sm:pt-[5vh]">
+        <div className="fixed inset-0 z-[1000] flex items-start sm:items-center justify-center p-4 sm:p-6 pt-[5dvh] sm:pt-0">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -250,10 +250,10 @@ function GradesModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 30 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="relative w-full max-w-4xl h-auto max-h-[82vh] bg-zinc-900 border border-white/10 rounded-[2rem] sm:rounded-3xl overflow-hidden flex flex-col shadow-2xl"
+            className="relative w-full max-w-4xl max-h-[85dvh] bg-zinc-900 border border-white/10 rounded-3xl overflow-hidden flex flex-col shadow-2xl"
           >
-            {/* Header */}
-            <div className="flex-shrink-0 p-5 sm:p-7 border-b border-white/5 bg-zinc-900/95 backdrop-blur-xl sticky top-0 z-20">
+            {/* Header - Fixed at Top */}
+            <div className="flex-shrink-0 p-5 sm:p-7 border-b border-white/5 bg-zinc-900/95 backdrop-blur-xl z-20">
               <div className="flex items-center justify-between gap-4 mb-5">
                 <div className="flex items-center gap-3.5 min-w-0">
                   <div className="w-10 h-10 rounded-2xl bg-blue-500/20 flex items-center justify-center flex-shrink-0">
