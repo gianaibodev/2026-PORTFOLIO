@@ -8,6 +8,7 @@ import { FullPageLoadingProvider } from "@/components/full-page-loading-context"
 import { FramerMotionProvider } from "@/components/framer-motion-provider";
 import { Footer } from "@/components/ui/footer-section";
 import { FloatingConsultButtonPortal } from "@/components/ui/floating-consult-button-portal";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -81,6 +82,7 @@ export default function RootLayout({
                     <Footer />
                     <FloatingConsultButtonPortal imageSrc="/lib/image.jpeg" />
                   </div>
+                  <SpeedInsights />
                 </FramerMotionProvider>
               </FullPageLoadingProvider>
             </CopyModeProvider>
