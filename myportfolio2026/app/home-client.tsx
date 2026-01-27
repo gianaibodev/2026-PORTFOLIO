@@ -9,6 +9,7 @@ import { ArrowUpRight } from "lucide-react";
 import MacOSMenuBar from "@/components/ui/mac-os-menu-bar";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { useCopyMode } from "@/components/copy-mode-provider";
+import { GradesModal, collegeGrades } from "@/components/academic-modals";
 
 // --- DYNAMIC IMPORTS ---
 interface SyntheticHeroProps {
@@ -73,6 +74,7 @@ type GalleryImage = {
 
 export default function HomeClient({ galleryImages }: { galleryImages: GalleryImage[] }) {
   const { copyMode, toggleCopyMode } = useCopyMode();
+  const [showGrades, setShowGrades] = useState(false);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -293,6 +295,13 @@ export default function HomeClient({ galleryImages }: { galleryImages: GalleryIm
                       <h4 className="font-bold">College — University of St. La Salle</h4>
                       <p className="text-sm text-muted-foreground">Bachelor of Science in Computer Science (2021-2025)</p>
                       <p className="text-xs font-medium text-blue-600 mt-1 uppercase tracking-wider">Cum Laude • GWA 1.3 / 97%</p>
+                      <button
+                        onClick={() => setShowGrades(true)}
+                        className="mt-3 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600/10 hover:bg-blue-600/20 text-blue-600 dark:text-blue-400 text-[10px] font-bold uppercase tracking-widest transition-all"
+                      >
+                        <ArrowUpRight size={12} />
+                        View Full Transcript
+                      </button>
                     </div>
                     <div className="relative pl-6 border-l-2 border-green-500/30">
                       <div className="absolute w-3 h-3 bg-green-500 rounded-full -left-[7px] top-1.5" />
@@ -390,6 +399,7 @@ export default function HomeClient({ galleryImages }: { galleryImages: GalleryIm
           </m.div>
         </section>
 
+        <GradesModal isOpen={showGrades} onClose={() => setShowGrades(false)} />
       </div>
     </ErrorBoundary>
   );
