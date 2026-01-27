@@ -84,7 +84,7 @@ export const collegeGrades = [
 export const accolades = {
     college: {
         honors: [
-            "CUM LAUDE with an OVERALL GWA: 1.3 (97%)",
+            "Cum Laude with an Overall GWA: 1.3 (97%)",
             "College Awardee - Outstanding Intern Award",
             "Rank 1 — Highest GWA across all colleges and year levels (7,042 students) — University of St. La Salle Recognition Rites, 1st Year (2021-2022)",
         ],

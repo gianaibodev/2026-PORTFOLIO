@@ -78,6 +78,50 @@ export function QuoteSection() {
             {copyMode === "plain" ? "Helping Businesses Worldwide" : "Leading Tech Communities & Engineering Teams"}
           </p>
         </m.div>
+
+        {/* Achievement badges */}
+        <m.div
+          variants={itemVariants}
+          className="flex flex-wrap justify-center gap-3 mt-12 scale-90"
+        >
+          {copyMode === "plain" ? (
+            <>
+              <div className="px-5 py-2 rounded-full bg-blue-500/10 border border-blue-500/25 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+                <p className="text-[13px] font-semibold text-blue-600 dark:text-blue-300">
+                  Easy to work with
+                </p>
+              </div>
+              <div className="px-5 py-2 rounded-full bg-blue-500/10 border border-blue-500/25 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+                <p className="text-[13px] font-semibold text-blue-600 dark:text-blue-300">
+                  Fast turnaround
+                </p>
+              </div>
+              <div className="px-5 py-2 rounded-full bg-blue-500/10 border border-blue-500/25 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+                <p className="text-[13px] font-semibold text-blue-600 dark:text-blue-300">
+                  Modern design
+                </p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="px-5 py-2 rounded-full bg-blue-500/10 border border-blue-500/25 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+                <p className="text-[13px] font-semibold text-blue-600 dark:text-blue-300">
+                  Engineering Leadership
+                </p>
+              </div>
+              <div className="px-5 py-2 rounded-full bg-blue-500/10 border border-blue-500/25 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+                <p className="text-[13px] font-semibold text-blue-600 dark:text-blue-300">
+                  Scalable Architecture
+                </p>
+              </div>
+              <div className="px-5 py-2 rounded-full bg-blue-500/10 border border-blue-500/25 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+                <p className="text-[13px] font-semibold text-blue-600 dark:text-blue-300">
+                  User-Centric Design
+                </p>
+              </div>
+            </>
+          )}
+        </m.div>
       </m.div>
     </section>
   );

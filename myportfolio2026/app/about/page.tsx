@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import MacOSMenuBar from "@/components/ui/mac-os-menu-bar";
 import { PixelHeader } from "@/components/ui/pixel-header";
-import { GraduationCap, Award, Trophy, Users, Sparkles, X, Search, FileText, ArrowUpRight } from "lucide-react";
+import { GraduationCap, Trophy, Sparkles, FileText, ArrowUpRight, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import {
   collegeGrades,
@@ -306,9 +306,10 @@ export default function AboutPage() {
                                 href={url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-foreground hover:text-blue-600 dark:hover:text-blue-400 hover:underline transition-colors"
+                                className="group flex items-center gap-1.5 text-foreground hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                               >
-                                {name}
+                                <span className="underline decoration-muted-foreground/30 group-hover:decoration-blue-500/50 underline-offset-4">{name}</span>
+                                <ExternalLink className="w-3 h-3 opacity-30 group-hover:opacity-100 transition-opacity" />
                               </a>
                             ) : (
                               <span>{name}</span>
