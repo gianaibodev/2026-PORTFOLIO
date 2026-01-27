@@ -8,8 +8,11 @@ import { X, Search } from "lucide-react";
 // --- PORTAL COMPONENT ---
 function Portal({ children }: { children: React.ReactNode }) {
     const [mounted, setMounted] = useState(false);
-    useEffect(() => setMounted(true), []);
-    return mounted ? createPortal(children, document.body) : null;
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+    if (!mounted) return null;
+    return createPortal(children, document.body);
 }
 
 export const collegeGrades = [
@@ -219,55 +222,55 @@ export function AchievementArchiveModal({ isOpen, onClose }: { isOpen: boolean; 
         <Portal>
             <AnimatePresence>
                 {isOpen && (
-                    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 md:p-10 pointer-events-none">
+                    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 md:p-10 font-sans tracking-tight pointer-events-none">
                         <m.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={onClose}
-                            className="absolute inset-0 bg-black/80 backdrop-blur-xl pointer-events-auto"
+                            className="absolute inset-0 bg-black/40 backdrop-blur-3xl pointer-events-auto touch-none"
                         />
 
                         <m.div
-                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            initial={{ opacity: 0, scale: 0.98, y: 10 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative w-full max-w-2xl h-full max-h-[85vh] bg-zinc-950 border border-white/10 rounded-[2.5rem] overflow-hidden flex flex-col shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] pointer-events-auto"
+                            exit={{ opacity: 0, scale: 0.98, y: 10 }}
+                            transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                            className="relative w-full max-w-2xl h-full max-h-[85vh] bg-zinc-950/90 border border-white/10 rounded-[2rem] overflow-hidden flex flex-col shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] pointer-events-auto backdrop-blur-md"
                         >
-                            <div className="flex-shrink-0 p-8 border-b border-white/5 bg-zinc-950 flex items-center justify-between">
+                            <div className="flex-shrink-0 p-8 border-b border-white/5 bg-transparent flex items-center justify-between">
                                 <div>
-                                    <h2 className="text-2xl font-black text-white tracking-tighter">Achievement Archive</h2>
-                                    <p className="text-xs text-zinc-500 font-bold uppercase tracking-widest mt-1 opacity-60">Complete History · 2009–2025</p>
+                                    <h2 className="text-2xl font-medium text-white tracking-tight">Achievement Archive</h2>
+                                    <p className="text-[10px] text-zinc-500 font-medium uppercase tracking-[0.2em] mt-1 opacity-80">Full History · 2009–2025</p>
                                 </div>
                                 <button
                                     onClick={onClose}
-                                    className="w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-all active:scale-90"
+                                    className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-all active:scale-95 group"
                                 >
-                                    <X className="w-6 h-6" />
+                                    <X className="w-5 h-5 text-zinc-400 group-hover:text-white transition-colors" />
                                 </button>
                             </div>
 
-                            <div className="flex-1 overflow-y-auto p-8 space-y-4 no-scrollbar">
-                                <div className="space-y-2">
-                                    <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-500 mb-4">Complete Award Ledger</h3>
+                            <div className="flex-1 overflow-y-auto p-8 space-y-4 no-scrollbar overscroll-behavior-contain">
+                                <div className="space-y-3">
+                                    <h3 className="text-[9px] font-bold uppercase tracking-[0.3em] text-blue-500/80 mb-6">Verified Ledger</h3>
                                     {allAwards.map((award, i) => (
                                         <m.div
-                                            initial={{ opacity: 0, x: -10 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: i * 0.01 }}
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ delay: i * 0.005 }}
                                             key={i}
-                                            className="p-4 rounded-xl bg-white/[0.03] border border-white/5 text-sm text-zinc-300 leading-relaxed flex gap-4"
+                                            className="p-5 rounded-2xl bg-white/[0.02] border border-white/5 text-sm text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.04] hover:border-white/10 transition-all leading-relaxed flex gap-5 group"
                                         >
-                                            <span className="text-zinc-600 font-mono text-[10px] pt-1 mt-0.5">{String(i + 1).padStart(3, '0')}</span>
-                                            {award}
+                                            <span className="text-zinc-700 font-mono text-[10px] pt-1 group-hover:text-blue-500/50 transition-colors">{String(i + 1).padStart(3, '0')}</span>
+                                            <span className="font-light tracking-wide">{award}</span>
                                         </m.div>
                                     ))}
                                 </div>
                             </div>
 
-                            <div className="flex-shrink-0 px-8 py-5 bg-zinc-950 border-t border-white/5">
-                                <p className="text-[9px] text-center font-black uppercase tracking-[0.4em] text-zinc-800">Verified Personal Record · Gian Aibo Boyero</p>
+                            <div className="flex-shrink-0 px-8 py-6 bg-transparent border-t border-white/5">
+                                <p className="text-[8px] text-center font-medium uppercase tracking-[0.5em] text-zinc-600">Generated for Gian Aibo Boyero</p>
                             </div>
                         </m.div>
                     </div>
@@ -319,89 +322,88 @@ export function GradesModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
         <Portal>
             <AnimatePresence>
                 {isOpen && (
-                    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 md:p-10 pointer-events-none">
+                    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 md:p-10 font-sans tracking-tight pointer-events-none">
                         <m.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={onClose}
-                            className="absolute inset-0 bg-black/80 backdrop-blur-xl pointer-events-auto"
+                            className="absolute inset-0 bg-black/40 backdrop-blur-3xl pointer-events-auto touch-none"
                         />
 
                         <m.div
-                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            initial={{ opacity: 0, scale: 0.98, y: 10 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative w-full max-w-4xl h-full max-h-[90vh] sm:max-h-[85vh] bg-zinc-950 border border-white/10 rounded-[2.5rem] overflow-hidden flex flex-col shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] pointer-events-auto"
+                            exit={{ opacity: 0, scale: 0.98, y: 10 }}
+                            transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                            className="relative w-full max-w-4xl h-full max-h-[88vh] sm:max-h-[85vh] bg-zinc-950/90 border border-white/10 rounded-[2rem] overflow-hidden flex flex-col shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] pointer-events-auto backdrop-blur-md"
                         >
-                            <div className="flex-shrink-0 p-6 sm:p-8 border-b border-white/5 bg-zinc-950">
-                                <div className="flex items-start justify-between gap-6 mb-6 sm:mb-8">
+                            <div className="flex-shrink-0 p-6 sm:p-10 border-b border-white/5 bg-transparent">
+                                <div className="flex items-start justify-between gap-6 mb-8 sm:mb-12">
                                     <div>
-                                        <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tighter">Transcript</h2>
-                                        <p className="text-xs sm:text-sm text-zinc-500 font-bold uppercase tracking-widest mt-1 opacity-60">University of St. La Salle · B.S. CS</p>
+                                        <h2 className="text-3xl sm:text-5xl font-light text-white tracking-tight">Transcript</h2>
+                                        <p className="text-[10px] sm:text-xs text-zinc-500 font-medium uppercase tracking-[0.2em] mt-2 opacity-80">University of St. La Salle · B.S. CompSci</p>
                                     </div>
                                     <button
                                         onClick={onClose}
-                                        className="w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 active:scale-90 flex items-center justify-center transition-all flex-shrink-0"
+                                        className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/5 hover:bg-white/10 active:scale-95 flex items-center justify-center transition-all group"
                                     >
-                                        <X className="w-6 h-6" />
+                                        <X className="w-5 h-5 sm:w-6 sm:h-6 text-zinc-400 group-hover:text-white transition-colors" />
                                     </button>
                                 </div>
 
-                                <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center">
-                                    <div className="relative flex-1">
-                                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-600" />
+                                <div className="flex flex-col md:flex-row gap-6 items-stretch md:items-end">
+                                    <div className="relative flex-1 group">
+                                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-600 group-focus-within:text-blue-500 transition-colors" />
                                         <input
                                             type="text"
-                                            placeholder="Filter records..."
+                                            placeholder="Find a subject..."
                                             value={searchQuery}
                                             onChange={(e) => setSearchQuery(e.target.value)}
-                                            className="w-full pl-12 pr-4 py-3 sm:py-3.5 rounded-2xl bg-white/[0.03] border border-white/5 focus:border-blue-500/50 focus:outline-none text-sm transition-all"
+                                            className="w-full pl-12 pr-6 py-4 rounded-2xl bg-white/[0.03] border border-white/5 focus:border-blue-500/30 focus:bg-white/[0.05] focus:outline-none text-sm transition-all placeholder:text-zinc-700"
                                         />
                                     </div>
 
-                                    <div className="flex gap-2">
-                                        <div className="px-4 py-2.5 sm:px-5 sm:py-3 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex flex-col justify-center min-w-[80px] sm:min-w-[90px]">
-                                            <span className="text-[8px] sm:text-[9px] uppercase font-black text-blue-500 tracking-widest leading-none mb-1">GWA</span>
-                                            <span className="text-lg sm:text-xl font-black text-blue-400">{avgGrade}</span>
+                                    <div className="flex gap-3">
+                                        <div className="px-6 py-3 rounded-2xl bg-white/[0.02] border border-white/5 flex flex-col justify-center min-w-[100px]">
+                                            <span className="text-[8px] uppercase font-bold text-zinc-600 tracking-[0.2em] mb-1">CUMULATIVE GWA</span>
+                                            <span className="text-xl font-light text-blue-400">{avgGrade}</span>
                                         </div>
-                                        <div className="px-4 py-2.5 sm:px-5 sm:py-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex flex-col justify-center min-w-[80px] sm:min-w-[90px]">
-                                            <span className="text-[8px] sm:text-[9px] uppercase font-black text-emerald-500 tracking-widest leading-none mb-1">Perfect</span>
-                                            <span className="text-lg sm:text-xl font-black text-emerald-400">{perfectGrades}</span>
+                                        <div className="px-6 py-3 rounded-2xl bg-white/[0.02] border border-white/5 flex flex-col justify-center min-w-[100px]">
+                                            <span className="text-[8px] uppercase font-bold text-zinc-600 tracking-[0.2em] mb-1">PERFECT SCORING</span>
+                                            <span className="text-xl font-light text-emerald-400">{perfectGrades}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="flex-shrink-0 px-6 sm:px-8 py-3 bg-white/[0.02] border-b border-white/5 flex items-center gap-4 overflow-x-auto no-scrollbar">
-                                <span className="text-[9px] font-black uppercase tracking-widest text-zinc-500">Scale:</span>
-                                <div className="flex items-center gap-4">
-                                    <div className="flex items-center gap-2 whitespace-nowrap"><div className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> <span className="text-[10px] font-bold text-zinc-500">1.0 (100%)</span></div>
-                                    <div className="flex items-center gap-2 whitespace-nowrap"><div className="w-1.5 h-1.5 rounded-full bg-green-500" /> <span className="text-[10px] font-bold text-zinc-500">1.1–1.5 (95%)</span></div>
-                                    <div className="flex items-center gap-2 whitespace-nowrap"><div className="w-1.5 h-1.5 rounded-full bg-blue-500" /> <span className="text-[10px] font-bold text-zinc-500">1.6–2.0 (88%)</span></div>
-                                    <div className="flex items-center gap-2 whitespace-nowrap"><div className="w-1.5 h-1.5 rounded-full bg-amber-500" /> <span className="text-[10px] font-bold text-zinc-500">2.1+ (85%)</span></div>
+                            <div className="flex-shrink-0 px-6 sm:px-10 py-4 bg-white/[0.01] border-b border-white/5 flex items-center gap-6 overflow-x-auto no-scrollbar">
+                                <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-zinc-600">Legend:</span>
+                                <div className="flex items-center gap-6">
+                                    <div className="flex items-center gap-2 whitespace-nowrap"><div className="w-1 h-1 rounded-full bg-emerald-500" /> <span className="text-[10px] font-medium text-zinc-500/80">1.0 Peak</span></div>
+                                    <div className="flex items-center gap-2 whitespace-nowrap"><div className="w-1 h-1 rounded-full bg-green-500" /> <span className="text-[10px] font-medium text-zinc-500/80">1.1–1.5 Honor</span></div>
+                                    <div className="flex items-center gap-2 whitespace-nowrap"><div className="w-1 h-1 rounded-full bg-blue-500" /> <span className="text-[10px] font-medium text-zinc-500/80">1.6–2.0 Pass</span></div>
                                 </div>
                             </div>
 
-                            <div className="flex-1 overflow-y-auto px-5 sm:px-8 py-6 sm:py-8 space-y-8 sm:space-y-12 bg-zinc-950 scroll-smooth no-scrollbar">
+                            <div className="flex-1 overflow-y-auto px-6 sm:px-10 py-8 space-y-12 bg-transparent scroll-smooth no-scrollbar overscroll-behavior-contain">
                                 {Object.entries(groupedGrades).map(([term, grades]) => (
-                                    <div key={term} className="space-y-4">
-                                        <div className="flex items-center gap-4 sticky top-0 bg-zinc-950 py-2 z-10">
-                                            <span className="relative text-xs font-black uppercase tracking-[0.25em] text-blue-500/80">{term}</span>
+                                    <div key={term} className="space-y-6">
+                                        <div className="flex items-center gap-4 sticky top-0 bg-transparent py-4 z-10 backdrop-blur-sm -mx-4 px-4">
+                                            <span className="relative text-[10px] font-bold uppercase tracking-[0.3em] text-blue-500/60 font-sans">{term}</span>
                                             <div className="relative h-px flex-1 bg-white/5" />
                                         </div>
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                                             {grades.map((grade, idx) => (
                                                 <div
                                                     key={`${term}-${idx}`}
-                                                    className="flex items-center justify-between p-4 sm:p-4.5 rounded-2xl bg-white/[0.02] border border-white/[0.04] hover:bg-white/[0.06] transition-all group"
+                                                    className="flex items-center justify-between p-5 rounded-2xl bg-white/[0.01] border border-white/[0.03] hover:bg-white/[0.03] hover:border-white/10 transition-all group"
                                                 >
-                                                    <div className="min-w-0 pr-4">
-                                                        <span className="text-sm font-bold text-zinc-300 group-hover:text-white transition-colors block truncate">{grade.subject}</span>
-                                                        <span className="text-[10px] text-zinc-600 font-bold uppercase tracking-widest mt-1.5 block">{grade.equivalent}</span>
+                                                    <div className="min-w-0 pr-6">
+                                                        <span className="text-sm font-light text-zinc-400 group-hover:text-white transition-colors block truncate tracking-wide font-sans">{grade.subject}</span>
+                                                        <span className="text-[10px] text-zinc-700 font-medium uppercase tracking-[0.15em] mt-2 block group-hover:text-zinc-500 transition-colors font-mono">{grade.equivalent}</span>
                                                     </div>
-                                                    <div className={`text-sm font-black min-w-[42px] text-center px-2 py-1.5 rounded-xl border ${getGradeColor(grade.grade)}`}>
+                                                    <div className={`text-xs font-mono px-3 py-2 rounded-xl border tabular-nums ${getGradeColor(grade.grade)}`}>
                                                         {grade.grade.toFixed(1)}
                                                     </div>
                                                 </div>
@@ -411,13 +413,13 @@ export function GradesModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                                 ))}
                                 {filteredGrades.length === 0 && (
                                     <div className="py-24 text-center">
-                                        <p className="text-sm font-bold text-zinc-600 uppercase tracking-widest">No matching records found</p>
+                                        <p className="text-[10px] font-bold text-zinc-700 uppercase tracking-[0.3em]">No records match your query</p>
                                     </div>
                                 )}
                             </div>
 
-                            <div className="flex-shrink-0 px-8 py-5 bg-zinc-950 border-t border-white/5">
-                                <p className="text-[9px] text-center font-black uppercase tracking-[0.4em] text-zinc-800">Verified Academic Record · USLS Bacolod</p>
+                            <div className="flex-shrink-0 px-8 py-6 bg-transparent border-t border-white/5">
+                                <p className="text-[8px] text-center font-medium uppercase tracking-[0.5em] text-zinc-800">Final Verification · USLS Bacolod</p>
                             </div>
                         </m.div>
                     </div>

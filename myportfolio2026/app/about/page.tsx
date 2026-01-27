@@ -274,58 +274,52 @@ export default function AboutPage() {
           <p className="text-sm text-muted-foreground mb-6">
             Verify credentials and badges: <a href="https://linkedin.com/in/aiboboyero" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">linkedin.com/in/aiboboyero</a>
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {Object.entries(certificationsByProvider).map(([provider, names]) => {
-              const card = {
-                Google: "border-blue-500/30 dark:border-blue-500/20 bg-blue-500/10",
-                Microsoft: "border-sky-500/30 dark:border-sky-500/20 bg-sky-500/10",
-                IBM: "border-violet-500/30 dark:border-violet-500/20 bg-violet-500/10",
-                Canva: "border-pink-500/30 dark:border-pink-500/20 bg-pink-500/10",
-                DataCamp: "border-orange-500/30 dark:border-orange-500/20 bg-orange-500/10",
-                GitHub: "border-slate-500/30 dark:border-slate-500/20 bg-slate-500/10",
-                YouTube: "border-red-500/30 dark:border-red-500/20 bg-red-500/10",
-              }[provider] || "border-zinc-300 dark:border-white/10 bg-white/5";
-              const dot = {
-                Google: "bg-blue-500",
-                Microsoft: "bg-sky-500",
-                IBM: "bg-violet-500",
-                Canva: "bg-pink-500",
-                DataCamp: "bg-orange-500",
-                GitHub: "bg-slate-500",
-                YouTube: "bg-red-500",
-              }[provider] || "bg-zinc-500";
-              return (
-                <div key={provider} className={`rounded-2xl p-5 border ${card}`}>
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className={`w-3 h-3 rounded-full ${dot}`} />
-                    <h3 className="text-base font-bold">{provider}</h3>
-                    <span className="text-xs text-muted-foreground">({certificationCounts[provider] ?? names.length})</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {Object.entries(certificationsByProvider)
+              .filter(([provider]) => ["Google", "Microsoft", "IBM"].includes(provider))
+              .map(([provider, names]) => {
+                const card = {
+                  Google: "border-blue-500/30 dark:border-blue-500/20 bg-blue-500/10",
+                  Microsoft: "border-sky-500/30 dark:border-sky-500/20 bg-sky-500/10",
+                  IBM: "border-violet-500/30 dark:border-violet-500/20 bg-violet-500/10",
+                }[provider] || "border-zinc-300 dark:border-white/10 bg-white/5";
+                const dot = {
+                  Google: "bg-blue-500",
+                  Microsoft: "bg-sky-500",
+                  IBM: "bg-violet-500",
+                }[provider] || "bg-zinc-500";
+                return (
+                  <div key={provider} className={`rounded-2xl p-5 border ${card}`}>
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className={`w-3 h-3 rounded-full ${dot}`} />
+                      <h3 className="text-base font-bold">{provider}</h3>
+                      <span className="text-xs text-muted-foreground">({certificationCounts[provider] ?? names.length})</span>
+                    </div>
+                    <ul className="space-y-1.5 text-sm">
+                      {names.map((name, i) => {
+                        const url = certificationUrls[name];
+                        return (
+                          <li key={i} className="flex items-start gap-2">
+                            <span className="text-muted-foreground mt-0.5">·</span>
+                            {url ? (
+                              <a
+                                href={url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-foreground hover:text-blue-600 dark:hover:text-blue-400 hover:underline transition-colors"
+                              >
+                                {name}
+                              </a>
+                            ) : (
+                              <span>{name}</span>
+                            )}
+                          </li>
+                        );
+                      })}
+                    </ul>
                   </div>
-                  <ul className="space-y-1.5 text-sm">
-                    {names.map((name, i) => {
-                      const url = certificationUrls[name];
-                      return (
-                        <li key={i} className="flex items-start gap-2">
-                          <span className="text-muted-foreground mt-0.5">·</span>
-                          {url ? (
-                            <a
-                              href={url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-foreground hover:text-blue-600 dark:hover:text-blue-400 hover:underline transition-colors"
-                            >
-                              {name}
-                            </a>
-                          ) : (
-                            <span>{name}</span>
-                          )}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
 
           <div className="text-center mt-12">
