@@ -276,23 +276,32 @@ export default function AboutPage() {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {Object.entries(certificationsByProvider)
-              .filter(([provider]) => ["Google", "Microsoft", "IBM"].includes(provider))
               .map(([provider, names]) => {
                 const card = {
                   Google: "border-blue-500/30 dark:border-blue-500/20 bg-blue-500/10",
                   Microsoft: "border-sky-500/30 dark:border-sky-500/20 bg-sky-500/10",
                   IBM: "border-violet-500/30 dark:border-violet-500/20 bg-violet-500/10",
+                  Canva: "border-cyan-500/30 dark:border-cyan-500/20 bg-cyan-500/10",
+                  DataCamp: "border-green-500/30 dark:border-green-500/20 bg-green-500/10",
+                  GitHub: "border-zinc-500/30 dark:border-zinc-500/20 bg-zinc-500/10",
+                  YouTube: "border-red-500/30 dark:border-red-500/20 bg-red-500/10",
                 }[provider] || "border-zinc-300 dark:border-white/10 bg-white/5";
+
                 const dot = {
                   Google: "bg-blue-500",
                   Microsoft: "bg-sky-500",
                   IBM: "bg-violet-500",
+                  Canva: "bg-cyan-500",
+                  DataCamp: "bg-green-500",
+                  GitHub: "bg-zinc-500",
+                  YouTube: "bg-red-500",
                 }[provider] || "bg-zinc-500";
+
                 return (
                   <div key={provider} className={`rounded-2xl p-5 border ${card}`}>
                     <div className="flex items-center gap-2 mb-3">
                       <div className={`w-3 h-3 rounded-full ${dot}`} />
-                      <h3 className="text-base font-bold">{provider}</h3>
+                      <h3 className="text-base font-bold dark:text-white">{provider}</h3>
                       <span className="text-xs text-muted-foreground">({certificationCounts[provider] ?? names.length})</span>
                     </div>
                     <ul className="space-y-1.5 text-sm">
@@ -312,7 +321,7 @@ export default function AboutPage() {
                                 <ExternalLink className="w-3 h-3 opacity-30 group-hover:opacity-100 transition-opacity" />
                               </a>
                             ) : (
-                              <span>{name}</span>
+                              <span className="text-zinc-700 dark:text-zinc-400">{name}</span>
                             )}
                           </li>
                         );
