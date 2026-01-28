@@ -36,8 +36,8 @@ export const FloatingConsultButton = ({
   popupHeading = "30-minutes call",
   popupDescription = "This will be a brief, free call with one of Bricks Studio's design and development producers to discuss your project and determine if we're a good fit.",
   popupBadgeText = "Free",
-  ctaButtonText = "Book a call",
-  ctaButtonAction = () => console.log("CTA clicked"),
+  ctaButtonText = "Schedule on Google Calendar",
+  ctaButtonAction = () => window.open("https://calendar.google.com/calendar/render?action=TEMPLATE&add=gianaibo.dev@gmail.com", "_blank"),
   position = { bottom: "2rem", right: "2rem" },
 }: FloatingConsultButtonProps) => {
   const { isActive } = useFullPageLoading();
@@ -99,6 +99,17 @@ export const FloatingConsultButton = ({
               >
                 {ctaButtonText}
               </Button>
+
+              <div className="text-center">
+                <a
+                  href="/lib/Resume%20-%20Gian%20Aibo%20Boyero.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-muted-foreground hover:text-blue-500 underline underline-offset-4 transition-colors"
+                >
+                  View my Resume
+                </a>
+              </div>
             </div>
           </m.div>
         )}

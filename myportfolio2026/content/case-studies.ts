@@ -497,7 +497,7 @@ const rawCaseStudies: CaseStudy[] = caseStudySchema.array().parse([
     category: "Web Development",
     tags: ["Automation", "Backend Engineering", "Telegram Bot", "Cloud Kitchen", "Full-Stack"],
     roles: ["Backend Developer", "System Architect", "Full-Stack Engineer"],
-    tools: ["Node.js", "Telegram Bot API", "Supabase (PostgreSQL)", "Webhooks", "HTML5/CSS3", "JavaScript"],
+    tools: ["React", "TypeScript", "Vite", "Tailwind CSS", "Node.js", "Supabase"],
     metrics: [
       "Eliminated 5-15 minute 'dead zone' in order processing",
       "Reduced order-to-rider dispatch time to <1 second",
@@ -505,21 +505,20 @@ const rawCaseStudies: CaseStudy[] = caseStudySchema.array().parse([
       "Automated identity mapping eliminates manual customer data entry",
       "Real-time receipt generation enhances customer trust",
     ],
-    heroImage: "/lib/755_1x_shots_so.png",
+    heroImage: "/lib/936_1x_shots_so.png",
     gallery: [
-      "/lib/755_1x_shots_so.png",
-      "/lib/348_1x_shots_so.png",
-      "/lib/389_1x_shots_so.png",
-      "/lib/719_1x_shots_so.png",
-      "/lib/943_1x_shots_so.png",
+      "/lib/936_1x_shots_so.png",
+      "/lib/117_1x_shots_so.png",
+      "/lib/133_1x_shots_so.png",
+      "/lib/180_1x_shots_so.png",
+      "/lib/289_1x_shots_so.png",
     ],
     deliverables: [
-      "Node.js Webhook-Driven Core Architecture",
-      "Supabase/PostgreSQL Database Schema",
-      "Tri-Group Dispatch Logic System",
-      "Automated Receipt Generation Engine",
-      "HTML5/CSS3 Admin Dashboard",
-      "Customer Identity Mapping System",
+      "React/Vite Admin Dashboard",
+      "Node.js Webhook Architecture",
+      "Supabase/PostgreSQL Database",
+      "Automated Receipt Engine",
+      "Customer Identity Mapping",
     ],
     sections: [
       {
@@ -552,7 +551,7 @@ const rawCaseStudies: CaseStudy[] = caseStudySchema.array().parse([
         body: [
           "Instead of using inefficient 'polling,' I built a Node.js Webhook listener that ensures the moment a customer interacts with the bot, the server receives a push notification. This architecture allows for sub-second response times, making the 'digital restaurant' feel as responsive as a physical waiter.",
           "I designed a custom SQL schema to move beyond simple chat interactions. Every user is indexed by their unique Telegram chat_id, allowing the restaurant to map @usernames to order histories, preferences, and delivery addresses—turning a chat app into a powerful Customer Relationship Management (CRM) tool.",
-          "I engineered a complex message-routing logic that manages three separate environments simultaneously: Customer DMs for private receipt delivery and order status updates, Kitchen/Admin Dashboard as a lightweight HTML5/CSS3 interface where the owner accepts or rejects orders, and Rider Logistics Group as an automated dispatch feed that instantly notifies all available riders when an order is ready.",
+          "I engineered a complex message-routing logic that manages three separate environments simultaneously: Customer DMs for private receipt delivery and order status updates, Kitchen/Admin Dashboard as a modern React/Vite interface where the owner accepts or rejects orders, and Rider Logistics Group as an automated dispatch feed that instantly notifies all available riders when an order is ready.",
         ],
         highlights: [
           "Webhook-Driven Core (Sub-Second Response)",
@@ -566,7 +565,7 @@ const rawCaseStudies: CaseStudy[] = caseStudySchema.array().parse([
         body: [
           "The automation flow begins when a customer triggers the bot via a /start or /menu command. The bot checks the Supabase database—if new, it captures the chat_id and @username. The web dashboard updates in real-time to show the incoming request.",
           "Upon admin approval, the bot executes a sendMessage request to the Rider Group Chat ID, tagging the order as [UNCLAIMED]. Simultaneously, a professionally formatted Digital Receipt is sent to the customer's private messages, including a timestamped Order ID.",
-          "The tech stack leverages Node.js as the runtime, PostgreSQL (via Supabase) for database persistence, HTML5/CSS3 for the Admin Dashboard frontend, and Telegram Bot API with Webhooks for real-time integration. The entire system is deployed via a Git-based workflow with npm dependency management.",
+          "The tech stack leverages Node.js as the runtime, PostgreSQL (via Supabase) for database persistence, React + TypeScript + Tailwind for the Admin Dashboard frontend, and Telegram Bot API with Webhooks for real-time integration. The entire system is deployed via a Git-based workflow with npm dependency management.",
         ],
         highlights: [
           "Step-by-Step Automation Workflow",

@@ -11,6 +11,7 @@ interface PixelHeaderProps {
   categoryText?: string;
   backLink?: React.ReactNode;
   maxWidth?: string;
+  children?: React.ReactNode;
 }
 
 export function PixelHeader({
@@ -21,6 +22,7 @@ export function PixelHeader({
   categoryText,
   backLink,
   maxWidth = "max-w-6xl",
+  children,
 }: PixelHeaderProps) {
   return (
     <div className="relative w-full h-[250px] sm:h-[300px] md:h-[350px] overflow-hidden">
@@ -69,6 +71,7 @@ export function PixelHeader({
               {subtitle}
             </p>
           )}
+          {children}
         </m.div>
       </div>
     </div>

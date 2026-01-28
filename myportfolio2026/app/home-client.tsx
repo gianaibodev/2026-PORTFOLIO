@@ -333,13 +333,21 @@ export default function HomeClient({ galleryImages }: { galleryImages: GalleryIm
                   ))}
                 </m.div>
 
-                <m.div variants={itemVariants} className="pt-8 text-center lg:text-left">
+                <m.div variants={itemVariants} className="pt-8 text-center lg:text-left flex flex-wrap gap-4">
                   <a
                     href="/about"
                     className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-blue-600 text-white font-bold hover:bg-blue-700 transition-colors"
                     suppressHydrationWarning
                   >
                     <span>Know More About Me</span>
+                  </a>
+                  <a
+                    href="/lib/Resume%20-%20Gian%20Aibo%20Boyero.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors font-medium"
+                  >
+                    <span>View Resume</span>
                   </a>
                 </m.div>
               </div>

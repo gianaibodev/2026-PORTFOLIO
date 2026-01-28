@@ -43,7 +43,19 @@ export default function AboutPage() {
         categoryIcon={<GraduationCap className="size-4" />}
         categoryText="Portfolio 2025"
         maxWidth="max-w-7xl"
-      />
+      >
+        <div className="mt-6 flex justify-center">
+          <a
+            href="/lib/Resume%20-%20Gian%20Aibo%20Boyero.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-blue-600 text-white font-bold hover:bg-blue-700 transition-colors text-sm"
+          >
+            <FileText className="w-4 h-4" />
+            View Resume
+          </a>
+        </div>
+      </PixelHeader>
 
       {/* Quick Stats — same visual language as Formal Education: colored cards, dot, badges */}
       <section className="px-4 sm:px-6 lg:px-10 py-12">
