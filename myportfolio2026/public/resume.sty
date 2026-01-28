@@ -1,0 +1,203 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[colorlinks=true, urlcolor=blue, linkcolor=blue]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{} 
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    {\Huge \scshape Gian Aibo C. Boyero} \\ \vspace{1pt}
+    \small Full-Stack Product Engineer $|$ Creative Technologist \\ \vspace{1pt}
+    Bacolod City, Philippines \\ \vspace{1pt}
+    \small \raisebox{-0.1\height}\faPhone\ +855 97 980 5483 ~ 
+    \href{mailto:gianaibo.dev@gmail.com}{\raisebox{-0.2\height}\faEnvelope\  \underline{gianaibo.dev@gmail.com}} ~ 
+    \href{https://www.gianaibo.tech}{\raisebox{-0.2\height}\faGlobe\ \underline{www.gianaibo.tech}} ~  
+    \href{https://linkedin.com/in/aiboboyero}{\raisebox{-0.2\height}\faLinkedin\ \underline{linkedin.com/in/aiboboyero}}
+    \vspace{-8pt}
+\end{center}
+
+
+%-----------SUMMARY-----------
+\section{Professional Summary}
+\small{Rank 1 Dean's Lister (A.Y. 2021-2022) out of 7,000+ students and Creative Technologist blending high-performance engineering with award-winning design. Expert in React 19, Next.js 16, and Shopify (Liquid). Proven ability to ship automated business solutions and lead large-scale technical communities.}
+\vspace{-12pt}
+
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: TypeScript, JavaScript, HTML, CSS, SQL} \\
+     \textbf{Frontend}{: React 19, Next.js 16, Vite, Tailwind CSS v4, Zustand, GSAP, Framer Motion, Three.js} \\
+     \textbf{Backend}{: Node.js, Supabase (PostgreSQL), Firebase, Telegram API, REST APIs, Webhooks, Shopify (Liquid)} \\
+     \textbf{Tools \& Cloud}{: Vercel (CI/CD), Git/GitHub, Figma, Adobe Creative Suite}
+    }}
+ \end{itemize}
+ \vspace{-16pt}
+
+
+%-----------PROJECT WORK-----------
+\section{Project Work}
+    \resumeSubHeadingListStart
+
+      \resumeProjectHeading
+          {\textbf{SaucyKPS Bot v1} $|$ \emph{Sole Developer \& Architect} $|$ \href{https://saucy-kps-bot-v1.vercel.app/}{\underline{Live URL}}}{2025}
+          \resumeItemListStart
+            \resumeItem{A Telegram-native "Cloud Kitchen" OS engineered to automate restaurant logistics.}
+            \resumeItem{\textbf{Eliminated 20-30\% in commission fees} by bypassing third-party delivery platforms via a direct-to-consumer interface.}
+            \resumeItem{Reduced order-to-dispatch time to \textbf{$<$1 second} (prev. 15 mins) by automating identity mapping with Node.js and Supabase.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{GDG Bacolod Platform} $|$ \emph{Sole Developer \& Architect} $|$ \href{https://gdg-bacolod.vercel.app/}{\underline{Live URL}}}{2025}
+          \resumeItemListStart
+            \resumeItem{Offline-ready Progressive Web App (PWA) built for community management and event tracking.}
+            \resumeItem{Automated certificate generation for \textbf{800+ attendees}, reducing organizer workload by 90\% using Cloud Functions.}
+            \resumeItem{Leveraged \textbf{React 19 and Firebase Firestore} to ensure real-time data sync in low-connectivity venues.}
+          \resumeItemListEnd
+          
+    \resumeSubHeadingListEnd
+
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {\href{https://www.gianaibo.tech/blog/gdsc-usls-journey-2022}{Google Developer Groups (GDG) on Campus USLS}}{Sep 2024 -- June 2025}
+      {Organizer \& CEO}{Bacolod City, Philippines}
+      \resumeItemListStart
+        \resumeItem{Scaled tech community membership from 500+ to \textbf{1,500+} in 5 months by executing strategic engagement initiatives.}
+        \resumeItem{Managed and mentored a team of \textbf{40+ officers}, ensuring efficient delivery of \textbf{50+ events} and workshops.}
+        \resumeItem{Served as Project Lead for 6 international events, connecting 2,650+ members with global industry leaders.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {\href{https://www.gianaibo.tech/case-studies/armada-brands-internship}{Armada Brands}}{June 2024 -- Sep 2024}
+      {Creatives \& Marketing Intern}{Makati, Philippines}
+      \resumeItemListStart
+        \resumeItem{Designated as an officially recognized \textbf{Shopify Developer} after building and deploying a fully functional website using \textbf{Liquid}.}
+        \resumeItem{Spearheaded creative strategy for major \textbf{7.7 and 8.8 campaigns}, producing high-conversion video assets that drove thousands of views across TikTok Shop, Shopee, and Lazada.}
+        \resumeItem{Streamlined creative workflows and led the \textbf{onboarding of new team members}, providing mentorship to ensure consistent brand alignment across diverse portfolios.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {\href{https://www.gianaibo.tech/case-studies/google-events-branding}{Google Developer Groups Bacolod}}{Nov 2022 -- June 2025}
+      {Creatives Co-head}{Bacolod City, Philippines}
+      \resumeItemListStart
+        \resumeItem{Developed software assets and 3D motion graphics to support large-scale tech conferences like DevFest.}
+        \resumeItem{Collaborated with regional leads to expand community reach across \textbf{30+ cities} through multimedia marketing.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {University of St. La Salle}{Aug 2021 -- June 2025}
+      {Bachelor of Science in Computer Science $|$ \textbf{1.3 GWA} \href{https://www.gianaibo.tech/lib/mygradescollege.pdf}{\underline{(View Grades)}}}{Bacolod City, Philippines}
+      \resumeItemListStart
+        \resumeItem{\textbf{Rank 1 Dean's Lister (2021-2022)} out of 7,000+ Students $\bullet$ Consistent Dean's List (2021-2025)}
+        \resumeItem{\textbf{Legacy Builder Award (2025)} $\bullet$ \textbf{Role Model of the Year (2023)} $\bullet$ Outstanding Intern (2025) $\bullet$ \textbf{National Top 10 Creative Awards}}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+
+%-----------CERTIFICATIONS-----------
+\section{Certifications}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{AI \& Machine Learning}{: \href{https://www.datacamp.com/certificate/AIEDA0017137154622}{AI Engineer Associate (DataCamp)} $\bullet$ \href{https://www.linkedin.com/in/aiboboyero/details/certifications/}{Microsoft Azure AI Fundamentals} $\bullet$ \href{https://www.linkedin.com/in/aiboboyero/details/certifications/}{Generative AI (Google)}} \\
+     \textbf{Product \& UX}{: \href{https://www.linkedin.com/in/aiboboyero/details/certifications/}{Foundations of UX Design (Google)} $\bullet$ \href{https://www.linkedin.com/in/aiboboyero/details/certifications/}{Project Management (Google)} $\bullet$ \href{https://www.linkedin.com/in/aiboboyero/details/certifications/}{Digital Marketing \& E-commerce}} \\
+     \textbf{Cloud \& Dev}{: \href{https://www.linkedin.com/in/aiboboyero/details/certifications/}{GitHub Foundations} $\bullet$ \href{https://www.linkedin.com/in/aiboboyero/details/certifications/}{Introduction to Cloud (IBM)} $\bullet$ \href{https://www.linkedin.com/in/aiboboyero/details/certifications/}{Working with OpenAI API (DataCamp)}}
+    }}
+ \end{itemize}
+
+\end{document}
