@@ -2,7 +2,7 @@
 
 ![portfolio preview](myportfolio2026/public/portfolio-screenshots/og-hero.jpg)
 
-this is my portfolio. not a template. not a tutorial project. just me figuring out how to make websites that don't suck.
+this is my portfolio. not a template. not a tutorial project. just stuff i've been working on.
 
 ---
 
