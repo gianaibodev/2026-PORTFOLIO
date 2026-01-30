@@ -5,6 +5,7 @@ import Image from "next/image"
 import { X, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ImageLightboxProps } from "./types"
+import { lockScroll, unlockScroll } from "@/lib/scroll-lock"
 
 export function ImageLightbox({
     projects,
@@ -94,12 +95,12 @@ export function ImageLightbox({
 
         window.addEventListener("keydown", handleKeyDown)
         if (isOpen) {
-            document.body.style.overflow = "hidden"
+            lockScroll()
         }
 
         return () => {
             window.removeEventListener("keydown", handleKeyDown)
-            document.body.style.overflow = ""
+            unlockScroll()
         }
     }, [isOpen, handleClose, navigateNext, navigatePrev])
 

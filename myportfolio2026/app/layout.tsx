@@ -11,6 +11,7 @@ import { FloatingConsultButtonPortal } from "@/components/ui/floating-consult-bu
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import { SmoothScroll } from "@/components/smooth-scroll";
+import { RouteChangeHandler } from "@/components/route-change-handler";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -73,6 +74,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning
       >
         <ThemeProvider>
           <SmoothScroll>
@@ -80,6 +82,7 @@ export default function RootLayout({
               <CopyModeProvider>
                 <FullPageLoadingProvider>
                   <FramerMotionProvider>
+                    <RouteChangeHandler />
                     <div className="flex min-h-screen flex-col">
                       <main className="flex-1">{children}</main>
                       <Footer />

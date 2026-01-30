@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect } from "react";
+import { lockScroll, unlockScroll, forceUnlockScroll } from "@/lib/scroll-lock";
 
 type FullPageLoadingContextType = {
   isActive: boolean;
@@ -14,15 +15,12 @@ export function FullPageLoadingProvider({ children }: { children: React.ReactNod
 
   useEffect(() => {
     if (isActive) {
-      document.body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden";
+      lockScroll();
     } else {
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
+      unlockScroll();
     }
     return () => {
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
+      forceUnlockScroll();
     };
   }, [isActive]);
 
@@ -35,6 +33,6 @@ export function FullPageLoadingProvider({ children }: { children: React.ReactNod
 
 export function useFullPageLoading() {
   const ctx = useContext(FullPageLoadingContext);
-  if (!ctx) return { isActive: false, setActive: () => {} };
+  if (!ctx) return { isActive: false, setActive: () => { } };
   return ctx;
 }

@@ -63,7 +63,7 @@ export function Footer() {
 	if (isActive) return null;
 
 	return (
-		<footer className="relative w-full border-t border-zinc-200 dark:border-white/10 bg-zinc-50/50 dark:bg-zinc-900/50 backdrop-blur-xl">
+		<footer className="relative w-full border-t border-zinc-200 dark:border-white/10 bg-zinc-50/50 dark:bg-zinc-900/50 backdrop-blur-xl pb-24 md:pb-28">
 			{/* Disclaimer Marquee */}
 			<div className="w-full bg-blue-500/5 border-b border-blue-500/10 py-3 overflow-hidden">
 				<div className="animate-marquee flex w-max whitespace-nowrap" style={{ "--duration": "40s" } as React.CSSProperties}>

@@ -26,6 +26,12 @@ export default function AboutPage() {
 
   useEffect(() => {
     setMounted(true);
+    // Scroll to top when page mounts
+    window.scrollTo(0, 0);
+    // Also reset Lenis if available
+    if (typeof window !== 'undefined' && (window as unknown as { lenis?: { scrollTo: (target: number, options?: object) => void } }).lenis) {
+      (window as unknown as { lenis: { scrollTo: (target: number, options?: object) => void } }).lenis.scrollTo(0, { immediate: true });
+    }
   }, []);
 
   if (!mounted) return null;
@@ -233,7 +239,7 @@ export default function AboutPage() {
                 Affiliations
               </h3>
               <div className="space-y-4">
-                {accolades.college.affiliations.slice(0, 5).map((a, i) => (
+                {accolades.college.affiliations.slice(0, 8).map((a, i) => (
                   <div key={i} className="p-4 rounded-2xl bg-white/5 border border-white/5 text-sm font-medium text-emerald-600 dark:text-emerald-400">{a}</div>
                 ))}
               </div>

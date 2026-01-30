@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { m, AnimatePresence } from "framer-motion";
 import { X, Search, ExternalLink } from "lucide-react";
+import { lockScroll, unlockScroll } from "@/lib/scroll-lock";
 
 // --- PORTAL COMPONENT ---
 function Portal({ children }: { children: React.ReactNode }) {
@@ -121,14 +122,27 @@ export const accolades = {
             "Google Career Certificate Scholar (2022)",
         ],
         affiliations: [
-            "Layout Artist Head, College of Engineering & Tech Council, University of St. La Salle (2021)",
-            "Layout Artist & Marketing, Maskara Theatre Ensemble (2021)",
-            "Lead, Google Developer Student Clubs (2022–2023)",
-            "Member and Volunteer, DEVCON Philippines (2023–Present)",
-            "Organizer, Google Developer Groups on Campus, University of St. La Salle (2024–Present)",
-            "GeeksPH Volunteer, Geeks On A Beach — GOAB7 2024 (2024)",
-            "Member, AWS Cloud Club – University of St. La Salle Chapter (2024–Present)",
-            "Project Lead, SONDER: Google Dev World Tour, Google Developer Groups on Campus Philippines (2024–Present)",
+            // Experience / Work
+            "Creatives Co-head, Google Developer Groups Bacolod (Nov 2022 – Jul 2025)",
+            "Chief Executive Officer, Google Developer Groups on Campus - University of St. La Salle (Sep 2024 – Jun 2025)",
+            "President, DEVCON Bacolod (Feb 2024 – Jan 2025)",
+            "Creatives & Marketing Intern, Armada Brands (Jun 2024 – Sep 2024)",
+            "Chief Executive Officer, Google Developer Student Clubs - University of St. La Salle (Aug 2022 – Jul 2023)",
+            "Editor in Chief, Tigris (Jun 2022 – Jun 2023)",
+            "Media Officer, Computer Science Society, USLS (Jan 2022 – Jan 2023)",
+            "Vice President, Google Developer Student Clubs - University of St. La Salle (Aug 2021 – Jun 2022)",
+            "Head of Public Relations Department, College of Engineering and Technology Council - USLS (Nov 2021 – Apr 2022)",
+            "Layout Artist Head, College of Engineering and Technology Council - USLS (Aug 2021 – Oct 2021)",
+            "Layout Artist, Maskara Theatre Ensemble (Jul 2019 – Mar 2021)",
+            "Owner, The Allegiance (Nov 2020 – Dec 2020)",
+            "Executive President, Student Government Organization - Holy Infant Academy (Apr 2018 – Mar 2019)",
+            // Volunteering
+            "Google Developer Groups on Campus Organizer, Google (Sep 2024 – Present)",
+            "Google Developer Student Clubs Lead, Google (Aug 2022 – Jun 2023)",
+            "Member and Volunteer, DEVCON Philippines (Aug 2023 – Present)",
+            "GeeksPH Volunteer, Geeks On A Beach — GOAB7 2024 (Nov 2024)",
+            "AWS Cloud Club - USLS Chapter Member, Amazon Web Services (Oct 2024 – Present)",
+            "SONDER: Google Dev World Tour - Project Lead, Google Developer Groups on Campus Philippines (Dec 2024 – Present)",
         ],
     },
     seniorHigh: {
@@ -214,15 +228,12 @@ export function getSpotlightGrades() {
 export function AchievementArchiveModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
     useEffect(() => {
         if (isOpen) {
-            document.body.style.overflow = "hidden";
-            document.documentElement.style.overflow = "hidden";
+            lockScroll();
         } else {
-            document.body.style.overflow = "";
-            document.documentElement.style.overflow = "";
+            unlockScroll();
         }
         return () => {
-            document.body.style.overflow = "";
-            document.documentElement.style.overflow = "";
+            unlockScroll();
         };
     }, [isOpen]);
 
@@ -310,15 +321,12 @@ export function GradesModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
 
     useEffect(() => {
         if (isOpen) {
-            document.body.style.overflow = "hidden";
-            document.documentElement.style.overflow = "hidden";
+            lockScroll();
         } else {
-            document.body.style.overflow = "";
-            document.documentElement.style.overflow = "";
+            unlockScroll();
         }
         return () => {
-            document.body.style.overflow = "";
-            document.documentElement.style.overflow = "";
+            unlockScroll();
         };
     }, [isOpen]);
 

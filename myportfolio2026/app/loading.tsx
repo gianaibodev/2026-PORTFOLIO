@@ -118,7 +118,12 @@ export default function Loading() {
 
         window.addEventListener("keydown", handleKeyDown);
         window.addEventListener("keyup", handleKeyUp);
-        window.addEventListener("click", handleClick);
+
+        // Only add click listener for desktop - mobile uses explicit skip button
+        if (!isMobile) {
+            window.addEventListener("click", handleClick);
+        }
+
         window.addEventListener("touchstart", handleTouchStart, { passive: false });
         window.addEventListener("touchend", handleTouchEnd, { passive: false });
         window.addEventListener("touchmove", handleTouchMove, { passive: false });
@@ -177,12 +182,12 @@ export default function Loading() {
 
     const overlay = (
         <div
-            className="fixed inset-0 z-[99999] min-h-[100dvh] overflow-hidden cursor-pointer bg-[#0a0f18]"
+            className={`fixed inset-0 z-[99999] min-h-[100dvh] overflow-hidden bg-[#0a0f18] ${!isMobile ? 'cursor-pointer' : ''}`}
             style={{ height: "100dvh" }}
-            onClick={() => {
+            onClick={!isMobile ? () => {
                 setShowLoader(false);
                 sessionStorage.setItem("siteIntroShown_v1", "true");
-            }}
+            } : undefined}
             aria-hidden="false"
         >
             <ParticleText hideInteractionHint />
