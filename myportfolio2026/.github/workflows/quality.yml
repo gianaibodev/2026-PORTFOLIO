@@ -1,0 +1,36 @@
+name: Enterprise Quality Gates
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  quality-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: TypeScript Strict Check
+        run: npx tsc --noEmit
+        
+      - name: ESLint Validation
+        run: npm run lint
+        
+      - name: Build Verification
+        run: npm run build
+        
+      - name: Check File Sizes (Prevent Monoliths)
+        run: |
+          find components/ui app -name "*.tsx" -type f -exec wc -l {} + | \
+          awk '$1 > 350 {print "FAIL: " $2 " has " $1 " lines (max 350)"; exit 1}'

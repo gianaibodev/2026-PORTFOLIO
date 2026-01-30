@@ -19,8 +19,8 @@ const ParticleText = ({ hideInteractionHint = false }: ParticleTextProps) => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d", { willReadFrequently: true });
-    if (!ctx) return;
+    const context = canvas.getContext("2d", { willReadFrequently: true });
+    if (!context) return;
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -48,92 +48,98 @@ const ParticleText = ({ hideInteractionHint = false }: ParticleTextProps) => {
       }
 
       draw() {
-        if (!ctx) return;
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.closePath();
-        ctx.fill();
+        if (!context) return;
+        context.fillStyle = this.color;
+        context.beginPath();
+        context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        context.closePath();
+        context.fill();
       }
 
       update() {
         if (mouse.current.x === undefined || mouse.current.y === undefined) {
-          const dx = this.x - this.baseX;
-          const dy = this.y - this.baseY;
-          this.x -= dx / 10;
-          this.y -= dy / 10;
+          const deltaX = this.x - this.baseX;
+          const deltaY = this.y - this.baseY;
+          this.x -= deltaX / 10;
+          this.y -= deltaY / 10;
           return;
         }
 
-        let dx = (mouse.current.x as number) - this.x;
-        let dy = (mouse.current.y as number) - this.y;
-        let distance = Math.sqrt(dx * dx + dy * dy);
-        let forceDirectionX = dx / distance;
-        let forceDirectionY = dy / distance;
+        const deltaX = (mouse.current.x as number) - this.x;
+        const deltaY = (mouse.current.y as number) - this.y;
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        const forceDirectionX = deltaX / distance;
+        const forceDirectionY = deltaY / distance;
         let force = (mouse.current.radius - distance) / mouse.current.radius;
         if (force < 0) force = 0;
 
-        let directionX = forceDirectionX * force * this.density;
-        let directionY = forceDirectionY * force * this.density;
+        const directionX = forceDirectionX * force * this.density;
+        const directionY = forceDirectionY * force * this.density;
 
         if (distance < mouse.current.radius) {
           this.x -= directionX;
           this.y -= directionY;
         } else {
           if (this.x !== this.baseX) {
-            let dx = this.x - this.baseX;
+            const dx = this.x - this.baseX;
             this.x -= dx / 10;
           }
           if (this.y !== this.baseY) {
-            let dy = this.y - this.baseY;
+            const dy = this.y - this.baseY;
             this.y -= dy / 10;
           }
         }
       }
     }
 
+    /**
+     * Initializes the particle system by analyzing pixel data from drawn text.
+     */
     function init() {
-      if (!ctx || !canvas) return;
+      if (!context || !canvas) return;
       particlesArray = [];
       const text = "Loading";
       const fontSize = Math.min(window.innerWidth / 6, 200);
       const textX = canvas.width / 2;
       const textY = canvas.height / 2;
 
-      ctx.font = `bold ${fontSize}px "Arial Black", Gadget, sans-serif`;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
+      context.font = `bold ${fontSize}px "Arial Black", Gadget, sans-serif`;
+      context.textAlign = "center";
+      context.textBaseline = "middle";
 
-      const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+      const gradient = context.createLinearGradient(0, 0, canvas.width, 0);
       gradient.addColorStop(0.2, "#41d1ff");
       gradient.addColorStop(0.5, "#41a9ff");
       gradient.addColorStop(0.8, "#61dafb");
-      ctx.fillStyle = gradient;
+      context.fillStyle = gradient;
 
-      ctx.fillText(text, textX, textY);
-      const textCoordinates = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      context.fillText(text, textX, textY);
+      const textCoordinates = context.getImageData(0, 0, canvas.width, canvas.height);
+      context.clearRect(0, 0, canvas.width, canvas.height);
 
       for (let y = 0; y < textCoordinates.height; y += 4) {
         for (let x = 0; x < textCoordinates.width; x += 4) {
           const alphaIndex = y * 4 * textCoordinates.width + x * 4 + 3;
           if (textCoordinates.data[alphaIndex] > 128) {
-            const r = textCoordinates.data[alphaIndex - 3];
-            const g = textCoordinates.data[alphaIndex - 2];
-            const b = textCoordinates.data[alphaIndex - 1];
-            const color = `rgb(${r},${g},${b})`;
+            const red = textCoordinates.data[alphaIndex - 3];
+            const green = textCoordinates.data[alphaIndex - 2];
+            const blue = textCoordinates.data[alphaIndex - 1];
+            const color = `rgb(${red},${green},${blue})`;
             particlesArray.push(new Particle(x, y, color));
           }
         }
       }
     }
 
+    /**
+     * Animation loop for updating and drawing particles.
+     */
     function animate() {
-      if (!ctx || !canvas) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particlesArray.forEach((p) => {
-        p.draw();
-        p.update();
+      if (!context || !canvas) return;
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      particlesArray.forEach((particle) => {
+        particle.draw();
+        particle.update();
       });
       animationFrameId = requestAnimationFrame(animate);
     }

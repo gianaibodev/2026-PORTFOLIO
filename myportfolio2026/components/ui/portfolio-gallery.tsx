@@ -34,6 +34,21 @@ interface PortfolioGalleryProps {
   marqueeRepeat?: number;
 }
 
+/**
+ * A responsive gallery component that features a 3D stacked card layout on desktop
+ * and an infinite marquee scroll on mobile devices.
+ * 
+ * @param props.title - The heading title for the gallery section
+ * @param props.archiveButton - Configuration for the "View All" button
+ * @param props.images - Array of images to display. Defaults to placeholder data if not provided.
+ * @param props.className - Additional CSS classes
+ * @param props.maxHeight - Base height for stagger calculation (desktop)
+ * @param props.spacing - Tailwind classes for horizontal spacing (desktop)
+ * @param props.onImageClick - Callback when an image is clicked
+ * @param props.pauseOnHover - Whether mobile marquee pauses on hover
+ * @param props.marqueeRepeat - Number of times to duplicate items for smooth marquee loop
+ */
+
 export function PortfolioGallery({
   title = "Browse my library",
   archiveButton = {

@@ -193,6 +193,10 @@ export const HARD_SUBJECTS = new Set([
     "Information Management", "Internship",
 ]);
 
+/**
+ * Filters the top grades for "hard" subjects to showcase academic excellence.
+ * @returns Sorted array of top performing subjects.
+ */
 export function getSpotlightGrades() {
     return collegeGrades
         .filter((g) => HARD_SUBJECTS.has(g.subject) && g.grade <= 1.8)
@@ -200,6 +204,13 @@ export function getSpotlightGrades() {
         .slice(0, 12);
 }
 
+/**
+ * Modal component displaying a comprehensive list of all academic and extracurricular achievements.
+ * Uses a portal to render outside the DOM hierarchy for proper z-indexing.
+ * 
+ * @param props.isOpen - Whether the modal is visible
+ * @param props.onClose - Callback to close the modal
+ */
 export function AchievementArchiveModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
     useEffect(() => {
         if (isOpen) {
@@ -287,6 +298,13 @@ export function AchievementArchiveModal({ isOpen, onClose }: { isOpen: boolean; 
     );
 }
 
+/**
+ * Modal component for searching and viewing the full college transcript.
+ * Features client-side search and filtering by term.
+ * 
+ * @param props.isOpen - Whether the modal is visible
+ * @param props.onClose - Callback to close the modal
+ */
 export function GradesModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
     const [searchQuery, setSearchQuery] = useState("");
 
