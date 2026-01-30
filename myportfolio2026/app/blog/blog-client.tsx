@@ -73,7 +73,7 @@ export default function BlogClient({ categories }: BlogClientProps) {
       {/* What's Here - Table of Contents */}
       <section className="px-4 sm:px-6 lg:px-10 py-8 sm:py-12">
         <div className="max-w-6xl mx-auto">
-          <div className="rounded-3xl border border-white/10 backdrop-blur-2xl bg-white/5 dark:bg-white/[0.03] p-6 sm:p-8 md:p-10">
+          <div className="rounded-3xl border border-zinc-200 dark:border-white/10 backdrop-blur-2xl bg-white/80 dark:bg-white/[0.03] p-6 sm:p-8 md:p-10">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2 rounded-xl bg-blue-500/10 border border-blue-500/20">
                 <Hash className="w-5 h-5 text-blue-500" />
@@ -90,7 +90,7 @@ export default function BlogClient({ categories }: BlogClientProps) {
                   <a
                     key={category.slug}
                     href={`#${category.slug}`}
-                    className="group flex items-center gap-3 p-4 rounded-2xl border border-white/10 hover:border-white/30 bg-white/5 dark:bg-white/[0.02] hover:bg-white/10 dark:hover:bg-white/[0.05] transition-all hover:scale-[1.02] active:scale-[0.98]"
+                    className="group flex items-center gap-3 p-4 rounded-2xl border border-zinc-200 dark:border-white/10 hover:border-zinc-400 dark:hover:border-white/30 bg-zinc-50 dark:bg-white/[0.02] hover:bg-zinc-100 dark:hover:bg-white/[0.05] transition-all hover:scale-[1.02] active:scale-[0.98]"
                   >
                     {isPinned && (
                       <Star className="w-4 h-4 text-amber-400 fill-amber-400 flex-shrink-0" />
@@ -130,7 +130,7 @@ export default function BlogClient({ categories }: BlogClientProps) {
                   </div>
                   <Link
                     href={`/projects/${category.slug}`}
-                    className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 sm:px-5 py-2 text-xs sm:text-sm text-muted-foreground hover:bg-white/10 transition-colors whitespace-nowrap"
+                    className="inline-flex items-center gap-2 rounded-full border border-zinc-200 dark:border-white/20 px-4 sm:px-5 py-2 text-xs sm:text-sm text-muted-foreground hover:bg-zinc-100 dark:hover:bg-white/10 transition-colors whitespace-nowrap"
                   >
                     View folder
                     <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4" />
@@ -159,7 +159,7 @@ export default function BlogClient({ categories }: BlogClientProps) {
                       <Link
                         key={study.slug}
                         href={`/blog/${study.slug}`}
-                        className="group border border-white/10 rounded-2xl sm:rounded-3xl p-4 sm:p-6 backdrop-blur-2xl bg-white/10 dark:bg-white/[0.02] hover:border-white/30 transition-all flex flex-col gap-4 sm:gap-6"
+                        className="group border border-zinc-200 dark:border-white/10 rounded-2xl sm:rounded-3xl p-4 sm:p-6 backdrop-blur-2xl bg-white dark:bg-white/[0.02] hover:border-zinc-400 dark:hover:border-white/30 transition-all flex flex-col gap-4 sm:gap-6"
                       >
                         <div className="relative overflow-hidden rounded-xl sm:rounded-2xl h-40 sm:h-48 bg-muted/10">
                           <Image
