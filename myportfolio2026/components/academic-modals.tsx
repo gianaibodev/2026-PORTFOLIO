@@ -240,7 +240,7 @@ export function AchievementArchiveModal({ isOpen, onClose }: { isOpen: boolean; 
         <Portal>
             <AnimatePresence>
                 {isOpen && (
-                    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 md:p-10 font-sans tracking-tight pointer-events-none" data-lenis-prevent>
+                    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 md:p-10 tracking-tight pointer-events-none" data-lenis-prevent>
                         <m.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -254,18 +254,18 @@ export function AchievementArchiveModal({ isOpen, onClose }: { isOpen: boolean; 
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.98, y: 10 }}
                             transition={{ type: "spring", damping: 30, stiffness: 400 }}
-                            className="relative w-full max-w-2xl h-full max-h-[85vh] bg-zinc-950/90 border border-white/10 rounded-[2rem] overflow-hidden flex flex-col shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] pointer-events-auto backdrop-blur-md"
+                            className="relative w-full max-w-2xl h-full max-h-[85vh] bg-white/95 dark:bg-zinc-950/90 border border-zinc-200 dark:border-white/10 rounded-[2rem] overflow-hidden flex flex-col shadow-[0_32px_64px_-16px_rgba(0,0,0,0.15)] dark:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] pointer-events-auto backdrop-blur-md"
                         >
-                            <div className="flex-shrink-0 p-8 border-b border-white/5 bg-transparent flex items-center justify-between">
+                            <div className="flex-shrink-0 p-8 border-b border-zinc-100 dark:border-white/5 bg-zinc-50/50 dark:bg-transparent flex items-center justify-between">
                                 <div>
-                                    <h2 className="text-2xl font-medium text-white tracking-tight">Achievement Archive</h2>
-                                    <p className="text-[10px] text-zinc-500 font-medium uppercase tracking-[0.2em] mt-1 opacity-80">Full History · 2009–2025</p>
+                                    <h2 className="text-2xl font-medium text-zinc-900 dark:text-white tracking-tight">Achievement Archive</h2>
+                                    <p className="text-[10px] text-zinc-500 dark:text-zinc-500 font-medium uppercase tracking-[0.2em] mt-1 opacity-80">Full History · 2009–2025</p>
                                 </div>
                                 <button
                                     onClick={onClose}
-                                    className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-all active:scale-95 group"
+                                    className="w-10 h-10 rounded-full bg-zinc-100 dark:bg-white/5 hover:bg-zinc-200 dark:hover:bg-white/10 flex items-center justify-center transition-all active:scale-95 group"
                                 >
-                                    <X className="w-5 h-5 text-zinc-400 group-hover:text-white transition-colors" />
+                                    <X className="w-5 h-5 text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors" />
                                 </button>
                             </div>
 
@@ -278,17 +278,17 @@ export function AchievementArchiveModal({ isOpen, onClose }: { isOpen: boolean; 
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ delay: i * 0.005 }}
                                             key={i}
-                                            className="p-5 rounded-2xl bg-white/[0.02] border border-white/5 text-sm text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.04] hover:border-white/10 transition-all leading-relaxed flex gap-5 group"
+                                            className="p-5 rounded-2xl bg-zinc-50 dark:bg-white/[0.02] border border-zinc-100 dark:border-white/5 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-white/[0.04] hover:border-zinc-200 dark:hover:border-white/10 transition-all leading-relaxed flex gap-5 group"
                                         >
-                                            <span className="text-zinc-700 font-mono text-[10px] pt-1 group-hover:text-blue-500/50 transition-colors">{String(i + 1).padStart(3, '0')}</span>
+                                            <span className="text-zinc-400 dark:text-zinc-700 font-mono text-[10px] pt-1 group-hover:text-blue-500/50 transition-colors">{String(i + 1).padStart(3, '0')}</span>
                                             <span className="font-light tracking-wide">{award}</span>
                                         </m.div>
                                     ))}
                                 </div>
                             </div>
 
-                            <div className="flex-shrink-0 px-8 py-6 bg-transparent border-t border-white/5">
-                                <p className="text-[8px] text-center font-medium uppercase tracking-[0.5em] text-zinc-600">Generated for Gian Aibo Boyero</p>
+                            <div className="flex-shrink-0 px-8 py-6 bg-zinc-50 dark:bg-transparent border-t border-zinc-100 dark:border-white/5">
+                                <p className="text-[8px] text-center font-medium uppercase tracking-[0.5em] text-zinc-500 dark:text-zinc-600">Generated for Gian Aibo Boyero</p>
                             </div>
                         </m.div>
                     </div>
@@ -356,7 +356,7 @@ export function GradesModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
         <Portal>
             <AnimatePresence>
                 {isOpen && (
-                    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 md:p-10 font-sans tracking-tight pointer-events-none" data-lenis-prevent>
+                    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 md:p-10 tracking-tight pointer-events-none" data-lenis-prevent>
                         <m.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -447,7 +447,7 @@ export function GradesModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                                 {Object.entries(groupedGrades).map(([term, grades]) => (
                                     <div key={term} className="space-y-3 pt-5">
                                         <div className="flex items-center gap-3 sticky top-0 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md z-20 py-2.5 -mx-2 px-2 border-b border-zinc-200 dark:border-white/5">
-                                            <span className="relative text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-600 dark:text-zinc-500 font-sans pl-1">{term}</span>
+                                            <span className="relative text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-600 dark:text-zinc-500 pl-1">{term}</span>
                                         </div>
                                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
                                             {grades.map((grade, idx) => (
