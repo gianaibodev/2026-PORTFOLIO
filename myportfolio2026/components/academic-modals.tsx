@@ -370,33 +370,33 @@ export function GradesModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.98, y: 10 }}
                             transition={{ type: "spring", damping: 30, stiffness: 400 }}
-                            className="relative w-full max-w-4xl h-full max-h-[90vh] bg-zinc-950/95 border border-white/10 rounded-[1.5rem] overflow-hidden flex flex-col shadow-2xl pointer-events-auto backdrop-blur-xl"
+                            className="relative w-full max-w-4xl h-full max-h-[90vh] bg-white/95 dark:bg-zinc-950/95 border border-zinc-200 dark:border-white/10 rounded-[1.5rem] overflow-hidden flex flex-col shadow-2xl pointer-events-auto backdrop-blur-xl"
                         >
                             {/* Compact Header */}
-                            <div className="flex-shrink-0 p-5 sm:p-6 border-b border-white/5 bg-zinc-900/20">
+                            <div className="flex-shrink-0 p-5 sm:p-6 border-b border-zinc-200 dark:border-white/5 bg-zinc-50/50 dark:bg-zinc-900/20">
                                 <div className="flex items-start justify-between gap-4 mb-5">
                                     <div>
                                         <div className="flex items-center gap-3">
-                                            <h2 className="text-2xl font-light text-white tracking-tight">Official Grades Transcript</h2>
+                                            <h2 className="text-2xl font-light text-zinc-900 dark:text-white tracking-tight">Official Grades Transcript</h2>
                                             <a
                                                 href="/lib/mygradescollege.pdf"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[10px] font-bold uppercase tracking-widest text-blue-400 hover:bg-blue-500/20 hover:text-blue-300 transition-all group/pdf"
+                                                className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[10px] font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 hover:text-blue-500 dark:hover:text-blue-300 transition-all group/pdf"
                                             >
                                                 <span>View Validated PDF</span>
                                                 <ExternalLink className="w-3 h-3 group-hover/pdf:translate-x-0.5 transition-transform" />
                                             </a>
                                         </div>
                                         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1.5">
-                                            <p className="text-[11px] text-zinc-500 font-medium uppercase tracking-widest">University of St. La Salle - Bacolod · Bachelor of Science in Computer Science</p>
+                                            <p className="text-[11px] text-zinc-500 dark:text-zinc-500 font-medium uppercase tracking-widest">University of St. La Salle - Bacolod · Bachelor of Science in Computer Science</p>
                                         </div>
                                     </div>
                                     <button
                                         onClick={onClose}
-                                        className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-all active:scale-95 group flex-shrink-0"
+                                        className="w-8 h-8 rounded-full bg-zinc-100 dark:bg-white/5 hover:bg-zinc-200 dark:hover:bg-white/10 flex items-center justify-center transition-all active:scale-95 group flex-shrink-0"
                                     >
-                                        <X className="w-4 h-4 text-zinc-400 group-hover:text-white transition-colors" />
+                                        <X className="w-4 h-4 text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors" />
                                     </button>
                                 </div>
 
@@ -408,56 +408,56 @@ export function GradesModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                                             placeholder="Search subjects or terms..."
                                             value={searchQuery}
                                             onChange={(e) => setSearchQuery(e.target.value)}
-                                            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-black/20 border border-white/10 focus:border-blue-500/30 focus:bg-black/40 focus:outline-none text-sm transition-all placeholder:text-zinc-600 text-zinc-200"
+                                            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-black/20 border border-zinc-200 dark:border-white/10 focus:border-blue-500/30 focus:bg-white dark:focus:bg-black/40 focus:outline-none text-sm transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-600 text-zinc-900 dark:text-zinc-200"
                                         />
                                     </div>
 
                                     {/* Compact Stats */}
                                     <div className="flex gap-2 flex-shrink-0">
-                                        <div className="px-4 py-2 rounded-xl bg-blue-500/5 border border-blue-500/10 flex flex-col justify-center min-w-[80px]">
-                                            <span className="text-[8px] uppercase font-bold text-blue-300/60 tracking-widest mb-0.5">Cumulative GWA</span>
-                                            <span className="text-sm font-semibold text-blue-400 tabular-nums">{avgGrade}</span>
+                                        <div className="px-4 py-2 rounded-xl bg-blue-50 dark:bg-blue-500/5 border border-blue-200 dark:border-blue-500/10 flex flex-col justify-center min-w-[80px]">
+                                            <span className="text-[8px] uppercase font-bold text-blue-500/70 dark:text-blue-300/60 tracking-widest mb-0.5">Cumulative GWA</span>
+                                            <span className="text-sm font-semibold text-blue-600 dark:text-blue-400 tabular-nums">{avgGrade}</span>
                                         </div>
-                                        <div className="px-4 py-2 rounded-xl bg-emerald-500/5 border border-emerald-500/10 flex flex-col justify-center min-w-[80px]">
-                                            <span className="text-[8px] uppercase font-bold text-emerald-300/60 tracking-widest mb-0.5">Perfect Marks</span>
-                                            <span className="text-sm font-semibold text-emerald-400 tabular-nums">{perfectGrades} Subjects</span>
+                                        <div className="px-4 py-2 rounded-xl bg-emerald-50 dark:bg-emerald-500/5 border border-emerald-200 dark:border-emerald-500/10 flex flex-col justify-center min-w-[80px]">
+                                            <span className="text-[8px] uppercase font-bold text-emerald-600/70 dark:text-emerald-300/60 tracking-widest mb-0.5">Perfect Marks</span>
+                                            <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400 tabular-nums">{perfectGrades} Subjects</span>
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* Refined Legend */}
-                                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-4 pt-3 border-t border-white/5">
+                                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-4 pt-3 border-t border-zinc-200 dark:border-white/5">
                                     <div className="flex items-center gap-1.5 opacity-90 hover:opacity-100 transition-opacity">
                                         <span className="text-emerald-400 font-bold">●</span>
-                                        <span className="text-[10px] uppercase font-bold text-zinc-400 tracking-widest">1.0 — Excellent</span>
+                                        <span className="text-[10px] uppercase font-bold text-zinc-500 dark:text-zinc-400 tracking-widest">1.0 — Excellent</span>
                                     </div>
                                     <div className="flex items-center gap-1.5 opacity-90 hover:opacity-100 transition-opacity">
                                         <span className="text-green-400 font-bold">●</span>
-                                        <span className="text-[10px] uppercase font-bold text-zinc-400 tracking-widest">1.1–1.5 — Superior</span>
+                                        <span className="text-[10px] uppercase font-bold text-zinc-500 dark:text-zinc-400 tracking-widest">1.1–1.5 — Superior</span>
                                     </div>
                                     <div className="flex items-center gap-1.5 opacity-90 hover:opacity-100 transition-opacity">
                                         <span className="text-blue-400 font-bold">●</span>
-                                        <span className="text-[10px] uppercase font-bold text-zinc-400 tracking-widest">1.6–2.0 — Commendable</span>
+                                        <span className="text-[10px] uppercase font-bold text-zinc-500 dark:text-zinc-400 tracking-widest">1.6–2.0 — Commendable</span>
                                     </div>
-                                    <a href="/lib/mygradescollege.pdf" target="_blank" rel="noopener noreferrer" className="sm:hidden ml-auto text-[10px] font-bold uppercase text-blue-400 tracking-widest">PDF</a>
+                                    <a href="/lib/mygradescollege.pdf" target="_blank" rel="noopener noreferrer" className="sm:hidden ml-auto text-[10px] font-bold uppercase text-blue-600 dark:text-blue-400 tracking-widest">PDF</a>
                                 </div>
                             </div>
 
                             <div className="flex-1 overflow-y-auto px-5 sm:px-6 py-0 space-y-6 bg-transparent scroll-smooth no-scrollbar overscroll-behavior-contain relative" data-lenis-prevent>
                                 {Object.entries(groupedGrades).map(([term, grades]) => (
                                     <div key={term} className="space-y-3 pt-5">
-                                        <div className="flex items-center gap-3 sticky top-0 bg-zinc-950/95 backdrop-blur-md z-20 py-2.5 -mx-2 px-2 border-b border-white/5">
-                                            <span className="relative text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 font-sans pl-1">{term}</span>
+                                        <div className="flex items-center gap-3 sticky top-0 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md z-20 py-2.5 -mx-2 px-2 border-b border-zinc-200 dark:border-white/5">
+                                            <span className="relative text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-600 dark:text-zinc-500 font-sans pl-1">{term}</span>
                                         </div>
                                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
                                             {grades.map((grade, idx) => (
                                                 <div
                                                     key={`${term}-${idx}`}
-                                                    className="flex items-center justify-between p-3.5 rounded-lg bg-white/[0.02] border border-white/[0.04] hover:bg-white/[0.04] hover:border-white/10 transition-all group"
+                                                    className="flex items-center justify-between p-3.5 rounded-lg bg-zinc-50 dark:bg-white/[0.02] border border-zinc-100 dark:border-white/[0.04] hover:bg-zinc-100 dark:hover:bg-white/[0.04] hover:border-zinc-200 dark:hover:border-white/10 transition-all group"
                                                 >
                                                     <div className="min-w-0 pr-3 flex-1">
-                                                        <span className="text-xs font-medium text-zinc-300 group-hover:text-white transition-colors block leading-tight mb-0.5 truncate">{grade.subject}</span>
-                                                        <span className="text-[9px] text-zinc-600 font-bold uppercase tracking-wider group-hover:text-zinc-500 transition-colors font-mono">{grade.equivalent}</span>
+                                                        <span className="text-xs font-medium text-zinc-700 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors block leading-tight mb-0.5 truncate">{grade.subject}</span>
+                                                        <span className="text-[9px] text-zinc-500 dark:text-zinc-600 font-bold uppercase tracking-wider group-hover:text-zinc-600 dark:group-hover:text-zinc-500 transition-colors font-mono">{grade.equivalent}</span>
                                                     </div>
                                                     <div className={`text-[11px] font-mono font-bold px-2 py-1 rounded-md border tabular-nums whitespace-nowrap ${getGradeColor(grade.grade)}`}>
                                                         {grade.grade.toFixed(1)}
@@ -469,17 +469,17 @@ export function GradesModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                                 ))}
                                 {filteredGrades.length === 0 && (
                                     <div className="py-24 text-center">
-                                        <p className="text-[11px] font-bold text-zinc-600 uppercase tracking-widest">No subjects found</p>
+                                        <p className="text-[11px] font-bold text-zinc-500 dark:text-zinc-600 uppercase tracking-widest">No subjects found</p>
                                     </div>
                                 )}
                                 <div className="h-8" />
                             </div>
 
-                            <div className="flex-shrink-0 px-6 py-4 bg-zinc-900/30 border-t border-white/5 flex justify-between items-center">
-                                <p className="text-[9px] font-medium uppercase tracking-widest text-zinc-600">Final Verification · 2025</p>
+                            <div className="flex-shrink-0 px-6 py-4 bg-zinc-50 dark:bg-zinc-900/30 border-t border-zinc-200 dark:border-white/5 flex justify-between items-center">
+                                <p className="text-[9px] font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-600">Final Verification · 2025</p>
                                 <div className="flex items-center gap-2">
                                     <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)] animate-pulse" />
-                                    <span className="text-[9px] font-bold uppercase tracking-widest text-emerald-500/80">Official Record</span>
+                                    <span className="text-[9px] font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-500/80">Official Record</span>
                                 </div>
                             </div>
                         </m.div>
