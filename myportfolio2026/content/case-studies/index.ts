@@ -22,6 +22,9 @@ import { appRedesigns } from "./data/app-redesigns";
 import { gdsc2022 } from "./data/gdsc-2022";
 import { leighCollaboration } from "./data/leigh-collaboration";
 import { portfolio2026 } from "./data/portfolio-2026";
+import { medicalTranscriptions } from "./data/medical-transcriptions";
+import { aiTravelGuide } from "./data/ai-travel-guide";
+import { ecommerceReviewAnalysis } from "./data/ecommerce-review-analysis";
 
 // Re-export types
 export * from "./types";
@@ -48,6 +51,9 @@ const rawData: CaseStudy[] = [
     gdsc2022,
     leighCollaboration,
     portfolio2026,
+    medicalTranscriptions,
+    aiTravelGuide,
+    ecommerceReviewAnalysis,
 ];
 
 // Validate data against schema (Ensures defaults like [] are applied if missing, matching original behavior)

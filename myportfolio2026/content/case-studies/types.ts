@@ -9,6 +9,7 @@ export const caseStudyCategories = [
     "Startups & Innovation",
     "Games & Experiments",
     "Internships",
+    "AI & Machine Learning",
 ] as const;
 
 export type CaseStudyCategory = (typeof caseStudyCategories)[number];
