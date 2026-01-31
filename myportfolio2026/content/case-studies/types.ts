@@ -1,15 +1,15 @@
 import { z } from "zod";
 
 export const caseStudyCategories = [
+    "AI & Machine Learning",
+    "Web Development",
+    "Community & Events",
+    "Internships",
     "Branding",
     "UI/UX",
-    "Web Development",
     "Photography",
-    "Community & Events",
-    "Startups & Innovation",
+    "Concepts",
     "Games & Experiments",
-    "Internships",
-    "AI & Machine Learning",
 ] as const;
 
 export type CaseStudyCategory = (typeof caseStudyCategories)[number];

@@ -9,7 +9,7 @@ export const signalin: CaseStudy = {
         "As CEO and Project Manager, I developed Signalin to bridge communication gaps for the deaf and hard-of-hearing community, leading the project to become a regional startup finalist.",
     date: "2023-01-10",
     year: 2023,
-    category: "Startups & Innovation",
+    category: "Concepts",
     tags: ["Startup", "Inclusivity", "Social Impact", "Pitching"],
     roles: ["CEO", "Project Manager", "UI Designer"],
     tools: ["Figma", "Pitch Deck Design", "UX Strategy", "Canva"],

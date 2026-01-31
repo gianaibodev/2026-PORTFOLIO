@@ -4,32 +4,34 @@ import { useEffect, useMemo, useState } from "react";
 import { AnimatedFolder } from "@/components/ui/3d-folder";
 
 type CategoryColorKey =
+  | "AI & Machine Learning"
+  | "Web Development"
+  | "Community & Events"
+  | "Internships"
   | "Branding"
   | "UI/UX"
-  | "Web Development"
   | "Photography"
-  | "Community & Events"
-  | "Startups & Innovation"
-  | "Games & Experiments"
-  | "Internships";
+  | "Concepts"
+  | "Games & Experiments";
 
 const categoryColors: Record<CategoryColorKey, string> = {
+  "AI & Machine Learning": "hsl(270, 85%, 60%)",
+  "Web Development": "hsl(142, 76%, 45%)",
+  "Community & Events": "hsl(162, 70%, 55%)",
+  Internships: "hsl(210, 25%, 70%)",
   Branding: "hsl(217, 91%, 60%)",
   "UI/UX": "hsl(280, 85%, 65%)",
-  "Web Development": "hsl(142, 76%, 45%)",
   Photography: "hsl(35, 90%, 60%)",
-  "Community & Events": "hsl(162, 70%, 55%)",
-  "Startups & Innovation": "hsl(4, 85%, 62%)",
+  Concepts: "hsl(4, 85%, 62%)",
   "Games & Experiments": "hsl(300, 65%, 58%)",
-  Internships: "hsl(210, 25%, 70%)",
 };
 
 // Priority categories that should appear first (pinned/starred)
 const PINNED_CATEGORIES = [
+  "AI & Machine Learning",
   "Web Development",
-  "Internships",
   "Community & Events",
-  "Startups & Innovation",
+  "Internships",
 ];
 
 type ApiCategory = {

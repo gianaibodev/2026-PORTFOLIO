@@ -10,10 +10,10 @@ import type { CaseStudy } from "@/content/case-studies";
 
 // Priority categories that should appear first (pinned/starred)
 const PINNED_CATEGORIES = [
+  "AI & Machine Learning",
   "Web Development",
-  "Internships",
   "Community & Events",
-  "Startups & Innovation",
+  "Internships",
 ];
 
 // Priority case studies that should appear first in "Highlighted work"

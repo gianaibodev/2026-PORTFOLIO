@@ -9,7 +9,7 @@ export const smileit: CaseStudy = {
         "As CEO and Lead UI/UX Designer, I spearheaded the digital transformation of SmileIT, crafting a professional MVP to democratize access to quality IT education in Bacolod City.",
     date: "2024-01-11",
     year: 2024,
-    category: "Startups & Innovation",
+    category: "Concepts",
     tags: ["Web Dev", "CEO Role", "Digital Transformation"],
     roles: ["CEO", "Lead UI/UX Designer", "Web Developer"],
     tools: ["React", "Next.js", "Tailwind CSS", "Vercel", "Canva"],
