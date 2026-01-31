@@ -121,17 +121,17 @@ export function PortfolioGallery({
   return (
     <section
       aria-label={title}
-      className={`relative py-8 sm:py-12 md:py-16 px-4 sm:px-6 ${className}`}
+      className={`relative py-12 sm:py-16 md:py-24 px-4 sm:px-6 min-h-[80vh] flex items-center ${className}`}
       id="archives"
     >
-      <div className="max-w-7xl mx-auto backdrop-blur-[40px] bg-white/30 dark:bg-black/20 border border-zinc-400 dark:border-white/10 rounded-[40px] overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)]">
+      <div className="w-full max-w-7xl mx-auto backdrop-blur-[40px] bg-white/30 dark:bg-black/20 border border-zinc-400 dark:border-white/10 rounded-[40px] overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)]">
         {/* Header Section */}
-        <div className="relative z-10 text-center pt-8 sm:pt-12 md:pt-16 pb-6 sm:pb-8 px-8 shadow-[0_20px_50px_rgba(0,0,0,0.04)] dark:shadow-none">
+        <div className="relative z-10 text-center pt-12 sm:pt-16 md:pt-20 pb-6 sm:pb-8 px-8 shadow-[0_20px_50px_rgba(0,0,0,0.04)] dark:shadow-none">
           <h2 className="text-4xl md:text-7xl font-bold text-foreground mb-6 sm:mb-8 text-balance tracking-tight leading-[1.1]">{title}</h2>
 
           <Link
             href={archiveButton.href}
-            className="inline-flex items-center gap-3 bg-blue-500/10 dark:bg-white/5 border border-blue-500/30 dark:border-white/10 backdrop-blur-2xl text-blue-600 dark:text-white px-10 py-4.5 rounded-full font-bold hover:bg-blue-500/20 dark:hover:bg-white/10 shadow-[0_15px_35px_rgba(59,130,246,0.1)] dark:shadow-none transition-all group mb-24 active:scale-95"
+            className="inline-flex items-center gap-3 bg-blue-500/10 dark:bg-white/5 border border-blue-500/30 dark:border-white/10 backdrop-blur-2xl text-blue-600 dark:text-white px-10 py-4.5 rounded-full font-bold hover:bg-blue-500/20 dark:hover:bg-white/10 shadow-[0_15px_35px_rgba(59,130,246,0.1)] dark:shadow-none transition-all group mb-16 active:scale-95"
             suppressHydrationWarning
           >
             <span className="text-[15px] tracking-tight">{archiveButton.text}</span>
@@ -140,7 +140,7 @@ export function PortfolioGallery({
         </div>
 
         {/* Desktop 3D overlapping layout - hidden on mobile */}
-        <div className="hidden md:block relative overflow-hidden h-[400px] -mb-[200px]">
+        <div className="hidden md:block relative overflow-hidden h-[450px] -mb-[220px]">
           <div className={`flex ${spacing} pb-8 pt-40 items-end justify-center`}>
             {images.map((image, index) => {
               // Calculate stagger height - peak in middle, descending to edges
@@ -208,8 +208,9 @@ export function PortfolioGallery({
                       blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIhAAAgEDBAMBAAAAAAAAAAAAAQIAAwQFBhESIQcxQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAECAAMRIf/aAAwDAQACEQMRAD8Az3xrqe2s7W8tby7roLimUKu3IFT35Gceg/YREVU2EbiZ2LZl7P/Z"
                       className="object-contain bg-muted/10"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                      <p className="text-white font-medium text-sm">{image.alt}</p>
+                    {/* Always-visible title overlay */}
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 pt-10">
+                      <p className="text-white font-semibold text-sm leading-tight drop-shadow-lg truncate">{image.alt}</p>
                     </div>
                   </div>
                 </m.div>
@@ -264,6 +265,10 @@ export function PortfolioGallery({
                           blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIhAAAgEDBAMBAAAAAAAAAAAAAQIAAwQFBhESIQcxQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAECAAMRIf/aAAwDAQACEQMRAD8Az3xrqe2s7W8tby7roLimUKu3IFT35Gceg/YREVU2EbiZ2LZl7P/Z"
                           className="object-cover object-left-top"
                         />
+                        {/* Title overlay */}
+                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-3 pt-8">
+                          <p className="text-white font-semibold text-xs leading-tight drop-shadow-lg truncate">{image.alt}</p>
+                        </div>
                       </div>
                     </div>
                   ))}
