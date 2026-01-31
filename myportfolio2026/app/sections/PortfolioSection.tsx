@@ -12,6 +12,7 @@ const PortfolioGallery = dynamic(
 export type GalleryImage = {
     src: string;
     alt: string;
+    slug?: string;
 };
 
 export function PortfolioSection({ galleryImages }: { galleryImages: GalleryImage[] }) {

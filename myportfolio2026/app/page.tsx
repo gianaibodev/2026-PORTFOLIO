@@ -8,6 +8,7 @@ export default function HomePage() {
     .map((study) => ({
       src: String(study.heroImage ?? ""),
       alt: String(study.title ?? ""),
+      slug: String(study.slug ?? ""),
     }))
     .filter((img) => img.src && img.alt); // Remove any invalid entries
 

@@ -38,6 +38,7 @@ const itemVariants = {
 type GalleryImage = {
   src: string;
   alt: string;
+  slug?: string;
 };
 
 export default function HomeClient({ galleryImages }: { galleryImages: GalleryImage[] }) {

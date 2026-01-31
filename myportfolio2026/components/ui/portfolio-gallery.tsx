@@ -2,6 +2,7 @@
 
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { m } from "framer-motion"
 import { useState } from "react"
 import Image from "next/image"
@@ -17,6 +18,7 @@ interface PortfolioGalleryProps {
     src: string;
     alt: string;
     title?: string;
+    slug?: string;
   }>;
   className?: string;
   maxHeight?: number;
@@ -64,6 +66,7 @@ export function PortfolioGallery({
   marqueeRepeat = 4
 }: PortfolioGalleryProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const router = useRouter()
 
   const defaultImages = [
     {
@@ -108,7 +111,12 @@ export function PortfolioGallery({
     },
   ]
 
-  const images = customImages || defaultImages
+  const images = customImages || defaultImages as Array<{
+    src: string;
+    alt: string;
+    title?: string;
+    slug?: string;
+  }>
 
   return (
     <section
@@ -171,7 +179,13 @@ export function PortfolioGallery({
                   }}
                   onHoverStart={() => setHoveredIndex(index)}
                   onHoverEnd={() => setHoveredIndex(null)}
-                  onClick={() => onImageClick?.(index)}
+                  onClick={() => {
+                    if (image.slug) {
+                      router.push(`/blog/${image.slug}`)
+                    } else {
+                      onImageClick?.(index)
+                    }
+                  }}
                 >
                   <div
                     className="relative aspect-video w-64 md:w-80 lg:w-96 rounded-2xl overflow-hidden transition-transform duration-300 group-hover:scale-105 group-hover:rotate-1"
@@ -229,7 +243,13 @@ export function PortfolioGallery({
                     <div
                       key={`${i}-${index}`}
                       className="group cursor-pointer flex-shrink-0"
-                      onClick={() => onImageClick?.(index)}
+                      onClick={() => {
+                        if (image.slug) {
+                          router.push(`/blog/${image.slug}`)
+                        } else {
+                          onImageClick?.(index)
+                        }
+                      }}
                     >
                       <div
                         className="relative aspect-video w-64 rounded-xl overflow-hidden transition-transform duration-300 active:scale-95 shadow-lg"

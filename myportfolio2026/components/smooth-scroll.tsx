@@ -7,13 +7,13 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     useEffect(() => {
         const isMobile = window.innerWidth < 768;
         const lenis = new Lenis({
-            duration: isMobile ? 3.0 : 1.0,
+            duration: isMobile ? 1.5 : 0.8, // Much snappier scrolling
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             orientation: "vertical",
             gestureOrientation: "vertical",
             smoothWheel: true,
-            wheelMultiplier: isMobile ? 1.0 : 1.2,
-            touchMultiplier: isMobile ? 1.5 : 2,
+            wheelMultiplier: isMobile ? 1.0 : 1.5, // Faster desktop wheel response
+            touchMultiplier: isMobile ? 2.0 : 2.5,
             infinite: false,
             autoResize: true,
         });
