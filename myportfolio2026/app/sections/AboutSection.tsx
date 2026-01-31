@@ -78,9 +78,10 @@ export function AboutSection({ variants, itemVariants }: { variants: any, itemVa
                                             </>
                                         ) : (
                                             <>
-                                                <li>• Outstanding Intern Award &apos;25</li>
-                                                <li>• Legacy Builder Award &apos;25</li>
-                                                <li>• PH Creative Awards Top 10</li>
+                                                <li>• Most Outstanding Student (Visual Arts & Service)</li>
+                                                <li>• National Creative Awards (Best Art Direction)</li>
+                                                <li>• Google Role Model of the Year</li>
+                                                <li>• Outstanding Intern & Legacy Builder</li>
                                             </>
                                         )}
                                     </ul>

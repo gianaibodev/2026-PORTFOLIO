@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback, useLayoutEffect } from "react"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { X, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ImageLightboxProps } from "./types"
@@ -16,6 +17,7 @@ export function ImageLightbox({
     onCloseComplete,
     onNavigate,
 }: ImageLightboxProps) {
+    const router = useRouter()
     const [animationPhase, setAnimationPhase] = useState<"initial" | "animating" | "complete">("initial")
     const [isClosing, setIsClosing] = useState(false)
     const [shouldRender, setShouldRender] = useState(false)
@@ -337,6 +339,13 @@ export function ImageLightbox({
                             </div>
 
                             <button
+                                onClick={() => {
+                                    // Use the project ID as the slug
+                                    // Assuming id matches the blog slug
+                                    if (currentProject?.id) {
+                                        router.push(`/blog/${currentProject.id}`)
+                                    }
+                                }}
                                 className={cn(
                                     "flex items-center gap-2 px-4 py-2",
                                     "text-sm font-medium text-muted-foreground",
@@ -344,9 +353,10 @@ export function ImageLightbox({
                                     "rounded-lg border border-border",
                                     "transition-all duration-200 ease-out",
                                     "hover:text-foreground",
+                                    "hover:bg-primary/10 hover:text-primary hover:border-primary/20"
                                 )}
                             >
-                                <span>View</span>
+                                <span>View Case Study</span>
                                 <ExternalLink className="w-3.5 h-3.5" />
                             </button>
                         </div>
