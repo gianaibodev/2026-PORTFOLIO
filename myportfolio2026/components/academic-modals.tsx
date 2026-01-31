@@ -84,7 +84,6 @@ export const collegeGrades = [
 
 export const accolades = {
     college: {
-        school: "University of St. La Salle - Bacolod",
         honors: [
             "Cum Laude with an Overall GWA: 1.3 (97%)",
             "College Awardee - Outstanding Intern Award",
@@ -164,7 +163,6 @@ export const accolades = {
         ],
     },
     juniorHigh: {
-        school: "Holy Infant Academy Diocese of San Carlos Inc.",
         honors: ["First Honors (Rank 1 of the Batch)", "Best in Math", "Best in English", "Best in Filipino", "Best in Science", "Best in Christian Living", "Best in Computer", "Best in MAPEH", "Best in Araling Panlipunan"],
         awards: ["Sen. Manny Villar Sipag Award", "Loyalty Award", "Sports Awardee, Cultural Awardee, Service Awardee"],
         roles: [
@@ -186,7 +184,6 @@ export const accolades = {
         ],
     },
     elementary: {
-        school: "Holy Infant Academy Diocese of San Carlos Inc.",
         honors: ["First Honors (Rank 1 of the Batch)", "Best in English", "Best in Science", "Best in Math", "Best in Sibika", "Best in Filipino", "Best in HELE"],
         awards: ["Computer Wizard", "Conduct Awardee", "Leadership Awardee", "Sports Awardee", "Artist of the Year", "Singer of the Year", "Cultural Awardee"],
         roles: ["Choir Member", "Band Member", "Vice President – PRISSAAP Region VI", "Most Outstanding Pupil – Private School of the 10th PRISSAAP Educator's Award – Region VI", "Consistent SGO Representative (Grade 4 to Grade 6)"],
