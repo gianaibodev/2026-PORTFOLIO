@@ -72,7 +72,7 @@ export default function BlogClient({ categories }: BlogClientProps) {
 
       {/* What's Here - Table of Contents */}
       <section className="px-4 sm:px-6 lg:px-10 py-8 sm:py-12">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="rounded-3xl border border-zinc-200 dark:border-white/10 backdrop-blur-2xl bg-white/80 dark:bg-white/[0.03] p-6 sm:p-8 md:p-10">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2 rounded-xl bg-blue-500/10 border border-blue-500/20">
@@ -113,7 +113,7 @@ export default function BlogClient({ categories }: BlogClientProps) {
       </section>
 
       <section className="px-4 sm:px-6 lg:px-10 pb-16 sm:pb-24 md:pb-32">
-        <div className="max-w-6xl mx-auto space-y-12 sm:space-y-16">
+        <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
           {sortedCategories.map((category) => {
             const isPinned = PINNED_CATEGORIES.includes(category.name);
             return (

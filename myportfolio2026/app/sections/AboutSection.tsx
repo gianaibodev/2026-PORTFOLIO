@@ -17,7 +17,7 @@ export function AboutSection({ variants, itemVariants }: { variants: any, itemVa
                 whileInView="visible"
                 viewport={{ once: true, margin: "-10%" }}
                 variants={variants}
-                className="max-w-6xl mx-auto px-4"
+                className="max-w-7xl mx-auto px-4"
             >
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                     <div className="text-left">
