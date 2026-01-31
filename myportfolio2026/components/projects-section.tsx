@@ -69,6 +69,9 @@ export function ProjectsSection() {
     let cancelled = false;
     async function run() {
       try {
+        const MIN_LOADING_TIME = 1500; // 1.5 seconds minimum load time
+        const startTime = Date.now();
+
         // Add timeout for mobile devices
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
@@ -85,6 +88,15 @@ export function ProjectsSection() {
         }
 
         const json = (await res.json()) as { categories?: ApiCategory[] };
+
+        // Calculate remaining time to wait
+        const elapsed = Date.now() - startTime;
+        const remaining = Math.max(0, MIN_LOADING_TIME - elapsed);
+
+        if (remaining > 0) {
+          await new Promise(resolve => setTimeout(resolve, remaining));
+        }
+
         if (cancelled) return;
         setApiCategories(json.categories ?? []);
       } catch (e) {
