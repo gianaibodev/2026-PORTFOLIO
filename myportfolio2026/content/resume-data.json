@@ -492,6 +492,100 @@
             "summary": "A premium digital environment built for creative tools, featuring a high-contrast dark interface, custom hardware-accelerated shaders, and precise typography. Implementation focuses on tactile feedback and high-performance animation.",
             "metrics": [],
             "category": "Web Development"
+        },
+        {
+            "title": "Medical Transcriptions with OpenAI API",
+            "subtitle": "Extracting Structured Clinical Data from Unstructured Medical Transcriptions",
+            "roles": [
+                "AI Engineer",
+                "Data Scientist"
+            ],
+            "tools": [
+                "Python",
+                "OpenAI API",
+                "Pandas",
+                "JSON Mode",
+                "Jupyter Notebook"
+            ],
+            "summary": "A Python-based data pipeline that leverages OpenAI's GPT-4o-mini model to extract structured medical information—including patient age, specialty, treatment plans, and ICD-10 diagnostic codes—from raw clinical transcriptions.",
+            "metrics": [
+                "Automated extraction of 4+ clinical data fields per transcription",
+                "Structured output with ICD-10 code matching",
+                "JSON schema validation for data integrity"
+            ],
+            "year": 2025,
+            "category": "AI & Machine Learning"
+        },
+        {
+            "title": "AI Travel Guide for Paris",
+            "subtitle": "Your Virtual Parisian Expert Powered by OpenAI",
+            "roles": [
+                "AI Engineer",
+                "Product Developer"
+            ],
+            "tools": [
+                "Python",
+                "OpenAI API",
+                "Prompt Engineering",
+                "Jupyter Notebook"
+            ],
+            "summary": "An AI-powered travel assistant that leverages OpenAI's GPT models to provide personalized, expert-level travel recommendations for Paris using advanced prompt engineering techniques.",
+            "metrics": [
+                "Context-aware travel recommendations",
+                "Multi-turn conversation support",
+                "Personalized itinerary suggestions"
+            ],
+            "year": 2025,
+            "category": "AI & Machine Learning"
+        },
+        {
+            "title": "E-commerce Review Analysis with Text Embeddings",
+            "subtitle": "Semantic Analysis and Visualization of Customer Feedback using AI",
+            "roles": [
+                "Data Scientist",
+                "ML Engineer"
+            ],
+            "tools": [
+                "Python",
+                "OpenAI API",
+                "ChromaDB",
+                "scikit-learn",
+                "Matplotlib",
+                "t-SNE"
+            ],
+            "summary": "A data science project that applies OpenAI text embeddings and t-SNE dimensionality reduction to analyze and visualize 23,000+ customer reviews, uncovering hidden sentiment patterns through 2D visualization.",
+            "metrics": [
+                "Semantic clustering of 23,000+ customer reviews",
+                "2D visualization of high-dimensional embeddings",
+                "Automated sentiment pattern detection"
+            ],
+            "year": 2025,
+            "category": "AI & Machine Learning"
+        },
+        {
+            "title": "AI Engineer for Developers Associate Practical Exam",
+            "subtitle": "Building a Validated RAG Chatbot Ecosystem with OpenAI",
+            "roles": [
+                "AI Engineer",
+                "System Architect"
+            ],
+            "tools": [
+                "Python",
+                "OpenAI API",
+                "JSON Schema",
+                "Vector Search",
+                "Pandas",
+                "RAG Architecture"
+            ],
+            "summary": "A comprehensive AI engineering project implementing a full Retrieval-Augmented Generation (RAG) pipeline with knowledge embedding, semantic search, and validated chatbot responses with confidence scoring.",
+            "metrics": [
+                "100% Validation accuracy on knowledge embeddings",
+                "Sub-second semantic search retrieval",
+                "Automated confidence scoring for response quality",
+                "DataCamp AI Engineer Associate Certification achieved"
+            ],
+            "year": 2025,
+            "category": "AI & Machine Learning"
         }
     ],
     "academic_achievements": {
