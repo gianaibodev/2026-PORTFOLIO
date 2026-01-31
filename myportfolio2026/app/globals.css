@@ -128,27 +128,20 @@
 
   html {
     overflow-x: hidden;
-    overflow-y: auto;
-    scroll-behavior: smooth;
+    /* Let Lenis handle smooth scrolling - removed scroll-behavior: smooth */
     scroll-padding-top: 80px;
     -webkit-overflow-scrolling: touch;
-    height: 100%;
-    /* removed: height: -webkit-fill-available; - often causes issues on desktop chrome */
   }
 
   body {
     @apply bg-background text-foreground;
     overflow-x: hidden;
-    overflow-y: visible;
-    /* changed from auto to visible to prevent nested scroll containers */
     width: 100%;
     position: relative;
     min-height: 100vh;
-    /* removed: min-height: -webkit-fill-available; */
     -webkit-overflow-scrolling: touch;
     /* Prevent horizontal scroll */
     overscroll-behavior-x: none;
-    /* removed: overscroll-behavior-y: contain; - which can lock scrolling in Chrome */
   }
 }
 
