@@ -4,6 +4,7 @@ import { useMemo, useEffect, useState } from "react";
 import { m, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import MacOSMenuBar from "@/components/ui/mac-os-menu-bar";
 import { accolades } from "@/components/academic-modals";
+import { PixelHeader } from "@/components/ui/pixel-header";
 import Link from "next/link";
 import { ArrowLeft, Trophy, Star, Medal, Crown, Sparkles, ChevronDown, Award, Users, Briefcase } from "lucide-react";
 
@@ -330,59 +331,26 @@ export default function AchievementsPage() {
         <div className="w-full min-h-screen bg-background text-foreground selection:bg-blue-500/20">
             <MacOSMenuBar appName="Achievement Archive" />
 
-            {/* Progress Bar removed to reduce flickering/distraction */}
-
-            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-32">
-                {/* Header */}
-                <m.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="mb-12"
-                >
+            <PixelHeader
+                title="Achievement Archive"
+                subtitle="A comprehensive verification ledger of academic honors, competitive awards, and leadership roles spanning over a decade."
+                colors={["#3b82f6", "#10b981", "#f59e0b", "#ec4899"]}
+                categoryIcon={<Trophy className="size-4" />}
+                categoryText="Excellence Ledger"
+                maxWidth="max-w-6xl"
+            >
+                <div className="mt-6 flex justify-center">
                     <Link
                         href="/about"
-                        className="inline-flex items-center gap-2 text-sm font-bold text-muted-foreground hover:text-foreground transition-colors mb-8 group"
+                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-zinc-900/5 dark:bg-white/10 border border-zinc-200 dark:border-white/10 text-foreground dark:text-white font-bold hover:scale-105 transition-transform text-sm backdrop-blur-md"
                     >
-                        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                        <ArrowLeft className="w-4 h-4" />
                         Back to About
                     </Link>
+                </div>
+            </PixelHeader>
 
-                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
-                        <div>
-                            <m.h1
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.1 }}
-                                className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter mb-4"
-                            >
-                                Achievement
-                                <br />
-                                <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                                    Archive
-                                </span>
-                            </m.h1>
-                            <m.p
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 0.2 }}
-                                className="text-lg text-muted-foreground max-w-xl font-light leading-relaxed"
-                            >
-                                A comprehensive verification ledger of academic honors, competitive awards, and leadership roles spanning over a decade.
-                            </m.p>
-                        </div>
-
-                        <m.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.3 }}
-                            className="hidden md:flex flex-col items-end"
-                        >
-                            <span className="text-7xl font-black text-foreground/5 leading-none tracking-tighter">2009</span>
-                            <span className="text-7xl font-black bg-gradient-to-b from-foreground/20 to-foreground/5 bg-clip-text text-transparent leading-none tracking-tighter -mt-4">2025</span>
-                        </m.div>
-                    </div>
-                </m.div>
+            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-32">
 
                 {/* Stats Overview */}
                 <StatsOverview />
