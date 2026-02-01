@@ -281,7 +281,7 @@ export default function ContactPage() {
 
             <footer className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-12 text-center">
                 <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-muted-foreground/30">
-                    DESIGNED & ENGINEERED BY GIAN AIBO · MMXVI - MMXXVI
+                    © 2016–2026 GIAN AIBO · ALL RIGHTS RESERVED
                 </p>
             </footer>
         </div>
