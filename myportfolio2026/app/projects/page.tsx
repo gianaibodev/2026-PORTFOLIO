@@ -76,9 +76,8 @@ export default function ProjectsPage() {
   if (showLoader) {
     const overlay = (
       <div
-        className="fixed inset-0 z-[99999] min-h-[100dvh] overflow-hidden cursor-pointer bg-[#0a0f18]"
+        className="fixed inset-0 z-[99999] min-h-[100dvh] overflow-hidden bg-[#0a0f18]"
         style={{ height: "100dvh" }}
-        onClick={handleCloseLoader}
       >
         <ParticleText hideInteractionHint />
         <button
@@ -91,7 +90,7 @@ export default function ProjectsPage() {
           SKIP INTRO
         </button>
         <div className="fixed bottom-12 left-1/2 -translate-x-1/2 z-[100000] text-white/50 text-[10px] uppercase tracking-widest font-medium pointer-events-none">
-          Tap or click to enter
+          Hold spacebar to interact • Press Skip to continue
         </div>
       </div>
     );
