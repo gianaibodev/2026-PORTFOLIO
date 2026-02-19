@@ -20,6 +20,7 @@ import { signalin } from "./data/signalin";
 import { devfest2023 } from "./data/devfest-2023";
 import { appRedesigns } from "./data/app-redesigns";
 import { gdsc2022 } from "./data/gdsc-2022";
+import { photoManipulation } from "./data/photo-manipulation";
 
 import { portfolio2026 } from "./data/portfolio-2026";
 import { medicalTranscriptions } from "./data/medical-transcriptions";
@@ -50,6 +51,7 @@ const rawData: CaseStudy[] = [
     devfest2023,
     appRedesigns,
     gdsc2022,
+    photoManipulation,
 
     portfolio2026,
     medicalTranscriptions,

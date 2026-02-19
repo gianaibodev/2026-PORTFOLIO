@@ -18,8 +18,8 @@ export const theCapitol: CaseStudy = {
         "500k+ social media impressions",
         "Secured 10+ local business sponsorships",
     ],
-    heroImage: "/framer/capitol-hero.jpg",
-    gallery: ["/framer/framer-06.jpg", "/framer/framer-07.jpg", "/framer/framer-08.jpg"],
+    heroImage: "/framer/projects/capitol-hero.webp",
+    gallery: ["/framer/projects/capitol-hero.webp", "/framer/projects/capitol-2.webp", "/framer/projects/capitol-3.webp", "/framer/projects/capitol-4.webp", "/framer/projects/capitol-5.webp"],
     deliverables: ["Logo suite", "Brand guidelines", "Social media kit", "Print collateral"],
     sections: [
         {

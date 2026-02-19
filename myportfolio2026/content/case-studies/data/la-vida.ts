@@ -18,8 +18,8 @@ export const laVida: CaseStudy = {
         "Strategic promotion and talent curation",
         "Delivered impactful experiences like Elgon's Secret Garden Pool Party",
     ],
-    heroImage: "/framer/lavida-hero.jpg",
-    gallery: ["/framer/framer-02.jpg", "/framer/framer-03.jpg", "/framer/framer-04.png"],
+    heroImage: "/framer/projects/la-vida-hero.webp",
+    gallery: ["/framer/projects/la-vida-hero.webp", "/framer/projects/la-vida-2.webp", "/framer/projects/la-vida-3.webp", "/framer/projects/la-vida-5.webp", "/framer/projects/la-vida-6.webp"],
     deliverables: [
         "Brand Identity",
         "Event Promotion Materials",

@@ -21,9 +21,8 @@ export const pizzaporia: CaseStudy = {
     heroImage: "/legacy/assets/demopic/7-a.jpg",
     gallery: [
         "/legacy/assets/demopic/Pizzaporia.gif",
-        "/legacy/assets/demopic/5-a.jpeg",
-        "/legacy/assets/demopic/5-b.jpg",
-        "/legacy/assets/demopic/5-c.jpg",
+        "/legacy/assets/demopic/7-a.jpg",
+        "/legacy/assets/demopic/7.jpg",
     ],
     deliverables: ["UX Audit", "UI Redesign", "Interactive Prototype", "Visual Harmony System"],
     sections: [
