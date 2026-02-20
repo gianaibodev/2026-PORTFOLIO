@@ -31,6 +31,8 @@ import { threeDWorks } from "./data/3d-works";
 import { vectorWorks } from "./data/vector-works";
 import { secrecyGdgoc } from "./data/secrecy";
 import { googleAwards } from "./data/google-awards";
+import { joseApp } from "./data/jose-app";
+import { techCare } from "./data/techcare";
 
 // Re-export types
 export * from "./types";
@@ -66,6 +68,8 @@ const rawData: CaseStudy[] = [
     vectorWorks,
     secrecyGdgoc,
     googleAwards,
+    joseApp,
+    techCare,
 ];
 
 // Validate data against schema (Ensures defaults like [] are applied if missing, matching original behavior)

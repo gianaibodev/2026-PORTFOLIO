@@ -132,16 +132,20 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                   ))}
                 </ul>
                 {study.links?.length ? (
-                  <div className="flex flex-wrap gap-2 sm:gap-3 pt-2">
+                  <div className="flex flex-wrap gap-2 sm:gap-4 pt-4 sm:pt-6">
                     {study.links.map((link) => (
                       <Link
                         key={link.href}
                         href={link.href}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-2 text-xs sm:text-sm text-blue-500 dark:text-blue-300 font-semibold break-all"
+                        className="group relative inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 overflow-hidden"
                       >
-                        {link.label} <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <span className="relative z-10 text-sm sm:text-base text-white font-bold tracking-wide uppercase">
+                          {link.label}
+                        </span>
+                        <ExternalLink className="relative z-10 w-4 h-4 sm:w-5 sm:h-5 text-blue-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                       </Link>
                     ))}
                   </div>

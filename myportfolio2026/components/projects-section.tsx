@@ -36,8 +36,6 @@ const PINNED_CATEGORIES = [
   "Web Development",
   "Community & Events",
   "Internships",
-  "3D Design",
-  "Illustration",
 ];
 
 type ApiCategory = {
