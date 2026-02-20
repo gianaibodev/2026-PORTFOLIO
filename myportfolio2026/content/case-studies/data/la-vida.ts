@@ -26,6 +26,9 @@ export const laVida: CaseStudy = {
         "Social Media Assets",
         "Venue Branding",
     ],
+    links: [
+        { label: "View on Behance", href: "https://www.behance.net/gallery/230699555/LA-VIDA-BRANDING" }
+    ],
     sections: [
         {
             title: "Event Production Excellence",

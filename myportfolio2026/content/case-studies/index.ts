@@ -29,7 +29,6 @@ import { ecommerceReviewAnalysis } from "./data/ecommerce-review-analysis";
 import { aiEngineerExam } from "./data/ai-engineer-exam";
 import { threeDWorks } from "./data/3d-works";
 import { vectorWorks } from "./data/vector-works";
-import { archivesMessy } from "./data/archives-messy";
 import { secrecyGdgoc } from "./data/secrecy";
 import { googleAwards } from "./data/google-awards";
 
@@ -65,7 +64,6 @@ const rawData: CaseStudy[] = [
     aiEngineerExam,
     threeDWorks,
     vectorWorks,
-    archivesMessy,
     secrecyGdgoc,
     googleAwards,
 ];

@@ -25,6 +25,9 @@ export const threeDWorks: CaseStudy = {
         "/projects/3d-works/3.webp",
     ],
     deliverables: ["High-Resolution Renders", "Motion Loops", "Material Library"],
+    links: [
+        { label: "View on Behance", href: "https://www.behance.net/gallery/231638657/3D-WORKS-2024" }
+    ],
     sections: [
         {
             title: "Concept: Abstract Materiality",

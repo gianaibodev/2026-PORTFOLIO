@@ -25,6 +25,9 @@ export const vectorWorks: CaseStudy = {
         "/projects/vector-works/3.webp",
     ],
     deliverables: ["Vector Asset Library", "Social Media Graphics", "Print-Ready Illustrations"],
+    links: [
+        { label: "View on Behance", href: "https://www.behance.net/gallery/231638385/VECTOR-WORKS-2020" }
+    ],
     sections: [
         {
             title: "Concept: Geometric Storytelling",

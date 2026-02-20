@@ -27,6 +27,9 @@ export const photoManipulation: CaseStudy = {
         "/framer/projects/photoman-5.webp",
     ],
     deliverables: ["Composited Photography Series", "Exhibition Prints", "Visual Style Guide"],
+    links: [
+        { label: "View on Behance", href: "https://www.behance.net/gallery/230990941/PHOTO-MANIPULATIONS-PS" }
+    ],
     sections: [
         {
             title: "The Power of Manipulation",

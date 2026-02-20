@@ -25,6 +25,9 @@ export const secrecyGdgoc: CaseStudy = {
         "/projects/secrecy/3.webp",
     ],
     deliverables: ["Full Brand Identity", "Animated Motion Graphics", "Social Media Toolkit"],
+    links: [
+        { label: "View on Behance", href: "https://www.behance.net/gallery/230998761/SECRECY-GDGOC-2022" }
+    ],
     sections: [
         {
             title: "Concept: Into the Shadows",

@@ -21,6 +21,9 @@ export const theCapitol: CaseStudy = {
     heroImage: "/framer/projects/la-vida-hero.webp",
     gallery: ["/framer/projects/capitol-hero.webp", "/framer/projects/capitol-2.webp", "/framer/projects/capitol-3.webp", "/framer/projects/capitol-4.webp", "/framer/projects/capitol-5.webp", "/framer/projects/capitol-6.webp"],
     deliverables: ["Logo suite", "Brand guidelines", "Social media kit", "Print collateral"],
+    links: [
+        { label: "View on Behance", href: "https://www.behance.net/gallery/230895797/THE-CAPITOL-GDGOC" }
+    ],
     sections: [
         {
             title: "Concept & Strategy",

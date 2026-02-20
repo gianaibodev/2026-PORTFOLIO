@@ -28,6 +28,9 @@ export const devconBacolod: CaseStudy = {
         "/framer/projects/devcon-6.webp",
     ],
     deliverables: ["Community Leadership", "Event Branding", "Chapter Growth"],
+    links: [
+        { label: "View on Behance", href: "https://www.behance.net/gallery/230996833/DEVCON-BACOLOD" }
+    ],
     sections: [
         {
             title: "Community Growth & Impact",

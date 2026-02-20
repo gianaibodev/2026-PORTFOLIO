@@ -24,6 +24,9 @@ export const googleAwards: CaseStudy = {
         "/projects/google-awards/2.webp",
     ],
     deliverables: ["Award Certificates", "Stage Graphics", "Promotional Campaign Assets"],
+    links: [
+        { label: "View on Behance", href: "https://www.behance.net/gallery/230997987/GOOGLE-AWARDS-2023" }
+    ],
     sections: [
         {
             title: "Concept: Celebrating Innovation",

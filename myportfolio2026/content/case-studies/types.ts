@@ -12,7 +12,6 @@ export const caseStudyCategories = [
     "Games & Experiments",
     "3D Design",
     "Illustration",
-    "Experimental Archives",
 ] as const;
 
 export type CaseStudyCategory = (typeof caseStudyCategories)[number];
