@@ -12,7 +12,10 @@ type CategoryColorKey =
   | "UI/UX"
   | "Photography"
   | "Concepts"
-  | "Games & Experiments";
+  | "Games & Experiments"
+  | "3D Design"
+  | "Illustration"
+  | "Experimental Archives";
 
 const categoryColors: Record<CategoryColorKey, string> = {
   "AI & Machine Learning": "hsl(270, 85%, 60%)",
@@ -24,6 +27,9 @@ const categoryColors: Record<CategoryColorKey, string> = {
   Photography: "hsl(35, 90%, 60%)",
   Concepts: "hsl(4, 85%, 62%)",
   "Games & Experiments": "hsl(300, 65%, 58%)",
+  "3D Design": "hsl(190, 80%, 50%)",
+  Illustration: "hsl(20, 85%, 55%)",
+  "Experimental Archives": "hsl(340, 75%, 60%)",
 };
 
 // Priority categories that should appear first (pinned/starred)
@@ -32,6 +38,9 @@ const PINNED_CATEGORIES = [
   "Web Development",
   "Community & Events",
   "Internships",
+  "3D Design",
+  "Illustration",
+  "Experimental Archives",
 ];
 
 type ApiCategory = {

@@ -19,7 +19,7 @@ export const theCapitol: CaseStudy = {
         "Secured 10+ local business sponsorships",
     ],
     heroImage: "/framer/projects/la-vida-hero.webp",
-    gallery: ["/framer/projects/la-vida-hero.webp", "/framer/projects/la-vida-2.webp", "/framer/projects/la-vida-3.webp", "/framer/projects/la-vida-5.webp", "/framer/projects/la-vida-6.webp"],
+    gallery: ["/framer/projects/capitol-hero.webp", "/framer/projects/capitol-2.webp", "/framer/projects/capitol-3.webp", "/framer/projects/capitol-4.webp", "/framer/projects/capitol-5.webp", "/framer/projects/capitol-6.webp"],
     deliverables: ["Logo suite", "Brand guidelines", "Social media kit", "Print collateral"],
     sections: [
         {

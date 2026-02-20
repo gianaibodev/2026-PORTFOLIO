@@ -27,6 +27,11 @@ import { medicalTranscriptions } from "./data/medical-transcriptions";
 import { aiTravelGuide } from "./data/ai-travel-guide";
 import { ecommerceReviewAnalysis } from "./data/ecommerce-review-analysis";
 import { aiEngineerExam } from "./data/ai-engineer-exam";
+import { threeDWorks } from "./data/3d-works";
+import { vectorWorks } from "./data/vector-works";
+import { archivesMessy } from "./data/archives-messy";
+import { secrecyGdgoc } from "./data/secrecy";
+import { googleAwards } from "./data/google-awards";
 
 // Re-export types
 export * from "./types";
@@ -58,6 +63,11 @@ const rawData: CaseStudy[] = [
     aiTravelGuide,
     ecommerceReviewAnalysis,
     aiEngineerExam,
+    threeDWorks,
+    vectorWorks,
+    archivesMessy,
+    secrecyGdgoc,
+    googleAwards,
 ];
 
 // Validate data against schema (Ensures defaults like [] are applied if missing, matching original behavior)
