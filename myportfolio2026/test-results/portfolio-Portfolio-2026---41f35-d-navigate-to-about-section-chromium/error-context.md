@@ -1,0 +1,540 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - main [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e7]:
+          - generic [ref=e8]:
+            - img [ref=e10] [cursor=pointer]
+            - generic [ref=e12]: About Gian Aibo
+            - generic [ref=e13]:
+              - generic [ref=e14] [cursor=pointer]: File
+              - generic [ref=e15] [cursor=pointer]: Edit
+              - generic [ref=e16] [cursor=pointer]: Go
+          - generic [ref=e17]:
+            - generic [ref=e18]:
+              - link "Home" [ref=e19] [cursor=pointer]:
+                - /url: /#home
+              - link "Projects" [ref=e20] [cursor=pointer]:
+                - /url: /projects
+              - link "Blog" [ref=e21] [cursor=pointer]:
+                - /url: /blog
+              - link "About" [ref=e22] [cursor=pointer]:
+                - /url: /about
+              - link "Contact" [ref=e23] [cursor=pointer]:
+                - /url: /contact
+            - button "Toggle theme" [ref=e26]:
+              - img [ref=e27]
+              - generic [ref=e29]: Toggle theme
+            - generic [ref=e30] [cursor=pointer]: Wed Feb 11 12:08 AM
+        - generic [ref=e36]:
+          - generic [ref=e37]:
+            - img [ref=e38]
+            - paragraph [ref=e41]: Portfolio 2025
+          - heading "Digital Craft & Academic Excellence" [level=1] [ref=e42]
+          - paragraph [ref=e43]: I'm Gian Aibo C. Boyero — a Computer Science graduate blending technical precision with high-end creative direction. Currently exploring the intersection of AI, design systems, and luxury interfaces.
+          - link "View Resume" [ref=e45] [cursor=pointer]:
+            - /url: /resume.pdf
+            - img [ref=e46]
+            - text: View Resume
+        - generic [ref=e51]:
+          - generic [ref=e52]:
+            - generic [ref=e55]: GWA
+            - generic [ref=e56]: "1.3"
+            - generic [ref=e58]: 97%
+          - generic [ref=e59]:
+            - generic [ref=e62]: Rank
+            - generic [ref=e63]: "#1"
+            - generic [ref=e65]: of 7,042 · 1st Year
+          - generic [ref=e66]:
+            - generic [ref=e69]: Honors
+            - generic [ref=e70]: Cum Laude
+            - generic [ref=e72]: "2025"
+          - generic [ref=e73]:
+            - generic [ref=e76]: Certifications
+            - generic [ref=e77]: "32"
+            - generic [ref=e79]: Google, Microsoft, IBM, Canva, DataCamp, GitHub, YouTube
+        - generic [ref=e81]:
+          - heading "Formal Education" [level=2] [ref=e82]:
+            - img [ref=e83]
+            - text: Formal Education
+          - generic [ref=e86]:
+            - generic [ref=e87]:
+              - heading "College" [level=3] [ref=e90]
+              - paragraph [ref=e91]: Bachelor of Science in Computer Science • University of St. La Salle • GWA 1.3 (97%)
+              - generic [ref=e93]: With Latin Honors (Cum Laude)
+              - generic [ref=e94]:
+                - paragraph [ref=e95]: Transcript at a glance
+                - paragraph [ref=e96]: Highest grades in hardest subjects
+                - generic [ref=e97]:
+                  - generic [ref=e98]:
+                    - generic [ref=e99]: System Analysis and Design
+                    - generic [ref=e100]: 1.1 (99%)
+                  - generic [ref=e101]:
+                    - generic [ref=e102]: Comp. Org. w/ Microcontroller Prog.
+                    - generic [ref=e103]: 1.1 (99%)
+                  - generic [ref=e104]:
+                    - generic [ref=e105]: Information Assurance and Security
+                    - generic [ref=e106]: 1.1 (99%)
+                  - generic [ref=e107]:
+                    - generic [ref=e108]: Software Engineering
+                    - generic [ref=e109]: 1.2 (98%)
+                  - generic [ref=e110]:
+                    - generic [ref=e111]: Usability, HCI and User Interaction Design
+                    - generic [ref=e112]: 1.2 (98%)
+                  - generic [ref=e113]:
+                    - generic [ref=e114]: Cloud Based Application Development
+                    - generic [ref=e115]: 1.2 (98%)
+                - button "View full transcript (63 subjects)" [ref=e116]:
+                  - img [ref=e117]
+                  - generic [ref=e120]: View full transcript (63 subjects)
+            - generic [ref=e121]:
+              - heading "Senior High School" [level=3] [ref=e124]
+              - paragraph [ref=e125]: STEM • Liceo De La Salle Bacolod
+              - generic [ref=e127]: With Highest Honors
+            - generic [ref=e128]:
+              - heading "Junior High School" [level=3] [ref=e131]
+              - paragraph [ref=e132]: Holy Infant Academy
+              - generic [ref=e133]:
+                - generic [ref=e134]: With Highest Honors
+                - generic [ref=e135]: Rank 1 of Batch
+            - generic [ref=e136]:
+              - heading "Elementary" [level=3] [ref=e139]
+              - paragraph [ref=e140]: Holy Infant Academy
+              - generic [ref=e142]: Batch Valedictorian
+        - generic [ref=e144]:
+          - generic [ref=e145]:
+            - generic [ref=e146]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e147]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e148]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e149]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e150]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e151]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e152]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e153]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+          - generic [ref=e154]:
+            - generic [ref=e155]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e156]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e157]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e158]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e159]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e160]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e161]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e162]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+        - generic [ref=e164]:
+          - generic [ref=e165]:
+            - generic [ref=e166]:
+              - heading "Awards & Achievements" [level=2] [ref=e167]:
+                - img [ref=e168]
+                - text: Awards & Achievements
+              - paragraph [ref=e174]: A condensed view of major creative and academic wins. Explore the full history below.
+            - link "Open Full Archive" [ref=e175] [cursor=pointer]:
+              - /url: /achievements
+              - text: Open Full Archive
+              - img [ref=e176]
+          - generic [ref=e179]:
+            - generic [ref=e180]:
+              - heading "College" [level=3] [ref=e181]: College
+              - generic [ref=e183]:
+                - generic [ref=e184]: "Cum Laude with an Overall GWA: 1.3 (97%)"
+                - generic [ref=e185]: College Awardee - Outstanding Intern Award
+                - generic [ref=e186]: Rank 1 — Highest GWA across all colleges and year levels (7,042 students) — University of St. La Salle Recognition Rites, 1st Year (2021-2022)
+                - generic [ref=e187]: Google Developer Groups on Campus USLS - Legacy Builder Award (2025)
+                - generic [ref=e188]: Best in 3D Game – Game On USLS (2024) – Group Award
+                - generic [ref=e189]: Best in Mobile Game – Game On USLS (2024) – Group Award
+            - generic [ref=e190]:
+              - heading "Affiliations" [level=3] [ref=e191]: Affiliations
+              - generic [ref=e193]:
+                - generic [ref=e194]: Creatives Co-head, Google Developer Groups Bacolod (Nov 2022 – Jul 2025)
+                - generic [ref=e195]: Chief Executive Officer, Google Developer Groups on Campus - University of St. La Salle (Sep 2024 – Jun 2025)
+                - generic [ref=e196]: President, DEVCON Bacolod (Feb 2024 – Jan 2025)
+                - generic [ref=e197]: Creatives & Marketing Intern, Armada Brands (Jun 2024 – Sep 2024)
+                - generic [ref=e198]: Chief Executive Officer, Google Developer Student Clubs - University of St. La Salle (Aug 2022 – Jul 2023)
+                - generic [ref=e199]: Editor in Chief, Tigris (Jun 2022 – Jun 2023)
+                - generic [ref=e200]: Media Officer, Computer Science Society, USLS (Jan 2022 – Jan 2023)
+                - generic [ref=e201]: Vice President, Google Developer Student Clubs - University of St. La Salle (Aug 2021 – Jun 2022)
+            - generic [ref=e202]:
+              - heading "Prior Honors" [level=3] [ref=e203]: Prior Honors
+              - generic [ref=e205]:
+                - generic [ref=e206]:
+                  - paragraph [ref=e207]: Senior High School
+                  - paragraph [ref=e208]: With Highest Honors
+                  - paragraph [ref=e209]: Principal's Distinction Award
+                - generic [ref=e210]:
+                  - paragraph [ref=e211]: Junior High School
+                  - paragraph [ref=e212]: First Honors (Rank 1)
+                  - paragraph [ref=e213]: 10+ Academic Awards
+        - generic [ref=e215]:
+          - generic [ref=e216]:
+            - generic [ref=e217]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e218]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e219]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e220]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e221]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e222]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e223]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e224]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+          - generic [ref=e225]:
+            - generic [ref=e226]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e227]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e228]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e229]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e230]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e231]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e232]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+            - generic [ref=e233]: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS
+        - generic [ref=e235]:
+          - heading "Certifications / Trainings" [level=2] [ref=e236]:
+            - img [ref=e237]
+            - text: Certifications / Trainings
+          - paragraph [ref=e240]:
+            - text: "Verify credentials and badges:"
+            - link "linkedin.com/in/aiboboyero" [ref=e241] [cursor=pointer]:
+              - /url: https://linkedin.com/in/aiboboyero
+          - generic [ref=e242]:
+            - generic [ref=e243]:
+              - generic [ref=e244]:
+                - heading "Google" [level=3] [ref=e246]
+                - generic [ref=e247]: (11)
+              - list [ref=e248]:
+                - listitem [ref=e249]:
+                  - generic [ref=e250]: ·
+                  - link "Attract and Engage Customers with Digital Marketing" [ref=e251] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/aiboboyero/details/certifications/
+                    - generic [ref=e252]: Attract and Engage Customers with Digital Marketing
+                    - img [ref=e253]
+                - listitem [ref=e257]:
+                  - generic [ref=e258]: ·
+                  - link "Gemini in Google Docs" [ref=e259] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/aiboboyero/details/certifications/
+                    - generic [ref=e260]: Gemini in Google Docs
+                    - img [ref=e261]
+                - listitem [ref=e265]:
+                  - generic [ref=e266]: ·
+                  - link "Gemini in Google Slides" [ref=e267] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/aiboboyero/details/certifications/
+                    - generic [ref=e268]: Gemini in Google Slides
+                    - img [ref=e269]
+                - listitem [ref=e273]:
+                  - generic [ref=e274]: ·
+                  - link "Introduction to Generative AI" [ref=e275] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/aiboboyero/details/certifications/
+                    - generic [ref=e276]: Introduction to Generative AI
+                    - img [ref=e277]
+                - listitem [ref=e281]:
+                  - generic [ref=e282]: ·
+                  - 'link "Make the Sale: Build, Launch, and Manage E-commerce Stores" [ref=e283] [cursor=pointer]':
+                    - /url: https://www.linkedin.com/in/aiboboyero/details/certifications/
+                    - generic [ref=e284]: "Make the Sale: Build, Launch, and Manage E-commerce Stores"
+                    - img [ref=e285]
+                - listitem [ref=e289]:
+                  - generic [ref=e290]: ·
+                  - link "Generative AI Fundamentals" [ref=e291] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/aiboboyero/details/certifications/
+                    - generic [ref=e292]: Generative AI Fundamentals
+                    - img [ref=e293]
+                - listitem [ref=e297]:
+                  - generic [ref=e298]: ·
+                  - generic [ref=e299]: Foundations of Digital Marketing and E-commerce
+                - listitem [ref=e300]:
+                  - generic [ref=e301]: ·
+                  - generic [ref=e302]: Foundations of Project Management
+                - listitem [ref=e303]:
+                  - generic [ref=e304]: ·
+                  - generic [ref=e305]: Foundations of User Experience (UX) Design
+                - listitem [ref=e306]:
+                  - generic [ref=e307]: ·
+                  - generic [ref=e308]: "Foundations: Data, Data, Everywhere"
+                - listitem [ref=e309]:
+                  - generic [ref=e310]: ·
+                  - generic [ref=e311]: Technical Support Fundamentals
+            - generic [ref=e312]:
+              - generic [ref=e313]:
+                - heading "Microsoft" [level=3] [ref=e315]
+                - generic [ref=e316]: (7)
+              - list [ref=e317]:
+                - listitem [ref=e318]:
+                  - generic [ref=e319]: ·
+                  - link "Trophy - Bring AI to your business with AI Builder" [ref=e320] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/aiboboyero/details/certifications/
+                    - generic [ref=e321]: Trophy - Bring AI to your business with AI Builder
+                    - img [ref=e322]
+                - listitem [ref=e326]:
+                  - generic [ref=e327]: ·
+                  - link "Trophy - Create Machine Learning Models" [ref=e328] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/aiboboyero/details/certifications/
+                    - generic [ref=e329]: Trophy - Create Machine Learning Models
+                    - img [ref=e330]
+                - listitem [ref=e334]:
+                  - generic [ref=e335]: ·
+                  - link "Trophy - Create bots with Power Virtual Agents" [ref=e336] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/aiboboyero/details/certifications/
+                    - generic [ref=e337]: Trophy - Create bots with Power Virtual Agents
+                    - img [ref=e338]
+                - listitem [ref=e342]:
+                  - generic [ref=e343]: ·
+                  - link "Trophy - Foundations of Data Science for Machine Learning" [ref=e344] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/aiboboyero/details/certifications/
+                    - generic [ref=e345]: Trophy - Foundations of Data Science for Machine Learning
+                    - img [ref=e346]
+                - listitem [ref=e350]:
+                  - generic [ref=e351]: ·
+                  - link "Trophy - Improve Business Performance with AI Builder" [ref=e352] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/aiboboyero/details/certifications/
+                    - generic [ref=e353]: Trophy - Improve Business Performance with AI Builder
+                    - img [ref=e354]
+                - listitem [ref=e358]:
+                  - generic [ref=e359]: ·
+                  - generic [ref=e360]: "Trophy - Microsoft Azure AI Fundamentals: Explore visual tools for machine learning"
+                - listitem [ref=e361]:
+                  - generic [ref=e362]: ·
+                  - generic [ref=e363]: Trophy - Understand Data Science for Machine Learning
+            - generic [ref=e364]:
+              - generic [ref=e365]:
+                - heading "IBM" [level=3] [ref=e367]
+                - generic [ref=e368]: (5)
+              - list [ref=e369]:
+                - listitem [ref=e370]:
+                  - generic [ref=e371]: ·
+                  - link "Solving Problems with Creative and Critical Thinking" [ref=e372] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/aiboboyero/details/certifications/
+                    - generic [ref=e373]: Solving Problems with Creative and Critical Thinking
+                    - img [ref=e374]
+                - listitem [ref=e378]:
+                  - generic [ref=e379]: ·
+                  - generic [ref=e380]: Data Science 101
+                - listitem [ref=e381]:
+                  - generic [ref=e382]: ·
+                  - generic [ref=e383]: Introduction to Cloud
+                - listitem [ref=e384]:
+                  - generic [ref=e385]: ·
+                  - generic [ref=e386]: Introduction to Quantum Computing
+                - listitem [ref=e387]:
+                  - generic [ref=e388]: ·
+                  - generic [ref=e389]: Statistics 101
+            - generic [ref=e390]:
+              - generic [ref=e391]:
+                - heading "DataCamp" [level=3] [ref=e393]
+                - generic [ref=e394]: (4)
+              - list [ref=e395]:
+                - listitem [ref=e396]:
+                  - generic [ref=e397]: ·
+                  - link "AI Engineer for Developers Associate" [ref=e398] [cursor=pointer]:
+                    - /url: https://www.datacamp.com/certificate/AIEDA0017137154622
+                    - generic [ref=e399]: AI Engineer for Developers Associate
+                    - img [ref=e400]
+                - listitem [ref=e404]:
+                  - generic [ref=e405]: ·
+                  - link "Working with the OpenAI API" [ref=e406] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/aiboboyero/details/certifications/
+                    - generic [ref=e407]: Working with the OpenAI API
+                    - img [ref=e408]
+                - listitem [ref=e412]:
+                  - generic [ref=e413]: ·
+                  - link "AI Fundamentals" [ref=e414] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/aiboboyero/details/certifications/
+                    - generic [ref=e415]: AI Fundamentals
+                    - img [ref=e416]
+                - listitem [ref=e420]:
+                  - generic [ref=e421]: ·
+                  - link "Introduction to ChatGPT" [ref=e422] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/aiboboyero/details/certifications/
+                    - generic [ref=e423]: Introduction to ChatGPT
+                    - img [ref=e424]
+            - generic [ref=e428]:
+              - generic [ref=e429]:
+                - heading "Canva" [level=3] [ref=e431]
+                - generic [ref=e432]: (3)
+              - list [ref=e433]:
+                - listitem [ref=e434]:
+                  - generic [ref=e435]: ·
+                  - link "AI in the classroom" [ref=e436] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/aiboboyero/details/certifications/
+                    - generic [ref=e437]: AI in the classroom
+                    - img [ref=e438]
+                - listitem [ref=e442]:
+                  - generic [ref=e443]: ·
+                  - link "Canva Essentials" [ref=e444] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/aiboboyero/details/certifications/
+                    - generic [ref=e445]: Canva Essentials
+                    - img [ref=e446]
+                - listitem [ref=e450]:
+                  - generic [ref=e451]: ·
+                  - link "Graphic Design Essentials" [ref=e452] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/aiboboyero/details/certifications/
+                    - generic [ref=e453]: Graphic Design Essentials
+                    - img [ref=e454]
+            - generic [ref=e458]:
+              - generic [ref=e459]:
+                - heading "GitHub" [level=3] [ref=e461]
+                - generic [ref=e462]: (1)
+              - list [ref=e463]:
+                - listitem [ref=e464]:
+                  - generic [ref=e465]: ·
+                  - link "GitHub Foundations" [ref=e466] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/aiboboyero/details/certifications/
+                    - generic [ref=e467]: GitHub Foundations
+                    - img [ref=e468]
+            - generic [ref=e472]:
+              - generic [ref=e473]:
+                - heading "YouTube" [level=3] [ref=e475]
+                - generic [ref=e476]: (1)
+              - list [ref=e477]:
+                - listitem [ref=e478]:
+                  - generic [ref=e479]: ·
+                  - generic [ref=e480]: YouTube Music Certification
+          - link "← Back to Home" [ref=e482] [cursor=pointer]:
+            - /url: /
+    - contentinfo [ref=e483]:
+      - generic [ref=e485]:
+        - generic [ref=e486]: "Note: This portfolio is currently being actively updated"
+        - generic [ref=e488]: "Note: This portfolio is currently being actively updated"
+        - generic [ref=e490]: "Note: This portfolio is currently being actively updated"
+        - generic [ref=e492]: "Note: This portfolio is currently being actively updated"
+        - generic [ref=e494]: "Note: This portfolio is currently being actively updated"
+        - generic [ref=e496]: "Note: This portfolio is currently being actively updated"
+        - generic [ref=e498]: "Note: This portfolio is currently being actively updated"
+        - generic [ref=e500]: "Note: This portfolio is currently being actively updated"
+        - generic [ref=e502]: "Note: This portfolio is currently being actively updated"
+        - generic [ref=e504]: "Note: This portfolio is currently being actively updated"
+        - generic [ref=e506]: "Note: This portfolio is currently being actively updated"
+        - generic [ref=e508]: "Note: This portfolio is currently being actively updated"
+      - generic [ref=e510]:
+        - generic [ref=e512]:
+          - generic [ref=e513]:
+            - link "G Gian Aibo Portfolio 2026" [ref=e514] [cursor=pointer]:
+              - /url: /
+              - generic [ref=e515]: G
+              - generic [ref=e516]:
+                - generic [ref=e517]: Gian Aibo
+                - generic [ref=e518]: Portfolio 2026
+            - paragraph [ref=e519]: Frontend Developer specializing in rapid product development via AI-assisted tools. Bridging Figma designs and React applications.
+            - paragraph [ref=e520]: © 2026 Gian Aibo Boyero. All rights reserved.
+          - generic [ref=e521]:
+            - generic [ref=e523]:
+              - heading "Navigation" [level=3] [ref=e524]
+              - list [ref=e525]:
+                - listitem [ref=e526]:
+                  - link "Home" [ref=e527] [cursor=pointer]:
+                    - /url: /#home
+                    - generic [ref=e528]: Home
+                - listitem [ref=e529]:
+                  - link "Projects" [ref=e530] [cursor=pointer]:
+                    - /url: /projects
+                    - generic [ref=e531]: Projects
+                - listitem [ref=e532]:
+                  - link "About" [ref=e533] [cursor=pointer]:
+                    - /url: /about
+                    - generic [ref=e534]: About
+                - listitem [ref=e535]:
+                  - link "Contact" [ref=e536] [cursor=pointer]:
+                    - /url: /contact
+                    - generic [ref=e537]: Contact
+            - generic [ref=e539]:
+              - heading "Resources" [level=3] [ref=e540]
+              - list [ref=e541]:
+                - listitem [ref=e542]:
+                  - link "All Projects" [ref=e543] [cursor=pointer]:
+                    - /url: /projects
+                    - generic [ref=e544]: All Projects
+                - listitem [ref=e545]:
+                  - link "About Me" [ref=e546] [cursor=pointer]:
+                    - /url: /about
+                    - generic [ref=e547]: About Me
+                - listitem [ref=e548]:
+                  - link "Credits" [ref=e549] [cursor=pointer]:
+                    - /url: /credits
+                    - generic [ref=e550]: Credits
+            - generic [ref=e552]:
+              - heading "Contact" [level=3] [ref=e553]
+              - list [ref=e554]:
+                - listitem [ref=e555]:
+                  - link "gianaibo.dev@gmail.com" [ref=e556] [cursor=pointer]:
+                    - /url: mailto:gianaibo.dev@gmail.com
+                    - img [ref=e557]
+                    - generic [ref=e560]: gianaibo.dev@gmail.com
+                - listitem [ref=e561]:
+                  - link "+63 907 047 0241" [ref=e562] [cursor=pointer]:
+                    - /url: tel:+639070470241
+                    - img [ref=e563]
+                    - generic [ref=e565]: +63 907 047 0241
+                - listitem [ref=e566]:
+                  - link "WhatsApp" [ref=e567] [cursor=pointer]:
+                    - /url: https://wa.me/639070470241
+                    - img [ref=e568]
+                    - generic [ref=e570]: WhatsApp
+                    - img [ref=e571]
+                - listitem [ref=e574]:
+                  - link "Telegram @gibandtake" [ref=e575] [cursor=pointer]:
+                    - /url: https://t.me/gibandtake
+                    - img [ref=e576]
+                    - generic [ref=e579]: Telegram @gibandtake
+                    - img [ref=e580]
+                - listitem [ref=e583]:
+                  - link "gianaibo.tech" [ref=e584] [cursor=pointer]:
+                    - /url: https://gianaibo.tech
+                    - img [ref=e585]
+                    - generic [ref=e588]: gianaibo.tech
+                    - img [ref=e589]
+            - generic [ref=e593]:
+              - heading "Social" [level=3] [ref=e594]
+              - list [ref=e595]:
+                - listitem [ref=e596]:
+                  - link "LinkedIn" [ref=e597] [cursor=pointer]:
+                    - /url: https://linkedin.com/in/aiboboyero
+                    - img [ref=e598]
+                    - generic [ref=e602]: LinkedIn
+                    - img [ref=e603]
+                - listitem [ref=e606]:
+                  - link "Facebook" [ref=e607] [cursor=pointer]:
+                    - /url: https://facebook.com/aiboboyero
+                    - img [ref=e608]
+                    - generic [ref=e610]: Facebook
+                    - img [ref=e611]
+                - listitem [ref=e614]:
+                  - link "Instagram" [ref=e615] [cursor=pointer]:
+                    - /url: https://instagram.com/gianheybo
+                    - img [ref=e616]
+                    - generic [ref=e619]: Instagram
+                    - img [ref=e620]
+                - listitem [ref=e623]:
+                  - link "GitHub" [ref=e624] [cursor=pointer]:
+                    - /url: https://github.com/gianaibodev
+                    - img [ref=e625]
+                    - generic [ref=e628]: GitHub
+                    - img [ref=e629]
+                - listitem [ref=e632]:
+                  - link "Threads" [ref=e633] [cursor=pointer]:
+                    - /url: https://threads.net/@gianheybo
+                    - generic [ref=e634]: Threads
+                    - img [ref=e635]
+        - generic [ref=e639]:
+          - generic [ref=e640]: Built with Next.js & Tailwind CSS
+          - generic [ref=e641]:
+            - link "About" [ref=e642] [cursor=pointer]:
+              - /url: /about
+            - link "Credits" [ref=e643] [cursor=pointer]:
+              - /url: /credits
+            - link "Contact" [ref=e644] [cursor=pointer]:
+              - /url: /contact
+  - generic [ref=e649] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e650]:
+      - img [ref=e651]
+    - generic [ref=e654]:
+      - button "Open issues overlay" [ref=e655]:
+        - generic [ref=e656]:
+          - generic [ref=e657]: "2"
+          - generic [ref=e658]: "3"
+        - generic [ref=e659]:
+          - text: Issue
+          - generic [ref=e660]: s
+      - button "Collapse issues badge" [ref=e661]:
+        - img [ref=e662]
+  - alert [ref=e664]
+  - generic [ref=e666] [cursor=pointer]:
+    - img [ref=e668]:
+      - generic [ref=e669]: LET'S TALK • FREE CONSULTATION •
+    - img "Gian Aibo - Portfolio consultant profile photo" [ref=e672]
+```

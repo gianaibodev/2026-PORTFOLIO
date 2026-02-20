@@ -1,0 +1,294 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - main [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e7]:
+          - generic [ref=e8]:
+            - img [ref=e10] [cursor=pointer]
+            - generic [ref=e12]: Connect with Gian
+            - generic [ref=e13]:
+              - generic [ref=e14] [cursor=pointer]: File
+              - generic [ref=e15] [cursor=pointer]: Edit
+              - generic [ref=e16] [cursor=pointer]: Go
+          - generic [ref=e17]:
+            - generic [ref=e18]:
+              - link "Home" [ref=e19] [cursor=pointer]:
+                - /url: /#home
+              - link "Projects" [ref=e20] [cursor=pointer]:
+                - /url: /projects
+              - link "Blog" [ref=e21] [cursor=pointer]:
+                - /url: /blog
+              - link "About" [ref=e22] [cursor=pointer]:
+                - /url: /about
+              - link "Contact" [ref=e23] [cursor=pointer]:
+                - /url: /contact
+            - button "Toggle theme" [ref=e26]:
+              - img [ref=e27]
+              - generic [ref=e29]: Toggle theme
+            - generic [ref=e30] [cursor=pointer]: Wed Feb 11 12:08 AM
+        - generic [ref=e36]:
+          - generic [ref=e37]:
+            - img [ref=e38]
+            - paragraph [ref=e41]: Contact 2026
+          - heading "Let's build something extraordinary" [level=1] [ref=e42]
+          - paragraph [ref=e43]: I'm currently open to new opportunities, high-end freelance projects, and collaborations in AI, design engineering, and full-stack development.
+        - main [ref=e44]:
+          - generic [ref=e45]:
+            - generic [ref=e46]:
+              - link "Primary Email gianaibo.dev@gmail.com" [ref=e47] [cursor=pointer]:
+                - /url: mailto:gianaibo.dev@gmail.com
+                - generic [ref=e48]:
+                  - generic [ref=e49]:
+                    - img [ref=e51]
+                    - img [ref=e55]
+                  - generic [ref=e58]:
+                    - paragraph [ref=e59]: Primary Email
+                    - paragraph [ref=e60]: gianaibo.dev@gmail.com
+              - link "Secondary Email gianaiboboyero@gmail.com" [ref=e61] [cursor=pointer]:
+                - /url: mailto:gianaiboboyero@gmail.com
+                - generic [ref=e62]:
+                  - generic [ref=e63]:
+                    - img [ref=e65]
+                    - img [ref=e68]
+                  - generic [ref=e71]:
+                    - paragraph [ref=e72]: Secondary Email
+                    - paragraph [ref=e73]: gianaiboboyero@gmail.com
+              - link "Available for Calls Book a 30-min discovery call Fastest way to get a project started. We'll discuss your goals, timeline, and how my technical-design hybrid approach can add value. Schedule Meeting" [ref=e74] [cursor=pointer]:
+                - /url: https://calendar.google.com/calendar/render?action=TEMPLATE&add=gianaibo.dev@gmail.com
+                - img [ref=e76]
+                - generic [ref=e78]:
+                  - generic [ref=e79]: Available for Calls
+                  - heading "Book a 30-min discovery call" [level=2] [ref=e83]
+                  - paragraph [ref=e84]: Fastest way to get a project started. We'll discuss your goals, timeline, and how my technical-design hybrid approach can add value.
+                  - generic [ref=e85]:
+                    - text: Schedule Meeting
+                    - img [ref=e86]
+            - generic [ref=e90]:
+              - heading "Current Location" [level=3] [ref=e91]
+              - generic [ref=e92]:
+                - img [ref=e94]
+                - generic [ref=e97]:
+                  - paragraph [ref=e98]: Manila / Bacolod
+                  - paragraph [ref=e99]: Philippines (GMT+8)
+              - separator [ref=e100]
+              - heading "Availability" [level=3] [ref=e101]
+              - list [ref=e102]:
+                - listitem [ref=e103]:
+                  - generic [ref=e104]: Freelance projects
+                  - generic [ref=e105]: Available
+                - listitem [ref=e106]:
+                  - generic [ref=e107]: Full-time roles
+                  - generic [ref=e108]: Open to work
+                - listitem [ref=e109]:
+                  - generic [ref=e110]: Response time
+                  - generic [ref=e111]: < 12 hours
+            - generic [ref=e112]:
+              - heading "Connect Digital Ecosystem" [level=3] [ref=e113]: Connect Digital Ecosystem
+              - generic [ref=e115]:
+                - link "LinkedIn aiboboyero Professional network & experience" [ref=e116] [cursor=pointer]:
+                  - /url: https://linkedin.com/in/aiboboyero
+                  - generic [ref=e117]:
+                    - img [ref=e119]
+                    - generic [ref=e123]:
+                      - heading "LinkedIn" [level=4] [ref=e124]
+                      - paragraph [ref=e125]: aiboboyero
+                    - img [ref=e127]
+                  - paragraph [ref=e130]: Professional network & experience
+                - link "GitHub @gianaibodev Code repositories & contributions" [ref=e131] [cursor=pointer]:
+                  - /url: https://github.com/gianaibodev
+                  - generic [ref=e132]:
+                    - img [ref=e134]
+                    - generic [ref=e137]:
+                      - heading "GitHub" [level=4] [ref=e138]
+                      - paragraph [ref=e139]: "@gianaibodev"
+                    - img [ref=e141]
+                  - paragraph [ref=e144]: Code repositories & contributions
+                - link "Instagram @gianheybo Photography & life snippets" [ref=e145] [cursor=pointer]:
+                  - /url: https://instagram.com/gianheybo
+                  - generic [ref=e146]:
+                    - img [ref=e148]
+                    - generic [ref=e151]:
+                      - heading "Instagram" [level=4] [ref=e152]
+                      - paragraph [ref=e153]: "@gianheybo"
+                    - img [ref=e155]
+                  - paragraph [ref=e158]: Photography & life snippets
+                - link "Facebook aiboboyero Personal updates & community" [ref=e159] [cursor=pointer]:
+                  - /url: https://facebook.com/aiboboyero
+                  - generic [ref=e160]:
+                    - img [ref=e162]
+                    - generic [ref=e164]:
+                      - heading "Facebook" [level=4] [ref=e165]
+                      - paragraph [ref=e166]: aiboboyero
+                    - img [ref=e168]
+                  - paragraph [ref=e171]: Personal updates & community
+                - link "Telegram @gibandtake Fast direct messaging" [ref=e172] [cursor=pointer]:
+                  - /url: https://t.me/gibandtake
+                  - generic [ref=e173]:
+                    - img [ref=e175]
+                    - generic [ref=e178]:
+                      - heading "Telegram" [level=4] [ref=e179]
+                      - paragraph [ref=e180]: "@gibandtake"
+                    - img [ref=e182]
+                  - paragraph [ref=e185]: Fast direct messaging
+                - link "WhatsApp +63 962 644 2911 Business & project chat" [ref=e186] [cursor=pointer]:
+                  - /url: https://wa.me/639626442911
+                  - generic [ref=e187]:
+                    - img [ref=e189]
+                    - generic [ref=e191]:
+                      - heading "WhatsApp" [level=4] [ref=e192]
+                      - paragraph [ref=e193]: +63 962 644 2911
+                    - img [ref=e195]
+                  - paragraph [ref=e198]: Business & project chat
+        - paragraph [ref=e200]: © 2016–2026 GIAN AIBO · ALL RIGHTS RESERVED
+    - contentinfo [ref=e201]:
+      - generic [ref=e203]:
+        - generic [ref=e204]: "Note: This portfolio is currently being actively updated"
+        - generic [ref=e206]: "Note: This portfolio is currently being actively updated"
+        - generic [ref=e208]: "Note: This portfolio is currently being actively updated"
+        - generic [ref=e210]: "Note: This portfolio is currently being actively updated"
+        - generic [ref=e212]: "Note: This portfolio is currently being actively updated"
+        - generic [ref=e214]: "Note: This portfolio is currently being actively updated"
+        - generic [ref=e216]: "Note: This portfolio is currently being actively updated"
+        - generic [ref=e218]: "Note: This portfolio is currently being actively updated"
+        - generic [ref=e220]: "Note: This portfolio is currently being actively updated"
+        - generic [ref=e222]: "Note: This portfolio is currently being actively updated"
+        - generic [ref=e224]: "Note: This portfolio is currently being actively updated"
+        - generic [ref=e226]: "Note: This portfolio is currently being actively updated"
+      - generic [ref=e228]:
+        - generic [ref=e230]:
+          - generic [ref=e231]:
+            - link "G Gian Aibo Portfolio 2026" [ref=e232] [cursor=pointer]:
+              - /url: /
+              - generic [ref=e233]: G
+              - generic [ref=e234]:
+                - generic [ref=e235]: Gian Aibo
+                - generic [ref=e236]: Portfolio 2026
+            - paragraph [ref=e237]: Frontend Developer specializing in rapid product development via AI-assisted tools. Bridging Figma designs and React applications.
+            - paragraph [ref=e238]: © 2026 Gian Aibo Boyero. All rights reserved.
+          - generic [ref=e239]:
+            - generic [ref=e241]:
+              - heading "Navigation" [level=3] [ref=e242]
+              - list [ref=e243]:
+                - listitem [ref=e244]:
+                  - link "Home" [ref=e245] [cursor=pointer]:
+                    - /url: /#home
+                    - generic [ref=e246]: Home
+                - listitem [ref=e247]:
+                  - link "Projects" [ref=e248] [cursor=pointer]:
+                    - /url: /projects
+                    - generic [ref=e249]: Projects
+                - listitem [ref=e250]:
+                  - link "About" [ref=e251] [cursor=pointer]:
+                    - /url: /about
+                    - generic [ref=e252]: About
+                - listitem [ref=e253]:
+                  - link "Contact" [ref=e254] [cursor=pointer]:
+                    - /url: /contact
+                    - generic [ref=e255]: Contact
+            - generic [ref=e257]:
+              - heading "Resources" [level=3] [ref=e258]
+              - list [ref=e259]:
+                - listitem [ref=e260]:
+                  - link "All Projects" [ref=e261] [cursor=pointer]:
+                    - /url: /projects
+                    - generic [ref=e262]: All Projects
+                - listitem [ref=e263]:
+                  - link "About Me" [ref=e264] [cursor=pointer]:
+                    - /url: /about
+                    - generic [ref=e265]: About Me
+                - listitem [ref=e266]:
+                  - link "Credits" [ref=e267] [cursor=pointer]:
+                    - /url: /credits
+                    - generic [ref=e268]: Credits
+            - generic [ref=e270]:
+              - heading "Contact" [level=3] [ref=e271]
+              - list [ref=e272]:
+                - listitem [ref=e273]:
+                  - link "gianaibo.dev@gmail.com" [ref=e274] [cursor=pointer]:
+                    - /url: mailto:gianaibo.dev@gmail.com
+                    - img [ref=e275]
+                    - generic [ref=e278]: gianaibo.dev@gmail.com
+                - listitem [ref=e279]:
+                  - link "+63 907 047 0241" [ref=e280] [cursor=pointer]:
+                    - /url: tel:+639070470241
+                    - img [ref=e281]
+                    - generic [ref=e283]: +63 907 047 0241
+                - listitem [ref=e284]:
+                  - link "WhatsApp" [ref=e285] [cursor=pointer]:
+                    - /url: https://wa.me/639070470241
+                    - img [ref=e286]
+                    - generic [ref=e288]: WhatsApp
+                    - img [ref=e289]
+                - listitem [ref=e292]:
+                  - link "Telegram @gibandtake" [ref=e293] [cursor=pointer]:
+                    - /url: https://t.me/gibandtake
+                    - img [ref=e294]
+                    - generic [ref=e297]: Telegram @gibandtake
+                    - img [ref=e298]
+                - listitem [ref=e301]:
+                  - link "gianaibo.tech" [ref=e302] [cursor=pointer]:
+                    - /url: https://gianaibo.tech
+                    - img [ref=e303]
+                    - generic [ref=e306]: gianaibo.tech
+                    - img [ref=e307]
+            - generic [ref=e311]:
+              - heading "Social" [level=3] [ref=e312]
+              - list [ref=e313]:
+                - listitem [ref=e314]:
+                  - link "LinkedIn" [ref=e315] [cursor=pointer]:
+                    - /url: https://linkedin.com/in/aiboboyero
+                    - img [ref=e316]
+                    - generic [ref=e320]: LinkedIn
+                    - img [ref=e321]
+                - listitem [ref=e324]:
+                  - link "Facebook" [ref=e325] [cursor=pointer]:
+                    - /url: https://facebook.com/aiboboyero
+                    - img [ref=e326]
+                    - generic [ref=e328]: Facebook
+                    - img [ref=e329]
+                - listitem [ref=e332]:
+                  - link "Instagram" [ref=e333] [cursor=pointer]:
+                    - /url: https://instagram.com/gianheybo
+                    - img [ref=e334]
+                    - generic [ref=e337]: Instagram
+                    - img [ref=e338]
+                - listitem [ref=e341]:
+                  - link "GitHub" [ref=e342] [cursor=pointer]:
+                    - /url: https://github.com/gianaibodev
+                    - img [ref=e343]
+                    - generic [ref=e346]: GitHub
+                    - img [ref=e347]
+                - listitem [ref=e350]:
+                  - link "Threads" [ref=e351] [cursor=pointer]:
+                    - /url: https://threads.net/@gianheybo
+                    - generic [ref=e352]: Threads
+                    - img [ref=e353]
+        - generic [ref=e357]:
+          - generic [ref=e358]: Built with Next.js & Tailwind CSS
+          - generic [ref=e359]:
+            - link "About" [ref=e360] [cursor=pointer]:
+              - /url: /about
+            - link "Credits" [ref=e361] [cursor=pointer]:
+              - /url: /credits
+            - link "Contact" [ref=e362] [cursor=pointer]:
+              - /url: /contact
+  - generic [ref=e367] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e368]:
+      - img [ref=e369]
+    - generic [ref=e372]:
+      - button "Open issues overlay" [ref=e373]:
+        - generic [ref=e374]:
+          - generic [ref=e375]: "0"
+          - generic [ref=e376]: "1"
+        - generic [ref=e377]: Issue
+      - button "Collapse issues badge" [ref=e378]:
+        - img [ref=e379]
+  - alert [ref=e381]
+  - generic [ref=e383] [cursor=pointer]:
+    - img [ref=e385]:
+      - generic [ref=e386]: LET'S TALK • FREE CONSULTATION •
+    - img "Gian Aibo - Portfolio consultant profile photo" [ref=e389]
+```

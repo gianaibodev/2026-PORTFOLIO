@@ -13,152 +13,83 @@ interface CodeBlockProps {
     className?: string;
 }
 
-// Simple syntax highlighting for Python
-function highlightPython(code: string): string {
-    let highlighted = code;
-
-    // Escape HTML first
-    highlighted = highlighted
+// Robust syntax highlighting using a tokenization approach to avoid overlapping replacements
+function highlightTokens(code: string, rules: { regex: RegExp; className: string; wrap?: (match: string) => string }[]): string {
+    let escapedCode = code
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
 
-    // Comments (must do first to avoid conflicts)
-    highlighted = highlighted.replace(
-        /(#[^\n]*)/g,
-        '<span class="text-emerald-400 italic">$1</span>'
-    );
+    let result = "";
+    let pos = 0;
 
-    // Triple-quoted strings (docstrings)
-    highlighted = highlighted.replace(
-        /("""[\s\S]*?"""|'''[\s\S]*?''')/g,
-        '<span class="text-amber-300">$1</span>'
-    );
+    while (pos < escapedCode.length) {
+        let bestMatch: { index: number; length: number; className: string; content: string; wrap?: (match: string) => string } | null = null;
 
-    // Strings (double and single quotes)
-    highlighted = highlighted.replace(
-        /("[^"\\]*(?:\\.[^"\\]*)*"|'[^'\\]*(?:\\.[^'\\]*)*')/g,
-        '<span class="text-amber-300">$1</span>'
-    );
+        for (const rule of rules) {
+            rule.regex.lastIndex = pos;
+            const match = rule.regex.exec(escapedCode);
+            if (match && (bestMatch === null || match.index < bestMatch.index)) {
+                bestMatch = {
+                    index: match.index,
+                    length: match[0].length,
+                    className: rule.className,
+                    content: match[0],
+                    wrap: rule.wrap
+                };
+            }
+        }
 
-    // f-strings
-    highlighted = highlighted.replace(
-        /(f"[^"]*"|f'[^']*')/g,
-        '<span class="text-amber-200">$1</span>'
-    );
+        if (bestMatch && bestMatch.index === pos) {
+            const content = bestMatch.wrap ? bestMatch.wrap(bestMatch.content) : bestMatch.content;
+            result += `<span class="${bestMatch.className}">${content}</span>`;
+            pos += bestMatch.length;
+        } else {
+            const nextMatchIndex = bestMatch ? bestMatch.index : escapedCode.length;
+            result += escapedCode.slice(pos, nextMatchIndex);
+            pos = nextMatchIndex;
+        }
+    }
 
-    // Keywords
-    const keywords = ['import', 'from', 'def', 'class', 'return', 'if', 'else', 'elif', 'for', 'while', 'try', 'except', 'with', 'as', 'in', 'not', 'and', 'or', 'True', 'False', 'None', 'lambda', 'async', 'await', 'yield', 'raise', 'pass', 'break', 'continue'];
-    keywords.forEach(kw => {
-        const regex = new RegExp(`\\b(${kw})\\b`, 'g');
-        highlighted = highlighted.replace(regex, '<span class="text-pink-400 font-medium">$1</span>');
-    });
-
-    // Built-in functions
-    const builtins = ['print', 'len', 'range', 'str', 'int', 'float', 'list', 'dict', 'set', 'tuple', 'open', 'type', 'isinstance', 'enumerate', 'zip', 'map', 'filter', 'sorted', 'reversed', 'sum', 'min', 'max', 'abs', 'round', 'input', 'format'];
-    builtins.forEach(fn => {
-        const regex = new RegExp(`\\b(${fn})\\s*\\(`, 'g');
-        highlighted = highlighted.replace(regex, '<span class="text-cyan-400">$1</span>(');
-    });
-
-    // Function definitions
-    highlighted = highlighted.replace(
-        /\bdef\s+(\w+)/g,
-        '<span class="text-pink-400 font-medium">def</span> <span class="text-blue-400 font-semibold">$1</span>'
-    );
-
-    // Class definitions
-    highlighted = highlighted.replace(
-        /\bclass\s+(\w+)/g,
-        '<span class="text-pink-400 font-medium">class</span> <span class="text-yellow-400 font-semibold">$1</span>'
-    );
-
-    // Numbers
-    highlighted = highlighted.replace(
-        /\b(\d+\.?\d*)\b/g,
-        '<span class="text-orange-400">$1</span>'
-    );
-
-    // Method calls (after .)
-    highlighted = highlighted.replace(
-        /\.(\w+)\(/g,
-        '.<span class="text-blue-300">$1</span>('
-    );
-
-    // Type hints / annotations
-    highlighted = highlighted.replace(
-        /:\s*(str|int|float|bool|list|dict|tuple|set|None|Any)\b/g,
-        ': <span class="text-teal-400">$1</span>'
-    );
-
-    // Decorators
-    highlighted = highlighted.replace(
-        /(@\w+)/g,
-        '<span class="text-yellow-500">$1</span>'
-    );
-
-    return highlighted;
+    return result;
 }
 
-// Generic syntax highlighting for JavaScript/TypeScript
+function highlightPython(code: string): string {
+    const rules = [
+        { regex: /#[^\n]*/g, className: "text-emerald-400 italic" },
+        { regex: /"""[\s\S]*?"""|'''[\s\S]*?'''/g, className: "text-amber-300" },
+        { regex: /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'/g, className: "text-amber-300" },
+        { regex: /\b(import|from|def|class|return|if|else|elif|for|while|try|except|with|as|in|not|and|or|True|False|None|lambda|async|await|yield|raise|pass|break|continue)\b/g, className: "text-pink-400 font-medium" },
+        {
+            regex: /\b(print|len|range|str|int|float|list|dict|set|tuple|open|type|isinstance|enumerate|zip|map|filter|sorted|reversed|sum|min|max|abs|round|input|format|hash|append)(?=\s*\()/g,
+            className: "text-cyan-400"
+        },
+        { regex: /(?<=def\s+)\w+/g, className: "text-blue-400 font-semibold" },
+        { regex: /(?<=class\s+)\w+/g, className: "text-yellow-400 font-semibold" },
+        { regex: /@\w+/g, className: "text-yellow-500" },
+        { regex: /\b\d+\.?\d*\b/g, className: "text-orange-400" },
+        { regex: /(?<=:\s*)(str|int|float|bool|list|dict|tuple|set|None|Any)\b/g, className: "text-teal-400" }
+    ];
+    return highlightTokens(code, rules);
+}
+
 function highlightJS(code: string): string {
-    let highlighted = code;
-
-    // Escape HTML
-    highlighted = highlighted
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
-
-    // Comments
-    highlighted = highlighted.replace(
-        /(\/\/[^\n]*)/g,
-        '<span class="text-emerald-400 italic">$1</span>'
-    );
-
-    // Strings
-    highlighted = highlighted.replace(
-        /("[^"\\]*(?:\\.[^"\\]*)*"|'[^'\\]*(?:\\.[^'\\]*)*'|`[^`\\]*(?:\\.[^`\\]*)*`)/g,
-        '<span class="text-amber-300">$1</span>'
-    );
-
-    // Keywords
-    const keywords = ['const', 'let', 'var', 'function', 'return', 'if', 'else', 'for', 'while', 'try', 'catch', 'throw', 'new', 'class', 'extends', 'import', 'export', 'from', 'default', 'async', 'await', 'typeof', 'instanceof', 'true', 'false', 'null', 'undefined', 'this', 'super'];
-    keywords.forEach(kw => {
-        const regex = new RegExp(`\\b(${kw})\\b`, 'g');
-        highlighted = highlighted.replace(regex, '<span class="text-pink-400 font-medium">$1</span>');
-    });
-
-    // Numbers
-    highlighted = highlighted.replace(
-        /\b(\d+\.?\d*)\b/g,
-        '<span class="text-orange-400">$1</span>'
-    );
-
-    // Arrow functions
-    highlighted = highlighted.replace(
-        /(=&gt;)/g,
-        '<span class="text-pink-400">=&gt;</span>'
-    );
-
-    return highlighted;
+    const rules = [
+        { regex: /\/\/[^\n]*/g, className: "text-emerald-400 italic" },
+        { regex: /\/\*[\s\S]*?\*\//g, className: "text-emerald-400 italic" },
+        { regex: /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`/g, className: "text-amber-300" },
+        { regex: /\b(const|let|var|function|return|if|else|for|while|try|catch|throw|new|class|extends|import|export|from|default|async|await|typeof|instanceof|true|false|null|undefined|this|super)\b/g, className: "text-pink-400 font-medium" },
+        { regex: /\b\d+\.?\d*\b/g, className: "text-orange-400" },
+        { regex: /=>/g, className: "text-pink-400" }
+    ];
+    return highlightTokens(code, rules);
 }
 
 function highlightCode(code: string, language: string): string {
-    switch (language.toLowerCase()) {
-        case 'python':
-        case 'py':
-            return highlightPython(code);
-        case 'javascript':
-        case 'js':
-        case 'typescript':
-        case 'ts':
-        case 'jsx':
-        case 'tsx':
-            return highlightJS(code);
-        default:
-            return code.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    }
+    const lang = language.toLowerCase();
+    if (lang === 'python' || lang === 'py') return highlightPython(code);
+    if (['javascript', 'js', 'typescript', 'ts', 'jsx', 'tsx'].includes(lang)) return highlightJS(code);
+    return code.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
 export function CodeBlock({
@@ -172,97 +103,111 @@ export function CodeBlock({
     const [copied, setCopied] = useState(false);
 
     const handleCopy = async () => {
-        await navigator.clipboard.writeText(code);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
+        try {
+            await navigator.clipboard.writeText(code);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch {
+            const textarea = document.createElement("textarea");
+            textarea.value = code;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        }
     };
 
-    const lines = code.split('\n');
-    const highlightedCode = highlightCode(code, language);
+    const highlightedFull = highlightCode(code, language);
+    const highlightedLines = highlightedFull.split('\n');
+    const rawLines = code.split('\n');
 
     return (
-        <div className={cn("relative group rounded-2xl overflow-hidden border border-white/10 bg-[#0d1117] shadow-2xl min-w-0", className)}>
-            {/* Header Bar - IDE Style */}
-            <div className="flex items-center justify-between px-3 sm:px-4 py-2 sm:py-3 bg-[#161b22] border-b border-white/10">
-                <div className="flex items-center gap-2 sm:gap-3 min-w-0 overflow-hidden">
-                    {/* Traffic Lights */}
+        <div
+            className={cn("relative group rounded-xl sm:rounded-2xl overflow-hidden border border-white/10 bg-[#0d1117] shadow-3xl w-full", className)}
+            suppressHydrationWarning
+        >
+            {/* Header Bar */}
+            <div className="flex items-center justify-between px-3 sm:px-4 py-2 sm:py-3 bg-[#161b22] border-b border-white/10 gap-2">
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0 overflow-hidden flex-1">
                     <div className="flex items-center gap-1 sm:gap-1.5 flex-shrink-0">
-                        <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500/80" />
-                        <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500/80" />
-                        <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500/80" />
+                        <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-red-500/80" />
+                        <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-yellow-500/80" />
+                        <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-green-500/80" />
                     </div>
 
-                    {/* Filename Tab - hidden on mobile */}
                     {filename && (
-                        <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-md bg-[#0d1117] border border-white/10">
-                            <Code2 className="w-3.5 h-3.5 text-blue-400" />
-                            <span className="text-xs font-mono text-zinc-400">{filename}</span>
+                        <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-md bg-[#0d1117] border border-white/10 min-w-0 overflow-hidden">
+                            <Code2 className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" />
+                            <span className="text-[10px] font-mono text-zinc-400 truncate tracking-tight">{filename}</span>
                         </div>
                     )}
 
-                    {/* Language Badge */}
-                    <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/20 flex-shrink-0">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-blue-400">{language}</span>
+                    <div className="flex items-center gap-1.5 px-1.5 sm:px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/20 flex-shrink-0">
+                        <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-blue-400">{language}</span>
                     </div>
                 </div>
 
-                {/* Copy Button */}
                 <button
                     onClick={handleCopy}
-                    className="flex items-center gap-1.5 px-2 sm:px-2.5 py-1 rounded-md bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-xs font-medium text-zinc-400 hover:text-white flex-shrink-0"
+                    aria-label={copied ? "Copied!" : "Copy code"}
+                    className="flex items-center gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-[10px] sm:text-xs font-medium text-zinc-400 hover:text-white flex-shrink-0 cursor-pointer"
                 >
                     {copied ? (
                         <>
-                            <Check className="w-3.5 h-3.5 text-green-400" />
-                            <span className="hidden sm:inline text-green-400">Copied!</span>
+                            <Check className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-green-400" />
+                            <span className="text-green-400">Copied</span>
                         </>
                     ) : (
                         <>
-                            <Copy className="w-3.5 h-3.5" />
-                            <span className="hidden sm:inline">Copy</span>
+                            <Copy className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
+                            <span>Copy</span>
                         </>
                     )}
                 </button>
             </div>
 
-            {/* Code Content */}
-            <div className="overflow-x-auto">
-                <pre className="p-3 sm:p-4 text-xs sm:text-sm font-mono leading-relaxed">
-                    <code>
-                        {showLineNumbers ? (
-                            <table className="w-full border-collapse">
-                                <tbody>
-                                    {lines.map((line, i) => (
-                                        <tr key={i} className="hover:bg-white/[0.03] transition-colors">
-                                            <td className="pr-3 sm:pr-4 pl-1 sm:pl-2 text-right text-zinc-600 select-none border-r border-white/5 w-[1%] whitespace-nowrap text-[10px] sm:text-sm">
-                                                {i + 1}
-                                            </td>
-                                            <td className="pl-3 sm:pl-4 text-zinc-300 whitespace-pre">
-                                                <span dangerouslySetInnerHTML={{ __html: highlightCode(line, language) }} />
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        ) : (
-                            <span className="text-zinc-300" dangerouslySetInnerHTML={{ __html: highlightedCode }} />
-                        )}
-                    </code>
-                </pre>
+            {/* Code Content - Container Div (Removed <pre> to avoid invalid <table> nesting) */}
+            <div className="w-full relative bg-[#0d1117]">
+                {showLineNumbers ? (
+                    <div className="overflow-x-auto w-full">
+                        <table className="w-full border-collapse table-auto border-spacing-0 font-mono text-[11px] sm:text-[13px] leading-6 sm:leading-7">
+                            <tbody>
+                                {rawLines.map((_, i) => (
+                                    <tr key={i} className="group/line hover:bg-white/[0.04] transition-colors">
+                                        <td
+                                            className="w-[3rem] sm:w-[4rem] min-w-[3rem] sm:min-w-[4rem] py-0 pr-3 sm:pr-4 text-right text-zinc-600 select-none border-r border-white/5 text-[9px] sm:text-[11px] align-top bg-[#0d1117] group-hover/line:text-zinc-400 transition-colors"
+                                        >
+                                            {i + 1}
+                                        </td>
+                                        <td className="py-0 pl-3 sm:pl-5 text-zinc-300 whitespace-pre-wrap break-normal align-top leading-6 sm:leading-7">
+                                            <span dangerouslySetInnerHTML={{ __html: highlightedLines[i] ?? '' }} />
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                ) : (
+                    <div className="p-4 whitespace-pre-wrap break-normal text-zinc-300 font-mono text-[11px] sm:text-[13px] leading-6 sm:leading-7">
+                        <span dangerouslySetInnerHTML={{ __html: highlightedFull }} />
+                    </div>
+                )}
             </div>
 
-            {/* Terminal Output Section */}
+            {/* Terminal Output */}
             {output && (
                 <div className="border-t border-white/10">
-                    <div className="flex items-center gap-2 px-4 py-2 bg-[#1c2128] border-b border-white/5">
-                        <Terminal className="w-4 h-4 text-emerald-400" />
-                        <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">Output</span>
+                    <div className="flex items-center gap-2 px-4 py-1.5 sm:py-2 bg-[#1c2128] border-b border-white/5">
+                        <Terminal className="w-3.5 h-3.5 text-emerald-400" />
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-400">Terminal Output</span>
                         <Play className="w-3 h-3 text-emerald-400 ml-auto animate-pulse" />
                     </div>
-                    <div className="p-4 bg-[#0a0e14] font-mono text-sm">
+                    <div className="p-3 sm:p-4 bg-[#0a0e14] font-mono text-xs sm:text-sm">
                         <div className="flex items-start gap-2">
-                            <ChevronRight className="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" />
-                            <pre className="text-emerald-300 whitespace-pre-wrap leading-relaxed">{output}</pre>
+                            <ChevronRight className="w-3.5 h-3.5 text-emerald-500 mt-0.5 flex-shrink-0" />
+                            <pre className="text-emerald-300 whitespace-pre-wrap leading-relaxed m-0">{output}</pre>
                         </div>
                     </div>
                 </div>

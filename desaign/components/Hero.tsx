@@ -1,92 +1,80 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 export function Hero() {
   return (
-    <section className="relative w-full min-h-screen flex flex-col items-center justify-center pt-32 pb-20 px-4 overflow-hidden">
-      {/* Central Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold-base/10 rounded-full blur-[100px] pointer-events-none" />
+    <section className="relative w-full min-h-screen overflow-hidden" style={{ backgroundColor: "#21346e" }}>
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+        poster=""
+      >
+        <source
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260206_044704_dd33cb15-c23f-4cfc-aa09-a0465d4dcb54.mp4"
+          type="video/mp4"
+        />
+      </video>
 
-      {/* Neural connection lines: center (50,50) to satellites — SVG path d does NOT support %, use viewBox coords */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id="gradient-line" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="10%" stopColor="#a78b71" />
-            <stop offset="90%" stopColor="#c9b8a0" />
-          </linearGradient>
-        </defs>
-        {/* Solid: center to right satellite ~(78,36) */}
-        <path d="M 50 50 Q 70 38 78 36" stroke="url(#gradient-line)" className="node-line animate-pulsing-branch" />
-        {/* Solid: center to left satellite ~(22,66) */}
-        <path d="M 50 50 Q 30 62 22 66" stroke="url(#gradient-line)" className="node-line animate-pulsing-branch" style={{ animationDelay: "0.5s" }} />
-        {/* Solid: center to top ~(50,22) */}
-        <path d="M 50 50 Q 50 32 50 22" stroke="url(#gradient-line)" className="node-line animate-pulsing-branch" style={{ animationDelay: "1s" }} />
-        {/* Dashed flow lines */}
-        <path d="M 50 50 Q 65 42 75 38" stroke="#c9b8a0" strokeWidth="1.5" strokeDasharray="5 15" fill="none" opacity={0.35} className="animate-pulsing-branch" style={{ animationDelay: "0.3s" }} />
-        <path d="M 50 50 Q 32 58 22 66" stroke="#a78b71" strokeWidth="1.5" strokeDasharray="5 15" fill="none" opacity={0.35} className="animate-pulsing-branch" style={{ animationDelay: "0.8s" }} />
-      </svg>
-
-      <div className="relative z-10 max-w-5xl mx-auto text-center">
-        <motion.div
-            initial={{ opacity: 0, y: 30 }}
+      {/* Content Container */}
+      <div className="relative z-10 w-full min-h-screen px-4 sm:px-6 lg:px-8 xl:px-12 pt-32 md:pt-48">
+        <div className="max-w-7xl mx-auto">
+          {/* Main Headline */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-        >
-            <h1 className="font-playfair italic font-medium leading-[1.1] text-foreground mb-8" style={{ fontSize: "clamp(2.5rem, 8vw, 6rem)" }}>
-                The future of <br/>
-                <span className="text-gold-base">your des(ai)gn</span>
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <h1
+              className="font-rubik font-bold uppercase text-white leading-[0.98] tracking-[-2px] md:tracking-[-4px]"
+              style={{
+                fontSize: "clamp(3.75rem, 10vw, 100px)",
+                fontFamily: "var(--font-rubik), sans-serif",
+              }}
+            >
+              <span className="block">NEW ERA</span>
+              <span className="block">OF DESIGN</span>
+              <span className="block">STARTS NOW</span>
             </h1>
-        </motion.div>
-
-        <motion.div
-             initial={{ opacity: 0, y: 20 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
-        >
-            <button className="px-8 py-4 bg-white text-black rounded-full font-inter font-medium text-sm hover:bg-gold-light transition-colors w-full sm:w-auto">
-                Get Started
-            </button>
-            <button className="px-8 py-4 glass-card border-white/20 text-white rounded-full font-inter font-medium text-sm hover:bg-white/5 transition-colors w-full sm:w-auto">
-                View Showreel
-            </button>
-        </motion.div>
-
-        {/* Central Node Card — 16:9, central glow per spec; bg image per spec */}
-        <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="relative w-full aspect-video max-w-4xl mx-auto glass-card border border-white/10 overflow-hidden group shadow-[0_0_100px_rgba(167,139,113,0.2)]"
-        >
-             <Image src="/hero/node-bg.jpg" alt="" fill className="object-cover" sizes="(max-width: 896px) 100vw, 896px" priority />
-             <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-transparent to-transparent z-10" />
-             <div className="absolute inset-0 flex items-center justify-center text-white/20 font-playfair text-4xl italic z-20">Interactive Node</div>
-        </motion.div>
-      </div>
-
-      {/* Satellite cards: section-relative to align with SVG endpoints; 220–260px, rounded-20, grayscale→color hover, scale 1.05, gold shadow on hover */}
-      <div className="absolute inset-0 z-20 pointer-events-none">
-        <div className="absolute left-[76%] top-[36%] -translate-x-1/2 -translate-y-1/2 w-[220px] md:w-[260px] pointer-events-auto hidden md:block">
-          <motion.div
-            className="relative aspect-[4/5] glass-card border border-white/10 rounded-[20px] overflow-hidden grayscale hover:grayscale-0 hover:scale-105 hover:shadow-[0_0_60px_rgba(167,139,113,0.3)] transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]"
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <Image src="/satellites/01.jpg" alt="" fill className="object-cover" sizes="260px" />
-            <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-gold-base/10" />
           </motion.div>
-        </div>
-        <div className="absolute left-[24%] top-[64%] -translate-x-1/2 -translate-y-1/2 w-[220px] md:w-[260px] pointer-events-auto hidden md:block">
+
+          {/* CTA Button */}
           <motion.div
-            className="relative aspect-[4/5] glass-card border border-white/10 rounded-[20px] overflow-hidden grayscale hover:grayscale-0 hover:scale-105 hover:shadow-[0_0_60px_rgba(167,139,113,0.3)] transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]"
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-12"
           >
-            <Image src="/satellites/02.jpg" alt="" fill className="object-cover" sizes="260px" />
-            <div className="absolute inset-0 bg-gradient-to-tl from-white/5 via-transparent to-gold-base/10" />
+            <button
+              className="relative w-[184px] h-[65px] flex items-center justify-center transition-transform duration-200 hover:scale-105 active:scale-95"
+              style={{
+                fontFamily: "var(--font-rubik), sans-serif",
+              }}
+            >
+              {/* SVG Background Shape */}
+              <svg
+                className="absolute inset-0 w-full h-full"
+                viewBox="0 0 184 65"
+                fill="none"
+                preserveAspectRatio="none"
+              >
+                <path
+                  d="M10 0H174C179.523 0 184 4.47715 184 10V55C184 60.5228 179.523 65 174 65H10C4.47715 65 0 60.5228 0 55V10C0 4.47715 4.47715 0 10 0Z"
+                  fill="white"
+                />
+              </svg>
+              {/* Button Text */}
+              <span
+                className="relative z-10 font-bold uppercase text-[20px]"
+                style={{ color: "#161a20" }}
+              >
+                GET STARTED
+              </span>
+            </button>
           </motion.div>
         </div>
       </div>

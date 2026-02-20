@@ -1,0 +1,8 @@
+{
+  "generateCodeAndExecute": {
+    "workingDirectory": "/Users/jovecreative/myportfolio2026/desaign",
+    "testCommand": "npm run build",
+    "framework": "nextjs",
+    "url": "http://localhost:3000"
+  }
+}

@@ -83,7 +83,7 @@ export default function RootLayout({
                 <FullPageLoadingProvider>
                   <FramerMotionProvider>
                     <RouteChangeHandler />
-                    <div className="flex min-h-screen flex-col">
+                    <div className="flex min-h-screen flex-col" suppressHydrationWarning>
                       <main className="flex-1">{children}</main>
                       <Footer />
                       <FloatingConsultButtonPortal imageSrc="/lib/image.jpeg" />

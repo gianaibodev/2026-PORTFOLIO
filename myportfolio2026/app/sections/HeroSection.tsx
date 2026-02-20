@@ -32,7 +32,7 @@ export function HeroSection() {
     const { copyMode, toggleCopyMode } = useCopyMode();
 
     return (
-        <div id="home" className="w-full min-h-screen relative overflow-visible">
+        <div id="home" className="w-full min-h-screen relative overflow-visible" suppressHydrationWarning>
             {/* ErrorBoundary should be at page level or section level. I'll omit local EB for clarity unless requested */}
             <Deferred delay={0}>
                 <SyntheticHero
