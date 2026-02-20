@@ -25,6 +25,9 @@ export const createx: CaseStudy = {
         "/legacy/assets/demopic/CreateX Logo.png",
     ],
     deliverables: ["Film camp posters", "Conference brochures", "Social media assets"],
+    links: [
+        { label: "View on Behance", href: "https://www.behance.net/gallery/230911765/CREATEX-ARTIST-HUB" }
+    ],
     sections: [
         {
             title: "The Design Wand",

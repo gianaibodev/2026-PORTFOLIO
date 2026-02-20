@@ -25,6 +25,9 @@ export const pizzaporia: CaseStudy = {
         "/legacy/assets/demopic/7.jpg",
     ],
     deliverables: ["UX Audit", "UI Redesign", "Interactive Prototype", "Visual Harmony System"],
+    links: [
+        { label: "View on Behance", href: "https://www.behance.net/gallery/230722305/PIZZAPORIA-UI-UX-DESIGN" }
+    ],
     sections: [
         {
             title: "The Challenge",

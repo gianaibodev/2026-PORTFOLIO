@@ -9,6 +9,7 @@ import { StyledIframe } from "@/components/ui/styled-iframe";
 import { shaderCredits, libraryCredits } from "@/content/portfolio-documentation";
 import { CodeBlock } from "@/components/ui/code-block";
 import { parseCodeBlocks } from "@/lib/parse-code-blocks";
+import { cn } from "@/lib/utils";
 
 export const dynamic = 'force-static';
 export const revalidate = 3600;
@@ -132,22 +133,60 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                   ))}
                 </ul>
                 {study.links?.length ? (
-                  <div className="flex flex-wrap gap-2 sm:gap-4 pt-4 sm:pt-6">
-                    {study.links.map((link) => (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="group relative inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 overflow-hidden"
-                      >
-                        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                        <span className="relative z-10 text-sm sm:text-base text-white font-bold tracking-wide uppercase">
-                          {link.label}
-                        </span>
-                        <ExternalLink className="relative z-10 w-4 h-4 sm:w-5 sm:h-5 text-blue-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                      </Link>
-                    ))}
+                  <div className="pt-8 sm:pt-12 space-y-4">
+                    <div className="flex items-center gap-3 text-muted-foreground mb-2">
+                      <div className="h-px flex-1 bg-white/10" />
+                      <span className="text-[10px] uppercase tracking-[0.2em] font-bold">Project Expansion</span>
+                      <div className="h-px flex-1 bg-white/10" />
+                    </div>
+
+                    <div className="grid gap-4">
+                      {study.links.map((link) => {
+                        const isBehance = link.href.includes("behance.net");
+                        return (
+                          <Link
+                            key={link.href}
+                            href={link.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            className={cn(
+                              "group relative flex items-center justify-between px-6 py-5 rounded-3xl transition-all duration-500 overflow-hidden border",
+                              isBehance
+                                ? "bg-blue-600/10 border-blue-500/30 hover:bg-blue-600/20 hover:border-blue-500/50"
+                                : "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20"
+                            )}
+                          >
+                            {/* Animated Background Glow */}
+                            <div className={cn(
+                              "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700",
+                              isBehance
+                                ? "bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/20 via-transparent to-transparent"
+                                : "bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/10 via-transparent to-transparent"
+                            )} />
+
+                            <div className="relative z-10 flex flex-col gap-1">
+                              <span className="text-xs font-bold text-blue-400 uppercase tracking-widest opacity-80 group-hover:opacity-100 transition-opacity">
+                                {isBehance ? "Full Showcase Available" : "External Resource"}
+                              </span>
+                              <span className="text-lg sm:text-xl font-bold text-white tracking-tight">
+                                {link.label}
+                              </span>
+                            </div>
+
+                            <div className="relative z-10 flex items-center justify-center w-12 h-12 rounded-2xl bg-white/10 border border-white/10 group-hover:scale-110 group-hover:bg-blue-500 group-hover:border-blue-400 transition-all duration-500">
+                              <ExternalLink className="w-5 h-5 text-white group-hover:rotate-12 transition-transform" />
+                            </div>
+
+                            {/* Decorative element */}
+                            <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-blue-500/5 rounded-full blur-2xl group-hover:bg-blue-500/10 transition-colors" />
+                          </Link>
+                        );
+                      })}
+                    </div>
+
+                    <p className="text-center text-[11px] text-muted-foreground/60 italic">
+                      Highly recommended to view the Behance link for higher resolution assets and full process documentation.
+                    </p>
                   </div>
                 ) : null}
               </div>

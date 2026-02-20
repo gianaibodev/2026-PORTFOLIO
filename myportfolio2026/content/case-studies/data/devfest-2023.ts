@@ -30,6 +30,9 @@ export const devfest2023: CaseStudy = {
         "Fireside Chat Insights",
         "Community Engagement Strategy",
     ],
+    links: [
+        { label: "View on Behance", href: "https://www.behance.net/gallery/230999557/DEVFEST-2023" }
+    ],
     sections: [
         {
             title: "Tech Takeover",
