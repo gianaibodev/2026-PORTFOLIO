@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useTransition } from 'react';
 import {
   Battery,
   Wifi,
@@ -18,6 +18,7 @@ import {
 import Link from 'next/link';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { useCopyMode } from '@/components/copy-mode-provider';
+import { usePerformance } from '@/components/performance-provider';
 import { AnimatePresence, m } from 'framer-motion';
 
 // Types
@@ -68,6 +69,7 @@ interface MenuDropdownProps {
   position: { x: number; y: number };
   onAction?: (action: string) => void;
   isMobile?: boolean;
+  performanceMode?: boolean;
 }
 
 const MenuDropdown: React.FC<MenuDropdownProps> = ({
@@ -76,7 +78,8 @@ const MenuDropdown: React.FC<MenuDropdownProps> = ({
   items,
   position,
   onAction,
-  isMobile
+  isMobile,
+  performanceMode
 }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -98,10 +101,12 @@ const MenuDropdown: React.FC<MenuDropdownProps> = ({
 
   if (!isOpen) return null;
 
+  const blurClass = performanceMode ? "backdrop-blur-md" : "backdrop-blur-3xl";
+
   return (
     <div
       ref={dropdownRef}
-      className={`absolute backdrop-blur-3xl z-[100] animate-menuFadeIn bg-white/70 dark:bg-black/40 border border-zinc-400 dark:border-white/10 shadow-2xl ${isMobile ? "fixed inset-x-4 top-16 mx-auto w-auto" : ""}`}
+      className={`absolute ${blurClass} z-[100] animate-menuFadeIn bg-white/70 dark:bg-black/40 border border-zinc-400 dark:border-white/10 shadow-2xl ${isMobile ? "fixed inset-x-4 top-16 mx-auto w-auto" : ""}`}
       style={!isMobile ? {
         left: `${position.x}px`,
         top: `${position.y}px`,
@@ -252,15 +257,29 @@ const MacOSMenuBar: React.FC<MacOSMenuBarProps> = ({
   className = ''
 }) => {
   const { copyMode, toggleCopyMode } = useCopyMode();
+  const { performanceMode } = usePerformance();
+  const [isPending, startTransition] = useTransition();
   const [currentTime, setCurrentTime] = useState('—');
   const [isMobile, setIsMobile] = useState(false);
-  const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [activeMenu, setActiveMenuState] = useState<string | null>(null);
   const [dropdownPosition, setDropdownPosition] = useState({ x: 0, y: 0 });
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpenState] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const appleLogoRef = useRef<HTMLDivElement>(null);
   const menuRefs = useRef<{ [key: string]: HTMLSpanElement | null }>({});
+
+  const setActiveMenu = useCallback((menu: string | null) => {
+    startTransition(() => {
+      setActiveMenuState(menu);
+    });
+  }, [startTransition]);
+
+  const setIsMobileMenuOpen = useCallback((open: boolean) => {
+    startTransition(() => {
+      setIsMobileMenuOpenState(open);
+    });
+  }, [startTransition]);
 
   const defaultMenus: MenuConfig[] = [
     {
@@ -345,7 +364,7 @@ const MacOSMenuBar: React.FC<MacOSMenuBarProps> = ({
       }
       setActiveMenu('apple');
     }
-  }, [activeMenu]);
+  }, [activeMenu, setActiveMenu]);
 
   const handleAppleMenuMouseEnter = useCallback(() => {
     if (activeMenu !== null && activeMenu !== 'apple') {
@@ -359,7 +378,7 @@ const MacOSMenuBar: React.FC<MacOSMenuBarProps> = ({
       }
       setActiveMenu('apple');
     }
-  }, [activeMenu]);
+  }, [activeMenu, setActiveMenu]);
 
   const handleMenuItemClick = useCallback((menuLabel: string) => {
     if (activeMenu === menuLabel) {
@@ -376,7 +395,7 @@ const MacOSMenuBar: React.FC<MacOSMenuBarProps> = ({
         setActiveMenu(menuLabel);
       }
     }
-  }, [activeMenu]);
+  }, [activeMenu, setActiveMenu]);
 
   const handleMenuItemMouseEnter = useCallback((menuLabel: string) => {
     if (activeMenu !== null && activeMenu !== menuLabel) {
@@ -391,11 +410,11 @@ const MacOSMenuBar: React.FC<MacOSMenuBarProps> = ({
         setActiveMenu(menuLabel);
       }
     }
-  }, [activeMenu]);
+  }, [activeMenu, setActiveMenu]);
 
   const closeDropdown = useCallback(() => {
     setActiveMenu(null);
-  }, []);
+  }, [setActiveMenu]);
 
   const handleMenuAction = useCallback((action: string) => {
     if (action === 'fullscreen') {
@@ -414,7 +433,7 @@ const MacOSMenuBar: React.FC<MacOSMenuBarProps> = ({
       className="fixed top-2 sm:top-4 left-1/2 -translate-x-1/2 w-[calc(100%-1rem)] sm:w-[calc(100%-2rem)] max-w-7xl z-[100] pt-[env(safe-area-inset-top,0px)]"
     >
       <div
-        className={`backdrop-blur-3xl transition-all duration-300 border shadow-lg ${className} bg-white/70 dark:bg-black/30 border-zinc-200 dark:border-white/10 saturate-150`}
+        className={`backdrop-blur-3xl transition-all duration-300 border shadow-lg ${className} bg-white/70 dark:bg-black/30 border-zinc-200 dark:border-white/10 saturate-150 ${isPending ? 'opacity-90' : 'opacity-100'}`}
         style={{
           height: "40px",
           borderRadius: "14px",
@@ -516,7 +535,7 @@ const MacOSMenuBar: React.FC<MacOSMenuBarProps> = ({
             className="md:hidden absolute top-12 left-0 right-0 p-3 z-[90]"
           >
             {/* Blur layer - appears instantly */}
-            <div className="absolute inset-0 m-3 backdrop-blur-3xl saturate-[180%] bg-white/75 dark:bg-[#1c1c1e]/80 border border-zinc-400 dark:border-white/10 rounded-[24px] shadow-2xl" />
+            <div className={`absolute inset-0 m-3 ${performanceMode ? "backdrop-blur-md" : "backdrop-blur-3xl"} saturate-[180%] bg-white/75 dark:bg-[#1c1c1e]/80 border border-zinc-400 dark:border-white/10 rounded-[24px] shadow-2xl`} />
 
             {/* Content layer - animates in */}
             <m.div
@@ -572,6 +591,7 @@ const MacOSMenuBar: React.FC<MacOSMenuBarProps> = ({
         position={dropdownPosition}
         onAction={handleMenuAction}
         isMobile={isMobile}
+        performanceMode={performanceMode}
       />
 
       {/* Menu Dropdowns */}
@@ -584,6 +604,7 @@ const MacOSMenuBar: React.FC<MacOSMenuBarProps> = ({
           position={dropdownPosition}
           onAction={handleMenuAction}
           isMobile={isMobile}
+          performanceMode={performanceMode}
         />
       ))}
     </div>
