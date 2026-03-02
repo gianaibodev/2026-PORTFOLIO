@@ -21,15 +21,6 @@ const libraries = [
   { name: "tw-animate-css", href: "https://github.com/jhukdev/tw-animate-css", desc: "Animations" },
 ];
 
-// Add artists, designers, collaborators here — replace or add entries: { name, role, href (or null) }
-const artistsAndDesigners: { name: string; role: string; href: string | null }[] = [
-  { name: "—", role: "Add artists & designers you’ve collaborated with", href: null },
-];
-
-const developersAndCollaborators: { name: string; role: string; href: string | null }[] = [
-  { name: "—", role: "Add developers & collaborators", href: null },
-];
-
 function CreditCard({
   name,
   href,
@@ -106,12 +97,53 @@ export default function CreditsPage() {
       />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 pb-24 pt-4 sm:pt-8 space-y-16">
-        {/* Attributes coming soon */}
-        <section className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Attributes Coming Soon</h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            A proper credits and attribution update is in progress. All sources, collaborators, and assets will be properly documented here.
+        {/* Libraries & components */}
+        <section>
+          <h2 className="flex items-center gap-3 text-xl font-bold mb-6">
+            <Code2 className="w-5 h-5 text-blue-500" />
+            Libraries & components
+          </h2>
+          <p className="text-muted-foreground text-sm mb-6 max-w-2xl">
+            Open-source projects and templates used to build this site.
           </p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {libraries.map((lib) => (
+              <CreditCard key={lib.name} name={lib.name} href={lib.href} desc={lib.desc} icon={Code2} />
+            ))}
+          </div>
+        </section>
+
+        {/* Role-based attributions */}
+        <section>
+          <h2 className="flex items-center gap-3 text-xl font-bold mb-6">
+            <Palette className="w-5 h-5 text-violet-500" />
+            Contributor attributions
+          </h2>
+          <p className="text-muted-foreground text-sm mb-6 max-w-2xl">
+            Role-based attributions are being finalized and will be published soon.
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <PersonCard
+              name="Ideator / Strategist"
+              role="Attribution coming soon"
+              href={null}
+            />
+            <PersonCard
+              name="Designer / Developer"
+              role="Attribution coming soon"
+              href={null}
+            />
+            <PersonCard
+              name="Illustrator / Visual Artist"
+              role="Attribution coming soon"
+              href={null}
+            />
+            <PersonCard
+              name="Contributors / Collaborators"
+              role="Attribution coming soon"
+              href={null}
+            />
+          </div>
         </section>
 
         <div className="pt-8 border-t border-zinc-200 dark:border-white/10">
