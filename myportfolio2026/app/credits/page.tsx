@@ -106,59 +106,15 @@ export default function CreditsPage() {
       />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 pb-24 pt-4 sm:pt-8 space-y-16">
-        {/* Libraries & components */}
-        <section>
-          <h2 className="flex items-center gap-3 text-xl font-bold mb-6">
-            <Code2 className="w-5 h-5 text-blue-500" />
-            Libraries & components
-          </h2>
-          <p className="text-muted-foreground text-sm mb-6 max-w-2xl">
-            Open-source projects and tools used to build this site. Thank you to the maintainers and communities.
+        {/* Attributes coming soon */}
+        <section className="text-center">
+          <h2 className="text-2xl font-bold mb-4">Attributes Coming Soon</h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            A proper credits and attribution update is in progress. All sources, collaborators, and assets will be properly documented here.
           </p>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {libraries.map((lib) => (
-              <CreditCard key={lib.name} name={lib.name} href={lib.href} desc={lib.desc} icon={Code2} />
-            ))}
-          </div>
-        </section>
-
-        {/* Artists & designers */}
-        <section>
-          <h2 className="flex items-center gap-3 text-xl font-bold mb-6">
-            <Palette className="w-5 h-5 text-violet-500" />
-            Artists & designers
-          </h2>
-          <p className="text-muted-foreground text-sm mb-6 max-w-2xl">
-            Designers and visual artists I’ve collaborated with on projects, assets, or inspiration.
-          </p>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {artistsAndDesigners.map((a, i) => (
-              <PersonCard key={i} name={a.name} role={a.role} href={a.href} />
-            ))}
-          </div>
-        </section>
-
-        {/* Developers & collaborators */}
-        <section>
-          <h2 className="flex items-center gap-3 text-xl font-bold mb-6">
-            <Users className="w-5 h-5 text-pink-500" />
-            Developers & collaborators
-          </h2>
-          <p className="text-muted-foreground text-sm mb-6 max-w-2xl">
-            Developers, mentors, and collaborators who helped shape this work.
-          </p>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {developersAndCollaborators.map((d, i) => (
-              <PersonCard key={i} name={d.name} role={d.role} href={d.href} />
-            ))}
-          </div>
         </section>
 
         <div className="pt-8 border-t border-zinc-200 dark:border-white/10">
-          <p className="text-sm text-muted-foreground">
-            To add or update credits, edit{" "}
-            <code className="px-1.5 py-0.5 rounded bg-zinc-200 dark:bg-white/10 text-xs">app/credits/page.tsx</code> — sections: <code className="px-1.5 py-0.5 rounded bg-zinc-200 dark:bg-white/10 text-xs">artistsAndDesigners</code> and <code className="px-1.5 py-0.5 rounded bg-zinc-200 dark:bg-white/10 text-xs">developersAndCollaborators</code>.
-          </p>
           <Link
             href="/"
             className="inline-flex items-center gap-2 mt-6 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
