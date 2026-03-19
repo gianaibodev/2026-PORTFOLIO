@@ -298,8 +298,6 @@
 /* Fixed elements: GPU acceleration only where needed */
 .fixed,
 [style*="position: fixed"] {
-  transform: translate3d(0, 0, 0);
-  -webkit-transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
@@ -432,7 +430,6 @@ canvas.interactive {
 [class*="backdrop-blur"] {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
 }
 
 /* Scroll animations */

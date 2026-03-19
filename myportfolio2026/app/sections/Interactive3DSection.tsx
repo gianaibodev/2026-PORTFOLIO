@@ -2,9 +2,9 @@
 
 import dynamic from "next/dynamic";
 import { m } from "framer-motion";
-import { Deferred } from "@/components/deferred";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { useCopyMode } from "@/components/copy-mode-provider"; // Valid assuming provider is accessible
+import { LazyMount } from "@/components/lazy-mount";
 
 const SplineSceneBasic = dynamic(
     () => import("@/components/demos/spline-scene-demo").then((mod) => ({ default: mod.SplineSceneBasic })),
@@ -52,9 +52,12 @@ export function Interactive3DSection({ variants, itemVariants }: { variants: any
 
                 <m.div variants={itemVariants} className="rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-muted/5">
                     <ErrorBoundary fallback={<div className="h-[400px] bg-muted" />}>
-                        <Deferred delay={200}>
+                        <LazyMount
+                            rootMargin="300px"
+                            placeholder={<div className="w-full h-[500px] bg-muted/10 rounded-lg" />}
+                        >
                             <SplineSceneBasic />
-                        </Deferred>
+                        </LazyMount>
                     </ErrorBoundary>
                 </m.div>
             </m.div>

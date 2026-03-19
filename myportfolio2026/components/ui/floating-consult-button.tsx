@@ -5,6 +5,7 @@ import { m, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 import { useFullPageLoading } from "@/components/full-page-loading-context";
+import Image from "next/image";
 
 interface FloatingConsultButtonProps {
   buttonSize?: number;
@@ -42,6 +43,7 @@ export const FloatingConsultButton = ({
 }: FloatingConsultButtonProps) => {
   const { isActive } = useFullPageLoading();
   const [isOpen, setIsOpen] = useState(false);
+  const [imageFailed, setImageFailed] = useState(false);
 
   if (isActive) return null;
 
@@ -165,18 +167,20 @@ export const FloatingConsultButton = ({
                 height: `${smImageSize}px`,
               }}
             >
-              <img
-                src={imageSrc}
-                alt={imageAlt}
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                  const parent = e.currentTarget.parentElement;
-                  if (parent) {
-                    parent.innerHTML = '<div class="w-full h-full bg-gradient-to-br from-red-500 to-orange-500"></div>';
-                  }
-                }}
-              />
+              {imageFailed ? (
+                <div className="w-full h-full bg-gradient-to-br from-red-500 to-orange-500" />
+              ) : (
+                <Image
+                  src={imageSrc}
+                  alt={imageAlt}
+                  width={Math.round(smImageSize)}
+                  height={Math.round(smImageSize)}
+                  sizes="60px"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  onError={() => setImageFailed(true)}
+                />
+              )}
             </div>
           </div>
         </m.div>

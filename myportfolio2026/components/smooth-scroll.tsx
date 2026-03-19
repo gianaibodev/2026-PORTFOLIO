@@ -7,6 +7,8 @@ import { usePathname } from "next/navigation";
 export function SmoothScroll({ children }: { children: ReactNode }) {
     const pathname = usePathname();
     const lenisRef = useRef<Lenis | null>(null);
+    const rafRef = useRef<number | null>(null);
+    const startedRef = useRef(false);
 
     useEffect(() => {
         const isMobile = window.innerWidth < 768;
@@ -27,13 +29,42 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
         // @ts-expect-error - Attach lenis to window for global control
         window.lenis = lenis;
 
-        let animationFrame: number;
-        function raf(time: number) {
-            lenis.raf(time);
-            animationFrame = requestAnimationFrame(raf);
-        }
+        const startRaf = () => {
+            if (startedRef.current) return;
+            startedRef.current = true;
+            const raf = (time: number) => {
+                lenis.raf(time);
+                rafRef.current = requestAnimationFrame(raf);
+            };
+            rafRef.current = requestAnimationFrame(raf);
+        };
 
-        animationFrame = requestAnimationFrame(raf);
+        const stopRaf = () => {
+            if (rafRef.current !== null) {
+                cancelAnimationFrame(rafRef.current);
+                rafRef.current = null;
+            }
+            startedRef.current = false;
+        };
+
+        // Start only after first user interaction to reduce idle CPU.
+        const onFirstIntent = () => {
+            startRaf();
+            window.removeEventListener("wheel", onFirstIntent, { passive: true } as AddEventListenerOptions);
+            window.removeEventListener("touchstart", onFirstIntent, { passive: true } as AddEventListenerOptions);
+            window.removeEventListener("keydown", onFirstIntent as any);
+        };
+
+        window.addEventListener("wheel", onFirstIntent, { passive: true });
+        window.addEventListener("touchstart", onFirstIntent, { passive: true });
+        window.addEventListener("keydown", onFirstIntent as any);
+
+        // Pause RAF when tab is hidden; resume on show (without forcing immediate start if user never interacted).
+        const onVisibility = () => {
+            if (document.hidden) stopRaf();
+            else if (startedRef.current) startRaf();
+        };
+        document.addEventListener("visibilitychange", onVisibility);
 
         // Recalculate scroll dimensions periodically and on resize
         // This ensures the footer is always reachable
@@ -46,18 +77,8 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
         // Also recalculate after images/fonts load
         window.addEventListener('load', resizeHandler);
 
-        // Periodic resize check for dynamic content (every 2 seconds for first 10 seconds)
-        let resizeChecks = 0;
-        const resizeInterval = setInterval(() => {
-            lenis.resize();
-            resizeChecks++;
-            if (resizeChecks >= 5) {
-                clearInterval(resizeInterval);
-            }
-        }, 2000);
-
         return () => {
-            cancelAnimationFrame(animationFrame);
+            stopRaf();
             lenis.stop();
             // @ts-expect-error - Cleanup
             window.lenis = null;
@@ -65,7 +86,10 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
             lenisRef.current = null;
             window.removeEventListener('resize', resizeHandler);
             window.removeEventListener('load', resizeHandler);
-            clearInterval(resizeInterval);
+            window.removeEventListener("wheel", onFirstIntent as any);
+            window.removeEventListener("touchstart", onFirstIntent as any);
+            window.removeEventListener("keydown", onFirstIntent as any);
+            document.removeEventListener("visibilitychange", onVisibility);
         };
     }, []);
 
