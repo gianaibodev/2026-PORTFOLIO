@@ -8,12 +8,19 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     const pathname = usePathname();
     const lenisRef = useRef<Lenis | null>(null);
     const rafRef = useRef<number | null>(null);
-    const startedRef = useRef(false);
 
     useEffect(() => {
         const isMobile = window.innerWidth < 768;
+
+        // Skip Lenis entirely on low-end/reduced-motion — native scroll is faster.
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const deviceMemory = (navigator as { deviceMemory?: number }).deviceMemory;
+        const isLowMemory = deviceMemory !== undefined && deviceMemory < 2;
+        const isLowCPU = navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency < 4;
+        if (prefersReducedMotion || isLowMemory || isLowCPU) return;
+
         const lenis = new Lenis({
-            duration: isMobile ? 1.0 : 0.5, // Reduced from 1.5/0.8 for snappier feel
+            duration: isMobile ? 1.0 : 0.5,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             orientation: "vertical",
             gestureOrientation: "vertical",
@@ -30,8 +37,6 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
         window.lenis = lenis;
 
         const startRaf = () => {
-            if (startedRef.current) return;
-            startedRef.current = true;
             const raf = (time: number) => {
                 lenis.raf(time);
                 rafRef.current = requestAnimationFrame(raf);
@@ -44,38 +49,20 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
                 cancelAnimationFrame(rafRef.current);
                 rafRef.current = null;
             }
-            startedRef.current = false;
         };
 
-        // Start only after first user interaction to reduce idle CPU.
-        const onFirstIntent = () => {
-            startRaf();
-            window.removeEventListener("wheel", onFirstIntent, { passive: true } as AddEventListenerOptions);
-            window.removeEventListener("touchstart", onFirstIntent, { passive: true } as AddEventListenerOptions);
-            window.removeEventListener("keydown", onFirstIntent as any);
-        };
+        // Start immediately for smooth feel; pause when tab is hidden.
+        startRaf();
 
-        window.addEventListener("wheel", onFirstIntent, { passive: true });
-        window.addEventListener("touchstart", onFirstIntent, { passive: true });
-        window.addEventListener("keydown", onFirstIntent as any);
-
-        // Pause RAF when tab is hidden; resume on show (without forcing immediate start if user never interacted).
         const onVisibility = () => {
             if (document.hidden) stopRaf();
-            else if (startedRef.current) startRaf();
+            else startRaf();
         };
         document.addEventListener("visibilitychange", onVisibility);
 
-        // Recalculate scroll dimensions periodically and on resize
-        // This ensures the footer is always reachable
-        const resizeHandler = () => {
-            lenis.resize();
-        };
-
-        window.addEventListener('resize', resizeHandler);
-
-        // Also recalculate after images/fonts load
-        window.addEventListener('load', resizeHandler);
+        const resizeHandler = () => lenis.resize();
+        window.addEventListener("resize", resizeHandler);
+        window.addEventListener("load", resizeHandler);
 
         return () => {
             stopRaf();
@@ -84,11 +71,8 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
             window.lenis = null;
             lenis.destroy();
             lenisRef.current = null;
-            window.removeEventListener('resize', resizeHandler);
-            window.removeEventListener('load', resizeHandler);
-            window.removeEventListener("wheel", onFirstIntent as any);
-            window.removeEventListener("touchstart", onFirstIntent as any);
-            window.removeEventListener("keydown", onFirstIntent as any);
+            window.removeEventListener("resize", resizeHandler);
+            window.removeEventListener("load", resizeHandler);
             document.removeEventListener("visibilitychange", onVisibility);
         };
     }, []);

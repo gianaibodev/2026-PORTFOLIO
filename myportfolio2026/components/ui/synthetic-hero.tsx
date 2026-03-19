@@ -130,9 +130,21 @@ const SyntheticHero = ({
   const [mounted, setMounted] = useState(false);
   const [canvasVisible, setCanvasVisible] = useState(false);
   const [dpr, setDpr] = useState(1);
+  const [isLowEnd, setIsLowEnd] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+
+    // Detect low-end device: skip WebGL shader to save GPU/CPU.
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const deviceMemory = (navigator as { deviceMemory?: number }).deviceMemory;
+    const isLowMemory = deviceMemory !== undefined && deviceMemory < 2;
+    const isLowCPU = navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency < 4;
+    const lowEnd = prefersReducedMotion || isLowMemory || isLowCPU;
+    setIsLowEnd(lowEnd);
+
+    if (lowEnd) return; // Skip canvas entirely
+
     // Delay Canvas mount to allow hydration and text paint
     const t = setTimeout(() => {
       if (window.requestIdleCallback) {
@@ -147,7 +159,10 @@ const SyntheticHero = ({
   useEffect(() => {
     if (typeof window === "undefined") return;
     const t = setTimeout(() => {
-      setDpr(Math.min(window.devicePixelRatio || 1, 1.5));
+      // Low-end: cap to 1.0; otherwise cap to 1.5 to avoid Retina overdraw.
+      const deviceMemory = (navigator as { deviceMemory?: number }).deviceMemory;
+      const isLowMem = deviceMemory !== undefined && deviceMemory < 2;
+      setDpr(isLowMem ? 1.0 : Math.min(window.devicePixelRatio || 1, 1.5));
     }, 0);
     return () => clearTimeout(t);
   }, []);
@@ -262,21 +277,33 @@ const SyntheticHero = ({
         className="hero-canvas-wrapper absolute inset-0 z-0 pointer-events-none"
         style={{ touchAction: "pan-y", pointerEvents: "none" }}
       >
-        {canvasVisible && (
-          <Canvas
-            key={isDark ? "dark" : "light"}
-            gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
-            dpr={dpr}
-            frameloop="always"
-            style={{ width: "100%", height: "100%", touchAction: "pan-y", pointerEvents: "none" }}
-            performance={{ min: 0.5 }}
-          >
-            <ShaderPlane
-              vertexShader={vertexShader}
-              fragmentShader={fragmentShader}
-              uniforms={shaderUniforms}
-            />
-          </Canvas>
+        {isLowEnd ? (
+          /* Static CSS gradient fallback for low-end devices — zero GPU cost */
+          <div
+            className="absolute inset-0"
+            style={{
+              background: isDark
+                ? "radial-gradient(ellipse at 50% 0%, rgba(40,80,120,0.45) 0%, transparent 70%), radial-gradient(ellipse at 80% 100%, rgba(20,40,80,0.3) 0%, transparent 60%)"
+                : "radial-gradient(ellipse at 50% 0%, rgba(180,210,255,0.5) 0%, transparent 70%), radial-gradient(ellipse at 80% 100%, rgba(200,220,255,0.3) 0%, transparent 60%)",
+            }}
+          />
+        ) : (
+          canvasVisible && (
+            <Canvas
+              key={isDark ? "dark" : "light"}
+              gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
+              dpr={dpr}
+              frameloop="always"
+              style={{ width: "100%", height: "100%", touchAction: "pan-y", pointerEvents: "none" }}
+              performance={{ min: 0.5 }}
+            >
+              <ShaderPlane
+                vertexShader={vertexShader}
+                fragmentShader={fragmentShader}
+                uniforms={shaderUniforms}
+              />
+            </Canvas>
+          )
         )}
       </div>
 

@@ -3,7 +3,8 @@
 import dynamic from "next/dynamic";
 import { m } from "framer-motion";
 import { ErrorBoundary } from "@/components/error-boundary";
-import { useCopyMode } from "@/components/copy-mode-provider"; // Valid assuming provider is accessible
+import { useCopyMode } from "@/components/copy-mode-provider";
+import { usePerformance } from "@/components/performance-provider";
 import { LazyMount } from "@/components/lazy-mount";
 
 const SplineSceneBasic = dynamic(
@@ -15,13 +16,8 @@ const SplineSceneBasic = dynamic(
 );
 
 export function Interactive3DSection({ variants, itemVariants }: { variants: any, itemVariants: any }) {
-    // Types for variants should be strict but 'any' for speed in refactor if types not shared. 
-    // I'll copy the variants definition if needed, or pass them as props.
-    // Ideally components are self-contained. I will redefine variants inside or import.
-    // The original file defined them locally. I'll define them here or accept props.
-    // Accepting props makes it dependent on parent. Self-contained is better for "Section" architecture.
-
     const { copyMode } = useCopyMode();
+    const { isLowEndDevice } = usePerformance();
 
     return (
         <section id="interactive-3d" className="w-full py-16 px-4 sm:px-6 lg:px-16 relative z-10 overflow-visible">
@@ -51,14 +47,24 @@ export function Interactive3DSection({ variants, itemVariants }: { variants: any
                 </div>
 
                 <m.div variants={itemVariants} className="rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-muted/5">
-                    <ErrorBoundary fallback={<div className="h-[400px] bg-muted" />}>
-                        <LazyMount
-                            rootMargin="300px"
-                            placeholder={<div className="w-full h-[500px] bg-muted/10 rounded-lg" />}
-                        >
-                            <SplineSceneBasic />
-                        </LazyMount>
-                    </ErrorBoundary>
+                    {isLowEndDevice ? (
+                        /* Static fallback — same card shape, zero runtime cost */
+                        <div className="w-full h-[500px] flex flex-col items-center justify-center gap-4 bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-800 dark:to-zinc-900 rounded-2xl">
+                            <div className="text-5xl">🎨</div>
+                            <p className="text-sm text-muted-foreground text-center px-6 max-w-xs">
+                                Interactive 3D preview available on higher-performance devices.
+                            </p>
+                        </div>
+                    ) : (
+                        <ErrorBoundary fallback={<div className="h-[400px] bg-muted" />}>
+                            <LazyMount
+                                rootMargin="300px"
+                                placeholder={<div className="w-full h-[500px] bg-muted/10 rounded-lg" />}
+                            >
+                                <SplineSceneBasic />
+                            </LazyMount>
+                        </ErrorBoundary>
+                    )}
                 </m.div>
             </m.div>
         </section>
