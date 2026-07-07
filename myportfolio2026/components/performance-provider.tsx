@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { createContext, useContext, useEffect, useState } from "react"
+import { isLowEndDevice as checkLowEndDevice } from "@/lib/device-performance"
 
 interface PerformanceContextType {
     performanceMode: boolean
@@ -26,18 +27,7 @@ export function PerformanceProvider({ children }: { children: React.ReactNode })
     useEffect(() => {
         if (typeof window === "undefined") return
 
-        // Check device capabilities
-        const checkDeviceCapability = () => {
-            const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-            const deviceMemory = (navigator as { deviceMemory?: number }).deviceMemory
-            const isLowMemory = deviceMemory !== undefined && deviceMemory < 4
-            const hardwareConcurrency = navigator.hardwareConcurrency
-            const isLowCPU = hardwareConcurrency !== undefined && hardwareConcurrency < 4
-
-            return prefersReducedMotion || isLowMemory || isLowCPU
-        }
-
-        const isLowEnd = checkDeviceCapability()
+        const isLowEnd = checkLowEndDevice()
         setIsLowEndDevice(isLowEnd)
 
         // Load saved preference or auto-detect

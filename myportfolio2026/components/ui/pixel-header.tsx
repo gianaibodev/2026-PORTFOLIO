@@ -2,6 +2,8 @@
 
 import { MeshGradient, Dithering } from "@paper-design/shaders-react";
 import { m } from "framer-motion";
+import { useEffect, useState } from "react";
+import { isLowEndDevice } from "@/lib/device-performance";
 
 interface PixelHeaderProps {
   colors?: string[];
@@ -24,29 +26,47 @@ export function PixelHeader({
   maxWidth = "max-w-6xl",
   children,
 }: PixelHeaderProps) {
+  const [lowEnd, setLowEnd] = useState(false);
+  useEffect(() => setLowEnd(isLowEndDevice()), []);
+
   return (
     <div className="relative w-full h-[310px] sm:h-[360px] md:h-[410px] pt-[60px] sm:pt-[70px] overflow-hidden">
-      <MeshGradient
-        colors={colors}
-        swirl={0.75}
-        distortion={0.5}
-        speed={0.05}
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
-      />
-      <Dithering
-        colorBack="#000000"
-        colorFront="#ffffff"
-        scale={0.8}
-        shape="dots"
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          opacity: 0.4,
-          mixBlendMode: "overlay",
-        }}
-      />
+      {lowEnd ? (
+        /* Static CSS mesh-gradient approximation of the WebGL shader —
+           same palette, zero GPU cost. The shader animates at speed 0.05,
+           so a still frame is visually near-identical. */
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: `radial-gradient(ellipse at 20% 20%, ${colors[0]} 0%, transparent 55%), radial-gradient(ellipse at 80% 25%, ${colors[1 % colors.length]} 0%, transparent 55%), radial-gradient(ellipse at 30% 80%, ${colors[2 % colors.length]} 0%, transparent 55%), radial-gradient(ellipse at 85% 80%, ${colors[3 % colors.length]} 0%, transparent 60%), ${colors[0]}`,
+          }}
+        />
+      ) : (
+        <>
+          <MeshGradient
+            colors={colors}
+            swirl={0.75}
+            distortion={0.5}
+            speed={0.05}
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+          />
+          <Dithering
+            colorBack="#000000"
+            colorFront="#ffffff"
+            scale={0.8}
+            shape="dots"
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              opacity: 0.4,
+              mixBlendMode: "overlay",
+            }}
+          />
+        </>
+      )}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60" />
 
       <div className={`relative container mx-auto px-4 sm:px-6 py-8 sm:py-10 md:py-12 text-left h-full flex flex-col justify-end ${maxWidth}`}>

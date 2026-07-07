@@ -8,6 +8,7 @@ import gsap from "gsap";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useTheme } from "next-themes";
+import { isLowEndDevice } from "@/lib/device-performance";
 
 gsap.registerPlugin(useGSAP);
 
@@ -131,16 +132,13 @@ const SyntheticHero = ({
   const [canvasVisible, setCanvasVisible] = useState(false);
   const [dpr, setDpr] = useState(1);
   const [isLowEnd, setIsLowEnd] = useState(false);
+  const [shaderActive, setShaderActive] = useState(true);
 
   useEffect(() => {
     setMounted(true);
 
     // Detect low-end device: skip WebGL shader to save GPU/CPU.
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const deviceMemory = (navigator as { deviceMemory?: number }).deviceMemory;
-    const isLowMemory = deviceMemory !== undefined && deviceMemory < 2;
-    const isLowCPU = navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency < 4;
-    const lowEnd = prefersReducedMotion || isLowMemory || isLowCPU;
+    const lowEnd = isLowEndDevice();
     setIsLowEnd(lowEnd);
 
     if (lowEnd) return; // Skip canvas entirely
@@ -160,9 +158,7 @@ const SyntheticHero = ({
     if (typeof window === "undefined") return;
     const t = setTimeout(() => {
       // Low-end: cap to 1.0; otherwise cap to 1.5 to avoid Retina overdraw.
-      const deviceMemory = (navigator as { deviceMemory?: number }).deviceMemory;
-      const isLowMem = deviceMemory !== undefined && deviceMemory < 2;
-      setDpr(isLowMem ? 1.0 : Math.min(window.devicePixelRatio || 1, 1.5));
+      setDpr(isLowEndDevice() ? 1.0 : Math.min(window.devicePixelRatio || 1, 1.5));
     }, 0);
     return () => clearTimeout(t);
   }, []);
@@ -256,16 +252,35 @@ const SyntheticHero = ({
 
     observer.observe(section, { childList: true, subtree: true, attributes: true, attributeFilter: ["style"] });
 
-    const interval = setInterval(() => {
-      const c = section.querySelector("canvas");
-      if (c) forceCanvasStyles(c as HTMLCanvasElement);
-    }, 1000);
-
     return () => {
       observer.disconnect();
-      clearInterval(interval);
     };
   }, [mounted, canvasVisible]);
+
+  // Halt the shader loop when the hero is scrolled out of view or the tab
+  // is hidden — nothing on screen changes, but GPU/CPU work drops to zero.
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section || isLowEnd) return;
+
+    let inView = true;
+    const sync = () => setShaderActive(inView && !document.hidden);
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        inView = entry.isIntersecting;
+        sync();
+      },
+      { rootMargin: "100px" }
+    );
+    io.observe(section);
+    document.addEventListener("visibilitychange", sync);
+
+    return () => {
+      io.disconnect();
+      document.removeEventListener("visibilitychange", sync);
+    };
+  }, [mounted, isLowEnd]);
 
   return (
     <section
@@ -293,7 +308,7 @@ const SyntheticHero = ({
               key={isDark ? "dark" : "light"}
               gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
               dpr={dpr}
-              frameloop="always"
+              frameloop={shaderActive ? "always" : "never"}
               style={{ width: "100%", height: "100%", touchAction: "pan-y", pointerEvents: "none" }}
               performance={{ min: 0.5 }}
             >

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
+import { isLowEndDevice } from "@/lib/device-performance";
 
 interface MousePosition {
   x: number | undefined;
@@ -25,8 +26,10 @@ const ParticleText = ({ hideInteractionHint = false }: ParticleTextProps) => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
+    const lowEnd = isLowEndDevice();
     let particlesArray: Particle[] = [];
     let animationFrameId: number;
+    let running = true;
 
     class Particle {
       x: number;
@@ -114,6 +117,11 @@ const ParticleText = ({ hideInteractionHint = false }: ParticleTextProps) => {
       context.fillStyle = gradient;
 
       context.fillText(text, textX, textY);
+
+      // Low-end devices keep the identical gradient text, just drawn
+      // once instead of rebuilt from thousands of animated particles.
+      if (lowEnd) return;
+
       const textCoordinates = context.getImageData(0, 0, canvas.width, canvas.height);
       context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -135,7 +143,7 @@ const ParticleText = ({ hideInteractionHint = false }: ParticleTextProps) => {
      * Animation loop for updating and drawing particles.
      */
     function animate() {
-      if (!context || !canvas) return;
+      if (!context || !canvas || !running) return;
       context.clearRect(0, 0, canvas.width, canvas.height);
       particlesArray.forEach((particle) => {
         particle.draw();
@@ -155,15 +163,29 @@ const ParticleText = ({ hideInteractionHint = false }: ParticleTextProps) => {
       init();
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    const handleVisibility = () => {
+      if (lowEnd) return;
+      if (document.hidden) {
+        running = false;
+        cancelAnimationFrame(animationFrameId);
+      } else if (!running) {
+        running = true;
+        animate();
+      }
+    };
+
+    if (!lowEnd) window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("resize", handleResize);
+    document.addEventListener("visibilitychange", handleVisibility);
 
     init();
-    animate();
+    if (!lowEnd) animate();
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("resize", handleResize);
+      document.removeEventListener("visibilitychange", handleVisibility);
+      running = false;
       cancelAnimationFrame(animationFrameId);
     };
   }, []);

@@ -41,20 +41,29 @@ export function Navigation() {
 
     let ticking = false;
 
+    // Section ids never change; compute once. Elements are cached as they
+    // appear (some mount lazily) so scroll frames avoid repeated DOM queries.
+    const sections = navItems
+      .filter(item => item.href.includes("#"))
+      .map((item) => item.href.split("#")[1]);
+    const sectionEls = new Map<string, HTMLElement>();
+
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           setIsScrolled(window.scrollY > 50);
 
-          // Determine active section based on scroll position
-          const sections = navItems
-            .filter(item => item.href.includes("#"))
-            .map((item) => item.href.split("#")[1]);
-
           const scrollPosition = window.scrollY + 200;
 
           for (let i = sections.length - 1; i >= 0; i--) {
-            const section = document.getElementById(sections[i]);
+            let section = sectionEls.get(sections[i]);
+            if (!section) {
+              const el = document.getElementById(sections[i]);
+              if (el) {
+                section = el;
+                sectionEls.set(sections[i], el);
+              }
+            }
             if (section && section.offsetTop <= scrollPosition) {
               setActiveSection(sections[i]);
               break;

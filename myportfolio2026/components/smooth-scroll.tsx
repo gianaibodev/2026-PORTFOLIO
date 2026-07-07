@@ -3,6 +3,7 @@
 import { ReactNode, useEffect, useRef } from "react";
 import Lenis from "lenis";
 import { usePathname } from "next/navigation";
+import { isLowEndDevice } from "@/lib/device-performance";
 
 export function SmoothScroll({ children }: { children: ReactNode }) {
     const pathname = usePathname();
@@ -13,11 +14,7 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
         const isMobile = window.innerWidth < 768;
 
         // Skip Lenis entirely on low-end/reduced-motion — native scroll is faster.
-        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        const deviceMemory = (navigator as { deviceMemory?: number }).deviceMemory;
-        const isLowMemory = deviceMemory !== undefined && deviceMemory < 2;
-        const isLowCPU = navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency < 4;
-        if (prefersReducedMotion || isLowMemory || isLowCPU) return;
+        if (isLowEndDevice()) return;
 
         const lenis = new Lenis({
             duration: isMobile ? 1.0 : 0.5,

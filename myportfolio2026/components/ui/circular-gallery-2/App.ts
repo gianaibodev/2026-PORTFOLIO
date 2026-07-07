@@ -2,6 +2,7 @@ import { Camera, OGLRenderingContext, Plane, Renderer, Transform } from "ogl";
 import { Media } from "./Media";
 import { GalleryItem } from "./types";
 import { autoBind, debounce, lerp } from "./utils";
+import { isLowEndDevice } from "@/lib/device-performance";
 
 interface AppParams {
     items?: GalleryItem[];
@@ -35,6 +36,10 @@ export class App {
     screen!: { width: number; height: number };
     viewport!: { width: number; height: number };
     raf!: number;
+    lowEnd: boolean = false;
+    paused: boolean = false;
+    visibilityObserver?: IntersectionObserver;
+    boundOnVisibilityChange!: () => void;
 
     // Bound event listeners
     boundOnResize!: () => void;
@@ -57,6 +62,7 @@ export class App {
         }: AppParams,
     ) {
         this.container = container;
+        this.lowEnd = isLowEndDevice();
         this.scrollSpeed = scrollSpeed;
         this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0 };
         this.onCheckDebounce = debounce(this.onCheck.bind(this), 200);
@@ -77,7 +83,7 @@ export class App {
         this.renderer = new Renderer({
             alpha: true,
             antialias: true,
-            dpr: Math.min(window.devicePixelRatio || 1, 2),
+            dpr: Math.min(window.devicePixelRatio || 1, this.lowEnd ? 1 : 2),
         });
         this.gl = this.renderer.gl;
         this.gl.clearColor(0, 0, 0, 0);
@@ -95,9 +101,11 @@ export class App {
     }
 
     createGeometry() {
+        // The bend curve is gentle, so far fewer segments produce an
+        // indistinguishable surface at a fraction of the vertex cost.
         this.planeGeometry = new Plane(this.gl, {
-            heightSegments: 50,
-            widthSegments: 100,
+            heightSegments: this.lowEnd ? 12 : 25,
+            widthSegments: this.lowEnd ? 24 : 50,
         });
     }
 
@@ -213,7 +221,21 @@ export class App {
             this.renderer.render({ scene: this.scene, camera: this.camera });
         }
         this.scroll.last = this.scroll.current;
-        this.raf = window.requestAnimationFrame(this.update.bind(this));
+        if (!this.paused) {
+            this.raf = window.requestAnimationFrame(this.update.bind(this));
+        }
+    }
+
+    pause() {
+        if (this.paused) return;
+        this.paused = true;
+        window.cancelAnimationFrame(this.raf);
+    }
+
+    resume() {
+        if (!this.paused) return;
+        this.paused = false;
+        this.update();
     }
 
     addEventListeners() {
@@ -232,10 +254,35 @@ export class App {
         this.container.addEventListener("touchstart", this.boundOnTouchDown);
         window.addEventListener("touchmove", this.boundOnTouchMove as EventListener, { passive: true });
         window.addEventListener("touchend", this.boundOnTouchUp, { passive: true });
+
+        // Stop rendering entirely while the gallery is off-screen or the
+        // tab is hidden — nothing visible changes, but the GPU/CPU idle.
+        this.boundOnVisibilityChange = () => {
+            if (document.hidden) this.pause();
+            else this.resume();
+        };
+        document.addEventListener("visibilitychange", this.boundOnVisibilityChange);
+
+        if ("IntersectionObserver" in window) {
+            this.visibilityObserver = new IntersectionObserver(
+                ([entry]) => {
+                    if (entry.isIntersecting) {
+                        if (!document.hidden) this.resume();
+                    } else {
+                        this.pause();
+                    }
+                },
+                { rootMargin: "100px" },
+            );
+            this.visibilityObserver.observe(this.container);
+        }
     }
 
     destroy() {
+        this.paused = true;
         window.cancelAnimationFrame(this.raf);
+        this.visibilityObserver?.disconnect();
+        document.removeEventListener("visibilitychange", this.boundOnVisibilityChange);
         window.removeEventListener("resize", this.boundOnResize);
         window.removeEventListener("mousewheel", this.boundOnWheel as EventListener);
         window.removeEventListener("wheel", this.boundOnWheel);
