@@ -10,6 +10,7 @@ import { shaderCredits, libraryCredits } from "@/content/portfolio-documentation
 import { CodeBlock } from "@/components/ui/code-block";
 import { parseCodeBlocks } from "@/lib/parse-code-blocks";
 import { cn } from "@/lib/utils";
+import { BentoFeatures } from "@/components/ui/bento-features";
 
 export const dynamic = 'force-static';
 export const revalidate = 3600;
@@ -220,6 +221,10 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               </ul>
             </div>
           </section>
+
+          {study.features?.length ? (
+            <BentoFeatures features={study.features} />
+          ) : null}
 
           {study.sections.map((section) => (
             <section

@@ -33,6 +33,10 @@ import { secrecyGdgoc } from "./data/secrecy";
 import { googleAwards } from "./data/google-awards";
 import { joseApp } from "./data/jose-app";
 import { techCare } from "./data/techcare";
+import { haffLeisureClub } from "./data/haff-leisure-club";
+import { paddleZone } from "./data/paddle-zone";
+import { pullvault } from "./data/pullvault";
+import { skillMaking } from "./data/skill-making";
 
 // Re-export types
 export * from "./types";
@@ -70,6 +74,10 @@ const rawData: CaseStudy[] = [
     googleAwards,
     joseApp,
     techCare,
+    haffLeisureClub,
+    paddleZone,
+    pullvault,
+    skillMaking,
 ];
 
 // Validate data against schema (Ensures defaults like [] are applied if missing, matching original behavior)
