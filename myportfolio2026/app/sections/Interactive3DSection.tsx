@@ -7,8 +7,8 @@ import { useCopyMode } from "@/components/copy-mode-provider";
 import { usePerformance } from "@/components/performance-provider";
 import { LazyMount } from "@/components/lazy-mount";
 
-const SplineSceneBasic = dynamic(
-    () => import("@/components/demos/spline-scene-demo").then((mod) => ({ default: mod.SplineSceneBasic })),
+const Interactive3DShowcase = dynamic(
+    () => import("@/components/demos/interactive-3d-showcase").then((mod) => ({ default: mod.Interactive3DShowcase })),
     {
         ssr: false,
         loading: () => <div className="w-full h-[500px] bg-muted/10 rounded-lg" />,
@@ -61,7 +61,7 @@ export function Interactive3DSection({ variants, itemVariants }: { variants: any
                                 rootMargin="300px"
                                 placeholder={<div className="w-full h-[500px] bg-muted/10 rounded-lg" />}
                             >
-                                <SplineSceneBasic />
+                                <Interactive3DShowcase />
                             </LazyMount>
                         </ErrorBoundary>
                     )}

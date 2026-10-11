@@ -252,7 +252,7 @@
   perspective: 1000px;
 }
 
-/* Loader for Spline */
+/* Spinner used by lazy component fallbacks */
 .loader {
   width: 48px;
   height: 48px;
@@ -300,7 +300,7 @@ html {
   inset: 0;
 }
 
-canvas:not(.spline-canvas) {
+canvas:not(.interactive) {
   /* Allow vertical scrolling to pass through non-interactive canvas elements */
   touch-action: pan-y !important;
   /* Prevent default touch behaviors that interfere with scrolling */
@@ -315,12 +315,6 @@ canvas:not(.spline-canvas) {
 canvas.interactive {
   pointer-events: auto;
   touch-action: manipulation;
-}
-
-/* Spline 3D scene: must receive mouse events for follow-the-cursor etc. */
-.spline-scene-container canvas {
-  pointer-events: auto !important;
-  touch-action: manipulation !important;
 }
 
 /* Reduce filter load on mobile to prevent GPU faults */

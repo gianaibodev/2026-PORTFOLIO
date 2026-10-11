@@ -21,15 +21,38 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(__dirname),
   },
-  // The site sets no headers of its own otherwise. These are the ones that
-  // cost nothing to send and break nothing: a CSP is deliberately absent,
-  // since Spline pulls a wasm module from unpkg at runtime and the shader
-  // components write inline styles, so one needs testing before it ships.
+  // A CSP that matches what the site genuinely loads. 'unsafe-inline' is the
+  // one concession left: Next inlines its bootstrap script and the shader
+  // components write inline styles, so removing it needs nonces. There is no
+  // 'unsafe-eval' and no third-party script host, which only became possible
+  // once the Spline embed went away.
+  // Note: case studies support an iframe embed that nothing uses yet. If one
+  // is ever added, its host must be added to frame-src or it will be blocked.
   async headers() {
+    const csp = [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline'",
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: blob: https://images.unsplash.com https://picsum.photos",
+      "font-src 'self' data:",
+      // A dependency feature-detects codec support with a tiny data: URI video;
+      // without this it falls back to default-src and gets blocked.
+      "media-src 'self' data: blob:",
+      "connect-src 'self' https://vitals.vercel-insights.com",
+      "worker-src 'self' blob:",
+      "frame-src 'self'",
+      "object-src 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
+      "frame-ancestors 'self'",
+      "upgrade-insecure-requests",
+    ].join("; ");
+
     return [
       {
         source: "/:path*",
         headers: [
+          { key: "Content-Security-Policy", value: csp },
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },

@@ -15,7 +15,6 @@ const libraries = [
   { name: "OGL", href: "https://github.com/oframe/ogl", desc: "WebGL" },
   { name: "@paper-design/shaders-react", href: "https://github.com/paper-design/shaders-react", desc: "Shaders" },
   { name: "GSAP", href: "https://gsap.com", desc: "Animation" },
-  { name: "Spline", href: "https://spline.design", desc: "3D scenes" },
   { name: "Lucide", href: "https://lucide.dev", desc: "Icons" },
   { name: "next-themes", href: "https://github.com/pacocoursey/next-themes", desc: "Theme" },
   { name: "tw-animate-css", href: "https://github.com/jhukdev/tw-animate-css", desc: "Animations" },
