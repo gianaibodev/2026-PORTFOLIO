@@ -28,9 +28,9 @@ export function Interactive3DShowcase() {
             Interactive 3D
           </h3>
           <p className="mt-4 text-slate-600 dark:text-neutral-300 max-w-lg">
-            Modelled, lit and rendered in Blender, then taken into the browser
-            with Three.js and React Three Fiber for scenes that react to the
-            people looking at them.
+            Modelled, lit and rendered in Blender, then brought into the
+            browser as real-time WebGL for scenes that react to the people
+            looking at them.
           </p>
           <Link
             href="/blog/3d-works-2024"

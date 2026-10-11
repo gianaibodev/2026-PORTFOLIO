@@ -1,8 +1,7 @@
 "use client";
 
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useMemo, useRef, useEffect, useState } from "react";
-import * as THREE from "three";
+import { Mesh, Plane, Program, Renderer, Transform } from "ogl";
+import { useRef, useEffect, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Button } from "@/components/ui/button";
@@ -13,6 +12,10 @@ import { isLowEndDevice } from "@/lib/device-performance";
 gsap.registerPlugin(useGSAP);
 
 const vertexShader = `
+  // three's ShaderMaterial injected these declarations automatically; ogl does
+  // not, so they are spelled out here. The body is otherwise unchanged.
+  attribute vec3 position;
+  attribute vec2 uv;
   varying vec2 vUv;
   void main() {
     vUv = uv;
@@ -68,39 +71,137 @@ const fragmentShader = `
   }
 `;
 
-function ShaderPlane({
-  vertexShader: vs,
-  fragmentShader: fs,
-  uniforms,
+/**
+ * The hero backdrop is a single fullscreen fragment shader — no geometry, no
+ * camera, no scene graph. It used to run on three.js + @react-three/fiber,
+ * which cost 924KB and loaded before anything else on the page. ogl was
+ * already a dependency (it drives the circular gallery) and does the same job
+ * in a fraction of the size, so the shaders below are unchanged and only the
+ * plumbing moved.
+ */
+function HeroShaderCanvas({
+  isDark,
+  dpr,
+  active,
 }: {
-  vertexShader: string;
-  fragmentShader: string;
-  uniforms: { [key: string]: { value: unknown } };
+  isDark: boolean;
+  dpr: number;
+  active: boolean;
 }) {
-  const meshRef = useRef<THREE.Mesh>(null);
-  const { size } = useThree();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const glRef = useRef<{
+    renderer: Renderer;
+    program: Program;
+    scene: Transform;
+    resize: () => void;
+  } | null>(null);
 
-  useFrame((state) => {
-    if (meshRef.current) {
-      const material = meshRef.current.material as THREE.ShaderMaterial;
-      material.uniforms.u_time.value = state.clock.elapsedTime * 0.5;
-      material.uniforms.u_resolution.value.set(size.width, size.height, 1.0);
-    }
-  });
+  // Build the context once. dpr, theme and play/pause are handled below
+  // without tearing down the GL context.
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
 
-  return (
-    <mesh ref={meshRef}>
-      <planeGeometry args={[2, 2]} />
-      <shaderMaterial
-        vertexShader={vs}
-        fragmentShader={fs}
-        uniforms={uniforms}
-        side={THREE.FrontSide}
-        depthTest={false}
-        depthWrite={false}
-      />
-    </mesh>
-  );
+    const renderer = new Renderer({
+      alpha: true,
+      antialias: false,
+      powerPreference: "high-performance",
+    });
+    const gl = renderer.gl;
+    const canvas = gl.canvas as HTMLCanvasElement;
+    canvas.classList.add("hero-shader-canvas");
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
+    canvas.style.display = "block";
+    container.appendChild(canvas);
+
+    const scene = new Transform();
+    const program = new Program(gl, {
+      vertex: vertexShader,
+      fragment: fragmentShader,
+      uniforms: {
+        u_time: { value: 0 },
+        u_resolution: { value: [1, 1, 1] },
+        u_dark: { value: isDark ? 1 : 0 },
+      },
+      depthTest: false,
+      depthWrite: false,
+      cullFace: false,
+    });
+    const mesh = new Mesh(gl, {
+      geometry: new Plane(gl, { width: 2, height: 2 }),
+      program,
+    });
+    mesh.setParent(scene);
+
+    const resize = () => {
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+      if (!w || !h) return;
+      renderer.setSize(w, h);
+      // Only the aspect ratio matters to the shader, which divides by .y
+      program.uniforms.u_resolution.value = [w, h, 1];
+      renderer.render({ scene });
+    };
+    resize();
+
+    const ro = new ResizeObserver(resize);
+    ro.observe(container);
+
+    glRef.current = { renderer, program, scene, resize };
+
+    // Draw one frame immediately. The animation loop only runs while the hero
+    // is on screen and the tab is focused, so without this the backdrop would
+    // be blank for anyone who loads the page in a background tab, or who has
+    // already scrolled past by the time the canvas mounts.
+    renderer.render({ scene });
+
+    return () => {
+      ro.disconnect();
+      canvas.remove();
+      gl.getExtension("WEBGL_lose_context")?.loseContext();
+      glRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    const state = glRef.current;
+    if (!state) return;
+    state.renderer.dpr = dpr;
+    state.resize();
+    state.renderer.render({ scene: state.scene });
+  }, [dpr]);
+
+  // Theme flips a uniform rather than rebuilding the context.
+  useEffect(() => {
+    const state = glRef.current;
+    if (!state) return;
+    state.program.uniforms.u_dark.value = isDark ? 1 : 0;
+    state.renderer.render({ scene: state.scene });
+  }, [isDark]);
+
+  // Off-screen or backgrounded means no rAF at all, not a loop that early-returns.
+  useEffect(() => {
+    const state = glRef.current;
+    if (!state || !active) return;
+
+    let raf = 0;
+    let last = performance.now();
+    let elapsed = state.program.uniforms.u_time.value * 2;
+
+    const frame = (now: number) => {
+      elapsed += (now - last) / 1000;
+      last = now;
+      state.program.uniforms.u_time.value = elapsed * 0.5;
+      state.renderer.render({ scene: state.scene });
+      raf = requestAnimationFrame(frame);
+    };
+    raf = requestAnimationFrame(frame);
+
+    return () => cancelAnimationFrame(raf);
+  }, [active]);
+
+  return <div ref={containerRef} className="absolute inset-0" />;
 }
 
 interface HeroProps {
@@ -164,14 +265,6 @@ const SyntheticHero = ({
   }, []);
 
   const isDark = mounted ? resolvedTheme === "dark" : true;
-  const shaderUniforms = useMemo(
-    () => ({
-      u_time: { value: 0 },
-      u_resolution: { value: new THREE.Vector3(1, 1, 1) },
-      u_dark: { value: isDark ? 1.0 : 0.0 },
-    }),
-    [isDark]
-  );
 
   useGSAP(
     () => {
@@ -304,20 +397,7 @@ const SyntheticHero = ({
           />
         ) : (
           canvasVisible && (
-            <Canvas
-              key={isDark ? "dark" : "light"}
-              gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
-              dpr={dpr}
-              frameloop={shaderActive ? "always" : "never"}
-              style={{ width: "100%", height: "100%", touchAction: "pan-y", pointerEvents: "none" }}
-              performance={{ min: 0.5 }}
-            >
-              <ShaderPlane
-                vertexShader={vertexShader}
-                fragmentShader={fragmentShader}
-                uniforms={shaderUniforms}
-              />
-            </Canvas>
+            <HeroShaderCanvas isDark={isDark} dpr={dpr} active={shaderActive} />
           )
         )}
       </div>
