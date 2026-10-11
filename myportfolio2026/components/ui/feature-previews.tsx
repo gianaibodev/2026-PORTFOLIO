@@ -29,20 +29,19 @@ function LiveDot() {
 
 function CourtStatus() {
   const courts = [
-    { name: "Court 1", state: "In play", tone: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30", meta: "Doubles · 12:40 left" },
-    { name: "Court 2", state: "Open", tone: "bg-sky-500/15 text-sky-300 border-sky-500/30", meta: "Ready for next group" },
-    { name: "Court 3", state: "In play", tone: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30", meta: "Singles · 05:10 left" },
-    { name: "Court 4", state: "Reserved", tone: "bg-amber-500/15 text-amber-300 border-amber-500/30", meta: "Starts in 15 min" },
+    { name: "Court 1", state: "Playing", tone: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30", meta: "Game in progress · 08:40 left" },
+    { name: "Court 2", state: "Open", tone: "bg-sky-500/15 text-sky-300 border-sky-500/30", meta: "Court is open for the next stack" },
+    { name: "Court 3", state: "Playing", tone: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30", meta: "Game in progress · 02:15 left" },
   ];
   return (
     <Panel>
       <div className="flex items-center justify-between mb-3">
-        <span className="text-xs font-semibold tracking-widest uppercase text-slate-400">Club Status</span>
+        <span className="text-xs font-semibold tracking-widest uppercase text-slate-400">Open Play Board</span>
         <span className="flex items-center gap-2 text-[11px] text-emerald-300">
           <LiveDot /> Live
         </span>
       </div>
-      <div className="grid grid-cols-2 gap-2 sm:gap-3">
+      <div className="grid grid-cols-1 gap-2 sm:gap-3">
         {courts.map((court) => (
           <div key={court.name} className="rounded-xl border border-white/10 bg-white/[0.04] p-3">
             <div className="flex items-center justify-between gap-2">
@@ -59,13 +58,13 @@ function CourtStatus() {
 
 function SessionList() {
   const rows = [
-    { initials: "AB", name: "Player A", status: "Checked in", tone: "text-emerald-300" },
-    { initials: "CD", name: "Player B", status: "Waiting", tone: "text-amber-300" },
-    { initials: "EF", name: "Player C", status: "On court", tone: "text-sky-300" },
+    { initials: "1", name: "Stack 1 · 4 players", status: "Next up", tone: "text-emerald-300" },
+    { initials: "2", name: "Stack 2 · 4 players", status: "About one game", tone: "text-amber-300" },
+    { initials: "3", name: "Stack 3 · 3 players", status: "Waiting", tone: "text-sky-300" },
   ];
   return (
     <Panel>
-      <p className="text-xs font-semibold tracking-widest uppercase text-slate-400 mb-3">Session</p>
+      <p className="text-xs font-semibold tracking-widest uppercase text-slate-400 mb-3">Queue</p>
       <div className="space-y-2">
         {rows.map((row) => (
           <div key={row.initials} className="flex items-center gap-3 rounded-xl bg-white/[0.04] px-3 py-2">
@@ -87,13 +86,13 @@ function PhoneApp() {
       <div className="mx-auto mb-2 h-1 w-8 rounded-full bg-slate-700" />
       <div className="flex items-center gap-1.5 mb-2">
         <span className="grid h-5 w-5 place-items-center rounded-md bg-blue-500 text-[8px] font-bold text-white">H</span>
-        <span className="text-[10px] font-semibold text-slate-200">Admin</span>
+        <span className="text-[10px] font-semibold text-slate-200">Open Play</span>
         <span className="ml-auto"><LiveDot /></span>
       </div>
       <div className="space-y-1.5">
-        <div className="rounded-lg bg-white/[0.06] p-1.5 text-[9px] text-slate-300">4 courts · 2 in play</div>
-        <div className="rounded-lg bg-white/[0.06] p-1.5 text-[9px] text-slate-300">7 players today</div>
-        <div className="rounded-lg bg-blue-500 p-1.5 text-center text-[9px] font-semibold text-white">Add to Home Screen</div>
+        <div className="rounded-lg bg-white/[0.06] p-1.5 text-[9px] text-slate-300">Your stack: next up</div>
+        <div className="rounded-lg bg-white/[0.06] p-1.5 text-[9px] text-slate-300">Court 2 is open</div>
+        <div className="rounded-lg bg-blue-500 p-1.5 text-center text-[9px] font-semibold text-white">GO — court is ready</div>
       </div>
     </div>
   );
@@ -101,18 +100,19 @@ function PhoneApp() {
 
 function RlsPolicy() {
   const rules = [
-    { who: "anon", action: "SELECT", ok: true },
-    { who: "anon", action: "UPDATE", ok: false },
-    { who: "admin token", action: "UPDATE", ok: true },
+    { who: "anon", action: "read players_public", ok: true },
+    { who: "anon", action: "write profiles", ok: false },
+    { who: "anon", action: "create account", ok: false },
+    { who: "admin", action: "write profiles", ok: true },
   ];
   return (
     <Panel className="font-mono">
       <p className="text-[11px] text-slate-500 mb-2">-- row level security</p>
-      <p className="text-[11px] text-sky-300 mb-3">policy on Player, Session</p>
+      <p className="text-[11px] text-sky-300 mb-3">policies on profiles, sessions</p>
       <div className="space-y-1.5">
         {rules.map((rule) => (
           <div key={rule.who + rule.action} className="flex items-center gap-3 rounded-lg bg-white/[0.04] px-3 py-1.5 text-[11px]">
-            <span className="w-20 text-slate-300">{rule.who}</span>
+            <span className="w-12 text-slate-300">{rule.who}</span>
             <span className="flex-1 text-slate-400">{rule.action}</span>
             {rule.ok ? (
               <span className="flex items-center gap-1 text-emerald-300"><Check className="size-3" /> allow</span>

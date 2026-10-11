@@ -106,7 +106,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         <div className="max-w-5xl mx-auto space-y-8 sm:space-y-12 md:space-y-16">
           <header className="space-y-6 sm:space-y-8 md:space-y-10">
             <div className="grid gap-4 sm:gap-6 sm:grid-cols-1 md:grid-cols-2">
-              <div className="rounded-3xl border border-zinc-300 dark:border-white/10 backdrop-blur-2xl bg-white/5 dark:bg-white/[0.03] p-4 sm:p-6 space-y-3 sm:space-y-4">
+              <div className="rounded-3xl border border-zinc-300 dark:border-white/10 bg-white/5 dark:bg-white/[0.03] p-4 sm:p-6 space-y-3 sm:space-y-4">
                 <h2 className="text-xs sm:text-sm uppercase tracking-[0.3em] text-muted-foreground">Roles & Stack</h2>
                 <div className="flex flex-wrap gap-2 text-xs sm:text-sm text-muted-foreground">
                   {study.roles.map((role) => (
@@ -123,7 +123,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                   ))}
                 </div>
               </div>
-              <div className="rounded-3xl border border-zinc-300 dark:border-white/10 backdrop-blur-2xl bg-white/5 dark:bg-white/[0.03] p-4 sm:p-6 space-y-3 sm:space-y-4">
+              <div className="rounded-3xl border border-zinc-300 dark:border-white/10 bg-white/5 dark:bg-white/[0.03] p-4 sm:p-6 space-y-3 sm:space-y-4">
                 <h2 className="text-xs sm:text-sm uppercase tracking-[0.3em] text-muted-foreground">Impact</h2>
                 <ul className="space-y-2 text-sm sm:text-base text-muted-foreground">
                   {study.metrics.map((metric) => (
@@ -202,15 +202,15 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           </header>
 
           <section className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="rounded-3xl border border-zinc-300 dark:border-white/10 p-4 sm:p-6 backdrop-blur-xl bg-white/5 dark:bg-white/[0.03]">
+            <div className="rounded-3xl border border-zinc-300 dark:border-white/10 p-4 sm:p-6 bg-white/5 dark:bg-white/[0.03]">
               <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-muted-foreground">Year</p>
               <p className="text-2xl sm:text-3xl font-semibold mt-2">{study.year}</p>
             </div>
-            <div className="rounded-3xl border border-zinc-300 dark:border-white/10 p-4 sm:p-6 backdrop-blur-xl bg-white/5 dark:bg-white/[0.03]">
+            <div className="rounded-3xl border border-zinc-300 dark:border-white/10 p-4 sm:p-6 bg-white/5 dark:bg-white/[0.03]">
               <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-muted-foreground">Category</p>
               <p className="text-2xl sm:text-3xl font-semibold mt-2 break-words">{study.category}</p>
             </div>
-            <div className="rounded-3xl border border-zinc-300 dark:border-white/10 p-4 sm:p-6 backdrop-blur-xl bg-white/5 dark:bg-white/[0.03] sm:col-span-2 lg:col-span-1">
+            <div className="rounded-3xl border border-zinc-300 dark:border-white/10 p-4 sm:p-6 bg-white/5 dark:bg-white/[0.03] sm:col-span-2 lg:col-span-1">
               <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-muted-foreground">Deliverables</p>
               <ul className="mt-2 space-y-1 text-muted-foreground text-sm sm:text-base">
                 {study.deliverables.map((item) => (
@@ -223,13 +223,13 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           </section>
 
           {study.features?.length ? (
-            <BentoFeatures features={study.features} />
+            <BentoFeatures features={study.features} theme={study.theme} />
           ) : null}
 
           {study.sections.map((section) => (
             <section
               key={section.title}
-              className="rounded-[24px] sm:rounded-[32px] border border-zinc-300 dark:border-white/10 backdrop-blur-2xl bg-white/5 dark:bg-white/[0.02] p-4 sm:p-6 md:p-8 space-y-3 sm:space-y-4"
+              className="rounded-[24px] sm:rounded-[32px] border border-zinc-300 dark:border-white/10 bg-white/5 dark:bg-white/[0.02] p-4 sm:p-6 md:p-8 space-y-3 sm:space-y-4"
             >
               <h2 className="text-xl sm:text-2xl font-semibold">{section.title}</h2>
               <div className="space-y-4 sm:space-y-5 text-muted-foreground text-base sm:text-lg leading-relaxed">
@@ -293,7 +293,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 </div>
                 <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
                   {shaderCredits.map((shader) => (
-                    <div key={shader.name} className="p-6 rounded-3xl border border-zinc-400 dark:border-white/20 bg-slate-950/80 dark:bg-black/80 backdrop-blur-3xl space-y-3 shadow-2xl">
+                    <div key={shader.name} className="p-6 rounded-3xl border border-zinc-400 dark:border-white/20 bg-slate-950/80 dark:bg-black/80 space-y-3 shadow-2xl">
                       <h3 className="text-xl font-bold text-white">{shader.name}</h3>
                       <p className="text-xs text-blue-400 font-bold uppercase tracking-wider">{shader.author} • {shader.source}</p>
                       <p className="text-base text-gray-100 dark:text-gray-200 leading-relaxed font-normal">{shader.description}</p>
@@ -327,7 +327,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 </div>
               </section>
 
-              <section className="p-10 rounded-[40px] bg-gradient-to-br from-slate-900 to-blue-900 border border-zinc-400 dark:border-white/20 backdrop-blur-3xl text-center shadow-2xl">
+              <section className="p-10 rounded-[40px] bg-gradient-to-br from-slate-900 to-blue-900 border border-zinc-400 dark:border-white/20 text-center shadow-2xl">
                 <Cpu className="w-16 h-12 text-blue-400 mx-auto mb-6 animate-pulse" />
                 <h3 className="text-3xl font-bold text-white mb-4">Architecture of Gian Aibo 2026</h3>
                 <p className="text-gray-100 text-lg font-normal max-w-2xl mx-auto leading-relaxed">
@@ -358,7 +358,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             </section>
           ) : null}
 
-          <section className="rounded-[24px] sm:rounded-[32px] border border-zinc-300 dark:border-white/10 backdrop-blur-2xl bg-white/5 dark:bg-white/[0.02] p-4 sm:p-6 md:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 sm:gap-6">
+          <section className="rounded-[24px] sm:rounded-[32px] border border-zinc-300 dark:border-white/10 bg-white/5 dark:bg-white/[0.02] p-4 sm:p-6 md:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 sm:gap-6">
             <div className="flex-1 min-w-0">
               <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-muted-foreground">Explore next</p>
               <h3 className="text-xl sm:text-2xl font-semibold mt-2 break-words">{nextStudy.title}</h3>

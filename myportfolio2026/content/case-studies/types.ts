@@ -52,6 +52,7 @@ export const caseStudyFeatureSchema = z.object({
         .optional(),
     image: z.string().optional(),
     stat: z.string().optional(),
+    kicker: z.string().optional(),
 });
 
 export const caseStudySchema = z.object({
@@ -79,6 +80,13 @@ export const caseStudySchema = z.object({
         )
         .optional(),
     features: z.array(caseStudyFeatureSchema).optional(),
+    theme: z
+        .object({
+            accent: z.string(),
+            surface: z.string(),
+            tile: z.string(),
+        })
+        .optional(),
     sections: z.array(caseStudySectionSchema),
 });
 

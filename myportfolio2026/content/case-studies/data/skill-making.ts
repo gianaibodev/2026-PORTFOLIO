@@ -42,14 +42,14 @@ export const skillMaking: CaseStudy = {
         },
         {
             title: "Installed and tested",
-            description: "Design skills from GitHub, including impeccable, huashu-design and taste-skill, tried on real work.",
+            description: "Design skills from GitHub, including impeccable, huashu-design and taste-skill, used on real projects.",
             icon: "layers",
             preview: "skill-list",
             size: "normal",
         },
         {
             title: "Reusable standards",
-            description: "Requests start from my way of working instead of a blank prompt.",
+            description: "Every request starts from my way of working, not a blank prompt.",
             icon: "sparkles",
             preview: "prompt-compare",
             size: "wide",
@@ -59,14 +59,14 @@ export const skillMaking: CaseStudy = {
         {
             title: "Why Skills",
             body: [
-                "Skills package how I want work done, so a request starts from my standards instead of a blank prompt. I install and test frontend design skills from GitHub and write my own where nothing fits.",
+                "Skills package how I want work done, so a request starts from my standards instead of a blank prompt. I install frontend design skills from GitHub and write my own where nothing fits.",
             ],
             highlights: ["Reusable standards", "Installed and tested", "Written to fit"],
         },
         {
             title: "The Triage Router",
             body: [
-                "With several design skills installed, picking the right one became its own task. I had Claude design a fourth skill, frontend-skill-picker, that reads a raw idea and hands it to the best-fit skill automatically.",
+                "With several design skills installed, choosing the right one became its own step. frontend-skill-picker reads a raw idea and hands it to the best-fit skill automatically.",
             ],
             highlights: ["Automatic skill selection", "Less prompt overhead"],
         },

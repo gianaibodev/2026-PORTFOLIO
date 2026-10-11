@@ -30,7 +30,7 @@ export function PixelHeader({
   useEffect(() => setLowEnd(isLowEndDevice()), []);
 
   return (
-    <div className="relative w-full h-[310px] sm:h-[360px] md:h-[410px] pt-[60px] sm:pt-[70px] overflow-hidden">
+    <div className="relative w-full pt-[84px] sm:pt-[104px] overflow-hidden">
       {lowEnd ? (
         /* Static CSS mesh-gradient approximation of the WebGL shader —
            same palette, zero GPU cost. The shader animates at speed 0.05,
@@ -67,9 +67,9 @@ export function PixelHeader({
           />
         </>
       )}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/70" />
 
-      <div className={`relative container mx-auto px-4 sm:px-6 py-8 sm:py-10 md:py-12 text-left h-full flex flex-col justify-end ${maxWidth}`}>
+      <div className={`relative container mx-auto px-4 sm:px-6 pt-6 pb-8 sm:pt-8 sm:pb-10 md:pb-12 text-left flex flex-col ${maxWidth}`}>
         <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

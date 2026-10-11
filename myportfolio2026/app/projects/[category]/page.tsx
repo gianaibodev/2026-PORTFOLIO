@@ -228,7 +228,7 @@ export default function CategoryPage() {
 
         <PixelHeader
           title={category.name}
-          subtitle="These are the hero projects that define this discipline. Skim the highlights here, then deep-dive into the full trillions-level case studies."
+          subtitle="These are the hero projects that define this discipline. Skim the highlights here, then open a case study for the full breakdown."
           colors={["#3b82f6", "#10b981", "#f59e0b", "#8b5cf6"]}
           backLink={
             <Link href="/projects" className="flex items-center gap-2 text-sm font-medium text-white/80 hover:text-white transition-colors">
