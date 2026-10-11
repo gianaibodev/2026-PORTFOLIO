@@ -318,7 +318,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                         <p className="text-sm text-gray-200 mt-2 line-clamp-2 leading-relaxed">{lib.purpose}</p>
                       </div>
                       {lib.url && (
-                        <Link href={lib.url} target="_blank" className="text-[10px] text-blue-400 font-bold flex items-center gap-1 hover:text-blue-300 transition-colors">
+                        <Link href={lib.url} target="_blank" rel="noreferrer" className="text-[10px] text-blue-400 font-bold flex items-center gap-1 hover:text-blue-300 transition-colors">
                           VIEW SOURCE <ExternalLink className="w-3 h-3" />
                         </Link>
                       )}

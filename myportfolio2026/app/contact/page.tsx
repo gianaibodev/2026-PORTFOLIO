@@ -8,6 +8,7 @@ import {
     Mail,
     Linkedin,
     Github,
+    PenTool,
     Instagram,
     Facebook,
     Twitter,
@@ -38,6 +39,14 @@ const socialLinks = [
         icon: Github,
         color: "bg-zinc-800",
         description: "Code repositories & contributions"
+    },
+    {
+        name: "Behance",
+        label: "gianaiboboyero",
+        href: "https://www.behance.net/gianaiboboyero",
+        icon: PenTool,
+        color: "bg-[#0057ff]",
+        description: "Design case studies & full showcases"
     },
     {
         name: "Instagram",
