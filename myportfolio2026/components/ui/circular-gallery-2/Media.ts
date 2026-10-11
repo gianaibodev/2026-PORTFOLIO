@@ -1,6 +1,45 @@
 import { Mesh, OGLRenderingContext, Plane, Program, Renderer, Texture, Transform } from "ogl";
 import { Title } from "./Title";
 
+/**
+ * The gallery duplicates its item list to fake infinite scrolling, so the same
+ * image URL is requested by several Media instances. Uploading one GPU texture
+ * per instance costs (width * height * 4 * ~1.33 for mipmaps) bytes each, which
+ * at 810x1080 is ~4.6MB a piece. Share one texture per URL per GL context
+ * instead; the duplicates are visually identical anyway.
+ */
+interface SharedTexture {
+    texture: Texture;
+    img: HTMLImageElement;
+}
+
+const textureCache = new WeakMap<OGLRenderingContext, Map<string, SharedTexture>>();
+
+function getSharedTexture(gl: OGLRenderingContext, url: string): SharedTexture {
+    let perContext = textureCache.get(gl);
+    if (!perContext) {
+        perContext = new Map();
+        textureCache.set(gl, perContext);
+    }
+
+    const cached = perContext.get(url);
+    if (cached) return cached;
+
+    const texture = new Texture(gl, { generateMipmaps: true });
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.decoding = "async";
+    // Upload to the GPU once, when the first instance's image arrives.
+    img.addEventListener("load", () => {
+        texture.image = img;
+    });
+    img.src = url;
+
+    const entry: SharedTexture = { texture, img };
+    perContext.set(url, entry);
+    return entry;
+}
+
 interface MediaParams {
     geometry: Plane;
     gl: OGLRenderingContext;
@@ -97,9 +136,7 @@ export class Media {
     }
 
     createShader() {
-        const texture = new Texture(this.gl, {
-            generateMipmaps: true,
-        });
+        const { texture, img } = getSharedTexture(this.gl, this.image);
         this.program = new Program(this.gl, {
             depthTest: false,
             depthWrite: false,
@@ -165,16 +202,18 @@ export class Media {
             transparent: true,
         });
 
-        const img = new Image();
-        img.crossOrigin = "anonymous";
-        img.src = this.image;
-        img.onload = () => {
-            texture.image = img;
+        const applyImageSizes = () => {
             this.program.uniforms.uImageSizes.value = [
                 img.naturalWidth,
                 img.naturalHeight,
             ];
         };
+
+        if (img.complete && img.naturalWidth) {
+            applyImageSizes();
+        } else {
+            img.addEventListener("load", applyImageSizes);
+        }
     }
 
     createMesh() {
