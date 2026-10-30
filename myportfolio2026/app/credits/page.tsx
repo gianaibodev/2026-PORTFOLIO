@@ -11,6 +11,8 @@ const libraries = [
   { name: "Tailwind CSS", href: "https://tailwindcss.com", desc: "Styling" },
   { name: "Framer Motion", href: "https://www.framer.com/motion", desc: "Animation" },
   { name: "Radix UI", href: "https://www.radix-ui.com", desc: "Components" },
+  { name: "border-beam", href: "https://github.com/Jakubantalik/Libraries.dev", desc: "Animated CTA border" },
+  { name: "@paper-design/shaders-react", href: "https://github.com/paper-design/shaders-react", desc: "Shaders" },
   { name: "OGL", href: "https://github.com/oframe/ogl", desc: "WebGL: hero shader & gallery" },
   { name: "Lucide", href: "https://lucide.dev", desc: "Icons" },
   { name: "next-themes", href: "https://github.com/pacocoursey/next-themes", desc: "Theme" },

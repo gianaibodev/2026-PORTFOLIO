@@ -20,10 +20,15 @@ export const devfest2023: CaseStudy = {
     ],
     heroImage: "/legacy/assets/demopic/8.jpg",
     gallery: [
+        "/legacy/assets/demopic/16-a.jpg",
         "/legacy/assets/demopic/16-c.jpg",
         "/legacy/assets/demopic/16-e.jpg",
         "/legacy/assets/demopic/16-b.jpg",
         "/legacy/assets/demopic/16-d.jpg",
+        "/legacy/assets/demopic/13-c.jpg",
+        "/projects/behance/devfest-2023/1.webp",
+        "/projects/behance/devfest-2023/2.webp",
+        "/projects/behance/devfest-2023/3.webp",
     ],
     deliverables: [
         "Main Event Poster",

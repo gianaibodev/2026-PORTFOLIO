@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import MacOSMenuBar from "@/components/ui/mac-os-menu-bar";
 import { m, LazyMotion, domAnimation } from "framer-motion";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { GitPullRequest, ExternalLink } from "lucide-react";
 import { PixelHeader } from "@/components/ui/pixel-header";
+import ParticleText from "@/components/ui/particle-text-canvas";
 import { ResponsiveImage } from "@/components/ui/responsive-image";
 
 type ApiStudy = {
@@ -54,6 +56,7 @@ type SimplifiedCategory = {
 };
 
 export default function CategoryPage() {
+  const [showLoader, setShowLoader] = useState(true);
   const [mounted, setMounted] = useState(false);
   const [apiCategories, setApiCategories] = useState<ApiCategory[]>([]);
   const [dataReady, setDataReady] = useState(false);
@@ -129,6 +132,31 @@ export default function CategoryPage() {
     setMounted(true);
   }, []);
 
+  const isLoading = showLoader || !mounted || !dataReady;
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const PROJECTS_INTRO_KEY = "projectsIntroShown_v1";
+    const hasSeen = sessionStorage.getItem(PROJECTS_INTRO_KEY);
+
+    if (hasSeen) {
+      setShowLoader(false);
+      return;
+    }
+
+    // A brief intro, once per session
+    const delay = 1100;
+
+    const timer = setTimeout(() => {
+      setShowLoader(false);
+      sessionStorage.setItem(PROJECTS_INTRO_KEY, "true");
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Show loading state until mounted and data is ready
   if (!mounted || !dataReady) {
     return (
       <div className="w-full min-h-screen bg-background flex items-center justify-center">
@@ -157,6 +185,34 @@ export default function CategoryPage() {
     );
   }
 
+  if (showLoader) {
+    const overlay = (
+      <div
+        className="fixed inset-0 z-[99999] min-h-[100dvh] overflow-hidden cursor-pointer bg-[#0a0f18]"
+        style={{ height: "100dvh" }}
+        onClick={() => setShowLoader(false)}
+      >
+        <ParticleText hideInteractionHint />
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowLoader(false);
+          }}
+          className="fixed bottom-24 left-1/2 -translate-x-1/2 z-[100000] px-8 py-3 rounded-full backdrop-blur-3xl bg-white/80 dark:bg-white/[0.03] border border-zinc-300 dark:border-white/[0.12] text-foreground dark:text-white text-sm font-bold shadow-2xl transition-all hover:bg-white/90 dark:hover:bg-white/[0.05] active:scale-95"
+        >
+          SKIP INTRO
+        </button>
+        <div className="fixed bottom-12 left-1/2 -translate-x-1/2 z-[100000] text-white/50 text-[10px] uppercase tracking-widest font-medium pointer-events-none">
+          Tap or click to enter
+        </div>
+      </div>
+    );
+    if (typeof document !== "undefined" && document.body) {
+      return createPortal(overlay, document.body);
+    }
+    return overlay;
+  }
+
   return (
     <LazyMotion features={domAnimation}>
       <div className="w-full min-h-screen bg-background">
@@ -165,8 +221,10 @@ export default function CategoryPage() {
         <PixelHeader
           title={category.name}
           subtitle="These are the hero projects that define this discipline. Skim the highlights here, then open a case study for the full breakdown."
+          colors={["#3b82f6", "#10b981", "#f59e0b", "#8b5cf6"]}
           backLink={
-            <Link href="/projects" className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="/projects" className="flex items-center gap-2 text-sm font-medium text-white/80 hover:text-white transition-colors">
+              <GitPullRequest className="size-4" />
               <span>← Back to all folders</span>
             </Link>
           }
@@ -186,7 +244,7 @@ export default function CategoryPage() {
                   className="rounded-[24px] sm:rounded-[32px] border border-zinc-300 dark:border-white/10 backdrop-blur-2xl bg-white/5 dark:bg-white/[0.02] p-4 sm:p-6 md:p-8 grid gap-4 sm:gap-6 md:gap-8 md:grid-cols-[2fr,1fr]"
                 >
                   <div className="space-y-3 sm:space-y-4 order-2 md:order-1">
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
                       {study.category} • {study.year}
                     </p>
                     <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold break-words">{study.title}</h2>
@@ -229,7 +287,7 @@ export default function CategoryPage() {
                       cover={true}
                     />
                     <div className="rounded-xl sm:rounded-2xl border border-zinc-300 dark:border-white/10 p-3 sm:p-4 text-xs sm:text-sm space-y-2">
-                      <p className="text-xs text-muted-foreground">Roles</p>
+                      <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Roles</p>
                       <p className="text-muted-foreground break-words">{study.roles.join(" • ")}</p>
                     </div>
                   </div>

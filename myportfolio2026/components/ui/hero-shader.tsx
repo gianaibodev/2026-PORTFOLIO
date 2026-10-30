@@ -175,9 +175,18 @@ function HeroShaderCanvas({
     let last = performance.now();
     let elapsed = state.program.uniforms.u_time.value * 2;
 
+    // If the GPU cannot hold frame rate, trade resolution rather than smoothness.
+    let slowFrames = 0;
+
     const frame = (now: number) => {
-      elapsed += (now - last) / 1000;
+      const delta = now - last;
+      elapsed += delta / 1000;
       last = now;
+      slowFrames = delta > 24 && delta < 200 ? slowFrames + 1 : Math.max(0, slowFrames - 1);
+      if (slowFrames > 20 && state.renderer.dpr > 0.6) {
+        state.renderer.dpr = 0.6;
+        state.resize();
+      }
       state.program.uniforms.u_time.value = elapsed * 0.5;
       state.renderer.render({ scene: state.scene });
       raf = requestAnimationFrame(frame);
@@ -204,7 +213,8 @@ export default function HeroShader() {
 
   useEffect(() => {
     if (isLowEndDevice()) return;
-    setDpr(Math.min(window.devicePixelRatio || 1, 1.5));
+    // The shader is soft light, so extra pixels add cost and no visible detail.
+    setDpr(1);
 
     // Hold the canvas back until the page has painted and gone idle.
     let idle = 0;

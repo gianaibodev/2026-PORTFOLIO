@@ -20,9 +20,14 @@ export const createx: CaseStudy = {
     ],
     heroImage: "/legacy/assets/demopic/2.png",
     gallery: [
-        "/legacy/assets/demopic/14.jpg",
-        "/legacy/assets/demopic/14-a.png",
-        "/legacy/assets/demopic/CreateX Logo.png",
+        "/projects/behance/createx/1.webp",
+        "/projects/behance/createx/2.webp",
+        "/projects/behance/createx/3.webp",
+        "/projects/behance/createx/4.webp",
+        "/projects/behance/createx/5.webp",
+        "/projects/behance/createx/6.webp",
+        "/projects/behance/createx/7.webp",
+        "/projects/behance/createx/8.webp",
     ],
     deliverables: ["Film camp posters", "Conference brochures", "Social media assets"],
     links: [

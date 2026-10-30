@@ -18,11 +18,13 @@ export const gdsc2022: CaseStudy = {
         "Organized 30+ events with 5,000+ participants",
         "First chapter globally to host an International GDSC Collab",
     ],
-    heroImage: "/framer/projects/secrecy-hero.webp",
+    heroImage: "/legacy/assets/demopic/5-a.jpeg",
     gallery: [
-        "/framer/projects/secrecy-hero.webp",
-        "/framer/projects/secrecy-2.webp",
-        "/framer/projects/secrecy-3.webp",
+        "/legacy/assets/demopic/5-a.jpeg",
+        "/legacy/assets/demopic/5-b.jpg",
+        "/legacy/assets/demopic/5-c.jpg",
+        "/legacy/assets/demopic/5.jpg",
+        "/legacy/assets/demopic/5-f.jpg",
     ],
     deliverables: [
         "Hierarchical Core Team System",

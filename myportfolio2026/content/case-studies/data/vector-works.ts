@@ -20,9 +20,10 @@ export const vectorWorks: CaseStudy = {
     ],
     heroImage: "/projects/vector-works/hero.webp",
     gallery: [
-        "/projects/vector-works/hero.webp",
-        "/projects/vector-works/2.webp",
-        "/projects/vector-works/3.webp",
+        "/projects/behance/vector-works/1.webp",
+        "/projects/behance/vector-works/2.webp",
+        "/projects/behance/vector-works/3.webp",
+        "/projects/behance/vector-works/4.webp",
     ],
     deliverables: ["Vector Asset Library", "Social Media Graphics", "Print-Ready Illustrations"],
     links: [

@@ -18,13 +18,16 @@ export const googleEvents: CaseStudy = {
         "30+ GDSC partners globally for Perennial",
         "Nationwide reach for LAWIG Info Session",
     ],
-    heroImage: "/framer/projects/gdgoc-hero.webp",
+    heroImage: "/framer/projects/capitol-hero.webp",
     gallery: [
-        "/framer/projects/gdgoc-hero.webp",
+        "/framer/projects/capitol-hero.webp",
+        "/framer/projects/gdgoc-2.webp",
         "/framer/projects/gdgoc-3.webp",
         "/framer/projects/gdgoc-4.webp",
         "/framer/projects/gdgoc-5.webp",
         "/framer/projects/gdgoc-6.webp",
+        "/legacy/assets/demopic/13-a.jpg",
+        "/legacy/assets/demopic/3.jpg",
     ],
     deliverables: ["Event Posters", "Branding Systems", "Social Media Kits"],
     sections: [

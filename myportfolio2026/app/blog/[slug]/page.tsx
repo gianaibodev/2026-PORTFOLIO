@@ -90,45 +90,41 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       <PixelHeader
         title={study.title}
         subtitle={study.subtitle || study.summary}
+        colors={["#ec4899", "#8b5cf6", "#3b82f6", "#10b981"]}
         categoryIcon={<GitPullRequest className="size-4" />}
         categoryText={study.category}
         backLink={
-          <Link href="/blog" className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          <Link href="/blog" className="flex items-center gap-2 text-sm font-medium text-white/80 hover:text-white transition-colors">
+            <GitPullRequest className="size-4" />
             <span>← Back to Case Studies</span>
           </Link>
         }
+        maxWidth="max-w-5xl"
       />
 
-      <article className="relative pb-12 sm:pb-16 md:pb-24 px-5 sm:px-8 mt-2">
-        <div className="wrap space-y-12 !px-0 sm:space-y-16">
-          <header className="space-y-10 sm:space-y-14">
-            <ResponsiveImage
-              src={study.heroImage}
-              alt={`${study.title} - Hero image showcasing ${study.category.toLowerCase()} project design and visual identity`}
-              priority
-              sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, 1200px"
-              cover={true}
-            />
+      <article className="relative pb-12 sm:pb-16 md:pb-24 px-4 sm:px-6 lg:px-10 mt-8 sm:mt-12">
+        <div className="max-w-5xl mx-auto space-y-8 sm:space-y-12 md:space-y-16">
+          <header className="space-y-6 sm:space-y-8 md:space-y-10">
             <div className="grid gap-4 sm:gap-6 sm:grid-cols-1 md:grid-cols-2">
-              <div className="space-y-3 sm:space-y-4">
-                <h2 className="text-xs sm:text-sm text-muted-foreground">Roles & Stack</h2>
+              <div className="rounded-3xl border border-zinc-300 dark:border-white/10 bg-white/5 dark:bg-white/[0.03] p-4 sm:p-6 space-y-3 sm:space-y-4">
+                <h2 className="text-xs sm:text-sm uppercase tracking-[0.3em] text-muted-foreground">Roles & Stack</h2>
                 <div className="flex flex-wrap gap-2 text-xs sm:text-sm text-muted-foreground">
                   {study.roles.map((role) => (
-                    <span key={role} className="px-2 sm:px-3 py-1 rounded-full bg-foreground/[0.07]">
+                    <span key={role} className="px-2 sm:px-3 py-1 rounded-full bg-white/10">
                       {role}
                     </span>
                   ))}
                 </div>
                 <div className="flex flex-wrap gap-2 text-xs text-muted-foreground/80">
                   {study.tools.map((tool) => (
-                    <span key={tool} className="px-2 sm:px-3 py-1 rounded-full bg-foreground/[0.04]">
+                    <span key={tool} className="px-2 sm:px-3 py-1 rounded-full bg-white/5">
                       {tool}
                     </span>
                   ))}
                 </div>
               </div>
-              <div className="space-y-3 sm:space-y-4">
-                <h2 className="text-xs sm:text-sm text-muted-foreground">Impact</h2>
+              <div className="rounded-3xl border border-zinc-300 dark:border-white/10 bg-white/5 dark:bg-white/[0.03] p-4 sm:p-6 space-y-3 sm:space-y-4">
+                <h2 className="text-xs sm:text-sm uppercase tracking-[0.3em] text-muted-foreground">Impact</h2>
                 <ul className="space-y-2 text-sm sm:text-base text-muted-foreground">
                   {study.metrics.map((metric) => (
                     <li key={metric} className="flex items-start gap-2 sm:gap-3">
@@ -141,7 +137,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                   <div className="pt-8 sm:pt-12 space-y-4">
                     <div className="flex items-center gap-3 text-muted-foreground mb-2">
                       <div className="h-px flex-1 bg-white/10" />
-                      <span className="text-xs font-bold">Project Expansion</span>
+                      <span className="text-[10px] uppercase tracking-[0.2em] font-bold">Project Expansion</span>
                       <div className="h-px flex-1 bg-white/10" />
                     </div>
 
@@ -166,11 +162,11 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                               "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700",
                               isBehance
                                 ? "bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/20 via-transparent to-transparent"
-                                : "bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/10 via-transparent to-transparent"
+                                : "bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/10 via-transparent to-transparent"
                             )} />
 
                             <div className="relative z-10 flex flex-col gap-1">
-                              <span className="text-xs font-bold text-blue-400 opacity-80 group-hover:opacity-100 transition-opacity">
+                              <span className="text-xs font-bold text-blue-400 uppercase tracking-widest opacity-80 group-hover:opacity-100 transition-opacity">
                                 {isBehance ? "Full Showcase Available" : "External Resource"}
                               </span>
                               <span className="text-lg sm:text-xl font-bold text-foreground tracking-tight">
@@ -196,19 +192,26 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 ) : null}
               </div>
             </div>
+            <ResponsiveImage
+              src={study.heroImage}
+              alt={`${study.title} - Hero image showcasing ${study.category.toLowerCase()} project design and visual identity`}
+              priority
+              sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, 1200px"
+              cover={true}
+            />
           </header>
 
           <section className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="border-t border-border pt-4">
-              <p className="text-xs sm:text-sm text-muted-foreground">Year</p>
-              <p className="text-xl font-medium mt-1">{study.year}</p>
+            <div className="rounded-3xl border border-zinc-300 dark:border-white/10 p-4 sm:p-6 bg-white/5 dark:bg-white/[0.03]">
+              <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-muted-foreground">Year</p>
+              <p className="text-2xl sm:text-3xl font-semibold mt-2">{study.year}</p>
             </div>
-            <div className="border-t border-border pt-4">
-              <p className="text-xs sm:text-sm text-muted-foreground">Category</p>
-              <p className="text-xl font-medium mt-1 break-words">{study.category}</p>
+            <div className="rounded-3xl border border-zinc-300 dark:border-white/10 p-4 sm:p-6 bg-white/5 dark:bg-white/[0.03]">
+              <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-muted-foreground">Category</p>
+              <p className="text-2xl sm:text-3xl font-semibold mt-2 break-words">{study.category}</p>
             </div>
-            <div className="border-t border-border pt-4 sm:col-span-2 lg:col-span-1">
-              <p className="text-xs sm:text-sm text-muted-foreground">Deliverables</p>
+            <div className="rounded-3xl border border-zinc-300 dark:border-white/10 p-4 sm:p-6 bg-white/5 dark:bg-white/[0.03] sm:col-span-2 lg:col-span-1">
+              <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-muted-foreground">Deliverables</p>
               <ul className="mt-2 space-y-1 text-muted-foreground text-sm sm:text-base">
                 {study.deliverables.map((item) => (
                   <li key={item} className="leading-tight">
@@ -226,9 +229,9 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           {study.sections.map((section) => (
             <section
               key={section.title}
-              className="max-w-3xl space-y-3 sm:space-y-4"
+              className="rounded-[24px] sm:rounded-[32px] border border-zinc-300 dark:border-white/10 bg-white/5 dark:bg-white/[0.02] p-4 sm:p-6 md:p-8 space-y-3 sm:space-y-4"
             >
-              <h2 className="text-2xl font-medium tracking-tight sm:text-3xl">{section.title}</h2>
+              <h2 className="text-xl sm:text-2xl font-semibold">{section.title}</h2>
               <div className="space-y-4 sm:space-y-5 text-muted-foreground text-base sm:text-lg leading-relaxed">
                 {section.body.map((paragraph, index) => {
                   const parts = parseCodeBlocks(paragraph);
@@ -269,7 +272,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               {section.highlights?.length ? (
                 <div className="flex flex-wrap gap-3 pt-4">
                   {section.highlights.map((highlight) => (
-                    <span key={highlight} className="px-4 py-2 rounded-full bg-foreground/[0.07] text-sm text-muted-foreground">
+                    <span key={highlight} className="px-4 py-2 rounded-full bg-white/10 text-sm text-muted-foreground">
                       {highlight}
                     </span>
                   ))}
@@ -292,7 +295,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                   {shaderCredits.map((shader) => (
                     <div key={shader.name} className="p-6 rounded-3xl border border-zinc-400 dark:border-white/20 bg-slate-950/80 dark:bg-black/80 space-y-3 shadow-2xl">
                       <h3 className="text-xl font-bold text-white">{shader.name}</h3>
-                      <p className="text-xs text-blue-400 font-bold">{shader.author} • {shader.source}</p>
+                      <p className="text-xs text-blue-400 font-bold uppercase tracking-wider">{shader.author} • {shader.source}</p>
                       <p className="text-base text-gray-100 dark:text-gray-200 leading-relaxed font-normal">{shader.description}</p>
                     </div>
                   ))}
@@ -301,8 +304,8 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
               <section className="space-y-6">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-xl bg-blue-500/10 border border-blue-500/20">
-                    <Layers className="w-5 h-5 text-blue-500" />
+                  <div className="p-2 rounded-xl bg-purple-500/10 border border-purple-500/20">
+                    <Layers className="w-5 h-5 text-purple-500" />
                   </div>
                   <h2 className="text-2xl sm:text-3xl font-semibold">Core Technology Stack</h2>
                 </div>
@@ -311,7 +314,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                     <div key={lib.name} className="p-5 rounded-2xl border border-zinc-300 dark:border-white/10 bg-slate-900/60 flex flex-col justify-between gap-3 group hover:border-zinc-500 dark:hover:border-white/30 transition-all shadow-lg">
                       <div>
                         <h4 className="font-bold text-base text-white">{lib.name}</h4>
-                        <p className="text-xs text-blue-300 font-bold">{lib.version} • {lib.license}</p>
+                        <p className="text-[10px] text-blue-300 uppercase tracking-widest font-bold">{lib.version} • {lib.license}</p>
                         <p className="text-sm text-gray-200 mt-2 line-clamp-2 leading-relaxed">{lib.purpose}</p>
                       </div>
                       {lib.url && (
@@ -339,7 +342,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           {study.gallery.length > 0 ? (
             <section className="space-y-6">
               <div>
-                <p className="text-sm text-muted-foreground">Gallery</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">Gallery</p>
                 <h2 className="text-3xl font-semibold">Process visuals</h2>
               </div>
               <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
@@ -357,7 +360,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
           <section className="rounded-[24px] sm:rounded-[32px] border border-zinc-300 dark:border-white/10 bg-white/5 dark:bg-white/[0.02] p-4 sm:p-6 md:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 sm:gap-6">
             <div className="flex-1 min-w-0">
-              <p className="text-xs sm:text-sm text-muted-foreground">Explore next</p>
+              <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-muted-foreground">Explore next</p>
               <h3 className="text-xl sm:text-2xl font-semibold mt-2 break-words">{nextStudy.title}</h3>
               <p className="text-sm sm:text-base text-muted-foreground mt-2 sm:mt-3 max-w-xl break-words">{nextStudy.summary}</p>
             </div>

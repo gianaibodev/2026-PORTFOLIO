@@ -18,7 +18,7 @@ export const appRedesigns: CaseStudy = {
         "Simplified service discovery for ILOVEUSAM",
         "Uniform UI styles established across all platforms",
     ],
-    heroImage: "/legacy/assets/demopic/7.jpg",
+    heroImage: "/legacy/assets/demopic/6.jpg",
     gallery: [
         "/legacy/assets/demopic/6.jpg",
         "/legacy/assets/demopic/Metrobank.gif",

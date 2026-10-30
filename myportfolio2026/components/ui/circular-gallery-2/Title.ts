@@ -1,5 +1,5 @@
 import { Mesh, OGLRenderingContext, Plane, Program, Renderer } from "ogl";
-import { autoBind, createTextTexture } from "./utils";
+import { autoBind, createTextTexture, sharedProgram } from "./utils";
 
 interface TitleParams {
     gl: OGLRenderingContext;
@@ -42,7 +42,7 @@ export class Title {
             this.textColor,
         );
         const geometry = new Plane(this.gl);
-        const program = new Program(this.gl, {
+        const program = sharedProgram(this.gl, "title", {
             vertex: `
         attribute vec3 position;
         attribute vec2 uv;

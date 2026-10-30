@@ -433,7 +433,7 @@ const MacOSMenuBar: React.FC<MacOSMenuBarProps> = ({
       className="fixed top-2 sm:top-4 left-1/2 -translate-x-1/2 w-[calc(100%-1rem)] sm:w-[calc(100%-2rem)] max-w-7xl z-[100] pt-[env(safe-area-inset-top,0px)]"
     >
       <div
-        className={`backdrop-blur-3xl transition-all duration-300 border shadow-lg ${className} bg-white/70 dark:bg-black/30 border-zinc-200 dark:border-white/10 saturate-150 ${isPending ? 'opacity-90' : 'opacity-100'}`}
+        className={`backdrop-blur-sm transition-all duration-300 border shadow-lg ${className} bg-white/85 dark:bg-black/70 border-zinc-200 dark:border-white/10 saturate-150 ${isPending ? 'opacity-90' : 'opacity-100'}`}
         style={{
           height: "40px",
           borderRadius: "14px",

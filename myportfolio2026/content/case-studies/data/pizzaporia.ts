@@ -23,6 +23,8 @@ export const pizzaporia: CaseStudy = {
         "/legacy/assets/demopic/Pizzaporia.gif",
         "/legacy/assets/demopic/7-a.jpg",
         "/legacy/assets/demopic/7.jpg",
+        "/projects/behance/pizzaporia/1.webp",
+        "/projects/behance/pizzaporia/2.webp",
     ],
     deliverables: ["UX Audit", "UI Redesign", "Interactive Prototype", "Visual Harmony System"],
     links: [

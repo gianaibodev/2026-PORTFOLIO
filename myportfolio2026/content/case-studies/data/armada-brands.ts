@@ -32,6 +32,7 @@ export const armadaBrands: CaseStudy = {
         "/projects/armada/2.avif",
         "/projects/armada/3.avif",
         "/projects/armada/4.avif",
+        "/framer/projects/armada-2.webp",
     ],
     deliverables: [
         "Campaign Identity Systems (7.7 & 8.8)",

@@ -20,11 +20,12 @@ export const photoManipulation: CaseStudy = {
     ],
     heroImage: "/framer/projects/photoman-hero.webp",
     gallery: [
-        "/framer/projects/photoman-hero.webp",
-        "/framer/projects/photoman-2.webp",
-        "/framer/projects/photoman-3.webp",
-        "/framer/projects/photoman-4.webp",
-        "/framer/projects/photoman-5.webp",
+        "/projects/behance/photo-manipulation/1.webp",
+        "/projects/behance/photo-manipulation/2.webp",
+        "/projects/behance/photo-manipulation/3.webp",
+        "/projects/behance/photo-manipulation/4.webp",
+        "/projects/behance/photo-manipulation/5.webp",
+        "/projects/behance/photo-manipulation/6.webp",
     ],
     deliverables: ["Composited Photography Series", "Exhibition Prints", "Visual Style Guide"],
     links: [

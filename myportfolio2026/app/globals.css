@@ -200,7 +200,7 @@
   }
 
   .btn-quiet {
-    @apply border border-foreground/20 bg-background/40 text-foreground backdrop-blur-sm hover:border-foreground/45;
+    @apply border border-foreground/20 bg-background/70 text-foreground hover:border-foreground/45;
   }
 
   .link-arrow {
@@ -208,7 +208,7 @@
   }
 
   blockquote em {
-    @apply not-italic text-foreground;
+    @apply not-italic text-blue-600 dark:text-blue-300;
   }
 
   /* Before the shader loads, and permanently on low-end devices. */
@@ -265,6 +265,94 @@
       animation-timeline: view();
       animation-range: entry 0% entry 35%;
     }
+  }
+}
+
+/* The fan of work under the hero. Phones get a swipeable rail. */
+.fan {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 0 1.25rem 1rem;
+  scrollbar-width: none;
+}
+
+.fan-slot {
+  flex: 0 0 78vw;
+  scroll-snap-align: center;
+}
+
+.fan-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: var(--muted);
+  box-shadow: 0 24px 60px -20px rgb(4 12 28 / 0.65);
+  outline-offset: 4px;
+}
+
+.fan-title {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 2.5rem 1rem 0.875rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #fff;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.75), transparent);
+}
+
+@media (min-width: 768px) {
+  .fan {
+    display: block;
+    position: relative;
+    /* Tall enough for the outer cards, which drop away along the arc. */
+    height: clamp(330px, 34vw, 640px);
+    overflow: visible;
+    padding: 0;
+  }
+
+  .fan-slot {
+    --fan-to: translateX(calc(var(--offset) * 9.5vw)) translateY(calc(var(--distance) * var(--distance) * 0.55vw)) rotate(calc(var(--offset) * 5deg));
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: clamp(280px, 30vw, 500px);
+    margin-left: calc(clamp(280px, 30vw, 500px) / -2);
+    transform: var(--fan-to);
+    transform-origin: 50% 120%;
+  }
+
+  .fan-slot:hover,
+  .fan-slot:focus-within {
+    z-index: 30 !important;
+  }
+
+  .fan-card {
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .fan-card:hover,
+  .fan-card:focus-visible {
+    transform: translateY(-7%) scale(1.06);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .fan-slot {
+        animation: fan-deal linear backwards;
+        animation-timeline: view();
+        animation-range: cover 0% cover 38%;
+      }
+    }
+  }
+}
+
+@keyframes fan-deal {
+  from {
+    transform: translateY(18%) rotate(0deg) scale(0.86);
   }
 }
 

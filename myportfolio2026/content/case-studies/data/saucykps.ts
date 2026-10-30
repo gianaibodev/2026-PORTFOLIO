@@ -28,6 +28,9 @@ export const saucykps: CaseStudy = {
         "/lib/133_1x_shots_so.png",
         "/lib/180_1x_shots_so.png",
         "/lib/289_1x_shots_so.png",
+        "/lib/755_1x_shots_so.png",
+        "/lib/389_1x_shots_so.png",
+        "/lib/943_1x_shots_so.png",
     ],
     deliverables: [
         "React/Vite Admin Dashboard",

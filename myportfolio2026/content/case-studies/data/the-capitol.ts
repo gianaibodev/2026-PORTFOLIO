@@ -19,7 +19,21 @@ export const theCapitol: CaseStudy = {
         "Secured 10+ local business sponsorships",
     ],
     heroImage: "/framer/projects/la-vida-hero.webp",
-    gallery: ["/framer/projects/capitol-hero.webp", "/framer/projects/capitol-2.webp", "/framer/projects/capitol-3.webp", "/framer/projects/capitol-4.webp", "/framer/projects/capitol-5.webp", "/framer/projects/capitol-6.webp"],
+    gallery: [
+        "/projects/behance/the-capitol/1.webp",
+        "/projects/behance/the-capitol/2.webp",
+        "/projects/behance/the-capitol/3.webp",
+        "/projects/behance/the-capitol/4.webp",
+        "/projects/behance/the-capitol/5.webp",
+        "/projects/behance/the-capitol/6.webp",
+        "/projects/behance/the-capitol/7.webp",
+        "/projects/behance/the-capitol/8.webp",
+        "/projects/behance/the-capitol/9.webp",
+        "/projects/behance/the-capitol/10.webp",
+        "/projects/behance/the-capitol/11.webp",
+        "/projects/behance/the-capitol/12.webp",
+        "/projects/behance/the-capitol/13.webp",
+    ],
     deliverables: ["Logo suite", "Brand guidelines", "Social media kit", "Print collateral"],
     links: [
         { label: "View on Behance", href: "https://www.behance.net/gallery/230895797/THE-CAPITOL-GDGOC" }

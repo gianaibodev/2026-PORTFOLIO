@@ -32,7 +32,6 @@ export const valtara: CaseStudy = {
         "Game Merchandise Concepts",
     ],
     links: [
-        { label: "View on Behance", href: "https://www.behance.net/gallery/230722097/VALTARA-GAME-UI-UX-DESIGN" }
     ],
     sections: [
         {

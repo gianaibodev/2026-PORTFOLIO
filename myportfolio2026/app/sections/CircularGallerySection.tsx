@@ -26,7 +26,7 @@ export function CircularGallerySection() {
                 </p>
             </div>
             <LazyMount
-                rootMargin="300px"
+                rootMargin="900px"
                 className="mt-10"
                 placeholder={<div className="h-[380px] w-full sm:h-[480px] md:h-[540px] lg:h-[600px]" />}
             >

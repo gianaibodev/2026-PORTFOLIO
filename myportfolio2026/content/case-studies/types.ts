@@ -1,17 +1,18 @@
 import { z } from "zod";
 
+// Display order across /projects and /blog: design disciplines lead.
 export const caseStudyCategories = [
-    "AI & Machine Learning",
-    "Web Development",
-    "Community & Events",
-    "Internships",
     "Branding",
     "UI/UX",
-    "Photography",
-    "Concepts",
-    "Games & Experiments",
     "3D Design",
     "Illustration",
+    "Concepts",
+    "Photography",
+    "Games & Experiments",
+    "Community & Events",
+    "Internships",
+    "Web Development",
+    "AI & Machine Learning",
 ] as const;
 
 export type CaseStudyCategory = (typeof caseStudyCategories)[number];

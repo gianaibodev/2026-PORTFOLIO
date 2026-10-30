@@ -39,6 +39,7 @@ export class App {
     lowEnd: boolean = false;
     paused: boolean = false;
     visibilityObserver?: IntersectionObserver;
+    buildRaf = 0;
     boundOnVisibilityChange!: () => void;
 
     // Bound event listeners
@@ -82,8 +83,8 @@ export class App {
     createRenderer() {
         this.renderer = new Renderer({
             alpha: true,
-            antialias: true,
-            dpr: Math.min(window.devicePixelRatio || 1, this.lowEnd ? 1 : 2),
+            antialias: false,
+            dpr: Math.min(window.devicePixelRatio || 1, this.lowEnd ? 1 : 1.25),
         });
         this.gl = this.renderer.gl;
         this.gl.clearColor(0, 0, 0, 0);
@@ -131,25 +132,37 @@ export class App {
 
         const galleryItems = items && items.length > 0 ? items : defaultItems;
         this.mediasImages = [...galleryItems, ...galleryItems];
-        this.medias = this.mediasImages.map((data, index) => {
-            return new Media({
-                geometry: this.planeGeometry,
-                gl: this.gl,
-                image: data.image,
-                index,
-                length: this.mediasImages.length,
-                renderer: this.renderer,
-                scene: this.scene,
-                screen: this.screen,
-                text: data.text,
-                viewport: this.viewport,
-                bend,
-                textColor,
-                borderRadius,
-                font,
-                imageScale,
-            });
-        });
+        // Each card compiles its own shaders. Build two per frame rather than
+        // all forty programs in one blocking burst as the gallery scrolls in.
+        const total = this.mediasImages.length;
+        this.medias = [];
+        let index = 0;
+        const buildBatch = () => {
+            for (const end = Math.min(index + 2, total); index < end; index++) {
+                const data = this.mediasImages[index];
+                this.medias.push(
+                    new Media({
+                        geometry: this.planeGeometry,
+                        gl: this.gl,
+                        image: data.image,
+                        index,
+                        length: total,
+                        renderer: this.renderer,
+                        scene: this.scene,
+                        screen: this.screen,
+                        text: data.text,
+                        viewport: this.viewport,
+                        bend,
+                        textColor,
+                        borderRadius,
+                        font,
+                        imageScale,
+                    }),
+                );
+            }
+            if (index < total) this.buildRaf = window.requestAnimationFrame(buildBatch);
+        };
+        buildBatch();
     }
 
     onTouchDown(e: MouseEvent | TouchEvent) {
@@ -281,6 +294,7 @@ export class App {
     destroy() {
         this.paused = true;
         window.cancelAnimationFrame(this.raf);
+        window.cancelAnimationFrame(this.buildRaf);
         this.visibilityObserver?.disconnect();
         document.removeEventListener("visibilitychange", this.boundOnVisibilityChange);
         window.removeEventListener("resize", this.boundOnResize);

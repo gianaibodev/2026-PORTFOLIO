@@ -32,10 +32,10 @@ const categoryColors: Record<CategoryColorKey, string> = {
 
 // Priority categories that should appear first (pinned/starred)
 const PINNED_CATEGORIES = [
-  "AI & Machine Learning",
-  "Web Development",
-  "Community & Events",
-  "Internships",
+  "Branding",
+  "UI/UX",
+  "3D Design",
+  "Illustration",
 ];
 
 type ApiCategory = {

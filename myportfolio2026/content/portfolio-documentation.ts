@@ -17,6 +17,13 @@ export interface LibraryCredit {
 
 export const shaderCredits: ShaderCredit[] = [
   {
+    name: "MeshGradient & Dithering",
+    author: "Paper Design",
+    source: "@paper-design/shaders-react",
+    description: "Dynamic multi-color mesh gradients combined with an overlay dithering pass to create a unique pixel-art editorial header.",
+    license: "MIT"
+  },
+  {
     name: "Adaptive Wave Shader",
     author: "Community Open Source",
     source: "GLSL Fragment Shader",

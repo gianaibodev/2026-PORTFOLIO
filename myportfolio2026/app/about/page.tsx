@@ -45,8 +45,10 @@ export default function AboutPage() {
         subtitle={copyMode === "plain"
           ? "I'm Gian Aibo C. Boyero, a Computer Science graduate blending technical precision with high-end creative direction. Currently exploring the intersection of AI, design systems, and luxury interfaces."
           : "GIAN AIBO CHUA BOYERO. Blending technical precision with high-end creative direction. Specializing in AI-driven interfaces and luxury digital experiences."}
+        colors={["#3b82f6", "#10b981", "#f59e0b", "#ec4899"]}
         categoryIcon={<GraduationCap className="size-4" />}
         categoryText="Portfolio 2025"
+        maxWidth="max-w-7xl"
       >
         <div className="mt-6 flex justify-center">
           <a
@@ -75,34 +77,34 @@ export default function AboutPage() {
                 <span className="px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-medium">97%</span>
               </div>
             </m.div>
-            <m.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }} className="rounded-2xl p-6 border border-blue-500/30 dark:border-blue-500/20 bg-blue-500/10">
+            <m.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }} className="rounded-2xl p-6 border border-emerald-500/30 dark:border-emerald-500/20 bg-emerald-500/10">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-3 h-3 bg-blue-500 rounded-full" />
-                <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">Rank</span>
+                <div className="w-3 h-3 bg-emerald-500 rounded-full" />
+                <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">Rank</span>
               </div>
-              <div className="text-2xl md:text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">#1</div>
+              <div className="text-2xl md:text-3xl font-bold text-emerald-600 dark:text-emerald-400 mb-2">#1</div>
               <div className="flex flex-wrap gap-1.5">
-                <span className="px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-medium">of 7,042 · 1st Year</span>
+                <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-medium">of 7,042 · 1st Year</span>
               </div>
             </m.div>
-            <m.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="rounded-2xl p-6 border border-blue-500/30 dark:border-blue-500/20 bg-blue-500/10">
+            <m.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="rounded-2xl p-6 border border-amber-500/30 dark:border-amber-500/20 bg-amber-500/10">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-3 h-3 bg-blue-500 rounded-full" />
-                <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">Honors</span>
+                <div className="w-3 h-3 bg-amber-500 rounded-full" />
+                <span className="text-sm font-semibold text-amber-600 dark:text-amber-400">Honors</span>
               </div>
-              <div className="text-2xl md:text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">Cum Laude</div>
+              <div className="text-2xl md:text-3xl font-bold text-amber-600 dark:text-amber-400 mb-2">Cum Laude</div>
               <div className="flex flex-wrap gap-1.5">
-                <span className="px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-medium">2025</span>
+                <span className="px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-600 dark:text-amber-400 text-xs font-medium">2025</span>
               </div>
             </m.div>
-            <m.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }} className="rounded-2xl p-6 border border-blue-500/30 dark:border-blue-500/20 bg-blue-500/10">
+            <m.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }} className="rounded-2xl p-6 border border-violet-500/30 dark:border-violet-500/20 bg-violet-500/10">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-3 h-3 bg-blue-500 rounded-full" />
-                <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">Certifications</span>
+                <div className="w-3 h-3 bg-violet-500 rounded-full" />
+                <span className="text-sm font-semibold text-violet-600 dark:text-violet-400">Certifications</span>
               </div>
-              <div className="text-2xl md:text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">32</div>
+              <div className="text-2xl md:text-3xl font-bold text-violet-600 dark:text-violet-400 mb-2">32</div>
               <div className="flex flex-wrap gap-1.5">
-                <span className="px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-medium">Google, Microsoft, IBM, Canva, DataCamp, GitHub, YouTube</span>
+                <span className="px-2.5 py-0.5 rounded-full bg-violet-500/20 text-violet-600 dark:text-violet-400 text-xs font-medium">Google, Microsoft, IBM, Canva, DataCamp, GitHub, YouTube</span>
               </div>
             </m.div>
           </div>
@@ -147,35 +149,35 @@ export default function AboutPage() {
                 </button>
               </div>
             </div>
-            <div className="bg-blue-500/10 rounded-2xl p-6 border border-blue-500/30 dark:border-blue-500/20">
+            <div className="bg-green-500/10 rounded-2xl p-6 border border-green-500/30 dark:border-green-500/20">
               <div className="flex items-center gap-2 mb-3">
-                <div className="w-3 h-3 bg-blue-500 rounded-full" />
+                <div className="w-3 h-3 bg-green-500 rounded-full" />
                 <h3 className="text-lg font-bold">Senior High School</h3>
               </div>
               <p className="text-sm text-muted-foreground mb-3">STEM • Liceo De La Salle Bacolod</p>
               <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-semibold">With Highest Honors</span>
+                <span className="px-3 py-1 rounded-full bg-green-500/20 text-green-600 dark:text-green-400 text-xs font-semibold">With Highest Honors</span>
               </div>
             </div>
-            <div className="bg-blue-500/10 rounded-2xl p-6 border border-blue-500/30 dark:border-blue-500/20">
+            <div className="bg-orange-500/10 rounded-2xl p-6 border border-orange-500/30 dark:border-orange-500/20">
               <div className="flex items-center gap-2 mb-3">
-                <div className="w-3 h-3 bg-blue-500 rounded-full" />
+                <div className="w-3 h-3 bg-orange-500 rounded-full" />
                 <h3 className="text-lg font-bold">Junior High School</h3>
               </div>
               <p className="text-sm text-muted-foreground mb-3">Holy Infant Academy</p>
               <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-semibold">With Highest Honors</span>
-                <span className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-semibold">Rank 1 of Batch</span>
+                <span className="px-3 py-1 rounded-full bg-orange-500/20 text-orange-600 dark:text-orange-400 text-xs font-semibold">With Highest Honors</span>
+                <span className="px-3 py-1 rounded-full bg-orange-500/20 text-orange-600 dark:text-orange-400 text-xs font-semibold">Rank 1 of Batch</span>
               </div>
             </div>
-            <div className="bg-blue-500/10 rounded-2xl p-6 border border-blue-500/30 dark:border-blue-500/20">
+            <div className="bg-pink-500/10 rounded-2xl p-6 border border-pink-500/30 dark:border-pink-500/20">
               <div className="flex items-center gap-2 mb-3">
-                <div className="w-3 h-3 bg-blue-500 rounded-full" />
+                <div className="w-3 h-3 bg-pink-500 rounded-full" />
                 <h3 className="text-lg font-bold">Elementary</h3>
               </div>
               <p className="text-sm text-muted-foreground mb-3">Holy Infant Academy</p>
               <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-semibold">Batch Valedictorian</span>
+                <span className="px-3 py-1 rounded-full bg-pink-500/20 text-pink-600 dark:text-pink-400 text-xs font-semibold">Batch Valedictorian</span>
               </div>
             </div>
           </div>
@@ -184,7 +186,7 @@ export default function AboutPage() {
 
       {/* Marquee: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS */}
       <div className="marquee-fade-edges overflow-hidden border-y border-zinc-300 dark:border-white/10 bg-white/[0.02] py-4">
-        <div className="animate-marquee flex w-max whitespace-nowrap text-xs md:text-sm md: font-medium text-muted-foreground" style={{ "--duration": "45s" } as React.CSSProperties}>
+        <div className="animate-marquee flex w-max whitespace-nowrap text-xs md:text-sm uppercase tracking-[0.25em] md:tracking-[0.3em] font-medium text-muted-foreground" style={{ "--duration": "45s" } as React.CSSProperties}>
           {[0, 1].map((copy) => (
             <div key={copy} className="flex shrink-0" {...(copy === 1 ? { "aria-hidden": true } : {})}>
               {Array.from({ length: 8 }).map((_, i) => (
@@ -201,7 +203,7 @@ export default function AboutPage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
             <div>
               <h2 className="text-3xl md:text-5xl font-black mb-4 flex items-center gap-3 tracking-tighter">
-                <Trophy className="w-10 h-10 text-blue-500" />
+                <Trophy className="w-10 h-10 text-yellow-500" />
                 Awards & Achievements
               </h2>
               <p className="text-muted-foreground text-lg max-w-xl">A condensed view of major creative and academic wins. Explore the full history below.</p>
@@ -226,36 +228,36 @@ export default function AboutPage() {
                   <div key={i} className="p-4 rounded-2xl bg-white/5 border border-white/5 text-sm font-medium leading-relaxed">{h}</div>
                 ))}
                 {accolades.college.awards.slice(0, 3).map((a, i) => (
-                  <div key={i} className="p-4 rounded-2xl bg-blue-500/5 border border-blue-500/10 text-sm italic opacity-80">{a}</div>
+                  <div key={i} className="p-4 rounded-2xl bg-amber-500/5 border border-amber-500/10 text-sm italic opacity-80">{a}</div>
                 ))}
               </div>
             </div>
 
-            <div className="p-8 rounded-[32px] border border-blue-500/20 bg-blue-500/5">
+            <div className="p-8 rounded-[32px] border border-emerald-500/20 bg-emerald-500/5">
               <h3 className="text-xl font-bold mb-6 flex items-center gap-3">
-                <div className="w-2.5 h-2.5 bg-blue-500 rounded-full" />
+                <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full" />
                 Affiliations
               </h3>
               <div className="space-y-4">
                 {accolades.college.affiliations.slice(0, 8).map((a, i) => (
-                  <div key={i} className="p-4 rounded-2xl bg-white/5 border border-white/5 text-sm font-medium text-blue-600 dark:text-blue-400">{a}</div>
+                  <div key={i} className="p-4 rounded-2xl bg-white/5 border border-white/5 text-sm font-medium text-emerald-600 dark:text-emerald-400">{a}</div>
                 ))}
               </div>
             </div>
 
-            <div className="p-8 rounded-[32px] border border-blue-500/20 bg-blue-500/5">
+            <div className="p-8 rounded-[32px] border border-orange-500/20 bg-orange-500/5">
               <h3 className="text-xl font-bold mb-6 flex items-center gap-3">
-                <div className="w-2.5 h-2.5 bg-blue-500 rounded-full" />
+                <div className="w-2.5 h-2.5 bg-orange-500 rounded-full" />
                 Prior Honors
               </h3>
               <div className="space-y-4">
                 <div className="p-5 rounded-2xl bg-white/5 border border-white/5">
-                  <p className="text-xs font-bold text-muted-foreground mb-3">Senior High School</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">Senior High School</p>
                   <p className="text-sm font-bold">With Highest Honors</p>
                   <p className="text-xs text-muted-foreground mt-1">Principal&apos;s Distinction Award</p>
                 </div>
                 <div className="p-5 rounded-2xl bg-white/5 border border-white/5">
-                  <p className="text-xs font-bold text-muted-foreground mb-3">Junior High School</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">Junior High School</p>
                   <p className="text-sm font-bold">First Honors (Rank 1)</p>
                   <p className="text-xs text-muted-foreground mt-1">10+ Academic Awards</p>
                 </div>
@@ -269,7 +271,7 @@ export default function AboutPage() {
 
       {/* Marquee: AWARDS • ACHIEVEMENTS • WINS • AFFILIATIONS */}
       <div className="marquee-fade-edges overflow-hidden border-y border-zinc-300 dark:border-white/10 bg-white/[0.02] py-4">
-        <div className="animate-marquee flex w-max whitespace-nowrap text-xs md:text-sm md: font-medium text-muted-foreground" style={{ "--duration": "45s" } as React.CSSProperties}>
+        <div className="animate-marquee flex w-max whitespace-nowrap text-xs md:text-sm uppercase tracking-[0.25em] md:tracking-[0.3em] font-medium text-muted-foreground" style={{ "--duration": "45s" } as React.CSSProperties}>
           {[0, 1].map((copy) => (
             <div key={copy} className="flex shrink-0" {...(copy === 1 ? { "aria-hidden": true } : {})}>
               {Array.from({ length: 8 }).map((_, i) => (
@@ -295,20 +297,20 @@ export default function AboutPage() {
               .map(([provider, names]) => {
                 const card = {
                   Google: "border-blue-500/30 dark:border-blue-500/20 bg-blue-500/10",
-                  Microsoft: "border-blue-500/30 dark:border-blue-500/20 bg-blue-500/10",
-                  IBM: "border-blue-500/30 dark:border-blue-500/20 bg-blue-500/10",
-                  Canva: "border-blue-500/30 dark:border-blue-500/20 bg-blue-500/10",
-                  DataCamp: "border-blue-500/30 dark:border-blue-500/20 bg-blue-500/10",
+                  Microsoft: "border-sky-500/30 dark:border-sky-500/20 bg-sky-500/10",
+                  IBM: "border-violet-500/30 dark:border-violet-500/20 bg-violet-500/10",
+                  Canva: "border-cyan-500/30 dark:border-cyan-500/20 bg-cyan-500/10",
+                  DataCamp: "border-green-500/30 dark:border-green-500/20 bg-green-500/10",
                   GitHub: "border-zinc-500/30 dark:border-zinc-500/20 bg-zinc-500/10",
                   YouTube: "border-red-500/30 dark:border-red-500/20 bg-red-500/10",
                 }[provider] || "border-zinc-300 dark:border-white/10 bg-white/5";
 
                 const dot = {
                   Google: "bg-blue-500",
-                  Microsoft: "bg-blue-500",
-                  IBM: "bg-blue-500",
-                  Canva: "bg-blue-500",
-                  DataCamp: "bg-blue-500",
+                  Microsoft: "bg-sky-500",
+                  IBM: "bg-violet-500",
+                  Canva: "bg-cyan-500",
+                  DataCamp: "bg-green-500",
                   GitHub: "bg-zinc-500",
                   YouTube: "bg-red-500",
                 }[provider] || "bg-zinc-500";

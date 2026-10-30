@@ -1,4 +1,32 @@
-import { OGLRenderingContext, Texture } from "ogl";
+import { OGLRenderingContext, Program, Texture } from "ogl";
+
+type ProgramOptions = ConstructorParameters<typeof Program>[1];
+
+const linkedPrograms = new WeakMap<OGLRenderingContext, Map<string, Program>>();
+
+/**
+ * Compiling and linking is the slow part of creating a card, and every card and
+ * title uses identical shader source. Link once per kind, then give each
+ * instance its own uniforms on top of the same GL program.
+ */
+export function sharedProgram(gl: OGLRenderingContext, kind: string, options: ProgramOptions): Program {
+    let programs = linkedPrograms.get(gl);
+    if (!programs) {
+        programs = new Map();
+        linkedPrograms.set(gl, programs);
+    }
+
+    const linked = programs.get(kind);
+    if (!linked) {
+        const program = new Program(gl, options);
+        programs.set(kind, program);
+        return program;
+    }
+
+    const instance: Program = Object.create(linked);
+    instance.uniforms = options?.uniforms ?? {};
+    return instance;
+}
 
 /**
  * Creates a debounced function that delays invoking func until after wait milliseconds have elapsed.
@@ -71,5 +99,6 @@ export function createTextTexture(
     context.fillText(text, canvas.width / 2, canvas.height / 2);
     const texture = new Texture(gl, { generateMipmaps: false });
     texture.image = canvas;
+    texture.update();
     return { texture, width: canvas.width, height: canvas.height };
 }

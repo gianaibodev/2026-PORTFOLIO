@@ -1,5 +1,6 @@
 import { Mesh, OGLRenderingContext, Plane, Program, Renderer, Texture, Transform } from "ogl";
 import { Title } from "./Title";
+import { sharedProgram } from "./utils";
 
 /**
  * The gallery duplicates its item list to fake infinite scrolling, so the same
@@ -11,6 +12,20 @@ import { Title } from "./Title";
 interface SharedTexture {
     texture: Texture;
     img: HTMLImageElement;
+}
+
+const uploadQueue: Array<() => void> = [];
+let drainingUploads = false;
+
+function drainUploadQueue() {
+    if (drainingUploads) return;
+    drainingUploads = true;
+    const next = () => {
+        uploadQueue.shift()?.();
+        if (uploadQueue.length) requestAnimationFrame(next);
+        else drainingUploads = false;
+    };
+    requestAnimationFrame(next);
 }
 
 const textureCache = new WeakMap<OGLRenderingContext, Map<string, SharedTexture>>();
@@ -25,13 +40,25 @@ function getSharedTexture(gl: OGLRenderingContext, url: string): SharedTexture {
     const cached = perContext.get(url);
     if (cached) return cached;
 
-    const texture = new Texture(gl, { generateMipmaps: true });
+    const texture = new Texture(gl, { generateMipmaps: false });
     const img = new Image();
     img.crossOrigin = "anonymous";
     img.decoding = "async";
     // Upload to the GPU once, when the first instance's image arrives.
     img.addEventListener("load", () => {
-        texture.image = img;
+        // Decode off the main thread, then hand textures to the GPU one per
+        // frame so the gallery arriving never stalls scrolling.
+        img.decode()
+            .catch(() => undefined)
+            .then(() => {
+                uploadQueue.push(() => {
+                    // Upload now, not at first render: the gallery pauses while
+                    // off screen, so waiting would send every texture at once.
+                    texture.image = img;
+                    texture.update();
+                });
+                drainUploadQueue();
+            });
     });
     img.src = url;
 
@@ -137,7 +164,7 @@ export class Media {
 
     createShader() {
         const { texture, img } = getSharedTexture(this.gl, this.image);
-        this.program = new Program(this.gl, {
+        this.program = sharedProgram(this.gl, "media", {
             depthTest: false,
             depthWrite: false,
             vertex: `

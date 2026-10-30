@@ -5,22 +5,23 @@ import { ArrowUpRight, Sparkle, Star, Hash } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { PixelHeader } from "@/components/ui/pixel-header";
+import { useState } from "react";
 import { useCopyMode } from "@/components/copy-mode-provider";
 import type { CaseStudy } from "@/content/case-studies";
 
 // Priority categories that should appear first (pinned/starred)
 const PINNED_CATEGORIES = [
-  "AI & Machine Learning",
-  "Web Development",
-  "Community & Events",
-  "Internships",
+  "Branding",
+  "UI/UX",
+  "3D Design",
+  "Illustration",
 ];
 
 // Priority case studies that should appear first in "Highlighted work"
 const PRIORITY_CASE_STUDIES = [
-  "saucykps-bot-v1",
-  "gdg-bacolod-community-platform",
-  "capture-pixels-photography-portfolio",
+  "la-vida-2025-brand-system",
+  "the-capitol-party-branding",
+  "devcon-bacolod-branding",
 ];
 
 // Case studies to exclude from "Highlighted work" section
@@ -35,6 +36,32 @@ type BlogClientProps = {
     studies: CaseStudy[];
   }[];
 };
+
+// Most covers are near 4:3 and can fill the frame losing almost nothing. Posters
+// and wide banners would lose too much, so they stay whole on a blurred copy.
+function CardImage({ src, alt, sizes }: { src: string; alt: string; sizes: string }) {
+  const [keepWhole, setKeepWhole] = useState(false);
+
+  return (
+    <>
+      {keepWhole && (
+        <Image src={src} alt="" fill sizes={sizes} aria-hidden className="scale-110 object-cover opacity-60 blur-xl" />
+      )}
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes={sizes}
+        onLoad={(event) => {
+          const { naturalWidth, naturalHeight } = event.currentTarget;
+          const ratio = naturalWidth / naturalHeight;
+          setKeepWhole(ratio < 1.15 || ratio > 1.55);
+        }}
+        className={`transition-transform duration-500 group-hover:scale-105 ${keepWhole ? "object-contain" : "object-cover"}`}
+      />
+    </>
+  );
+}
 
 export default function BlogClient({ categories }: BlogClientProps) {
   const { copyMode } = useCopyMode();
@@ -65,6 +92,7 @@ export default function BlogClient({ categories }: BlogClientProps) {
         subtitle={copyMode === "plain"
           ? "Read how I approach problems, design solutions, and deliver results."
           : "Editorial-grade breakdowns of branding, product, and experience design: strategy, craft, and impact."}
+        colors={["#f59e0b", "#ec4899", "#8b5cf6", "#3b82f6"]}
         categoryIcon={<Sparkle className="size-4" />}
         categoryText="Case Studies"
       />
@@ -92,7 +120,7 @@ export default function BlogClient({ categories }: BlogClientProps) {
                     className="group flex items-center gap-3 p-4 rounded-2xl border border-zinc-200 dark:border-white/10 hover:border-zinc-400 dark:hover:border-white/30 bg-zinc-50 dark:bg-white/[0.02] hover:bg-zinc-100 dark:hover:bg-white/[0.05] transition-all hover:scale-[1.02] active:scale-[0.98]"
                   >
                     {isPinned && (
-                      <Star className="w-4 h-4 text-blue-400 fill-blue-400 flex-shrink-0" />
+                      <Star className="w-4 h-4 text-amber-400 fill-amber-400 flex-shrink-0" />
                     )}
                     <div className="flex-1 min-w-0">
                       <p className="font-semibold text-sm sm:text-base break-words group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors">
@@ -120,10 +148,10 @@ export default function BlogClient({ categories }: BlogClientProps) {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
                   <div className="flex items-center gap-3">
                     {isPinned && (
-                      <Star className="w-5 h-5 text-blue-400 fill-blue-400 flex-shrink-0" />
+                      <Star className="w-5 h-5 text-amber-400 fill-amber-400 flex-shrink-0" />
                     )}
                     <div>
-                      <p className="text-xs sm:text-sm text-muted-foreground/80">{category.name}</p>
+                      <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-muted-foreground/80">{category.name}</p>
                       <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mt-1 sm:mt-2">Highlighted work</h2>
                     </div>
                   </div>
@@ -160,16 +188,14 @@ export default function BlogClient({ categories }: BlogClientProps) {
                         href={`/blog/${study.slug}`}
                         className="group border border-zinc-200 dark:border-white/10 rounded-2xl sm:rounded-3xl p-4 sm:p-6 backdrop-blur-2xl bg-white dark:bg-white/[0.02] hover:border-zinc-400 dark:hover:border-white/30 transition-all flex flex-col gap-4 sm:gap-6"
                       >
-                        <div className="relative overflow-hidden rounded-xl sm:rounded-2xl h-40 sm:h-48 bg-muted/10">
-                          <Image
+                        <div className="relative aspect-[4/3] overflow-hidden rounded-xl sm:rounded-2xl bg-muted/10">
+                          <CardImage
                             src={study.heroImage}
                             alt={`${study.title} - ${study.category} project thumbnail`}
-                            fill
-                            className="object-contain transition-transform duration-500 group-hover:scale-105 rounded-xl sm:rounded-2xl"
-                            sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
                           />
                         </div>
-                        <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
+                        <div className="flex flex-wrap gap-2 text-xs uppercase tracking-[0.3em] text-muted-foreground">
                           <span>{study.category}</span>
                           <span>•</span>
                           <span>{study.year}</span>

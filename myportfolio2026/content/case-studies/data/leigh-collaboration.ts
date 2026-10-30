@@ -25,6 +25,10 @@ export const leighCollaboration: CaseStudy = {
         "/legacy/assets/demopic/17-e.jpg",
         "/legacy/assets/demopic/17-c.png",
         "/legacy/assets/demopic/13.jpg",
+        "/legacy/assets/demopic/13-b.jpg",
+        "/legacy/assets/demopic/12.jpg",
+        "/legacy/assets/demopic/12-a.png",
+        "/legacy/assets/demopic/5-e.jpg",
     ],
     deliverables: [
         "Countdown Poster Series",

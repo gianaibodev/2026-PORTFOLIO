@@ -231,7 +231,7 @@ export function AnimatedFolder({ title, projects, className, color, href, isPinn
                 >
                     {isPinned && (
                         <Star
-                            className="w-4 h-4 text-blue-400 fill-blue-400 flex-shrink-0"
+                            className="w-4 h-4 text-amber-400 fill-amber-400 flex-shrink-0"
                             aria-label="Featured category"
                         />
                     )}
