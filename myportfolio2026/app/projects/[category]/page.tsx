@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import MacOSMenuBar from "@/components/ui/mac-os-menu-bar";
 import { m, LazyMotion, domAnimation } from "framer-motion";
@@ -10,6 +10,7 @@ import { GitPullRequest, ExternalLink } from "lucide-react";
 import { PixelHeader } from "@/components/ui/pixel-header";
 import ParticleText from "@/components/ui/particle-text-canvas";
 import { ResponsiveImage } from "@/components/ui/responsive-image";
+import { useFullPageLoading } from "@/components/full-page-loading-context";
 
 type ApiStudy = {
   slug: string;
@@ -133,6 +134,11 @@ export default function CategoryPage() {
   }, []);
 
   const isLoading = showLoader || !mounted || !dataReady;
+  const { setActive } = useFullPageLoading();
+  useLayoutEffect(() => {
+    setActive(isLoading);
+    return () => setActive(false);
+  }, [isLoading, setActive]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -145,8 +151,10 @@ export default function CategoryPage() {
       return;
     }
 
-    // A brief intro, once per session
-    const delay = 1100;
+    // Show loader for 5-6 seconds for the first time
+    const minDelay = 5000; // 5 seconds
+    const maxDelay = 6000; // 6 seconds
+    const delay = Math.random() * (maxDelay - minDelay) + minDelay;
 
     const timer = setTimeout(() => {
       setShowLoader(false);

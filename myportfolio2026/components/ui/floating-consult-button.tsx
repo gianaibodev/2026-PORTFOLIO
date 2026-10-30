@@ -1,5 +1,6 @@
 'use client';
 
+import { useFullPageLoading } from "@/components/full-page-loading-context";
 import React, { useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -40,8 +41,11 @@ export const FloatingConsultButton = ({
   ctaButtonAction = () => window.open("https://calendar.google.com/calendar/render?action=TEMPLATE&add=gianaibo.dev@gmail.com", "_blank"),
   position = { bottom: "2rem", right: "2rem" },
 }: FloatingConsultButtonProps) => {
+  const { isActive } = useFullPageLoading();
   const [isOpen, setIsOpen] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
+
+  if (isActive) return null;
 
   const lgButtonSize = buttonSize || 76;
   const smButtonSize = buttonSize ? buttonSize * 0.8 : 60;

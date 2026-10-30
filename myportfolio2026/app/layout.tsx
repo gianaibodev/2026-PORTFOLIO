@@ -1,3 +1,5 @@
+import { HoverScramble } from "@/components/hover-scramble";
+import { FullPageLoadingProvider } from "@/components/full-page-loading-context";
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -80,9 +82,11 @@ export default function RootLayout({
           <SmoothScroll>
             <PerformanceProvider>
               <CopyModeProvider>
+                <FullPageLoadingProvider>
                   <FramerMotionProvider>
                     <RouteChangeHandler />
                     <SpotlightTracker />
+                    <HoverScramble />
                     <div aria-hidden className="scroll-progress" />
                     <div className="flex min-h-screen flex-col" suppressHydrationWarning>
                       <main className="flex-1">{children}</main>
@@ -92,6 +96,7 @@ export default function RootLayout({
                     <SpeedInsights />
                     <Analytics />
                   </FramerMotionProvider>
+                </FullPageLoadingProvider>
               </CopyModeProvider>
             </PerformanceProvider>
           </SmoothScroll>

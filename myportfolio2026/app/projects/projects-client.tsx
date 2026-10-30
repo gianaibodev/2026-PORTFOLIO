@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import MacOSMenuBar from "@/components/ui/mac-os-menu-bar";
 import { ProjectsSection } from "@/components/projects-section";
@@ -9,9 +9,11 @@ import { PixelHeader } from "@/components/ui/pixel-header";
 import ParticleText from "@/components/ui/particle-text-canvas";
 
 import { useCopyMode } from "@/components/copy-mode-provider";
+import { useFullPageLoading } from "@/components/full-page-loading-context";
 
 export default function ProjectsPage() {
   const { copyMode } = useCopyMode();
+  const { setActive } = useFullPageLoading();
   const [showLoader, setShowLoader] = useState(true);
 
   // Use a ref to track if user manually skipped (prevents race conditions)
@@ -19,6 +21,14 @@ export default function ProjectsPage() {
   // Store timeout ID so we can clear it if user skips early
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Lock scroll when loader is active
+  useLayoutEffect(() => {
+    setActive(showLoader);
+    return () => {
+      // Cleanup: ensure scroll is unlocked if component unmounts
+      if (showLoader) setActive(false);
+    };
+  }, [showLoader, setActive]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -33,12 +43,12 @@ export default function ProjectsPage() {
       return;
     }
 
-    // A brief intro, once per session
+    // Set a 10 SECOND timer (10000ms) before auto-fading
     timeoutRef.current = setTimeout(() => {
       if (!hasSkipped.current) {
         handleCloseLoader();
       }
-    }, 1100);
+    }, 10000); // 10 seconds
 
     return () => {
       // Cleanup timeout on unmount

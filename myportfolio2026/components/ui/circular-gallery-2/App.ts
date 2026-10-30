@@ -19,6 +19,26 @@ interface AppParams {
  * Main application class for the Circular Gallery.
  * Orchestrates the WebGL renderer, camera, scene, and interaction events.
  */
+/**
+ * ogl's Renderer requests every float and compressed texture extension up
+ * front. Each request is a blocking round trip to the GPU process, and together
+ * they stall the page for most of a second. This gallery uses none of them.
+ */
+function canvasWithoutUnusedExtensions() {
+    const canvas = document.createElement("canvas");
+    const getContext = canvas.getContext.bind(canvas) as typeof canvas.getContext;
+    canvas.getContext = ((type: string, attributes?: WebGLContextAttributes) => {
+        const gl = getContext(type as "webgl2", attributes);
+        if (gl) {
+            const getExtension = gl.getExtension.bind(gl);
+            gl.getExtension = ((name: string) =>
+                /texture|EXT_color_buffer_float/i.test(name) ? null : getExtension(name)) as typeof gl.getExtension;
+        }
+        return gl;
+    }) as typeof canvas.getContext;
+    return canvas;
+}
+
 export class App {
     container: HTMLElement;
     scrollSpeed: number;
@@ -82,6 +102,7 @@ export class App {
 
     createRenderer() {
         this.renderer = new Renderer({
+            canvas: canvasWithoutUnusedExtensions(),
             alpha: true,
             antialias: false,
             dpr: Math.min(window.devicePixelRatio || 1, this.lowEnd ? 1 : 1.25),

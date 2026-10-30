@@ -1,4 +1,5 @@
 'use client';
+import { useFullPageLoading } from '@/components/full-page-loading-context';
 import React from 'react';
 import type { ComponentProps, ReactNode } from 'react';
 import { m, useReducedMotion } from 'framer-motion';
@@ -58,6 +59,8 @@ const footerLinks: FooterSection[] = [
 ];
 
 export function Footer() {
+	const { isActive } = useFullPageLoading();
+	if (isActive) return null;
 
 	return (
 		<footer className="relative w-full border-t border-zinc-200 dark:border-white/10 pb-6">

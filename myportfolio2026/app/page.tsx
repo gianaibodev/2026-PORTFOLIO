@@ -1,6 +1,7 @@
 import { getAllCaseStudies } from "@/content/case-studies";
 import { ErrorBoundary } from "@/components/error-boundary";
 import MacOSMenuBar from "@/components/ui/mac-os-menu-bar";
+import { HomeIntro } from "@/components/home-intro";
 import { HeroSection } from "./sections/HeroSection";
 import { WorkFanSection } from "./sections/WorkFanSection";
 import { PortfolioSection } from "./sections/PortfolioSection";
@@ -71,6 +72,7 @@ export default function HomePage() {
   return (
     <ErrorBoundary>
       <div className="flex w-full flex-col overflow-x-clip selection:bg-blue-500/30">
+        <HomeIntro />
         <MacOSMenuBar />
         <HeroSection />
         <WorkFanSection projects={fan} />
