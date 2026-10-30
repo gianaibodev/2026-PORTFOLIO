@@ -380,6 +380,216 @@
   }
 }
 
+/* Case files: each pins, then recedes as the next arrives. */
+.case-slot + .case-slot {
+  margin-top: 1.5rem;
+}
+
+.case-file {
+  position: relative;
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--card);
+}
+
+.case-file::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--background);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Work index: one list, with the image trailing the cursor. */
+.work-index::after {
+  display: none;
+}
+
+.work-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-block: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.work-title {
+  font-size: clamp(1.375rem, 3.4vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  transition: color 0.25s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.work-meta {
+  flex-shrink: 0;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+.work-thumb {
+  display: none;
+}
+
+@media (hover: hover) and (min-width: 768px) {
+  .work-index:hover .work-title {
+    color: var(--muted-foreground);
+  }
+
+  .work-row:hover .work-title,
+  .work-row:focus-visible .work-title {
+    color: var(--foreground);
+    transform: translateX(0.75rem);
+  }
+
+  .work-row:hover .work-thumb {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    width: 340px;
+    height: 225px;
+    object-fit: cover;
+    border-radius: 1rem;
+    pointer-events: none;
+    box-shadow: 0 24px 60px -20px rgb(4 12 28 / 0.6);
+    transform: translate(calc(var(--x, 0px) + 28px), calc(var(--y, 0px) - 112px));
+  }
+}
+
+@media (min-width: 768px) {
+  .case-file {
+    grid-template-columns: 7fr 5fr;
+    min-height: min(70vh, 560px);
+  }
+
+  .case-slot {
+    position: sticky;
+    top: calc(5.5rem + var(--i) * 0.75rem);
+  }
+
+  .case-slot + .case-slot {
+    margin-top: 28vh;
+  }
+}
+
+@keyframes case-recede {
+  to { transform: scale(0.94); }
+}
+
+@keyframes case-dim {
+  to { opacity: 0.55; }
+}
+
+@media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+  @supports (animation-timeline: view()) {
+    .case-stack {
+      view-timeline: --cases block;
+    }
+
+    .case-slot:not(:last-child) .case-file {
+      transform-origin: 50% 0;
+      animation: case-recede linear both;
+      animation-timeline: --cases;
+      animation-range: contain calc((var(--i) + 0.2) * 100% / var(--cases)) contain calc((var(--i) + 1) * 100% / var(--cases));
+    }
+
+    .case-slot:not(:last-child) .case-file::after {
+      animation: case-dim linear both;
+      animation-timeline: --cases;
+      animation-range: contain calc((var(--i) + 0.2) * 100% / var(--cases)) contain calc((var(--i) + 1) * 100% / var(--cases));
+    }
+  }
+}
+
+/* Page progress, and the 3D render pinning open to full screen. */
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 120;
+  height: 2px;
+  background: var(--color-blue-500);
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
+}
+
+.zoom-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: var(--muted);
+}
+
+@keyframes page-progress {
+  to { transform: scaleX(1); }
+}
+
+@keyframes zoom-open {
+  from {
+    transform: scale(0.58);
+    border-radius: 2.5rem;
+  }
+  to {
+    transform: scale(1);
+    border-radius: 0;
+  }
+}
+
+@keyframes closing-type {
+  from {
+    transform: scale(0.72);
+    opacity: 0.2;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .scroll-progress {
+      animation: page-progress linear both;
+      animation-timeline: scroll(root);
+    }
+
+    .closing-type {
+      transform-origin: left center;
+      animation: closing-type linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 45%;
+    }
+
+    @media (min-width: 768px) {
+      .zoom-track {
+        height: 210vh;
+        view-timeline: --zoom block;
+      }
+
+      .zoom-stage {
+        position: sticky;
+        top: 0;
+        height: 100dvh;
+        margin-inline: calc(50% - 50vw);
+        overflow: hidden;
+      }
+
+      .zoom-frame {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: auto;
+        animation: zoom-open linear both;
+        animation-timeline: --zoom;
+        animation-range: contain 0% contain 75%;
+        will-change: transform;
+      }
+    }
+  }
+}
+
 /* Wow layer. Scroll-linked and pointer-linked only: nothing here runs while the
    page is still, and all of it falls back to a plain static layout. */
 .rail {

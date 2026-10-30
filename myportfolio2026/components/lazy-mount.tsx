@@ -14,6 +14,8 @@ type LazyMountProps = {
    */
   once?: boolean;
   className?: string;
+  /** Mount now regardless of scroll position, e.g. to warm up during idle time. */
+  force?: boolean;
 };
 
 export function LazyMount({
@@ -22,6 +24,7 @@ export function LazyMount({
   rootMargin = "200px",
   once = true,
   className,
+  force = false,
 }: LazyMountProps) {
   const ref = React.useRef<HTMLDivElement | null>(null);
   const [mounted, setMounted] = React.useState(false);
@@ -55,7 +58,7 @@ export function LazyMount({
 
   return (
     <div ref={ref} className={className}>
-      {mounted ? children : placeholder}
+      {mounted || force ? children : placeholder}
     </div>
   );
 }

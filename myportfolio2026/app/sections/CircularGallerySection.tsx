@@ -1,8 +1,10 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useCopyMode } from "@/components/copy-mode-provider";
 import { LazyMount } from "@/components/lazy-mount";
+import { usePerformance } from "@/components/performance-provider";
 
 const CircularGalleryDemo = dynamic(() => import("@/components/demos/circular-gallery-demo"), {
     ssr: false,
@@ -11,6 +13,22 @@ const CircularGalleryDemo = dynamic(() => import("@/components/demos/circular-ga
 
 export function CircularGallerySection() {
     const { copyMode } = useCopyMode();
+    const { isLowEndDevice } = usePerformance();
+
+    // Starting WebGL blocks for most of a second, which reads as a stall if it
+    // lands mid-scroll. On capable desktops, do it during idle time after load.
+    const [warm, setWarm] = useState(false);
+    useEffect(() => {
+        if (isLowEndDevice || window.innerWidth < 768 || !window.requestIdleCallback) return;
+        let idle = 0;
+        const timer = window.setTimeout(() => {
+            idle = window.requestIdleCallback(() => setWarm(true), { timeout: 3000 });
+        }, 2500);
+        return () => {
+            window.clearTimeout(timer);
+            if (idle) window.cancelIdleCallback(idle);
+        };
+    }, [isLowEndDevice]);
 
     return (
         <section className="section">
@@ -27,6 +45,7 @@ export function CircularGallerySection() {
             </div>
             <LazyMount
                 rootMargin="900px"
+                force={warm}
                 className="mt-10"
                 placeholder={<div className="h-[380px] w-full sm:h-[480px] md:h-[540px] lg:h-[600px]" />}
             >

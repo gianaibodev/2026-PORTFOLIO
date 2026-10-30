@@ -10,8 +10,8 @@ export function ContactSection() {
 
     return (
         <section id="contact-redirect" className="section">
-            <div className="wrap reveal">
-                <h2 className="text-5xl font-medium leading-[1.04] tracking-[-0.035em] md:text-7xl">
+            <div className="wrap">
+                <h2 className="closing-type text-5xl font-medium leading-[1.04] tracking-[-0.035em] md:text-7xl">
                     {plain ? "Ready to start?" : "Get In Touch"}
                 </h2>
                 <p className="lede">

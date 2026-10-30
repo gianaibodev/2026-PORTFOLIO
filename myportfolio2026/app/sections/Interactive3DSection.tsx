@@ -26,31 +26,36 @@ export function Interactive3DSection() {
                     )}
                 </p>
 
-                <div className="reveal mt-12 grid grid-cols-2 gap-3 md:mt-16 md:grid-cols-12 md:grid-rows-2 md:gap-4">
-                    <div className="unmask relative col-span-2 aspect-video overflow-hidden rounded-2xl bg-muted md:col-span-8 md:row-span-2 md:aspect-auto">
-                        <Image
-                            src="/projects/3d-works/hero.webp"
-                            alt="A rendered 3D sphere in brushed teal metal, split open around an amber core"
-                            fill
-                            sizes="(max-width: 768px) 100vw, 66vw"
-                            className="object-cover"
-                        />
+                <div className="zoom-track mt-12 md:mt-16">
+                    <div className="zoom-stage">
+                        <div className="zoom-frame">
+                            <Image
+                                src="/projects/3d-works/hero.webp"
+                                alt="A rendered 3D sphere in brushed teal metal, split open around an amber core"
+                                fill
+                                sizes="100vw"
+                                className="object-cover"
+                            />
+                        </div>
                     </div>
-                    <div className="relative aspect-video overflow-hidden rounded-2xl bg-muted md:col-span-4">
+                </div>
+
+                <div className="reveal mt-3 grid grid-cols-2 gap-3 md:mt-4 md:gap-4">
+                    <div className="relative aspect-video overflow-hidden rounded-2xl bg-muted">
                         <Image
                             src="/projects/3d-works/2.webp"
                             alt="Close view of the amber core inside the sphere"
                             fill
-                            sizes="(max-width: 768px) 50vw, 33vw"
+                            sizes="50vw"
                             className="object-cover"
                         />
                     </div>
-                    <div className="relative aspect-video overflow-hidden rounded-2xl bg-muted md:col-span-4">
+                    <div className="relative aspect-video overflow-hidden rounded-2xl bg-muted">
                         <Image
                             src="/projects/3d-works/3.webp"
                             alt="The same sphere with its core removed, showing the empty housing"
                             fill
-                            sizes="(max-width: 768px) 50vw, 33vw"
+                            sizes="50vw"
                             className="object-cover"
                         />
                     </div>

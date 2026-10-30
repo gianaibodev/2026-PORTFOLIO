@@ -83,6 +83,7 @@ export default function RootLayout({
                   <FramerMotionProvider>
                     <RouteChangeHandler />
                     <SpotlightTracker />
+                    <div aria-hidden className="scroll-progress" />
                     <div className="flex min-h-screen flex-col" suppressHydrationWarning>
                       <main className="flex-1">{children}</main>
                       <Footer />
