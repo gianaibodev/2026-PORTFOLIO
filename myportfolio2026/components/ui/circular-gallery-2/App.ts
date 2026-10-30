@@ -256,7 +256,7 @@ export class App {
         window.addEventListener("touchend", this.boundOnTouchUp, { passive: true });
 
         // Stop rendering entirely while the gallery is off-screen or the
-        // tab is hidden — nothing visible changes, but the GPU/CPU idle.
+        // tab is hidden, nothing visible changes, but the GPU/CPU idle.
         this.boundOnVisibilityChange = () => {
             if (document.hidden) this.pause();
             else this.resume();

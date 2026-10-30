@@ -3,7 +3,7 @@ import { CaseStudy } from "../types";
 export const joseApp: CaseStudy = {
     slug: "jose-app-prototype",
     projectId: "jose-app",
-    title: "JOSE — APP PROTOTYPE",
+    title: "JOSE App Prototype",
     subtitle: "Modernizing Social Engagement Through Mobile Design",
     summary:
         "JOSE is a conceptual mobile application designed to streamline social networking and community engagement. This prototype focuses on a minimalist user interface, intuitive navigation, and a 'human-first' approach to digital interaction.",

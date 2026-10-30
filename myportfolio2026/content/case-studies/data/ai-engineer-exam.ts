@@ -33,7 +33,7 @@ export const aiEngineerExam: CaseStudy = {
         {
             title: "Phase 1: Production-Ready AI Architectures",
             body: [
-                "Modern AI implementations require more than just prompt engineering—they demand strict schema compliance, deterministic validation, and robust error handling. This project focuses on building a system that meets these high production standards.",
+                "Modern AI implementations require more than just prompt engineering. They demand strict schema compliance, deterministic validation, and robust error handling. This project focuses on building a system that meets these high production standards.",
                 "The core objective was to architect a complete RAG (Retrieval-Augmented Generation) pipeline from the ground up: ingesting raw documentation, generating searchable embeddings, and serving contextually accurate responses.",
             ],
             highlights: [

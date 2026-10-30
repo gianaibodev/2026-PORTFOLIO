@@ -17,20 +17,6 @@ export interface LibraryCredit {
 
 export const shaderCredits: ShaderCredit[] = [
   {
-    name: "LightSpeed Loader",
-    author: "Matthias Hurrle (@atzedent)",
-    source: "Custom fragment shader integration",
-    description: "A high-performance WebGL 2.0 shader creating a 'warp speed' entrance effect. Features custom hue-shifting particle systems.",
-    license: "Custom"
-  },
-  {
-    name: "MeshGradient & Dithering",
-    author: "Paper Design",
-    source: "@paper-design/shaders-react",
-    description: "Dynamic multi-color mesh gradients combined with an overlay dithering pass to create a unique 'Pixel-Art editorial' aesthetic.",
-    license: "MIT"
-  },
-  {
     name: "Adaptive Wave Shader",
     author: "Community Open Source",
     source: "GLSL Fragment Shader",
@@ -49,19 +35,19 @@ export const shaderCredits: ShaderCredit[] = [
 export const libraryCredits: LibraryCredit[] = [
   {
     name: "Next.js 16",
-    version: "16.1.0",
+    version: "16.4.3",
     author: "Vercel",
     license: "MIT",
     purpose: "Framework for performance-critical routing and efficient server-side rendering.",
     url: "https://nextjs.org"
   },
   {
-    name: "Three.js & R3F",
-    version: "0.182.0",
-    author: "mrdoob / pmndrs",
-    license: "MIT",
-    purpose: "Engine for complex 3D visual logic and fragment shader execution.",
-    url: "https://threejs.org"
+    name: "OGL",
+    version: "1.0.11",
+    author: "Nathan Gordon",
+    license: "Unlicense",
+    purpose: "Minimal WebGL library running the hero shader and the travel gallery.",
+    url: "https://github.com/oframe/ogl"
   },
   {
     name: "Framer Motion",
@@ -70,14 +56,6 @@ export const libraryCredits: LibraryCredit[] = [
     license: "MIT",
     purpose: "Declarative orchestration of physics-based UI interaction.",
     url: "https://framer.com/motion"
-  },
-  {
-    name: "GSAP",
-    version: "3.14.2",
-    author: "GreenSock",
-    license: "Standard",
-    purpose: "Advanced timeline management for precisely sequenced motion paths.",
-    url: "https://gsap.com"
   }
 ];
 

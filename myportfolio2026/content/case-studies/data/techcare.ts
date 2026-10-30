@@ -3,7 +3,7 @@ import { CaseStudy } from "../types";
 export const techCare: CaseStudy = {
     slug: "techcare-gdgoc",
     projectId: "techcare",
-    title: "TECHCARE — GDGOC",
+    title: "TechCare: GDGoC",
     subtitle: "Empowering Communities Through Technology and Compassion",
     summary:
         "TechCare is a flagship initiative under Google Developer Groups On Campus (GDGOC) that bridges the gap between technical skill and social impact. This project highlights the visual storytelling, event coordination, and community-driven design used to support social causes through technology.",

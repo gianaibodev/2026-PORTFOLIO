@@ -3,10 +3,10 @@ import { CaseStudy } from "../types";
 export const laVida: CaseStudy = {
     slug: "la-vida-2025-brand-system",
     projectId: "la-vida",
-    title: "LA VIDA 2025 BRANDING",
+    title: "La Vida 2025 Branding",
     subtitle: "Event Promotion & Brand Identity for High-Energy Social Events",
     summary:
-        "La Vida is an event organizing team specializing in high-energy social events, including rave parties, club nights, and themed gatherings.\n\nWe manage all facets of event production—from venue selection and talent curation to logistics, technical production, and strategic promotion.",
+        "La Vida is an event organizing team specializing in high-energy social events, including rave parties, club nights, and themed gatherings.\n\nWe manage all facets of event production, from venue selection and talent curation to logistics, technical production, and strategic promotion.",
     date: "2025-03-01",
     year: 2025,
     category: "Branding",

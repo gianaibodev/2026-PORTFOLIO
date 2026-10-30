@@ -7,7 +7,7 @@ export const aiTravelGuide: CaseStudy = {
     subtitle:
         "Your Virtual Parisian Expert Powered by OpenAI",
     summary:
-        "An AI-powered travel assistant that leverages OpenAI's GPT models to provide personalized, expert-level travel recommendations for Paris.\n\nUsing advanced prompt engineering techniques, the system maintains conversational context and delivers authentic Parisian insights—from hidden gems to local cuisine recommendations.",
+        "An AI-powered travel assistant that leverages OpenAI's GPT models to provide personalized, expert-level travel recommendations for Paris.\n\nUsing advanced prompt engineering techniques, the system maintains conversational context and delivers authentic Parisian insights, from hidden gems to local cuisine recommendations.",
     date: "2025-01-20",
     year: 2025,
     category: "AI & Machine Learning",
@@ -35,7 +35,7 @@ export const aiTravelGuide: CaseStudy = {
             title: "The Situation: Static Travel Resources",
             body: [
                 "Travelers planning a trip to Paris face information overload: thousands of blog posts, outdated guidebooks, and generic recommendations that don't account for personal preferences. Finding authentic local experiences requires hours of research.",
-                "The opportunity was to create an interactive AI assistant that could answer travel questions naturally, provide personalized recommendations, and adapt to each user's interests—whether they're foodies, art lovers, or adventure seekers.",
+                "The opportunity was to create an interactive AI assistant that could answer travel questions naturally, provide personalized recommendations, and adapt to each user's interests, whether they're foodies, art lovers, or adventure seekers.",
             ],
             highlights: [
                 "Information Overload Problem",
@@ -46,7 +46,7 @@ export const aiTravelGuide: CaseStudy = {
         {
             title: "The Problem: Generic AI Doesn't Feel Local",
             body: [
-                "A basic ChatGPT query about Paris returns generic tourist information. The challenge was engineering a system that feels like talking to a knowledgeable local friend—someone who knows the best croissants in Le Marais, the optimal museum visiting times, and the neighborhoods tourists should avoid.",
+                "A basic ChatGPT query about Paris returns generic tourist information. The challenge was engineering a system that feels like talking to a knowledgeable local friend, someone who knows the best croissants in Le Marais, the optimal museum visiting times, and the neighborhoods tourists should avoid.",
                 "The key problems to solve: establishing a consistent persona, injecting domain-specific knowledge, and maintaining context across a multi-turn conversation.",
             ],
             highlights: [

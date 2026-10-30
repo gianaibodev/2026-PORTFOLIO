@@ -3,7 +3,7 @@ import { CaseStudy } from "../types";
 export const armadaBrands: CaseStudy = {
     slug: "armada-brands-internship",
     projectId: "armada-brands",
-    title: "Armada Brands — Internship",
+    title: "Armada Brands: Internship",
     subtitle: "From Startup K-Drama Dream to Reality: Scaling D2C Brands",
     summary:
         "Armada Brands is a Singapore-headquartered e-commerce company founded in 2021. Its core business model is to acquire and partner with promising digital-first D2C (Direct-to-Consumer) brands, primarily in Southeast Asia, and then provide them with the resources and expertise to scale. My role involved scaling partner brands like Nuprene and Goodies Nutrition through strategic resource allocation and creative operational support.",
@@ -44,7 +44,7 @@ export const armadaBrands: CaseStudy = {
         {
             title: "The 'Startup K-Drama' Reality",
             body: [
-                "Stepping into Armada Brands felt like entering the fast-paced world of a startup K-Drama—intense, dynamic, and full of potential. My role wasn't limited to making things 'look good'; it was about solving business problems through design.",
+                "Stepping into Armada Brands felt like entering the fast-paced world of a startup K-Drama: intense, dynamic, and full of potential. My role wasn't limited to making things 'look good'; it was about solving business problems through design.",
                 "I was immediately thrust into the deep end, handling diverse brand portfolios like Nuprene (luggage) and Goodies Nutrition. The challenge was to maintain distinct brand voices while executing rapid-fire promotional campaigns on tight deadlines.",
             ],
             highlights: [
@@ -57,7 +57,7 @@ export const armadaBrands: CaseStudy = {
             title: "Campaign Domination: 7.7 & 8.8",
             body: [
                 "The highlight of my residency was taking creative ownership during the critical 7.7 and 8.8 e-commerce mega-sales. These aren't just dates; they are the Super Bowls of Southeast Asian retail.",
-                "I produced a comprehensive suite of assets—from thumb-stopping Instagram Reels to high-conversion static banners for Shopee and Lazada. The result was a cohesive visual identity that cut through the noise, driving significant traffic and engagement during peak trading hours.",
+                "I produced a comprehensive suite of assets, from thumb-stopping Instagram Reels to high-conversion static banners for Shopee and Lazada. The result was a cohesive visual identity that cut through the noise, driving significant traffic and engagement during peak trading hours.",
             ],
             highlights: [
                 "Led Creative Strategy for Mega-Sales",

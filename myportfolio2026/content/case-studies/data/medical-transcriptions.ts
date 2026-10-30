@@ -7,7 +7,7 @@ export const medicalTranscriptions: CaseStudy = {
     subtitle:
         "Extracting Structured Clinical Data from Unstructured Medical Transcriptions",
     summary:
-        "A Python-based data pipeline that leverages OpenAI's GPT-4o-mini model to extract structured medical information—including patient age, specialty, treatment plans, and ICD-10 diagnostic codes—from raw clinical transcriptions.\n\nThis project demonstrates production-grade AI engineering with JSON schema enforcement, achieving automated extraction of 4+ clinical data fields per transcription with high accuracy.",
+        "A Python-based data pipeline that leverages OpenAI's GPT-4o-mini model to extract structured medical information, including patient age, specialty, treatment plans, and ICD-10 diagnostic codes, from raw clinical transcriptions.\n\nThis project demonstrates production-grade AI engineering with JSON schema enforcement, achieving automated extraction of 4+ clinical data fields per transcription with high accuracy.",
     date: "2025-01-15",
     year: 2025,
     category: "AI & Machine Learning",
@@ -34,7 +34,7 @@ export const medicalTranscriptions: CaseStudy = {
         {
             title: "The Situation: Unstructured Clinical Data",
             body: [
-                "Healthcare organizations generate massive volumes of clinical transcriptions daily. These free-form text documents contain valuable patient information—diagnoses, treatments, demographics—but extracting this data manually is expensive, slow, and error-prone.",
+                "Healthcare organizations generate massive volumes of clinical transcriptions daily. These free-form text documents contain valuable patient information (diagnoses, treatments, demographics), but extracting this data manually is expensive, slow, and error-prone.",
                 "I was tasked with building an automated pipeline that could parse raw transcriptions and output structured, validated JSON suitable for analytics and billing systems. The key challenge: medical language is nuanced, full of abbreviations, and requires domain knowledge to interpret correctly.",
             ],
             highlights: [

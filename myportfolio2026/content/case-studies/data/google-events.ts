@@ -38,7 +38,7 @@ export const googleEvents: CaseStudy = {
         {
             title: "LAWIG National",
             body: [
-                "As a GDSC Lead, I dreamt of a nationwide event—a bridge across islands weaving a tapestry of Filipino tech talent. LAWIG was born in that collision of shared passion given form.",
+                "As a GDSC Lead, I dreamt of a nationwide event, a bridge across islands weaving a tapestry of Filipino tech talent. LAWIG was born in that collision of shared passion given form.",
                 "The final design, a fusion of circuits and landscapes, reflects the heart of LAWIG: where tech meets the Philippines, and a thousand futures bloom.",
             ],
         },

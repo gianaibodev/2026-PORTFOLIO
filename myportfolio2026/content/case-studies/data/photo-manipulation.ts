@@ -34,7 +34,7 @@ export const photoManipulation: CaseStudy = {
         {
             title: "The Power of Manipulation",
             body: [
-                "Photo manipulation transcends simple editing — it's the art of constructing entirely new realities from photographic raw material.",
+                "Photo manipulation transcends simple editing. It's the art of constructing entirely new realities from photographic raw material.",
                 "Each piece in this series challenged the boundary between photography and digital painting, using layer masking, frequency separation, and perspective warping to produce images that feel both real and impossible.",
             ],
         },
@@ -42,7 +42,7 @@ export const photoManipulation: CaseStudy = {
             title: "Exhibition & Impact",
             body: [
                 "Exhibited as part of a visual arts showcase, these works demonstrated how strong conceptual direction transforms a photograph from documentation into statement.",
-                "The series spanned surreal portraiture, product transformation, and environmental compositing — each exploring a different facet of visual storytelling.",
+                "The series spanned surreal portraiture, product transformation, and environmental compositing, each exploring a different facet of visual storytelling.",
             ],
         },
     ],

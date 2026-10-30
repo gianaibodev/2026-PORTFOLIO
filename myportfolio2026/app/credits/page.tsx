@@ -11,9 +11,7 @@ const libraries = [
   { name: "Tailwind CSS", href: "https://tailwindcss.com", desc: "Styling" },
   { name: "Framer Motion", href: "https://www.framer.com/motion", desc: "Animation" },
   { name: "Radix UI", href: "https://www.radix-ui.com", desc: "Components" },
-  { name: "OGL", href: "https://github.com/oframe/ogl", desc: "WebGL — hero shader & gallery" },
-  { name: "@paper-design/shaders-react", href: "https://github.com/paper-design/shaders-react", desc: "Shaders" },
-  { name: "GSAP", href: "https://gsap.com", desc: "Animation" },
+  { name: "OGL", href: "https://github.com/oframe/ogl", desc: "WebGL: hero shader & gallery" },
   { name: "Lucide", href: "https://lucide.dev", desc: "Icons" },
   { name: "next-themes", href: "https://github.com/pacocoursey/next-themes", desc: "Theme" },
   { name: "tw-animate-css", href: "https://github.com/jhukdev/tw-animate-css", desc: "Animations" },
@@ -69,7 +67,7 @@ function PersonCard({
       {...props}
       className={`flex items-start gap-4 rounded-2xl border border-zinc-300 dark:border-white/10 bg-white/50 dark:bg-white/[0.02] p-4 sm:p-5 ${href ? "hover:border-zinc-400 dark:hover:border-white/20 hover:bg-white/70 dark:hover:bg-white/[0.05] transition-all group" : ""}`}
     >
-      <div className="shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-blue-500/20 to-violet-500/20 dark:from-blue-400/20 dark:to-violet-400/20 flex items-center justify-center">
+      <div className="shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-500/20 dark:from-blue-400/20 dark:to-blue-400/20 flex items-center justify-center">
         <Users className="w-5 h-5 text-blue-600 dark:text-blue-400" />
       </div>
       <div className="min-w-0 flex-1">
@@ -91,7 +89,6 @@ export default function CreditsPage() {
       <PixelHeader
         title="Credits"
         subtitle="Libraries, components, and the people who helped make this portfolio possible."
-        colors={["#3b82f6", "#8b5cf6", "#ec4899"]}
       />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 pb-24 pt-4 sm:pt-8 space-y-16">
@@ -114,7 +111,7 @@ export default function CreditsPage() {
         {/* Role-based attributions */}
         <section>
           <h2 className="flex items-center gap-3 text-xl font-bold mb-6">
-            <Palette className="w-5 h-5 text-violet-500" />
+            <Palette className="w-5 h-5 text-blue-500" />
             Contributor attributions
           </h2>
           <p className="text-muted-foreground text-sm mb-6 max-w-2xl">

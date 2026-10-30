@@ -38,7 +38,7 @@ export const valtara: CaseStudy = {
         {
             title: "Eco-Adventure",
             body: [
-                "Valtara is set in a world where greedy corporations have plundered resources, throwing the elemental spirits—Earth, Water, Air, and Fire—into disarray. Players embark on a quest to collect the spirits and restore balance.",
+                "Valtara is set in a world where greedy corporations have plundered resources, throwing the elemental spirits (Earth, Water, Air, and Fire) into disarray. Players embark on a quest to collect the spirits and restore balance.",
                 "Through Valtara, I applied skills in core platforming mechanics, unique elemental systems, and environmental narrative crafting.",
             ],
         },

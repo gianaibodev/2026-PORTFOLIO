@@ -4,7 +4,6 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { PerformanceProvider } from "@/components/performance-provider";
 import { CopyModeProvider } from "@/components/copy-mode-provider";
-import { FullPageLoadingProvider } from "@/components/full-page-loading-context";
 import { FramerMotionProvider } from "@/components/framer-motion-provider";
 import { Footer } from "@/components/ui/footer-section";
 import { FloatingConsultButtonPortal } from "@/components/ui/floating-consult-button-portal";
@@ -28,7 +27,7 @@ const geistMono = Geist_Mono({
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://gianaibo.tech";
 
 export const metadata: Metadata = {
-  title: "Gian Aibo | 2026 PORTFOLIO",
+  title: { default: "Gian Aibo | 2026 PORTFOLIO", template: "%s | Gian Aibo" },
   description: "Computer Scientist | Experience Designer | AI Implementation | Technical Leader",
   metadataBase: new URL(baseUrl),
   icons: {
@@ -80,7 +79,6 @@ export default function RootLayout({
           <SmoothScroll>
             <PerformanceProvider>
               <CopyModeProvider>
-                <FullPageLoadingProvider>
                   <FramerMotionProvider>
                     <RouteChangeHandler />
                     <div className="flex min-h-screen flex-col" suppressHydrationWarning>
@@ -91,7 +89,6 @@ export default function RootLayout({
                     <SpeedInsights />
                     <Analytics />
                   </FramerMotionProvider>
-                </FullPageLoadingProvider>
               </CopyModeProvider>
             </PerformanceProvider>
           </SmoothScroll>

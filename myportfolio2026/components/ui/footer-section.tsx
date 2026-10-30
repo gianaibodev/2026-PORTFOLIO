@@ -4,7 +4,6 @@ import type { ComponentProps, ReactNode } from 'react';
 import { m, useReducedMotion } from 'framer-motion';
 import { Facebook, Instagram, Linkedin, Mail, Globe, Phone, ArrowUpRight, MessageCircle, Send } from 'lucide-react';
 import Link from 'next/link';
-import { useFullPageLoading } from '@/components/full-page-loading-context';
 
 interface FooterLink {
 	title: string;
@@ -59,32 +58,15 @@ const footerLinks: FooterSection[] = [
 ];
 
 export function Footer() {
-	const { isActive } = useFullPageLoading();
-	if (isActive) return null;
 
 	return (
-		<footer className="relative w-full border-t border-zinc-200 dark:border-white/10 bg-zinc-50/50 dark:bg-zinc-900/50 backdrop-blur-xl pb-24 md:pb-28">
-			{/* Disclaimer Marquee */}
-			<div className="w-full bg-blue-500/5 border-b border-blue-500/10 py-3 overflow-hidden">
-				<div className="animate-marquee flex w-max whitespace-nowrap" style={{ "--duration": "40s" } as React.CSSProperties}>
-					{Array.from({ length: 12 }).map((_, i) => (
-						<span key={i} className="mx-8 text-[10px] md:text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-widest flex items-center gap-2">
-							<div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-							Note: This portfolio is currently being actively updated
-						</span>
-					))}
-				</div>
-			</div>
-
+		<footer className="relative w-full border-t border-zinc-200 dark:border-white/10 pb-24 md:pb-28">
 			<div className="max-w-7xl mx-auto px-6 py-12 lg:py-16">
-				{/* Gradient line at top */}
-				<div className="absolute top-0 left-1/2 -translate-x-1/2 h-px w-1/3 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
-
 				<div className="grid w-full gap-10 xl:grid-cols-3 xl:gap-12">
 					{/* Brand */}
 					<AnimatedContainer className="space-y-4">
 						<Link href="/" className="inline-flex items-center gap-3 group" suppressHydrationWarning>
-							<div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-blue-500/25">
+							<div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-medium text-lg">
 								G
 							</div>
 							<div>
@@ -105,7 +87,7 @@ export function Footer() {
 						{footerLinks.map((section, index) => (
 							<AnimatedContainer key={section.label} delay={0.1 + index * 0.1}>
 								<div className="mb-10 md:mb-0">
-									<h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">
+									<h3 className="text-sm font-medium text-foreground mb-4">
 										{section.label}
 									</h3>
 									<ul className="space-y-3">
@@ -173,10 +155,10 @@ function AnimatedContainer({ className, delay = 0.1, children }: ViewAnimationPr
 
 	return (
 		<m.div
-			initial={{ filter: 'blur(4px)', translateY: -8, opacity: 0 }}
-			whileInView={{ filter: 'blur(0px)', translateY: 0, opacity: 1 }}
+			initial={{ translateY: 8, opacity: 0 }}
+			whileInView={{ translateY: 0, opacity: 1 }}
 			viewport={{ once: true }}
-			transition={{ delay, duration: 0.8 }}
+			transition={{ delay: delay / 2, duration: 0.5 }}
 			className={className}
 		>
 			{children}

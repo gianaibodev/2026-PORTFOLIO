@@ -3,7 +3,7 @@ import { CaseStudy } from "../types";
 export const googleAwards: CaseStudy = {
     slug: "google-awards-2023",
     projectId: "google-awards",
-    title: "GOOGLE AWARDS — 2023",
+    title: "Google Awards 2023",
     subtitle: "Recognition of Excellence in Community Leadership",
     summary:
         "The Google Awards 2023 celebrated outstanding contributions to the developer ecosystem. This project focuses on the visual storytelling and materials crafted to highlight the achievements of community leaders and innovators within the Google Developer Groups.",

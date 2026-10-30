@@ -3,7 +3,7 @@ import { CaseStudy } from "../types";
 export const slickStore: CaseStudy = {
     slug: "slick-store-ecommerce-platform",
     projectId: "slick-store",
-    title: "Slick Store — Full‑Stack Sneaker Marketplace",
+    title: "Slick Store: Full‑Stack Sneaker Marketplace",
     subtitle: "A React + Supabase architecture study for sneaker resell flows",
     summary:
         "Slick Store is a full-stack e‑commerce prototype focused on the sneaker reselling space. It explores how to model products, variants, and orders in PostgreSQL, and how to connect that to a React + Tailwind frontend that feels similar to modern sneaker marketplaces without relying on boilerplate templates.",

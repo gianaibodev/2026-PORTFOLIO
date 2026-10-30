@@ -43,7 +43,7 @@ export const gdgBacolod: CaseStudy = {
         {
             title: "Why I Built This",
             body: [
-                "As someone who helped organize events for GDG on Campus (USLS) and worked on creatives for GDG Bacolod from 2022 to 2025, I noticed how much time we spent on things that could be automated. Creating certificates by hand, copying event details between different places, and trying to keep track of who attended what—it all added up.",
+                "As someone who helped organize events for GDG on Campus (USLS) and worked on creatives for GDG Bacolod from 2022 to 2025, I noticed how much time we spent on things that could be automated. Creating certificates by hand, copying event details between different places, and trying to keep track of who attended what: it all added up.",
                 "I thought it would be nice to have one place where everything lives. A website that shows upcoming events, a gallery of past moments so people can remember the fun times, and a way to create certificates without opening design software every time. This platform was my attempt to make those tasks a little easier.",
             ],
             highlights: [
@@ -94,7 +94,7 @@ export const gdgBacolod: CaseStudy = {
         {
             title: "Special Features for Bacolod",
             body: [
-                "This isn't just generic community software—I tried to make it fit how GDG Bacolod actually works. For example, there's a 'Community Partners' tier specifically for local university organizations and tech startups in Bacolod, which is different from the standard sponsor tiers.",
+                "This isn't just generic community software. I tried to make it fit how GDG Bacolod actually works. For example, there's a 'Community Partners' tier specifically for local university organizations and tech startups in Bacolod, which is different from the standard sponsor tiers.",
                 "The Moments gallery is set up to preserve four years of history (2022-2025), so future organizers can see what the chapter has accomplished and learn from past events. It's a way to keep the community's story alive.",
                 "There's also a ShareCard feature that creates images optimized for Instagram Stories and Twitter, so when people share their certificates, it looks nice and includes a link back to the validation portal. This helps spread awareness about the chapter naturally.",
             ],
@@ -107,9 +107,9 @@ export const gdgBacolod: CaseStudy = {
         {
             title: "What I Learned",
             body: [
-                "Building this taught me a lot about what organizers actually need versus what seems cool to build. Sometimes the simplest solution—like using LocalStorage as a fallback—is the most useful because it means the platform works even when things don't go perfectly.",
+                "Building this taught me a lot about what organizers actually need versus what seems cool to build. Sometimes the simplest solution, like using LocalStorage as a fallback, is the most useful because it means the platform works even when things don't go perfectly.",
                 "I also learned that making something for a community you're part of is different from building for clients. You understand the real problems because you've lived them. The platform isn't perfect, and there are things I'd do differently now, but it was a good learning experience.",
-                "The best part is seeing how it could help future organizers spend less time on administrative tasks and more time on what matters—bringing developers together and creating great events.",
+                "The best part is seeing how it could help future organizers spend less time on administrative tasks and more time on what matters: bringing developers together and creating great events.",
             ],
             highlights: [
                 "Built from Real Experience",

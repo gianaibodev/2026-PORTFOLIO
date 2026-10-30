@@ -135,7 +135,9 @@
 
   body {
     @apply bg-background text-foreground;
-    overflow-x: hidden;
+    /* clip, not hidden: hidden would make body a scroll container and stall
+       every scroll-driven animation bound to the viewport. */
+    overflow-x: clip;
     width: 100%;
     position: relative;
     min-height: 100vh;
@@ -168,6 +170,101 @@
 
   .dark .bg-folder-tab {
     background-color: hsl(217, 65%, 45%) !important;
+  }
+}
+
+/* Shared page rhythm. One radius rule: pills for controls, 16px for imagery. */
+@layer components {
+  .wrap {
+    @apply mx-auto max-w-7xl px-5 sm:px-8;
+  }
+
+  .section {
+    @apply py-20 md:py-32;
+  }
+
+  .heading {
+    @apply text-4xl font-medium leading-[1.08] tracking-[-0.03em] text-foreground md:text-5xl;
+  }
+
+  .lede {
+    @apply mt-5 max-w-[62ch] text-pretty text-lg leading-relaxed text-muted-foreground;
+  }
+
+  .btn {
+    @apply inline-flex items-center gap-2 whitespace-nowrap rounded-full px-6 py-3 text-[15px] font-medium transition-[background-color,border-color,transform] duration-200 active:scale-[0.98];
+  }
+
+  .btn-primary {
+    @apply bg-blue-600 text-white hover:bg-blue-700;
+  }
+
+  .btn-quiet {
+    @apply border border-foreground/20 bg-background/40 text-foreground backdrop-blur-sm hover:border-foreground/45;
+  }
+
+  .link-arrow {
+    @apply inline-flex items-center gap-2 text-[15px] font-medium text-blue-600 transition-colors hover:text-blue-500 dark:text-blue-300 dark:hover:text-blue-200;
+  }
+
+  blockquote em {
+    @apply not-italic text-foreground;
+  }
+
+  /* Before the shader loads, and permanently on low-end devices. */
+  .hero-canvas-wrapper {
+    background:
+      radial-gradient(ellipse at 70% 0%, rgb(180 210 255 / 0.5), transparent 70%),
+      radial-gradient(ellipse at 90% 100%, rgb(200 220 255 / 0.3), transparent 60%);
+  }
+
+  .dark .hero-canvas-wrapper {
+    background:
+      radial-gradient(ellipse at 70% 0%, rgb(40 80 120 / 0.45), transparent 70%),
+      radial-gradient(ellipse at 90% 100%, rgb(20 40 80 / 0.3), transparent 60%);
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-blue-500);
+  outline-offset: 3px;
+}
+
+/* Motion: the hero introduces itself in reading order, then sections arrive as
+   they are reached. Native CSS, so it costs no JavaScript and browsers without
+   scroll timelines simply show the content. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@keyframes canvas-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  }
+
+  .rise-1 { animation-delay: 0.08s; }
+  .rise-2 { animation-delay: 0.16s; }
+  .rise-3 { animation-delay: 0.24s; }
+
+  .hero-shader-canvas {
+    animation: canvas-in 1.2s ease-out;
+  }
+
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: rise linear backwards;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
   }
 }
 

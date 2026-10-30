@@ -52,8 +52,8 @@ export const saucykps: CaseStudy = {
         {
             title: "The Problem: The 'Manual Messaging' Bottleneck",
             body: [
-                "Before the implementation of SaucyKPS, the operational workflow was plagued by several critical failure points. The Relay Lag created a 5–15 minute 'dead zone' where a staff member had to manually copy order details from the customer chat and paste them into the rider group, causing food to sit getting cold.",
-                "Identity Fragmentation meant there was no persistent way to track a customer's lifetime value—if a user changed their display name, their order history was effectively lost. The Verification Void left customers feeling insecure about where their money went until the food actually arrived, and Logistics Chaos saw riders 'double-pick' orders because there was no status-tracking mechanism.",
+                "Before the implementation of SaucyKPS, the operational workflow was plagued by several critical failure points. The Relay Lag created a 5-15 minute 'dead zone' where a staff member had to manually copy order details from the customer chat and paste them into the rider group, causing food to sit getting cold.",
+                "Identity Fragmentation meant there was no persistent way to track a customer's lifetime value: if a user changed their display name, their order history was effectively lost. The Verification Void left customers feeling insecure about where their money went until the food actually arrived, and Logistics Chaos saw riders 'double-pick' orders because there was no status-tracking mechanism.",
             ],
             highlights: [
                 "5-15 Minute Order Processing Delay",
@@ -66,7 +66,7 @@ export const saucykps: CaseStudy = {
             title: "The Solution: A Modular Automation Ecosystem",
             body: [
                 "Instead of using inefficient 'polling,' I built a Node.js Webhook listener that ensures the moment a customer interacts with the bot, the server receives a push notification. This architecture allows for sub-second response times, making the 'digital restaurant' feel as responsive as a physical waiter.",
-                "I designed a custom SQL schema to move beyond simple chat interactions. Every user is indexed by their unique Telegram chat_id, allowing the restaurant to map @usernames to order histories, preferences, and delivery addresses—turning a chat app into a powerful Customer Relationship Management (CRM) tool.",
+                "I designed a custom SQL schema to move beyond simple chat interactions. Every user is indexed by their unique Telegram chat_id, allowing the restaurant to map @usernames to order histories, preferences, and delivery addresses, turning a chat app into a powerful Customer Relationship Management (CRM) tool.",
                 "I engineered a complex message-routing logic that manages three separate environments simultaneously: Customer DMs for private receipt delivery and order status updates, Kitchen/Admin Dashboard as a modern React/Vite interface where the owner accepts or rejects orders, and Rider Logistics Group as an automated dispatch feed that instantly notifies all available riders when an order is ready.",
             ],
             highlights: [
@@ -79,7 +79,7 @@ export const saucykps: CaseStudy = {
         {
             title: "Technical Implementation: The Automation Flow",
             body: [
-                "The automation flow begins when a customer triggers the bot via a /start or /menu command. The bot checks the Supabase database—if new, it captures the chat_id and @username. The web dashboard updates in real-time to show the incoming request.",
+                "The automation flow begins when a customer triggers the bot via a /start or /menu command. The bot checks the Supabase database. If new, it captures the chat_id and @username. The web dashboard updates in real-time to show the incoming request.",
                 "Upon admin approval, the bot executes a sendMessage request to the Rider Group Chat ID, tagging the order as [UNCLAIMED]. Simultaneously, a professionally formatted Digital Receipt is sent to the customer's private messages, including a timestamped Order ID.",
                 "The tech stack leverages Node.js as the runtime, PostgreSQL (via Supabase) for database persistence, React + TypeScript + Tailwind for the Admin Dashboard frontend, and Telegram Bot API with Webhooks for real-time integration. The entire system is deployed via a Git-based workflow with npm dependency management.",
             ],

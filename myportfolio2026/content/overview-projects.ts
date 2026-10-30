@@ -22,7 +22,7 @@ const rawOverviewProjects: OverviewProject[] = overviewProjectSchema.array().par
   {
     projectId: "your-desaign",
     title: "your des(ai)gn",
-    subtitle: "AI and creative tools — dark luxury interface",
+    subtitle: "AI and creative tools: dark luxury interface",
     summary:
       "A premium digital environment built for creative tools, featuring a high-contrast dark interface, custom hardware-accelerated shaders, and precise typography. Implementation focuses on tactile feedback and high-performance animation.",
     heroImage: "/legacy/assets/demopic/9.jpg",

@@ -3,7 +3,7 @@ import { CaseStudy } from "../types";
 export const theCapitol: CaseStudy = {
     slug: "the-capitol-party-branding",
     projectId: "the-capitol",
-    title: "THE CAPITOL — Event Identity",
+    title: "The Capitol: Event Identity",
     subtitle: "A vibrant, youth-focused brand identity for a major city event.",
     summary:
         "Developed a comprehensive brand identity for 'The Capitol Party,' including logo, typography, color palette, and promotional materials.",

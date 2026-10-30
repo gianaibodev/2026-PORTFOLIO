@@ -92,7 +92,7 @@ function PhoneApp() {
       <div className="space-y-1.5">
         <div className="rounded-lg bg-white/[0.06] p-1.5 text-[9px] text-slate-300">Your stack: next up</div>
         <div className="rounded-lg bg-white/[0.06] p-1.5 text-[9px] text-slate-300">Court 2 is open</div>
-        <div className="rounded-lg bg-blue-500 p-1.5 text-center text-[9px] font-semibold text-white">GO — court is ready</div>
+        <div className="rounded-lg bg-blue-500 p-1.5 text-center text-[9px] font-semibold text-white">GO: court is ready</div>
       </div>
     </div>
   );

@@ -259,7 +259,7 @@ const MacOSMenuBar: React.FC<MacOSMenuBarProps> = ({
   const { copyMode, toggleCopyMode } = useCopyMode();
   const { performanceMode } = usePerformance();
   const [isPending, startTransition] = useTransition();
-  const [currentTime, setCurrentTime] = useState('—');
+  const [currentTime, setCurrentTime] = useState('\u00A0');
   const [isMobile, setIsMobile] = useState(false);
   const [activeMenu, setActiveMenuState] = useState<string | null>(null);
   const [dropdownPosition, setDropdownPosition] = useState({ x: 0, y: 0 });
@@ -484,7 +484,7 @@ const MacOSMenuBar: React.FC<MacOSMenuBarProps> = ({
 
           {/* Right section - status icons and clock */}
           <div className="flex items-center space-x-1 sm:space-x-1.5">
-            {/* Desktop Section Links — suppressHydrationWarning: browser extensions (e.g. rtrvr) inject attributes into <a> */}
+            {/* Desktop Section Links, suppressHydrationWarning: browser extensions (e.g. rtrvr) inject attributes into <a> */}
             <div className="hidden md:flex items-center space-x-0.5 mr-1.5" suppressHydrationWarning>
               <Link href="/#home" className="px-2.5 py-1 text-foreground dark:text-white text-[13px] font-medium hover:bg-black/5 dark:hover:bg-white/10 rounded-lg transition-all border border-transparent hover:border-zinc-300 dark:hover:border-white/10" suppressHydrationWarning>Home</Link>
               <Link href="/projects" className="px-2.5 py-1 text-foreground dark:text-white text-[13px] font-medium hover:bg-black/5 dark:hover:bg-white/10 rounded-lg transition-all border border-transparent hover:border-zinc-300 dark:hover:border-white/10" suppressHydrationWarning>Projects</Link>
@@ -504,7 +504,7 @@ const MacOSMenuBar: React.FC<MacOSMenuBarProps> = ({
               </div>
             </div>
 
-            {/* Mobile Menu Toggle — suppressHydrationWarning: extensions may inject attributes */}
+            {/* Mobile Menu Toggle, suppressHydrationWarning: extensions may inject attributes */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden w-8 h-8 flex items-center justify-center rounded-lg bg-black/[0.08] dark:bg-white/[0.12] text-foreground dark:text-white hover:bg-black/[0.12] dark:hover:bg-white/[0.18] transition-all active:scale-90"
@@ -513,7 +513,7 @@ const MacOSMenuBar: React.FC<MacOSMenuBarProps> = ({
               {isMobileMenuOpen ? <X size={18} strokeWidth={2.5} /> : <Menu size={18} strokeWidth={2.5} />}
             </button>
 
-            {/* Clock — suppressHydrationWarning: Date/locale can differ between server and client */}
+            {/* Clock, suppressHydrationWarning: Date/locale can differ between server and client */}
             <span
               className="text-foreground dark:text-white text-[13px] font-medium select-none ml-1 cursor-pointer hover:opacity-70 transition-opacity duration-150 hidden sm:inline tabular-nums tracking-[-0.02em]"
               suppressHydrationWarning

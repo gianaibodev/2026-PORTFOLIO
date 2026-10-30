@@ -3,7 +3,7 @@ import { CaseStudy } from "../types";
 export const secrecyGdgoc: CaseStudy = {
     slug: "secrecy-gdgoc-2022",
     projectId: "secrecy",
-    title: "SECRECY — GDGOC 2022",
+    title: "Secrecy: GDGoC 2022",
     subtitle: "Visual Identity for an Underground Tech Event",
     summary:
         "A dark, mysterious brand identity created for the GDGOC 2022 'SECRECY' event. The project explores themes of encryption, digital shadows, and the hidden layers of cybersecurity through bold typography and high-contrast visuals.",

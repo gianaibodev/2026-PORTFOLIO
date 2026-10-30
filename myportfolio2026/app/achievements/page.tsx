@@ -19,7 +19,7 @@ const categoryIcons: Record<string, any> = {
 // Color configurations for each era
 const eraColors = {
     blue: {
-        gradient: "from-blue-500 to-indigo-600",
+        gradient: "from-blue-500 to-blue-600",
         bg: "bg-blue-500/10",
         border: "border-blue-500/20",
         text: "text-blue-600 dark:text-blue-400",
@@ -27,23 +27,23 @@ const eraColors = {
         glow: "shadow-blue-500/20",
     },
     emerald: {
-        gradient: "from-emerald-500 to-teal-600",
-        bg: "bg-emerald-500/10",
-        border: "border-emerald-500/20",
-        text: "text-emerald-600 dark:text-emerald-400",
-        dot: "bg-emerald-500",
-        glow: "shadow-emerald-500/20",
+        gradient: "from-blue-500 to-teal-600",
+        bg: "bg-blue-500/10",
+        border: "border-blue-500/20",
+        text: "text-blue-600 dark:text-blue-400",
+        dot: "bg-blue-500",
+        glow: "shadow-blue-500/20",
     },
     amber: {
-        gradient: "from-amber-500 to-orange-600",
-        bg: "bg-amber-500/10",
-        border: "border-amber-500/20",
-        text: "text-amber-600 dark:text-amber-400",
-        dot: "bg-amber-500",
-        glow: "shadow-amber-500/20",
+        gradient: "from-blue-500 to-blue-600",
+        bg: "bg-blue-500/10",
+        border: "border-blue-500/20",
+        text: "text-blue-600 dark:text-blue-400",
+        dot: "bg-blue-500",
+        glow: "shadow-blue-500/20",
     },
     rose: {
-        gradient: "from-rose-500 to-pink-600",
+        gradient: "from-rose-500 to-blue-600",
         bg: "bg-rose-500/10",
         border: "border-rose-500/20",
         text: "text-rose-600 dark:text-rose-400",
@@ -268,7 +268,7 @@ function StatsOverview() {
                 label: "Academic Honors",
                 value: (college.honors?.length || 0) + (sh.honors?.length || 0) + (jh.honors?.length || 0) + (elem.honors?.length || 0),
                 icon: Crown,
-                color: "text-amber-500",
+                color: "text-blue-500",
             },
             {
                 label: "Awards Won",
@@ -280,7 +280,7 @@ function StatsOverview() {
                 label: "Leadership Roles",
                 value: (college.affiliations?.length || 0) + (sh.roles?.length || 0) + (jh.roles?.length || 0) + (elem.roles?.length || 0),
                 icon: Briefcase,
-                color: "text-emerald-500",
+                color: "text-blue-500",
             },
             {
                 label: "Academic Journey",
@@ -358,7 +358,7 @@ export default function AchievementsPage() {
                             >
                                 Achievement
                                 <br />
-                                <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+                                <span className="bg-gradient-to-r from-blue-600 to-blue-500 bg-clip-text text-transparent">
                                     Archive
                                 </span>
                             </m.h1>
@@ -391,7 +391,7 @@ export default function AchievementsPage() {
                 <div className="space-y-8">
                     <EraSection
                         title="College"
-                        years="2021 — 2025"
+                        years="2021-2025"
                         data={accolades.college}
                         colorKey="blue"
                         icon={GraduationCapIcon}
@@ -399,7 +399,7 @@ export default function AchievementsPage() {
                     />
                     <EraSection
                         title="Senior High"
-                        years="2019 — 2021"
+                        years="2019-2021"
                         data={accolades.seniorHigh}
                         colorKey="emerald"
                         icon={Sparkles}
@@ -407,7 +407,7 @@ export default function AchievementsPage() {
                     />
                     <EraSection
                         title="Junior High"
-                        years="2015 — 2019"
+                        years="2015-2019"
                         data={accolades.juniorHigh}
                         colorKey="amber"
                         icon={Star}
@@ -415,7 +415,7 @@ export default function AchievementsPage() {
                     />
                     <EraSection
                         title="Elementary"
-                        years="2009 — 2015"
+                        years="2009-2015"
                         data={accolades.elementary}
                         colorKey="rose"
                         icon={Medal}
@@ -432,7 +432,7 @@ export default function AchievementsPage() {
                 >
                     <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                         <div className="text-center md:text-left">
-                            <p className="text-xs text-muted-foreground font-bold uppercase tracking-widest mb-2">
+                            <p className="text-xs text-muted-foreground font-bold mb-2">
                                 End of Archive
                             </p>
                             <p className="text-sm text-muted-foreground">

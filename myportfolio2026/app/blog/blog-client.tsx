@@ -64,8 +64,7 @@ export default function BlogClient({ categories }: BlogClientProps) {
         title={copyMode === "plain" ? "Stories behind the work" : "Detailed Project Documentation"}
         subtitle={copyMode === "plain"
           ? "Read how I approach problems, design solutions, and deliver results."
-          : "Editorial-grade breakdowns of branding, product, and experience design—strategy, craft, and impact."}
-        colors={["#f59e0b", "#ec4899", "#8b5cf6", "#3b82f6"]}
+          : "Editorial-grade breakdowns of branding, product, and experience design: strategy, craft, and impact."}
         categoryIcon={<Sparkle className="size-4" />}
         categoryText="Case Studies"
       />
@@ -93,7 +92,7 @@ export default function BlogClient({ categories }: BlogClientProps) {
                     className="group flex items-center gap-3 p-4 rounded-2xl border border-zinc-200 dark:border-white/10 hover:border-zinc-400 dark:hover:border-white/30 bg-zinc-50 dark:bg-white/[0.02] hover:bg-zinc-100 dark:hover:bg-white/[0.05] transition-all hover:scale-[1.02] active:scale-[0.98]"
                   >
                     {isPinned && (
-                      <Star className="w-4 h-4 text-amber-400 fill-amber-400 flex-shrink-0" />
+                      <Star className="w-4 h-4 text-blue-400 fill-blue-400 flex-shrink-0" />
                     )}
                     <div className="flex-1 min-w-0">
                       <p className="font-semibold text-sm sm:text-base break-words group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors">
@@ -121,10 +120,10 @@ export default function BlogClient({ categories }: BlogClientProps) {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
                   <div className="flex items-center gap-3">
                     {isPinned && (
-                      <Star className="w-5 h-5 text-amber-400 fill-amber-400 flex-shrink-0" />
+                      <Star className="w-5 h-5 text-blue-400 fill-blue-400 flex-shrink-0" />
                     )}
                     <div>
-                      <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-muted-foreground/80">{category.name}</p>
+                      <p className="text-xs sm:text-sm text-muted-foreground/80">{category.name}</p>
                       <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mt-1 sm:mt-2">Highlighted work</h2>
                     </div>
                   </div>
@@ -170,7 +169,7 @@ export default function BlogClient({ categories }: BlogClientProps) {
                             sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
                           />
                         </div>
-                        <div className="flex flex-wrap gap-2 text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                        <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
                           <span>{study.category}</span>
                           <span>•</span>
                           <span>{study.year}</span>

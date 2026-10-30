@@ -130,7 +130,7 @@ const ContactMethod = ({
                 )}
             </div>
             <div className="mt-6">
-                <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground/60 mb-1">{title}</p>
+                <p className="text-xs font-bold text-muted-foreground/60 mb-1">{title}</p>
                 <p className="text-lg font-semibold tracking-tight text-foreground">{value}</p>
             </div>
         </div>
@@ -159,10 +159,8 @@ export default function ContactPage() {
             <PixelHeader
                 title="Let's build something extraordinary"
                 subtitle="I'm currently open to new opportunities, high-end freelance projects, and collaborations in AI, design engineering, and full-stack development."
-                colors={["#3b82f6", "#8b5cf6", "#ec4899", "#f59e0b"]}
                 categoryIcon={<Sparkles className="size-4" />}
                 categoryText="Contact 2026"
-                maxWidth="max-w-7xl"
             />
 
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-16">
@@ -196,7 +194,7 @@ export default function ContactPage() {
                                 <Calendar size={120} strokeWidth={1} />
                             </div>
                             <div className="relative z-10">
-                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-400 text-[10px] font-bold uppercase tracking-widest mb-6 border border-blue-500/20">
+                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-bold mb-6 border border-blue-500/20">
                                     <span className="relative flex h-2 w-2">
                                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                                         <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
@@ -218,7 +216,7 @@ export default function ContactPage() {
                     {/* Sidebar: Location & Availability */}
                     <div className="lg:col-span-4 space-y-6">
                         <div className="rounded-3xl p-8 border border-zinc-200 dark:border-white/10 bg-white/50 dark:bg-white/[0.03] backdrop-blur-xl">
-                            <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground/60 mb-6">Current Location</h3>
+                            <h3 className="text-sm font-bold text-muted-foreground/60 mb-6">Current Location</h3>
                             <div className="flex items-center gap-4 mb-8">
                                 <div className="size-12 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-600 dark:text-orange-400">
                                     <Globe size={24} />
@@ -229,7 +227,7 @@ export default function ContactPage() {
                                 </div>
                             </div>
                             <hr className="border-zinc-200 dark:border-white/5 mb-8" />
-                            <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground/60 mb-4">Availability</h3>
+                            <h3 className="text-sm font-bold text-muted-foreground/60 mb-4">Availability</h3>
                             <ul className="space-y-3">
                                 <li className="flex items-center justify-between text-sm">
                                     <span className="text-muted-foreground lowercase opacity-70">Freelance projects</span>
@@ -272,7 +270,7 @@ export default function ContactPage() {
                                         </div>
                                         <div>
                                             <h4 className="font-bold text-lg tracking-tight group-hover:text-blue-500 transition-colors">{social.name}</h4>
-                                            <p className="text-xs text-muted-foreground uppercase tracking-widest font-bold opacity-60">{social.label}</p>
+                                            <p className="text-xs text-muted-foreground font-bold opacity-60">{social.label}</p>
                                         </div>
                                         <div className="ml-auto p-2 rounded-full border border-zinc-200 dark:border-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
                                             <ArrowUpRight size={16} />
@@ -289,8 +287,8 @@ export default function ContactPage() {
             </main>
 
             <footer className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-12 text-center">
-                <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-muted-foreground/30">
-                    © 2016–2026 GIAN AIBO · ALL RIGHTS RESERVED
+                <p className="text-xs font-bold text-muted-foreground/30">
+                    © 2016-2026 GIAN AIBO · ALL RIGHTS RESERVED
                 </p>
             </footer>
         </div>

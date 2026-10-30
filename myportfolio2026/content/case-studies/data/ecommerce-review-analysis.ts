@@ -34,7 +34,7 @@ export const ecommerceReviewAnalysis: CaseStudy = {
         {
             title: "The Situation: Millions of Reviews, No Insights",
             body: [
-                "E-commerce platforms accumulate massive volumes of customer reviews. These reviews contain invaluable signals about product quality, fit issues, and customer sentiment—but analyzing thousands of text reviews manually is impossible.",
+                "E-commerce platforms accumulate massive volumes of customer reviews. These reviews contain invaluable signals about product quality, fit issues, and customer sentiment, but analyzing thousands of text reviews manually is impossible.",
                 "The Women's Clothing E-Commerce Reviews dataset presented a perfect testbed: 23,000+ reviews with ratings, product categories, and recommendation flags. The goal was to uncover patterns that keyword searches and simple aggregations miss.",
             ],
             highlights: [
@@ -47,7 +47,7 @@ export const ecommerceReviewAnalysis: CaseStudy = {
             title: "The Problem: Text is High-Dimensional",
             body: [
                 "Traditional approaches like word frequency analysis or sentiment scoring reduce rich text to simplistic metrics. They miss nuance: a 3-star review saying 'fabric is nice but runs small' contains different information than 'average quality, fine for the price.'",
-                "The challenge was to represent reviews in a way that captures semantic meaning—so that similar opinions cluster together naturally, regardless of the exact words used.",
+                "The challenge was to represent reviews in a way that captures semantic meaning, so that similar opinions cluster together naturally, regardless of the exact words used.",
             ],
             highlights: [
                 "Nuance Lost in Simple Metrics",
@@ -58,7 +58,7 @@ export const ecommerceReviewAnalysis: CaseStudy = {
         {
             title: "The Solution: Embedding + Dimensionality Reduction",
             body: [
-                "I built a pipeline that converts each review into a high-dimensional vector using OpenAI's embedding model. These vectors capture the 'meaning' of the text—similar reviews have similar vectors, even if they use different words.",
+                "I built a pipeline that converts each review into a high-dimensional vector using OpenAI's embedding model. These vectors capture the 'meaning' of the text: similar reviews have similar vectors, even if they use different words.",
                 "To visualize these vectors, I applied t-SNE (t-distributed Stochastic Neighbor Embedding) to reduce 1536 dimensions down to 2D, creating a scatter plot where clusters represent groups of semantically similar reviews.",
             ],
             highlights: [
@@ -106,7 +106,7 @@ export const ecommerceReviewAnalysis: CaseStudy = {
         {
             title: "Insights & Impact",
             body: [
-                "The visualization revealed distinct clusters: positive reviews about fit and quality grouped together, while complaints about sizing formed a separate cluster. This insight could drive product improvements—if 'runs small' complaints cluster together, the sizing chart needs updating.",
+                "The visualization revealed distinct clusters: positive reviews about fit and quality grouped together, while complaints about sizing formed a separate cluster. This insight could drive product improvements: if 'runs small' complaints cluster together, the sizing chart needs updating.",
                 "The methodology is applicable beyond e-commerce: support ticket analysis, social media monitoring, competitive intelligence. The embedding approach captures meaning that keyword-based methods miss, enabling deeper understanding of unstructured text data.",
             ],
             highlights: [

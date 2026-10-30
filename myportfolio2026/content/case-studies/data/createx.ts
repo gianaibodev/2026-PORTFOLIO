@@ -33,7 +33,7 @@ export const createx: CaseStudy = {
             title: "The Design Wand",
             body: [
                 "In the whirlwind of color and chaos that is Artist Hub's CreateX, I am the invisible hand wielding the design wand. From playful PLAYSHOP posters to sleek conference brochures, my pixels and brushstrokes weave a visual tapestry that binds it all together.",
-                "I'm not just a designer; I'm a storyteller. Each project – be it a film camp poster bursting with kinetic energy or a minimalist Artists Innovation Laboratory brochure – is a chapter in CreateX's ever-evolving saga.",
+                "I'm not just a designer; I'm a storyteller. Each project - be it a film camp poster bursting with kinetic energy or a minimalist Artists Innovation Laboratory brochure - is a chapter in CreateX's ever-evolving saga.",
             ],
         },
         {

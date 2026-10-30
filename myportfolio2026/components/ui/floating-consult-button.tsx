@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
-import { useFullPageLoading } from "@/components/full-page-loading-context";
 import Image from "next/image";
 
 interface FloatingConsultButtonProps {
@@ -32,25 +31,22 @@ export const FloatingConsultButton = ({
   imageSize,
   imageSrc = "/lib/image.jpeg",
   imageAlt = "Gian Aibo - Portfolio consultant profile photo",
-  revolvingText = "LET'S TALK • FREE CONSULTATION • ",
+  revolvingText = "LET'S TALK - FREE CONSULTATION - ",
   revolvingSpeed = 10,
-  popupHeading = "30-minutes call",
-  popupDescription = "This will be a brief, free call with one of Bricks Studio's design and development producers to discuss your project and determine if we're a good fit.",
+  popupHeading = "30-minute call",
+  popupDescription = "A brief, free call with me to discuss your project and see if we're a good fit.",
   popupBadgeText = "Free",
   ctaButtonText = "Schedule on Google Calendar",
   ctaButtonAction = () => window.open("https://calendar.google.com/calendar/render?action=TEMPLATE&add=gianaibo.dev@gmail.com", "_blank"),
   position = { bottom: "2rem", right: "2rem" },
 }: FloatingConsultButtonProps) => {
-  const { isActive } = useFullPageLoading();
   const [isOpen, setIsOpen] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
 
-  if (isActive) return null;
-
-  const lgButtonSize = buttonSize || 100;
-  const smButtonSize = buttonSize ? buttonSize * 0.8 : 80;
-  const lgImageSize = imageSize || 60;
-  const smImageSize = imageSize ? imageSize * 0.833 : 48;
+  const lgButtonSize = buttonSize || 76;
+  const smButtonSize = buttonSize ? buttonSize * 0.8 : 60;
+  const lgImageSize = imageSize || 46;
+  const smImageSize = imageSize ? imageSize * 0.833 : 36;
 
   return (
     <>

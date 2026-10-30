@@ -3,7 +3,7 @@ import { CaseStudy } from "../types";
 export const smileit: CaseStudy = {
     slug: "smileit-web-app-mvp",
     projectId: "smileit",
-    title: "SmileIT Inc. — Web App Solution",
+    title: "SmileIT Inc.: Web App Solution",
     subtitle: "Revamping SmileIT Computer Institute's Online Presence",
     summary:
         "As CEO and Lead UI/UX Designer, I spearheaded the digital transformation of SmileIT, crafting a professional MVP to democratize access to quality IT education in Bacolod City.",

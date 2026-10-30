@@ -3,7 +3,7 @@ import { CaseStudy } from "../types";
 export const vectorWorks: CaseStudy = {
     slug: "vector-works-2020",
     projectId: "vector-works",
-    title: "VECTOR WORKS — 2020",
+    title: "Vector Works 2020",
     subtitle: "Precision Geometry and Minimalist Illustration",
     summary:
         "A retrospective of vector-based illustrations from 2020. This collection explores the power of simple geometric forms, flat color palettes, and precise line work to convey complex narratives and clean aesthetics.",

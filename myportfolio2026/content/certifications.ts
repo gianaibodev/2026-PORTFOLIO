@@ -1,5 +1,5 @@
 /**
- * Licenses & certifications — from LinkedIn. Verify at linkedin.com/in/aiboboyero
+ * Licenses & certifications, from LinkedIn. Verify at linkedin.com/in/aiboboyero
  * Names aligned with LinkedIn profile as of 2026.
  * URLs from LinkedIn "Licenses & certifications" (linkedin.com/in/aiboboyero/details/certifications/).
  * DataCamp credential URL uses DataCamp's /certificate/{id} when Credential ID is known from LinkedIn.

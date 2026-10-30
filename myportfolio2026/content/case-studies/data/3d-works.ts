@@ -3,7 +3,7 @@ import { CaseStudy } from "../types";
 export const threeDWorks: CaseStudy = {
     slug: "3d-works-2024",
     projectId: "3d-works",
-    title: "3D WORKS — 2024",
+    title: "3D Works 2024",
     subtitle: "Exploring Dimension, Materiality, and Light",
     summary:
         "A collection of 3D explorations created throughout 2024, focusing on abstract forms, realistic materials, and dynamic lighting setups. This series experiments with the intersection of technology and organic aesthetics.",

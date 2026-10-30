@@ -3,7 +3,7 @@ import { CaseStudy } from "../types";
 export const capturePixels: CaseStudy = {
     slug: "capture-pixels-photography-portfolio",
     projectId: "capture-pixels",
-    title: "Capture Pixels — Photography Portfolio Platform",
+    title: "Capture Pixels: Photography Portfolio Platform",
     subtitle: "Engineering a Cinematic 3D Photography Ecosystem",
     summary:
         "A high-performance, full-stack photography portfolio designed to push the boundaries of modern web aesthetics. Built with Next.js 16 and React 19, the platform shifts away from static galleries toward a physics-based, interactive media experience.\n\nIt serves as a professional showcase that combines cutting-edge 3D mathematics with a robust, custom-built Content Management System (CMS).",

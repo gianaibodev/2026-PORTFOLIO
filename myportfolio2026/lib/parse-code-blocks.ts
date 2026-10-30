@@ -18,7 +18,7 @@ export function parseCodeBlocks(text: string): Array<{ type: 'text' | 'code'; co
             }
         }
 
-        // Add code block — trim trailing newline only, preserve internal whitespace
+        // Add code block, trim trailing newline only, preserve internal whitespace
         const rawCode = match[2];
         // Remove one trailing newline if present (from the \n before ```)
         const cleanCode = rawCode.endsWith('\n') ? rawCode.slice(0, -1) : rawCode;
