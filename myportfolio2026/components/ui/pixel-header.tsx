@@ -2,7 +2,7 @@
 
 import { MeshGradient, Dithering } from "@paper-design/shaders-react";
 import { m } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { isLowEndDevice } from "@/lib/device-performance";
 
 interface PixelHeaderProps {
@@ -29,10 +29,21 @@ export function PixelHeader({
   const [lowEnd, setLowEnd] = useState(false);
   useEffect(() => setLowEnd(isLowEndDevice()), []);
 
+  // The soft gradient needs few pixels, and only animates while it is on screen.
+  const rootRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(true);
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting));
+    observer.observe(root);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="relative w-full pt-[84px] sm:pt-[104px] overflow-hidden">
+    <div ref={rootRef} className="relative w-full pt-[84px] sm:pt-[104px] overflow-hidden">
       {lowEnd ? (
-        /* Static CSS mesh-gradient approximation of the WebGL shader —
+        /* Static CSS mesh-gradient approximation of the WebGL shader,
            same palette, zero GPU cost. The shader animates at speed 0.05,
            so a still frame is visually near-identical. */
         <div
@@ -48,7 +59,9 @@ export function PixelHeader({
             colors={colors}
             swirl={0.75}
             distortion={0.5}
-            speed={0.05}
+            speed={inView ? 0.05 : 0}
+            minPixelRatio={1}
+            maxPixelCount={350000}
             style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
           />
           <Dithering
@@ -56,6 +69,9 @@ export function PixelHeader({
             colorFront="#ffffff"
             scale={0.8}
             shape="dots"
+            speed={0}
+            minPixelRatio={1}
+            maxPixelCount={900000}
             style={{
               position: "absolute",
               inset: 0,

@@ -31,7 +31,7 @@ export function QuoteSection() {
   };
 
   return (
-    <section className="relative w-full flex items-center justify-center bg-gradient-to-b from-background via-blue-600/5 dark:via-blue-400/5 to-background overflow-x-hidden py-8 sm:py-12 md:py-16">
+    <section className="relative w-full flex items-center justify-center bg-gradient-to-b from-background via-blue-600/5 dark:via-blue-400/5 to-background overflow-x-clip py-8 sm:py-12 md:py-16">
       <m.div
         initial="hidden"
         whileInView="visible"
@@ -45,7 +45,7 @@ export function QuoteSection() {
 
         <m.blockquote
           variants={itemVariants}
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light leading-tight text-foreground mb-8 px-2"
+          className="scroll-lit text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light leading-tight text-foreground mb-8 px-2"
         >
           {copyMode === "plain" ? (
             <>

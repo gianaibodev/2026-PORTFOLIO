@@ -9,7 +9,10 @@ const LogoCloud = dynamic(
 
 export function VendorsSection() {
     return (
-        <section aria-label="Organizations" className="w-full py-12 relative z-10 overflow-visible">
+        <section aria-labelledby="organizations-heading" className="w-full py-12 relative z-10 overflow-visible">
+            <h2 id="organizations-heading" className="mb-8 px-5 text-center text-2xl font-medium tracking-tight text-foreground sm:text-3xl">
+                Organizations I&apos;ve worked with
+            </h2>
             <LogoCloud
                 logos={[
                     { src: "/framer/framer-19.png", alt: "Google" },

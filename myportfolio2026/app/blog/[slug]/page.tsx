@@ -229,7 +229,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           {study.sections.map((section) => (
             <section
               key={section.title}
-              className="rounded-[24px] sm:rounded-[32px] border border-zinc-300 dark:border-white/10 bg-white/5 dark:bg-white/[0.02] p-4 sm:p-6 md:p-8 space-y-3 sm:space-y-4"
+              className="reveal rounded-[24px] sm:rounded-[32px] border border-zinc-300 dark:border-white/10 bg-white/5 dark:bg-white/[0.02] p-4 sm:p-6 md:p-8 space-y-3 sm:space-y-4"
             >
               <h2 className="text-xl sm:text-2xl font-semibold">{section.title}</h2>
               <div className="space-y-4 sm:space-y-5 text-muted-foreground text-base sm:text-lg leading-relaxed">
@@ -349,6 +349,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 {study.gallery.map((image, index) => (
                   <ResponsiveImage
                     key={image}
+                    className="reveal"
                     src={image}
                     alt={`${study.title} - Process visual ${index + 1} showing design process, mockups, or final deliverables`}
                     sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, 600px"

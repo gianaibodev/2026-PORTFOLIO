@@ -94,7 +94,7 @@ export function AboutSection() {
                     <h3 className="text-xl font-medium tracking-tight">Education</h3>
                     <ol className="mt-6 space-y-6 border-l border-border pl-6">
                         {EDUCATION.map((entry) => (
-                            <li key={entry.detail}>
+                            <li key={entry.detail} className="reveal">
                                 <p className="font-medium text-foreground">{entry.school}</p>
                                 <p className="mt-0.5 text-sm text-muted-foreground">{entry.detail}</p>
                                 <p className="mt-0.5 text-sm text-blue-600 dark:text-blue-300">{entry.honor}</p>

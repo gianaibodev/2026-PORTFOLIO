@@ -12,7 +12,7 @@ export function Interactive3DSection() {
     return (
         <section id="interactive-3d" className="section">
             <div className="wrap">
-                <h2 className="heading">{plain ? "Interactive & 3D Design" : "Mastering Motion & 3D"}</h2>
+                <h2 className="heading reveal">{plain ? "Interactive & 3D Design" : "Mastering Motion & 3D"}</h2>
                 <p className="lede">
                     {plain ? (
                         "I create websites that feel alive. Using modern 3D tools and animation, I make sure your brand stands out and keeps visitors engaged longer."
@@ -27,7 +27,7 @@ export function Interactive3DSection() {
                 </p>
 
                 <div className="reveal mt-12 grid grid-cols-2 gap-3 md:mt-16 md:grid-cols-12 md:grid-rows-2 md:gap-4">
-                    <div className="relative col-span-2 aspect-video overflow-hidden rounded-2xl bg-muted md:col-span-8 md:row-span-2 md:aspect-auto">
+                    <div className="unmask relative col-span-2 aspect-video overflow-hidden rounded-2xl bg-muted md:col-span-8 md:row-span-2 md:aspect-auto">
                         <Image
                             src="/projects/3d-works/hero.webp"
                             alt="A rendered 3D sphere in brushed teal metal, split open around an amber core"

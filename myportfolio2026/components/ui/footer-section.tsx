@@ -60,7 +60,7 @@ const footerLinks: FooterSection[] = [
 export function Footer() {
 
 	return (
-		<footer className="relative w-full border-t border-zinc-200 dark:border-white/10 pb-24 md:pb-28">
+		<footer className="relative w-full border-t border-zinc-200 dark:border-white/10 pb-6">
 			<div className="max-w-7xl mx-auto px-6 py-12 lg:py-16">
 				<div className="grid w-full gap-10 xl:grid-cols-3 xl:gap-12">
 					{/* Brand */}
@@ -136,6 +136,8 @@ export function Footer() {
 					</div>
 				</AnimatedContainer>
 			</div>
+			{/* The page ends on the name, at full width. */}
+			<div aria-hidden className="footer-mark reveal">Gian Aibo</div>
 		</footer>
 	);
 }

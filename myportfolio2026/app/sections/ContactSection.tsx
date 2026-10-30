@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { BorderBeam } from "border-beam";
 import { useCopyMode } from "@/components/copy-mode-provider";
 
 export function ContactSection() {
@@ -19,7 +20,9 @@ export function ContactSection() {
                         : "I'm always open to new opportunities, collaborations, and conversations."}
                 </p>
                 <div className="mt-9 flex flex-wrap gap-3">
-                    <a href="mailto:gianaibo.dev@gmail.com" className="btn btn-primary">Email Me</a>
+                    <BorderBeam size="md" colorVariant="ocean" theme="dark" duration={3.2}>
+                        <a href="mailto:gianaibo.dev@gmail.com" className="btn btn-primary">Email Me</a>
+                    </BorderBeam>
                     <Link href="/contact" className="btn btn-quiet">Connect Socially</Link>
                 </div>
             </div>

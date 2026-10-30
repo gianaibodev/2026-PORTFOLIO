@@ -1,5 +1,6 @@
 "use client";
 
+import { Fragment } from "react";
 import dynamic from "next/dynamic";
 import { ArrowDown } from "lucide-react";
 import { BorderBeam } from "border-beam";
@@ -22,16 +23,14 @@ export function HeroSection() {
                 <p className="rise text-sm font-medium text-blue-600 dark:text-blue-300">
                     Open to work, {plain ? "2026 Portfolio" : "Portfolio 2026"}
                 </p>
-                <h1 className="rise rise-1 mt-5 text-balance text-[clamp(3.25rem,8.6vw,8.75rem)] font-medium leading-[0.98] tracking-[-0.045em] text-foreground">
-                    {plain ? (
-                        <>
-                            <span className="text-blue-600 dark:text-blue-300">Design</span> that people remember.
-                        </>
-                    ) : (
-                        <>
-                            <span className="text-blue-600 dark:text-blue-300">Designing</span> high-end digital experiences.
-                        </>
-                    )}
+                <h1 className="mt-5 text-balance text-[clamp(3.25rem,8.6vw,8.75rem)] font-medium leading-[0.98] tracking-[-0.045em] text-foreground">
+                    {(plain ? "Design that people remember." : "Designing high-end digital experiences.").split(" ").map((word, index) => (
+                        <Fragment key={`${copyMode}-${word}`}>
+                            <span className="hero-word" style={{ "--word": index } as React.CSSProperties}>
+                                <span className={index === 0 ? "text-blue-600 dark:text-blue-300" : undefined}>{word}</span>
+                            </span>{" "}
+                        </Fragment>
+                    ))}
                 </h1>
                 <p className="rise rise-2 mt-6 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
                     {plain

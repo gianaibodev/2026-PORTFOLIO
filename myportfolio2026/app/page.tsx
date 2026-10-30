@@ -4,6 +4,7 @@ import MacOSMenuBar from "@/components/ui/mac-os-menu-bar";
 import { HeroSection } from "./sections/HeroSection";
 import { WorkFanSection } from "./sections/WorkFanSection";
 import { PortfolioSection } from "./sections/PortfolioSection";
+import { DisciplineRails } from "./sections/DisciplineRails";
 import { QuoteSection } from "./sections/QuoteSection";
 import { Interactive3DSection } from "./sections/Interactive3DSection";
 import { CircularGallerySection } from "./sections/CircularGallerySection";
@@ -58,6 +59,7 @@ export default function HomePage() {
         <HeroSection />
         <WorkFanSection projects={fan} />
         <PortfolioSection galleryImages={featured} />
+        <DisciplineRails />
         <QuoteSection />
         <Interactive3DSection />
         <CircularGallerySection />

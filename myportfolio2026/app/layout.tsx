@@ -11,6 +11,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { RouteChangeHandler } from "@/components/route-change-handler";
+import { SpotlightTracker } from "@/components/spotlight-tracker";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -81,6 +82,7 @@ export default function RootLayout({
               <CopyModeProvider>
                   <FramerMotionProvider>
                     <RouteChangeHandler />
+                    <SpotlightTracker />
                     <div className="flex min-h-screen flex-col" suppressHydrationWarning>
                       <main className="flex-1">{children}</main>
                       <Footer />

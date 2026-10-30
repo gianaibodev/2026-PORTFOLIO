@@ -186,7 +186,7 @@ export default function BlogClient({ categories }: BlogClientProps) {
                       <Link
                         key={study.slug}
                         href={`/blog/${study.slug}`}
-                        className="group border border-zinc-200 dark:border-white/10 rounded-2xl sm:rounded-3xl p-4 sm:p-6 backdrop-blur-2xl bg-white dark:bg-white/[0.02] hover:border-zinc-400 dark:hover:border-white/30 transition-all flex flex-col gap-4 sm:gap-6"
+                        className="spotlight group border border-zinc-200 dark:border-white/10 rounded-2xl sm:rounded-3xl p-4 sm:p-6 backdrop-blur-2xl bg-white dark:bg-white/[0.02] hover:border-zinc-400 dark:hover:border-white/30 transition-all flex flex-col gap-4 sm:gap-6"
                       >
                         <div className="relative aspect-[4/3] overflow-hidden rounded-xl sm:rounded-2xl bg-muted/10">
                           <CardImage
