@@ -20,6 +20,20 @@ export const valtara: CaseStudy = {
     ],
     heroImage: "/legacy/assets/demopic/4.jpg",
     gallery: [
+        "/projects/behance/valtara/1.webp",
+        "/projects/behance/valtara/2.webp",
+        "/projects/behance/valtara/3.webp",
+        "/projects/behance/valtara/4.webp",
+        "/projects/behance/valtara/5.webp",
+        "/projects/behance/valtara/6.webp",
+        "/projects/behance/valtara/7.webp",
+        "/projects/behance/valtara/8.webp",
+        "/projects/behance/valtara/9.webp",
+        "/projects/behance/valtara/10.webp",
+        "/projects/behance/valtara/11.webp",
+        "/projects/behance/valtara/12.webp",
+        "/projects/behance/valtara/13.webp",
+        "/projects/behance/valtara/14.webp",
         "/legacy/assets/demopic/15.jpg",
         "/legacy/assets/demopic/15-a.gif",
         "/legacy/assets/demopic/watch1.gif",
@@ -32,6 +46,7 @@ export const valtara: CaseStudy = {
         "Game Merchandise Concepts",
     ],
     links: [
+        { label: "View on Behance", href: "https://www.behance.net/gallery/176248003/Valtara-2D-Game" }
     ],
     sections: [
         {
