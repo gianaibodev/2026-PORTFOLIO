@@ -10,6 +10,7 @@ import ParticleText from "@/components/ui/particle-text-canvas";
 
 import { useCopyMode } from "@/components/copy-mode-provider";
 import { useFullPageLoading } from "@/components/full-page-loading-context";
+import { useSkipOnScroll } from "@/lib/use-skip-on-scroll";
 
 export default function ProjectsPage() {
   const { copyMode } = useCopyMode();
@@ -72,6 +73,8 @@ export default function ProjectsPage() {
     // Trigger fade out
     setShowLoader(false);
   };
+
+  useSkipOnScroll(showLoader, handleCloseLoader);
 
   if (showLoader) {
     const overlay = (

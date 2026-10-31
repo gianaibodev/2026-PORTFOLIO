@@ -11,6 +11,7 @@ import { PixelHeader } from "@/components/ui/pixel-header";
 import ParticleText from "@/components/ui/particle-text-canvas";
 import { ResponsiveImage } from "@/components/ui/responsive-image";
 import { useFullPageLoading } from "@/components/full-page-loading-context";
+import { useSkipOnScroll } from "@/lib/use-skip-on-scroll";
 
 type ApiStudy = {
   slug: string;
@@ -135,6 +136,10 @@ export default function CategoryPage() {
 
   const isLoading = showLoader || !mounted || !dataReady;
   const { setActive } = useFullPageLoading();
+  useSkipOnScroll(showLoader, () => {
+    setShowLoader(false);
+    sessionStorage.setItem("projectsIntroShown_v1", "true");
+  });
   useLayoutEffect(() => {
     setActive(isLoading);
     return () => setActive(false);

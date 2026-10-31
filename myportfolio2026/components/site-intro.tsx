@@ -4,6 +4,7 @@ import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import ParticleText from "@/components/ui/particle-text-canvas";
 import { useFullPageLoading } from "@/components/full-page-loading-context";
+import { useSkipOnScroll } from "@/lib/use-skip-on-scroll";
 
 type SiteIntroProps = {
     // What to show once the intro has finished. Route loading screens keep
@@ -24,6 +25,10 @@ export default function SiteIntro({ fallback = null }: SiteIntroProps) {
     const touchStartTimeRef = useRef<number>(0);
     const longPressTimerRef = useRef<NodeJS.Timeout | null>(null);
     const { setActive } = useFullPageLoading();
+    useSkipOnScroll(showLoader, () => {
+        setShowLoader(false);
+        sessionStorage.setItem("siteIntroShown_v1", "true");
+    });
 
     useLayoutEffect(() => {
         setActive(showLoader);

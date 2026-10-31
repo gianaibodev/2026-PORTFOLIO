@@ -4,6 +4,7 @@ import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import ParticleText from "@/components/ui/particle-text-canvas";
 import { useFullPageLoading } from "@/components/full-page-loading-context";
+import { useSkipOnScroll } from "@/lib/use-skip-on-scroll";
 
 export default function Loading() {
   const [showLoader, setShowLoader] = useState(true);
@@ -18,6 +19,10 @@ export default function Loading() {
   const touchStartTimeRef = useRef<number>(0);
   const longPressTimerRef = useRef<NodeJS.Timeout | null>(null);
   const { setActive } = useFullPageLoading();
+  useSkipOnScroll(showLoader, () => {
+    setShowLoader(false);
+    sessionStorage.setItem("siteIntroShown_v1", "true");
+  });
 
   useLayoutEffect(() => {
     setActive(true);
