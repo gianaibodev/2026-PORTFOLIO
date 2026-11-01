@@ -14,9 +14,9 @@ export const devconBacolod: CaseStudy = {
     roles: ["Chapter Lead", "Creative Director"],
     tools: ["Figma", "Adobe Photoshop", "Community Building"],
     metrics: [
-        "Largest volunteer tech community in the Philippines",
-        "Promoted collaborative growth for Filipino developers",
-        "Provided platforms for learning and networking",
+        "Led CIPHER, the chapter's AI series",
+        "Hacking AI: Chatbots for Daily Use, February 2024, supported by Accenture and Talino Venture Studios",
+        "Inter-school attendance leaderboard across Negros schools",
     ],
     heroImage: "/framer/projects/devcon-hero.webp",
     gallery: [
@@ -45,6 +45,7 @@ export const devconBacolod: CaseStudy = {
             body: [
                 "As Chapter Lead for DEVCON Bacolod, I spearheaded initiatives to connect local developers with the broader Philippine tech ecosystem.",
                 "Our focus was on creating inclusive spaces for learning, where students and professionals could bridge the gap between academia and industry requirements.",
+                "CIPHER was the chapter's AI series. Hacking AI: Chatbots for Daily Use ran on Zoom on February 17, 2024, free with certificates and open to anyone, with support from Accenture and Talino Venture Studios. An attendance leaderboard ranked University of St. La Salle, Southland College of Kabankalan City and Carlos Hilado Memorial State University.",
             ],
         },
     ],
