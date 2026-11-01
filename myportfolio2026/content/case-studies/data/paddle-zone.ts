@@ -4,7 +4,7 @@ export const paddleZone: CaseStudy = {
     slug: "paddle-zone",
     projectId: "paddle-zone",
     title: "Paddle Zone",
-    subtitle: "Open play queue, TV board and player passport for a Bacolod pickleball club",
+    subtitle: "Pre-launch experiment: open play queue, TV board and player passport for a Bacolod pickleball club",
     summary:
         "One app for the players, the front desk and the TV at Paddle Zone Bacolod. Members always know their next game, courts run themselves, and every game adds to a player passport with levels, grades, honor and shareable cards.",
     date: "2026-10-06",
@@ -23,6 +23,7 @@ export const paddleZone: CaseStudy = {
         "/projects/paddle-zone/2.webp",
         "/projects/paddle-zone/3.webp",
     ],
+    links: [{ label: "Open the pre-launch app", href: "https://paddle-zone-bcd.vercel.app" }],
     deliverables: [
         "Member app: queue, home, community and profile",
         "TV board with a voice announcer",

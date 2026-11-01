@@ -23,7 +23,7 @@ export const gdgBacolod: CaseStudy = {
         "Vercel",
     ],
     metrics: [
-        "Automated certificate generation saves time for organizers",
+        "Prototype: certificate generation built to save organizers time",
         "Centralized archive preserves event history and moments",
         "Offline-ready fallback for venues with poor connectivity",
         "Multi-format certificate export (PNG & PDF)",

@@ -53,8 +53,8 @@ export function CircularGallerySection() {
                 <h2 className="heading reveal">Almost 1 Year on the Road</h2>
                 <p className="lede">
                     {copyMode === "plain"
-                        ? "After finishing school, I spent almost 1 year backpacking across different countries, funding my travels through freelance work: SEO, design, video, photography, web design, AI tasks, and more. Now, with this portfolio launched, I'm ready to transition into a full-time professional role and bring those fresh perspectives into my work."
-                        : "After graduating, I spent almost 1 year backpacking across different countries, funding my travels through freelance work: SEO, design, video, photography, web design, AI tasks, and more. Now, with this portfolio launched, I'm ready to embark on my next professional chapter and bring those global perspectives into my work."}
+                        ? "After graduating, I spent almost 1 year backpacking across different countries. I freelanced in web design, SEO and video along the way, and built Haff Leisure Club. Now I'm ready for a full-time frontend role."
+                        : "After graduating, I spent almost 1 year backpacking across different countries. I freelanced in web design, SEO and video along the way, and built Haff Leisure Club. Now I'm ready for a full-time frontend role."}
                 </p>
                 <p className="mt-4 max-w-[65ch] leading-relaxed text-muted-foreground">
                     Traveling and experiencing different cultures has been a huge boost to my creativity, teaching me design styles, color palettes, and visual languages from around the world.

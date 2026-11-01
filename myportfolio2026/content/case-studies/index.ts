@@ -35,6 +35,8 @@ import { joseApp } from "./data/jose-app";
 import { techCare } from "./data/techcare";
 import { haffLeisureClub } from "./data/haff-leisure-club";
 import { paddleZone } from "./data/paddle-zone";
+import { smdiConsultants } from "./data/smdi-consultants";
+import { newsearch } from "./data/newsearch";
 import { skillMaking } from "./data/skill-making";
 
 // Re-export types
@@ -75,6 +77,8 @@ const rawData: CaseStudy[] = [
     techCare,
     haffLeisureClub,
     paddleZone,
+    smdiConsultants,
+    newsearch,
     skillMaking,
 ];
 

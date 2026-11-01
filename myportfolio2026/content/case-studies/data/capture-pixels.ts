@@ -24,10 +24,9 @@ export const capturePixels: CaseStudy = {
         "Vercel",
     ],
     metrics: [
-        "60fps 3D animations provide premium 'luxury' feel",
+        "Physics-based 3D gallery",
         "Zero-friction content management workflow for non-technical users",
-        "Instant revalidation ensures global updates within milliseconds",
-        "High-performance Core Web Vitals (LCP/CLS) maintained",
+        "Content updates revalidate on save",
         "Secure admin dashboard with HTTP-only cookies and middleware protection",
     ],
     heroImage: "/lib/96shots_so.png",

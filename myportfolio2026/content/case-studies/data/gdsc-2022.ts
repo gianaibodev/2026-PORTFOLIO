@@ -11,7 +11,7 @@ export const gdsc2022: CaseStudy = {
     year: 2022,
     category: "Community & Events",
     tags: ["Leadership", "Google DSC", "Growth", "Impact"],
-    roles: ["Lead", "CEO", "Event Organizer"],
+    roles: ["Lead", "Event Organizer"],
     tools: ["Leadership", "Community Building", "Project Management", "AR Technology"],
     metrics: [
         "Grew membership from 8 to 150+ in one month",

@@ -40,8 +40,8 @@ const footerLinks: FooterSection[] = [
 		label: 'Contact',
 		links: [
 			{ title: 'gianaibo.dev@gmail.com', href: 'mailto:gianaibo.dev@gmail.com', icon: Mail },
-			{ title: '+63 907 047 0241', href: 'tel:+639070470241', icon: Phone },
-			{ title: 'WhatsApp', href: 'https://wa.me/639070470241', icon: MessageCircle, external: true },
+			{ title: '+63 968 620 8079', href: 'tel:+639686208079', icon: Phone },
+			{ title: 'WhatsApp', href: 'https://wa.me/639686208079', icon: MessageCircle, external: true },
 			{ title: 'Telegram @gibandtake', href: 'https://t.me/gibandtake', icon: Send, external: true },
 			{ title: 'gianaibo.tech', href: 'https://gianaibo.tech', icon: Globe, external: true },
 		],

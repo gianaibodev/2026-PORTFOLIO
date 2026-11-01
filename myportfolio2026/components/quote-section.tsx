@@ -51,7 +51,7 @@ export function QuoteSection() {
             <>
               <span className="text-blue-600 dark:text-blue-300 font-semibold">Reliability</span> is my main currency. I turn{" "}
               <span className="text-blue-600 dark:text-blue-300 font-semibold">messy ideas</span> into{" "}
-              <span className="text-blue-600 dark:text-blue-300 font-semibold">clean, profitable websites</span> that you&apos;ll be proud to show off.
+              <span className="text-blue-600 dark:text-blue-300 font-semibold">clean, working interfaces</span> that real people use every day.
             </>
           ) : (
             <>
@@ -72,10 +72,10 @@ export function QuoteSection() {
             Gian Aibo C. Boyero
           </p>
           <p className="text-sm text-muted-foreground/85 font-medium tracking-wide">
-            {copyMode === "plain" ? "Designer & Developer" : "Software Engineer & Community Leader"}
+            {copyMode === "plain" ? "Frontend Developer" : "Frontend Developer & Community Leader"}
           </p>
           <p className="text-xs text-muted-foreground/75 uppercase tracking-widest">
-            {copyMode === "plain" ? "Helping Businesses Worldwide" : "Leading Tech Communities & Engineering Teams"}
+            {copyMode === "plain" ? "Figma to Deployed Code" : "Leading Tech Communities & Engineering Teams"}
           </p>
         </m.div>
 

@@ -11,7 +11,7 @@ export const leighCollaboration: CaseStudy = {
     year: 2024,
     category: "Branding",
     tags: ["Collaboration", "Graphic Design", "Mentorship", "Process"],
-    roles: ["Creative Director", "CEO", "Mentor"],
+    roles: ["Creative Director", "Mentor"],
     tools: ["Discord", "Adobe Photoshop", "GDSC Branding"],
     metrics: [
         "Mentored a Design Officer to Lead Designer transition",

@@ -12,11 +12,11 @@ export function ContactSection() {
         <section id="contact-redirect" className="section">
             <div className="wrap">
                 <h2 className="closing-type text-5xl font-medium leading-[1.04] tracking-[-0.035em] md:text-7xl">
-                    {plain ? "Ready to start?" : "Get In Touch"}
+                    {plain ? "Hiring? Let's talk." : "Get In Touch"}
                 </h2>
                 <p className="lede">
                     {plain
-                        ? "Let's discuss your project. I'm currently accepting new clients."
+                        ? "I'm open to full-time frontend roles and happy to walk you through my work."
                         : "I'm always open to new opportunities, collaborations, and conversations."}
                 </p>
                 <div className="mt-9 flex flex-wrap gap-3">

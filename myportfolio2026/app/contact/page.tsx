@@ -74,11 +74,11 @@ const socialLinks = [
     },
     {
         name: "WhatsApp",
-        label: "+63 962 644 2911",
-        href: "https://wa.me/639626442911",
+        label: "+63 968 620 8079",
+        href: "https://wa.me/639686208079",
         icon: MessageCircle,
         color: "bg-emerald-500",
-        description: "Business & project chat"
+        description: "Direct chat"
     }
 ];
 

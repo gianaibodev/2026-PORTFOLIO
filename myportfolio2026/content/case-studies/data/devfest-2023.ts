@@ -6,12 +6,12 @@ export const devfest2023: CaseStudy = {
     title: "DevFest 2023: Bacolod Tech Takeover",
     subtitle: "Hosting and Organizing Bacolod's Biggest Tech Event",
     summary:
-        "As Acting President of DEVCON Bacolod and Co-Lead Creatives, I hosted Day 1 of DevFest 2023 and designed the main event visuals, celebrating a vibrant tech community of over 800 participants.",
+        "As Creatives Co-head of GDG Bacolod, I hosted Day 1 of DevFest 2023 and designed the main event visuals, celebrating a vibrant tech community of over 800 participants.",
     date: "2023-10-08",
     year: 2023,
     category: "Community & Events",
     tags: ["Hosting", "Public Speaking", "Community Lead"],
-    roles: ["Event Host", "Creatives Lead", "Acting President DEVCON"],
+    roles: ["Event Host", "Creatives Co-head"],
     tools: ["Public Speaking", "Event Management", "Graphic Design", "Canva"],
     metrics: [
         "800+ participants and curious passersby",

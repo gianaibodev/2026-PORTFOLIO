@@ -4,20 +4,20 @@ export const portfolio2026: CaseStudy = {
     slug: "portfolio-2026-making-of",
     projectId: "portfolio-2026",
     title: "THE MAKING OF GIAN AIBO 2026",
-    subtitle: "Designing a World-Class Digital Experience",
+    subtitle: "Engineering notes behind this site",
     summary:
         "A meta-study on the engineering and design choices behind this very website. Combining Next.js 16, custom GLSL shaders, and MacOS-inspired glassmorphism to create a high-end digital experience that pushes the boundaries of traditional portfolio design.",
     date: "2025-12-23",
     year: 2025,
     category: "UI/UX",
     tags: ["Technical Lead", "GLSL Shaders", "Next.js 16", "Apple Design"],
-    roles: ["Architect", "Shader Artist", "Lead Developer"],
+    roles: ["Designer", "Developer"],
     tools: ["React 19", "OGL", "Framer Motion", "PostCSS 4"],
     metrics: [
         "Real-time GPU-based theme switching",
         "Interactive 3D folder navigation system",
         "Zero-flash theme persistence using sessionStorage",
-        "Sub-100ms interaction latency across all WebGL nodes",
+        "Hero shader moved to a Web Worker, removing a 1.1 second main-thread block",
     ],
     heroImage: "/portfolio-screenshots/hero-desktop.jpg",
     gallery: [

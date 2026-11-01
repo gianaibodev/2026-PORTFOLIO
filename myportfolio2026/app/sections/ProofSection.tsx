@@ -2,9 +2,9 @@ import { CountUp } from "@/components/count-up";
 
 const PROOF = [
     { prefix: "#1 of ", value: 7042, suffix: "", label: "students across all colleges in my first year" },
-    { prefix: "", value: 1500, suffix: "+", label: "global community members led" },
-    { prefix: "", value: 32, suffix: "", label: "professional certifications" },
-    { prefix: "", value: 8, suffix: "+", label: "years of design experience" },
+    { prefix: "", value: 1500, suffix: "+", label: "developer community members led" },
+    { prefix: "", value: 4, suffix: "", label: "web projects you can open right now" },
+    { prefix: "", value: 97, suffix: "%", label: "college GWA, Cum Laude in Computer Science" },
 ];
 
 export function ProofSection() {

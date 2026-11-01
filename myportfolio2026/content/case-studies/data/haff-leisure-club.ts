@@ -23,6 +23,7 @@ export const haffLeisureClub: CaseStudy = {
         "/projects/haff-leisure-club/2.webp",
         "/projects/haff-leisure-club/3.webp",
     ],
+    links: [{ label: "Open the live app", href: "https://www.haffleisureclub.com" }],
     deliverables: [
         "Open Play queue with stacks and court assignments",
         "TV board for the club floor",

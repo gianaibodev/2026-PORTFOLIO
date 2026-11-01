@@ -1,7 +1,8 @@
 import { z } from "zod";
 
-// Display order across /projects and /blog: design disciplines lead.
+// Display order across /projects and /blog: web work leads for frontend roles.
 export const caseStudyCategories = [
+    "Web Development",
     "Branding",
     "UI/UX",
     "3D Design",
@@ -11,7 +12,6 @@ export const caseStudyCategories = [
     "Games & Experiments",
     "Community & Events",
     "Internships",
-    "Web Development",
     "AI & Machine Learning",
 ] as const;
 

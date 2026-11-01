@@ -52,10 +52,10 @@ export function AboutSection() {
                         {plain ? (
                             <>
                                 <p>
-                                    I&apos;m <span className="font-medium text-foreground">Gian Aibo C. Boyero</span>, a designer and developer who builds websites that work. I recently graduated with honors, but my focus is 100% on delivering real results for clients.
+                                    I&apos;m <span className="font-medium text-foreground">Gian Aibo C. Boyero</span>, a frontend developer who designs interfaces and then builds them. I graduated Cum Laude in Computer Science in 2025.
                                 </p>
                                 <p>
-                                    Whether you need a simple landing page or a full online store, I handle the technical details so you can focus on your business. I value clear communication, hitting deadlines, and making things look professional.
+                                    I work in React, Next.js and TypeScript, and my background in design and in leading developer communities means I can talk to designers, engineers and users. I am looking for a full-time frontend role.
                                 </p>
                             </>
                         ) : (
@@ -73,12 +73,12 @@ export function AboutSection() {
                     <div className="mt-10 grid max-w-xl grid-cols-1 gap-8 sm:grid-cols-2">
                         {plain ? (
                             <>
-                                <FactList title="My Focus" items={["Web Design & Dev", "E-commerce (Shopify)", "Brand Strategy"]} />
+                                <FactList title="My Focus" items={["React & Next.js", "TypeScript", "Figma to Code"]} />
                                 <FactList title="Values" items={["Reliability", "Fast Delivery", "Clear Communication"]} />
                             </>
                         ) : (
                             <>
-                                <FactList title="Leadership" items={["President, DEVCON Bacolod", "CEO, GDG on Campus USLS", "Creatives Co-head, GDG Bacolod"]} />
+                                <FactList title="Leadership" items={["Acting President, DEVCON Bacolod", "Lead, GDG on Campus USLS", "Creatives Co-head, GDG Bacolod"]} />
                                 <FactList title="Key Wins" items={["Most Outstanding Student (Visual Arts & Service)", "National Creative Awards (Best Art Direction)", "Google Role Model of the Year", "Outstanding Intern & Legacy Builder"]} />
                             </>
                         )}
