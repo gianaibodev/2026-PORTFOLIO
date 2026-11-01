@@ -47,7 +47,7 @@ const FAN_SLUGS = [
 // The pinned stack, with the result that best sums up each project.
 const CASE_FILES = [
   { slug: "haff-leisure-club", result: "Replaced a club whiteboard with one live board" },
-  { slug: "smdi-consultants-website", result: "A team can update its own site without a developer" },
+  { slug: "smdi-consultants-website", result: "Built so a team can update its site without a developer" },
   { slug: "newsearch-news-signal-lens", result: "Cuts through noisy news feeds" },
   { slug: "la-vida-2025-brand-system", result: "Strategic promotion and talent curation for high-energy events" },
   { slug: "google-awards-2023", result: "50+ digital assets for 100+ community finalists" },

@@ -34,7 +34,7 @@ export function HeroSection() {
                 </h1>
                 <p className="rise rise-2 mt-6 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
                     {plain
-                        ? "Frontend developer working in React, Next.js and TypeScript. I built the live queue and court app a pickleball club uses on its floor, and a company site with its own CMS."
+                        ? "Frontend developer working in React, Next.js and TypeScript. I built the live queue and court app a pickleball club uses on its floor, and a company site proposal with its own CMS."
                         : "Real-time interfaces, Web Workers, WebGL and accessible components. Open to full-time frontend roles."}
                 </p>
                 <div className="rise rise-3 mt-9 flex flex-wrap items-center gap-3">

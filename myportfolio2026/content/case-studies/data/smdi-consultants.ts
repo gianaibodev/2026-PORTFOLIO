@@ -4,9 +4,9 @@ export const smdiConsultants: CaseStudy = {
     slug: "smdi-consultants-website",
     projectId: "smdi-consultants",
     title: "SMDI Consultants",
-    subtitle: "Company website and custom CMS, built 1:1 from a Figma design",
+    subtitle: "Client proposal: company website and custom CMS, built 1:1 from a Figma design",
     summary:
-        "A responsive company website for SMDI Consultants, built 1:1 from a Figma design, with a custom content management system so the team can update the site without a developer.",
+        "A client proposal for SMDI Consultants: a responsive company website built 1:1 from a Figma design, with a custom content management system designed so a team can update the site without a developer.",
     date: "2026-09-17",
     year: 2026,
     category: "Web Development",
@@ -20,7 +20,7 @@ export const smdiConsultants: CaseStudy = {
     ],
     heroImage: "/projects/smdi-consultants/hero.jpg",
     gallery: [],
-    links: [{ label: "Open the live site", href: "https://smdi-website.vercel.app" }],
+    links: [{ label: "Open the proposal site", href: "https://smdi-website.vercel.app" }],
     deliverables: [
         "Public site: Home, Solutions, Consulting, Projects, About us and Contact us",
         "Admin for page content, navigation, projects, news, media and enquiries",
