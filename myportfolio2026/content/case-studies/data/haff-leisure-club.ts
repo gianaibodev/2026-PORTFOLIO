@@ -14,7 +14,7 @@ export const haffLeisureClub: CaseStudy = {
     roles: ["Full-Stack Developer", "Product Design"],
     tools: ["React", "Vite", "TypeScript", "Supabase", "Framer Motion", "Vercel"],
     metrics: [
-        "3,100+ visitors and 16,000+ page views in 30 days (Oct 2026), 93% on mobile",
+        "About 100 visits a day and 16,000+ page views in 30 days (Oct 2026), 93% on phones",
         "Three courts, one queue, one shared game clock",
         "Court release and next-stack seating handled on the server",
         "Admin-created accounts with Row Level Security on every table",
