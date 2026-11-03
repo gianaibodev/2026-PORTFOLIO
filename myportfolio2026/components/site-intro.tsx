@@ -36,7 +36,9 @@ export default function SiteIntro({ fallback = null }: SiteIntroProps) {
     }, [showLoader, setActive]);
 
     useEffect(() => {
-        if (typeof window === "undefined") return;
+        // Once the intro is gone its touch handlers must go too, or the page
+        // stays unscrollable on phones (their touchstart calls preventDefault).
+        if (typeof window === "undefined" || !showLoader) return;
 
         const SITE_INTRO_KEY = "siteIntroShown_v1";
         const hasSeen = sessionStorage.getItem(SITE_INTRO_KEY);
@@ -182,7 +184,7 @@ export default function SiteIntro({ fallback = null }: SiteIntroProps) {
                 clearTimeout(longPressTimerRef.current);
             }
         };
-    }, [isHeld, progress, isMobile]);
+    }, [isHeld, progress, isMobile, showLoader]);
 
     if (!showLoader) {
         return fallback;

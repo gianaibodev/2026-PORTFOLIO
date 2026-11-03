@@ -23,7 +23,8 @@ export function HomeIntro() {
     if (play !== null) return play ? <SiteIntro /> : null;
     return (
         <>
-            <div id="intro-cover" className="fixed inset-0 z-[99999] bg-[#0a0f18]" suppressHydrationWarning />
+            {/* If scripts never run (slow in-app browsers), the cover hides itself. */}
+            <div id="intro-cover" className="fixed inset-0 z-[99999] bg-[#0a0f18]" style={{ animation: "intro-cover-out 0s 8s forwards" }} suppressHydrationWarning />
             <script dangerouslySetInnerHTML={{ __html: hideForReturning }} />
             <noscript>
                 <style>{"#intro-cover{display:none}"}</style>

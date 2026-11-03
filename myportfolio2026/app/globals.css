@@ -1058,3 +1058,8 @@ canvas.interactive {
 .particle-loading-hint {
   animation: pulse 2s ease-in-out infinite;
 }
+@keyframes intro-cover-out {
+  to {
+    visibility: hidden;
+  }
+}
