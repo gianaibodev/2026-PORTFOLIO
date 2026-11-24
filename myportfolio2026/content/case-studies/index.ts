@@ -36,6 +36,7 @@ import { techCare } from "./data/techcare";
 import { haffLeisureClub } from "./data/haff-leisure-club";
 import { paddleZone } from "./data/paddle-zone";
 import { smdiConsultants } from "./data/smdi-consultants";
+import { noFilterClub } from "./data/no-filter-club";
 import { newsearch } from "./data/newsearch";
 import { skillMaking } from "./data/skill-making";
 
@@ -76,6 +77,7 @@ const rawData: CaseStudy[] = [
     joseApp,
     techCare,
     haffLeisureClub,
+    noFilterClub,
     paddleZone,
     smdiConsultants,
     newsearch,

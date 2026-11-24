@@ -4,7 +4,7 @@ export const paddleZone: CaseStudy = {
     slug: "paddle-zone",
     projectId: "paddle-zone",
     title: "Paddle Zone",
-    subtitle: "Pre-launch experiment: open play queue, TV board and player passport for a Bacolod pickleball club",
+    subtitle: "Open play queue, TV board and player passport for a Bacolod pickleball club",
     summary:
         "One app for the players, the front desk and the TV at Paddle Zone Bacolod. Members always know their next game, courts run themselves, and every game adds to a player passport with levels, grades, honor and shareable cards.",
     date: "2026-10-06",
@@ -17,13 +17,14 @@ export const paddleZone: CaseStudy = {
         "4 courts tracked live, with a 60 second walk-over before every game",
         "16 badges and 22 shareable card designs",
         "No public sign-up: staff create every login",
+        "Sign-in kept in a server cookie, so iPhone Safari never signs players out",
     ],
     heroImage: "/projects/paddle-zone/hero.webp",
     gallery: [
         "/projects/paddle-zone/2.webp",
         "/projects/paddle-zone/3.webp",
     ],
-    links: [{ label: "Open the pre-launch app", href: "https://paddle-zone-bcd.vercel.app" }],
+    links: [{ label: "Open the demo", href: "https://paddle-zone-bcd.vercel.app" }],
     deliverables: [
         "Member app: queue, home, community and profile",
         "TV board with a voice announcer",
@@ -115,6 +116,14 @@ export const paddleZone: CaseStudy = {
                 "The app runs on Supabase and Vercel free tiers, and its court rules, queue logic and progression are covered by an automated test suite.",
             ],
             highlights: ["Staff-created logins", "Rate-limited sign-in", "Automated tests"],
+        },
+        {
+            title: "Built for Cheap Phones",
+            body: [
+                "Most players open the app on iPhone Safari, which wipes site storage after a week and runs out of memory on long lists. The sign-in now lives in a server cookie, the community page draws players in pages of 36, and share cards free their memory after use.",
+                "A light and dark switch sits on every page and stays in step across screens, with a lite mode that keeps motion smooth on older phones.",
+            ],
+            highlights: ["Server cookie sessions", "Paged lists", "Light and dark"],
         },
     ],
 };
