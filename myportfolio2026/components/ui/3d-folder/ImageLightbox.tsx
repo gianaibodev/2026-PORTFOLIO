@@ -96,15 +96,14 @@ export function ImageLightbox({
         }
 
         window.addEventListener("keydown", handleKeyDown)
-        if (isOpen) {
-            lockScroll()
-        }
-
-        return () => {
-            window.removeEventListener("keydown", handleKeyDown)
-            unlockScroll()
-        }
+        return () => window.removeEventListener("keydown", handleKeyDown)
     }, [isOpen, handleClose, navigateNext, navigatePrev])
+
+    useEffect(() => {
+        if (!isOpen) return
+        lockScroll()
+        return () => unlockScroll()
+    }, [isOpen])
 
     useLayoutEffect(() => {
         if (isOpen && sourceRect) {
@@ -137,8 +136,8 @@ export function ImageLightbox({
 
         const viewportWidth = window.innerWidth
         const viewportHeight = window.innerHeight
-        const targetWidth = Math.min(768, viewportWidth - 64)
-        const targetHeight = Math.min(viewportHeight * 0.85, 600)
+        const targetWidth = viewportWidth
+        const targetHeight = viewportHeight
 
         const targetX = (viewportWidth - targetWidth) / 2
         const targetY = (viewportHeight - targetHeight) / 2
@@ -167,7 +166,7 @@ export function ImageLightbox({
 
     return (
         <div
-            className={cn("fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8")}
+            className="fixed inset-0 z-[110] flex items-center justify-center"
             onClick={handleClose}
             style={{
                 opacity: isClosing ? 0 : 1,
@@ -175,7 +174,7 @@ export function ImageLightbox({
             }}
         >
             <div
-                className="absolute inset-0 bg-background/80 backdrop-blur-xl"
+                className="absolute inset-0 bg-background"
                 style={{
                     opacity: animationPhase === "initial" && !isClosing ? 0 : 1,
                     transition: "opacity 400ms cubic-bezier(0.16, 1, 0.3, 1)",
@@ -255,7 +254,7 @@ export function ImageLightbox({
 
             <div
                 ref={containerRef}
-                className="relative z-10 w-full max-w-3xl"
+                className="relative z-10 h-[100dvh] w-full"
                 onClick={(e) => e.stopPropagation()}
                 style={{
                     ...currentStyles,
@@ -268,26 +267,27 @@ export function ImageLightbox({
                 }}
             >
                 <div
-                    className={cn("relative overflow-hidden", "rounded-2xl", "bg-card", "ring-1 ring-border", "shadow-2xl")}
+                    className="relative flex h-full flex-col overflow-hidden bg-background"
                     style={{
-                        borderRadius: animationPhase === "initial" && !isClosing ? "8px" : "16px",
+                        borderRadius: animationPhase === "initial" && !isClosing ? "12px" : "0px",
                         transition: "border-radius 500ms cubic-bezier(0.16, 1, 0.3, 1)",
                     }}
                 >
-                    <div className="relative overflow-hidden">
+                    <div className="relative min-h-0 flex-1 overflow-hidden">
                         <div
-                            className="flex transition-transform duration-400 ease-out"
+                            className="flex h-full transition-transform duration-400 ease-out"
                             style={{
                                 transform: `translateX(-${internalIndex * 100}%)`,
                                 transition: isSliding ? "transform 400ms cubic-bezier(0.32, 0.72, 0, 1)" : "none",
                             }}
                         >
                             {projects.map((project, idx) => (
-                                <div key={project.id} className="relative w-full h-[400px] md:h-[600px] flex-shrink-0">
+                                <div key={project.id} className="relative h-full w-full flex-shrink-0">
                                     <Image
                                         src={project.image || "/placeholder.svg"}
                                         alt={`${project.title} - Project preview image in lightbox viewer`}
                                         fill
+                                        sizes="100vw"
                                         className="object-contain bg-background"
                                     />
                                 </div>
@@ -295,24 +295,24 @@ export function ImageLightbox({
                         </div>
 
                         {/* Subtle vignette effect */}
-                        <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-card/20 via-transparent to-card/10" />
+                        
                     </div>
 
                     <div
-                        className={cn("px-6 py-5", "bg-card", "border-t border-border")}
+                        className="border-t border-border bg-background px-5 py-4 sm:px-8"
                         style={{
                             opacity: animationPhase === "complete" && !isClosing ? 1 : 0,
                             transform: animationPhase === "complete" && !isClosing ? "translateY(0)" : "translateY(20px)",
                             transition: "opacity 300ms ease-out 100ms, transform 300ms ease-out 100ms",
                         }}
                     >
-                        <div className="flex items-start justify-between gap-4">
+                        <div className="flex items-center justify-between gap-4">
                             <div className="flex-1 min-w-0">
                                 <h3 className="text-lg font-medium text-foreground tracking-tight truncate h-7">
                                     {currentProject?.title}
                                 </h3>
                                 <div className="flex items-center gap-3 mt-1">
-                                    <p className="text-sm text-muted-foreground">
+                                    <p className="hidden text-sm text-muted-foreground sm:block">
                                         <kbd className="px-1.5 py-0.5 mx-0.5 text-xs font-medium bg-muted text-muted-foreground rounded border border-border">
                                             ←
                                         </kbd>
@@ -340,10 +340,12 @@ export function ImageLightbox({
 
                             <button
                                 onClick={() => {
-                                    // Use the project ID as the slug
-                                    // Assuming id matches the blog slug
-                                    if (currentProject?.id) {
-                                        router.push(`/blog/${currentProject.id}`)
+                                    const target = currentProject?.href
+                                    if (!target) return
+                                    if (/^https?:\/\//.test(target)) {
+                                        window.open(target, "_blank", "noopener,noreferrer")
+                                    } else {
+                                        router.push(target)
                                     }
                                 }}
                                 className={cn(
@@ -356,7 +358,7 @@ export function ImageLightbox({
                                     "hover:bg-primary/10 hover:text-primary hover:border-primary/20"
                                 )}
                             >
-                                <span>View Case Study</span>
+                                <span>{/^https?:\/\//.test(currentProject?.href ?? "") ? "Open site" : "View Case Study"}</span>
                                 <ExternalLink className="w-3.5 h-3.5" />
                             </button>
                         </div>

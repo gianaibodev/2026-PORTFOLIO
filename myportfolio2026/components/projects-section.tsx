@@ -42,7 +42,14 @@ const PINNED_CATEGORIES = [
 type ApiCategory = {
   name: string;
   slug: string;
-  studies: { projectId: string; title: string; heroImage: string }[];
+  studies: {
+    slug: string;
+    projectId: string;
+    title: string;
+    heroImage: string;
+    isOverviewOnly?: boolean;
+    externalHref?: string;
+  }[];
 };
 
 // Loading skeleton component
@@ -129,10 +136,11 @@ export function ProjectsSection() {
         slug: category.slug,
         color: categoryColors[category.name as CategoryColorKey] ?? "hsl(217, 91%, 60%)",
         isPinned: PINNED_CATEGORIES.includes(category.name),
-        projects: category.studies.slice(0, 4).map((study) => ({
+        projects: category.studies.map((study) => ({
           id: study.projectId,
           image: study.heroImage,
           title: study.title,
+          href: study.isOverviewOnly && study.externalHref ? study.externalHref : `/blog/${study.slug}`,
         })),
       }))
       .filter((category) => category.projects.length > 0);

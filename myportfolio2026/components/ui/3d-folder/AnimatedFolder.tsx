@@ -1,79 +1,32 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState } from "react"
 import { cn } from "@/lib/utils"
-import { FolderOpen, Star } from "lucide-react"
+import { Star } from "lucide-react"
 import { useTheme } from "next-themes"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { AnimatedFolderProps, Project } from "./types"
+import { AnimatedFolderProps } from "./types"
 import { ProjectCard } from "./ProjectCard"
-import { ImageLightbox } from "./ImageLightbox"
+import { FolderPanel } from "./FolderPanel"
 
 export function AnimatedFolder({ title, projects, className, color, href, isPinned = false }: AnimatedFolderProps) {
     const [isHovered, setIsHovered] = useState(false)
-    const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
-    const [sourceRect, setSourceRect] = useState<DOMRect | null>(null)
-    const [hiddenCardId, setHiddenCardId] = useState<string | null>(null)
-    const cardRefs = useRef<(HTMLDivElement | null)[]>([])
+    const [isPanelOpen, setIsPanelOpen] = useState(false)
     const { resolvedTheme } = useTheme()
     const isDark = resolvedTheme === "dark"
-    const router = useRouter()
-
-    // Use passed color or default blue
-    const baseH = color ? color.split(',')[0].replace('hsl(', '') : "217"
-    // const baseS = color ? color.split(',')[1] : "91%" // Unused
 
     const toGlassTint = (c?: string, alpha = 0.22) => {
         const base = c ?? (isDark ? "hsl(217, 70%, 50%)" : "hsl(217, 91%, 60%)")
         return base.replace("hsl(", "hsla(").replace(")", `,${alpha})`)
     }
 
-    // Increase saturation/opacity for both themes - more vibrant and visible
     const folderBackColor = toGlassTint(color, 0.45)
     const folderFrontColor = toGlassTint(color, 0.55)
     const folderTabColor = toGlassTint(color, 0.65)
     const folderGlowColor = toGlassTint(color, 0.30)
 
-    const handleProjectClick = (project: Project, index: number) => {
-        const cardEl = cardRefs.current[index]
-        if (cardEl) {
-            setSourceRect(cardEl.getBoundingClientRect())
-        }
-        setSelectedIndex(index)
-        setHiddenCardId(project.id)
-    }
-
-    const handleCloseLightbox = () => {
-        setSelectedIndex(null)
-        setSourceRect(null)
-    }
-
-    const handleCloseComplete = () => {
-        setHiddenCardId(null)
-    }
-
-    const handleNavigate = (newIndex: number) => {
-        setSelectedIndex(newIndex)
-        setHiddenCardId(projects[newIndex]?.id || null)
-    }
-
-    // Auto-navigate after 10 seconds of being open (to let users "experience" it)
-    useEffect(() => {
-        let timer: NodeJS.Timeout;
-        if (isHovered && href) {
-            timer = setTimeout(() => {
-                router.push(href);
-            }, 10000); // 10 seconds delay
-        }
-        return () => clearTimeout(timer);
-    }, [isHovered, href, router]);
-
-    const handleFolderClick = (e: React.MouseEvent) => {
-        // Toggle open/close on mobile/touch
-        if (window.innerWidth < 768) {
-            setIsHovered(!isHovered)
-        }
+    const openPanel = () => {
+        setIsHovered(false)
+        setIsPanelOpen(true)
     }
 
     return (
@@ -99,7 +52,16 @@ export function AnimatedFolder({ title, projects, className, color, href, isPinn
                 }}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
-                onClick={handleFolderClick}
+                onClick={openPanel}
+                role="button"
+                tabIndex={0}
+                aria-label={`Open ${title}, ${projects.length} ${projects.length === 1 ? "project" : "projects"}`}
+                onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault()
+                        openPanel()
+                    }
+                }}
             >
                 {/* Backdrop blur layer - moved here to prevent clipping children in Safari */}
                 <div className="absolute inset-0 rounded-2xl backdrop-blur-2xl bg-white/22 dark:bg-white/[0.065] -z-10 pointer-events-none" />
@@ -169,16 +131,13 @@ export function AnimatedFolder({ title, projects, className, color, href, isPinn
                         {projects.slice(0, 3).map((project, index) => (
                             <ProjectCard
                                 key={project.id}
-                                ref={(el) => {
-                                    cardRefs.current[index] = el
-                                }}
                                 image={project.image}
                                 title={project.title}
                                 delay={index * 80}
                                 isVisible={isHovered}
                                 index={index}
-                                onClick={() => handleProjectClick(project, index)}
-                                isSelected={hiddenCardId === project.id}
+                                onClick={openPanel}
+                                isSelected={false}
                             />
                         ))}
                     </div>
@@ -245,32 +204,8 @@ export function AnimatedFolder({ title, projects, className, color, href, isPinn
                         opacity: isHovered ? 0.7 : 1,
                     }}
                 >
-                    {projects.length} projects
+                    {projects.length} {projects.length === 1 ? "project" : "projects"}
                 </p>
-
-                {/* View Details Link - Visible on mobile, appears on hover on desktop */}
-                {href && (
-                    <Link
-                        href={href}
-                        className={cn(
-                            "z-50 relative px-6 py-2.5 rounded-full text-[13px] font-semibold transition-all duration-500",
-                            "border border-white/20 shadow-lg backdrop-blur-md",
-                            "text-white flex items-center gap-2",
-                            "hover:scale-105 active:scale-95 group/btn"
-                        )}
-                        style={{
-                            backgroundColor: folderTabColor,
-                            boxShadow: `0 8px 16px -4px ${folderGlowColor}, inset 0 1px 1px rgba(255,255,255,0.3)`,
-                            opacity: isHovered ? 1 : 0,
-                            transform: isHovered ? "translateY(0)" : "translateY(12px)",
-                            pointerEvents: isHovered ? "auto" : "none",
-                        }}
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        Explore Category
-                        <FolderOpen className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5" />
-                    </Link>
-                )}
 
                 {/* Hover hint - responsive text */}
                 <div
@@ -280,19 +215,17 @@ export function AnimatedFolder({ title, projects, className, color, href, isPinn
                         transform: isHovered ? "translateY(10px)" : "translateY(0)",
                     }}
                 >
-                    <span className="hidden md:inline">Hover to explore</span>
+                    <span className="hidden md:inline">Click to open</span>
                     <span className="md:hidden">Tap to open</span>
                 </div>
             </div>
 
-            <ImageLightbox
-                projects={projects.slice(0, 3)}
-                currentIndex={selectedIndex ?? 0}
-                isOpen={selectedIndex !== null}
-                onClose={handleCloseLightbox}
-                sourceRect={sourceRect}
-                onCloseComplete={handleCloseComplete}
-                onNavigate={handleNavigate}
+            <FolderPanel
+                title={title}
+                projects={projects}
+                href={href}
+                isOpen={isPanelOpen}
+                onClose={() => setIsPanelOpen(false)}
             />
         </>
     )
