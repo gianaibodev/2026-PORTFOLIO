@@ -17,6 +17,7 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion", "@radix-ui/react-slot"],
+    agentUpgrade: "security",
   },
   turbopack: {
     root: path.resolve(__dirname),
